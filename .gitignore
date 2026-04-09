@@ -1,0 +1,23 @@
+# Maven: Ignorar binarios y reportes
+target/
+
+# NetBeans: Ignorar configuraciones privadas del usuario
+nbproject/private/
+build/
+nbbuild/
+dist/
+
+# Logs y temporales
+*.log
+nbactions.xml
+nb-configuration.xml
+
+# Eclipse 
+.settings/
+.project
+.classpath
+Restaurante/pom.xml
+RestauranteDominio/src/main/resources/META-INF/persistence.xml
+RestaurantePersistencia/src/test/java/itson/org/restaurantepersistencia/ClienteDAOTest.java
+RestaurantePresentacion/pom.xml
+/RestauranteNegocio/nbproject/
