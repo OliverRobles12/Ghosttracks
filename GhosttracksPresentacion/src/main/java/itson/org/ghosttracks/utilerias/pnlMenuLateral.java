@@ -63,7 +63,7 @@ public class pnlMenuLateral extends javax.swing.JPanel {
         btnSeguimiento.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnSeguimiento.addActionListener(this::btnSeguimientoActionPerformed);
 
-        lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itson/org/ghosttracks/imagenes/ghostracksLogo.png"))); // NOI18N
+        lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ghostracksLogo.png"))); // NOI18N
 
         btnCerrarSesion.setBackground(new java.awt.Color(230, 94, 7));
         btnCerrarSesion.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
