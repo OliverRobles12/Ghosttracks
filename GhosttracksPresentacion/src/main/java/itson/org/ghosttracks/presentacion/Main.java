@@ -40,19 +40,18 @@ public class Main extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1400, 800));
         setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel1.setText("Texto cuerpo Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris dictum pharetra maximus.");
 
-        jLabel2.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Corbel", 1, 24)); // NOI18N
         jLabel2.setText("Texto Titulo Lorem ipsum dolor sit amet, consectetur adipiscing elit.");
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel3.setText("Texto subtitulo Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris dictum pharetra maximus.");
 
-        jLabel4.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Corbel", 1, 36)); // NOI18N
         jLabel4.setText("Texto Encabezado Lorem ipsum dolor sit amet.");
 
         jLabel5.setText("Los textos mejor decidanlo sobre la marcha :b");
@@ -117,7 +116,7 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(276, Short.MAX_VALUE))
+                .addContainerGap(272, Short.MAX_VALUE))
         );
 
         pack();
