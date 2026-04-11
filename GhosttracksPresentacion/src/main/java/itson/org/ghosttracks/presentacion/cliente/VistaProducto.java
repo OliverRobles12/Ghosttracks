@@ -683,13 +683,11 @@ public class VistaProducto extends javax.swing.JFrame {
     private itson.org.ghosttracks.utilerias.PanelRedondeado pnlImgSug02;
     private itson.org.ghosttracks.utilerias.PanelRedondeado pnlImgSug03;
     private itson.org.ghosttracks.utilerias.PanelRedondeado pnlImgSug04;
-    private itson.org.ghosttracks.utilerias.PanelRedondeado pnlImgSug4;
     private itson.org.ghosttracks.utilerias.PanelRedondeado pnlMas;
     private itson.org.ghosttracks.utilerias.PanelRedondeado pnlMenos;
     private itson.org.ghosttracks.utilerias.PanelRedondeado pnlSugerencia01;
     private itson.org.ghosttracks.utilerias.PanelRedondeado pnlSugerencia02;
     private itson.org.ghosttracks.utilerias.PanelRedondeado pnlSugerencia03;
     private itson.org.ghosttracks.utilerias.PanelRedondeado pnlSugerencia04;
-    private itson.org.ghosttracks.utilerias.PanelRedondeado pnlSugerencia4;
     // End of variables declaration//GEN-END:variables
 }

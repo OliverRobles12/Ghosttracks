@@ -95,6 +95,7 @@
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new itson.org.ghosttracks.utilerias.pnlBarraSuperior()"/>
+                <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="VistaProducto_pnlBase"/>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value=""/>
               </AuxValues>
 
