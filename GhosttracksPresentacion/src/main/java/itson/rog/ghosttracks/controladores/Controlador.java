@@ -1,0 +1,31 @@
+ 
+package itson.rog.ghosttracks.controladores;
+
+/**
+ *
+ * @author oliro
+ */
+public class Controlador {
+    
+    private static Controlador instancia;
+    
+    private ControlVentaEnLinea controlVentaEnLinea;
+    
+    private Controlador() {
+    }
+    
+    public static Controlador getInstancia() {
+        if (instancia == null) {
+            instancia = new Controlador();
+        }
+        return instancia;
+    }
+    
+    public ControlVentaEnLinea getControlVentaEnLinea() {
+        if (controlVentaEnLinea == null)  {
+            controlVentaEnLinea = new ControlVentaEnLinea();
+        }
+        return controlVentaEnLinea;
+    }
+    
+}
