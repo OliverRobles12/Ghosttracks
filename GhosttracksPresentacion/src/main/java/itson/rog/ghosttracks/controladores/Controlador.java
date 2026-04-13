@@ -10,6 +10,7 @@ public class Controlador {
     private static Controlador instancia;
     
     private ControlVentaEnLinea controlVentaEnLinea;
+    private ControladorVentasAdmin controlVentasAdmin;
     
     private Controlador() {
     }
@@ -26,6 +27,13 @@ public class Controlador {
             controlVentaEnLinea = new ControlVentaEnLinea();
         }
         return controlVentaEnLinea;
+    }
+    
+    public ControladorVentasAdmin getControlVentasAdmin() {
+        if(controlVentasAdmin == null) {
+            controlVentasAdmin = new ControladorVentasAdmin();
+        }
+        return controlVentasAdmin;
     }
     
 }
