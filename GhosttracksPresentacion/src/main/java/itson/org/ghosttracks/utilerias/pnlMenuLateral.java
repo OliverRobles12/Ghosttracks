@@ -58,7 +58,7 @@ public class pnlMenuLateral extends javax.swing.JPanel {
 
         btnSeguimiento.setBackground(new java.awt.Color(230, 94, 7));
         btnSeguimiento.setFont(new java.awt.Font("Corbel", 1, 30)); // NOI18N
-        btnSeguimiento.setText("Seguimiendo");
+        btnSeguimiento.setText("Seguimiento");
         btnSeguimiento.setBorder(null);
         btnSeguimiento.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnSeguimiento.addActionListener(this::btnSeguimientoActionPerformed);

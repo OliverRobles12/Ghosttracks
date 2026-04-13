@@ -51,14 +51,13 @@ public class pnlBarraSuperiorCorta extends javax.swing.JPanel {
         btnCarrito.setBorderPainted(false);
         btnCarrito.setContentAreaFilled(false);
         btnCarrito.setFocusPainted(false);
-        btnCarrito.setPreferredSize(new java.awt.Dimension(50, 50));
 
         jLabel4.setFont(new java.awt.Font("Corbel", 1, 24)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel4.setText("Nombre Apellido");
 
         jLabel5.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel5.setText("Aministrador");
+        jLabel5.setText("Administrador");
 
         btnUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconoUsuario.png"))); // NOI18N
         btnUsuario.setBorderPainted(false);
@@ -110,8 +109,8 @@ public class pnlBarraSuperiorCorta extends javax.swing.JPanel {
                 .addGap(22, 22, 22)
                 .addComponent(panelRedondeado2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24)
-                .addComponent(btnCarrito, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addComponent(btnCarrito)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addComponent(btnFavoritos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30))
         );
@@ -120,7 +119,7 @@ public class pnlBarraSuperiorCorta extends javax.swing.JPanel {
             .addGroup(panelRedondeado1Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addGroup(panelRedondeado1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnCarrito, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCarrito, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnFavoritos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRedondeado1Layout.createSequentialGroup()
                         .addComponent(panelRedondeado2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -163,7 +162,7 @@ public class pnlBarraSuperiorCorta extends javax.swing.JPanel {
     private javax.swing.JButton btnFavoritos;
     private javax.swing.JButton btnUsuario;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
+    public javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JTextField jTextField1;
     private itson.org.ghosttracks.utilerias.PanelRedondeado panelRedondeado1;

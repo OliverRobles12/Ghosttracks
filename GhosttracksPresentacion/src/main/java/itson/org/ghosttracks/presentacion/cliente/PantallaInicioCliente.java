@@ -21,7 +21,7 @@ public class PantallaInicioCliente extends javax.swing.JFrame {
         
         this.pnlMenuLateral = new pnlMenuLateral();
         this.pnlBarraSuperior = new pnlBarraSuperiorCorta();
-        
+     
         pnlPrincipal.add(pnlMenuLateral, new AbsoluteConstraints(0, 0, 300, 800));
         pnlPrincipal.add(pnlBarraSuperior, new AbsoluteConstraints(300, 0, 1100, 110));
         

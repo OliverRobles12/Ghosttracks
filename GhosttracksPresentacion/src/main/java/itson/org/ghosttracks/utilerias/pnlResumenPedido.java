@@ -30,14 +30,6 @@ public class pnlResumenPedido extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        pnlContenedprProd = new javax.swing.JPanel();
-        pnlImgProducto = new itson.org.ghosttracks.utilerias.PanelRedondeado();
-        lblNombreProducto = new javax.swing.JLabel();
-        lblArtista = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        lblPrecio = new javax.swing.JLabel();
         pnlTotales = new javax.swing.JPanel();
         btnContinuar = new javax.swing.JButton();
         lblTituloSubtotal = new javax.swing.JLabel();
@@ -47,17 +39,118 @@ public class pnlResumenPedido extends javax.swing.JPanel {
         lblSubtotal = new javax.swing.JLabel();
         lblTax = new javax.swing.JLabel();
         lblTotal = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         btnEliminarCarrito = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        pnlContenedprProd = new javax.swing.JPanel();
+        pnlImgProducto = new itson.org.ghosttracks.utilerias.PanelRedondeado();
+        lblNombreProducto = new javax.swing.JLabel();
+        lblArtista = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        lblPrecio = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(153, 153, 153));
-        setPreferredSize(new java.awt.Dimension(348, 640));
+        setPreferredSize(new java.awt.Dimension(348, 605));
 
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("Resumen");
+        pnlTotales.setBackground(new java.awt.Color(153, 153, 153));
+        pnlTotales.setForeground(new java.awt.Color(153, 153, 153));
+        pnlTotales.setMinimumSize(new java.awt.Dimension(336, 173));
+
+        btnContinuar.setBackground(new java.awt.Color(204, 0, 0));
+        btnContinuar.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        btnContinuar.setText("Continuar");
+
+        lblTituloSubtotal.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lblTituloSubtotal.setForeground(new java.awt.Color(51, 51, 51));
+        lblTituloSubtotal.setText("Subtotal:");
+
+        lblTituloTax.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lblTituloTax.setForeground(new java.awt.Color(51, 51, 51));
+        lblTituloTax.setText("Tax (16%):");
+
+        lblTituloTotal.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lblTituloTotal.setForeground(new java.awt.Color(0, 0, 0));
+        lblTituloTotal.setText("Total:");
+
+        lblSubtotal.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblSubtotal.setForeground(new java.awt.Color(51, 51, 51));
+        lblSubtotal.setText("$0");
+
+        lblTax.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblTax.setForeground(new java.awt.Color(51, 51, 51));
+        lblTax.setText("$0");
+
+        lblTotal.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblTotal.setForeground(new java.awt.Color(0, 0, 0));
+        lblTotal.setText("$0");
+
+        javax.swing.GroupLayout pnlTotalesLayout = new javax.swing.GroupLayout(pnlTotales);
+        pnlTotales.setLayout(pnlTotalesLayout);
+        pnlTotalesLayout.setHorizontalGroup(
+            pnlTotalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlTotalesLayout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addComponent(lblTituloSubtotal)
+                .addGap(215, 215, 215)
+                .addComponent(lblSubtotal))
+            .addGroup(pnlTotalesLayout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addComponent(lblTituloTax)
+                .addGap(195, 195, 195)
+                .addComponent(lblTax))
+            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(pnlTotalesLayout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addComponent(lblTituloTotal)
+                .addGap(241, 241, 241)
+                .addComponent(lblTotal))
+            .addGroup(pnlTotalesLayout.createSequentialGroup()
+                .addGap(101, 101, 101)
+                .addComponent(btnContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        pnlTotalesLayout.setVerticalGroup(
+            pnlTotalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlTotalesLayout.createSequentialGroup()
+                .addGroup(pnlTotalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTituloSubtotal)
+                    .addGroup(pnlTotalesLayout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(lblSubtotal)))
+                .addGap(18, 18, 18)
+                .addGroup(pnlTotalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTituloTax)
+                    .addGroup(pnlTotalesLayout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(lblTax)))
+                .addGap(16, 16, 16)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4)
+                .addGroup(pnlTotalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTituloTotal)
+                    .addGroup(pnlTotalesLayout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(lblTotal)))
+                .addGap(18, 18, 18)
+                .addComponent(btnContinuar))
+        );
+
+        btnEliminarCarrito.setBackground(new java.awt.Color(153, 153, 153));
+        btnEliminarCarrito.setForeground(new java.awt.Color(204, 0, 0));
+        btnEliminarCarrito.setText("Eliminar carrito");
+        btnEliminarCarrito.setBorder(null);
+        btnEliminarCarrito.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarCarritoActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\cinca\\Documents\\carro 1.png")); // NOI18N
 
         pnlContenedprProd.setBackground(new java.awt.Color(204, 204, 204));
+
+        pnlImgProducto.setBackground(new java.awt.Color(153, 153, 153));
+        pnlImgProducto.setForeground(new java.awt.Color(153, 153, 153));
 
         javax.swing.GroupLayout pnlImgProductoLayout = new javax.swing.GroupLayout(pnlImgProducto);
         pnlImgProducto.setLayout(pnlImgProductoLayout);
@@ -97,7 +190,7 @@ public class pnlResumenPedido extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel4))
                     .addComponent(lblArtista))
-                .addContainerGap(80, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlContenedprProdLayout.setVerticalGroup(
             pnlContenedprProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -114,131 +207,47 @@ public class pnlResumenPedido extends javax.swing.JPanel {
                             .addComponent(lblPrecio))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblArtista)))
-                .addContainerGap(285, Short.MAX_VALUE))
+                .addContainerGap(269, Short.MAX_VALUE))
         );
 
         jScrollPane1.setViewportView(pnlContenedprProd);
 
-        pnlTotales.setBackground(new java.awt.Color(153, 153, 153));
-        pnlTotales.setForeground(new java.awt.Color(153, 153, 153));
-
-        btnContinuar.setBackground(new java.awt.Color(204, 0, 0));
-        btnContinuar.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        btnContinuar.setText("Continuar");
-
-        lblTituloSubtotal.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        lblTituloSubtotal.setForeground(new java.awt.Color(51, 51, 51));
-        lblTituloSubtotal.setText("Subtotal:");
-
-        lblTituloTax.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        lblTituloTax.setForeground(new java.awt.Color(51, 51, 51));
-        lblTituloTax.setText("Tax (16%):");
-
-        lblTituloTotal.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        lblTituloTotal.setForeground(new java.awt.Color(0, 0, 0));
-        lblTituloTotal.setText("Total:");
-
-        lblSubtotal.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblSubtotal.setForeground(new java.awt.Color(51, 51, 51));
-        lblSubtotal.setText("$0");
-
-        lblTax.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblTax.setForeground(new java.awt.Color(51, 51, 51));
-        lblTax.setText("$0");
-
-        lblTotal.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblTotal.setForeground(new java.awt.Color(0, 0, 0));
-        lblTotal.setText("$0");
-
-        javax.swing.GroupLayout pnlTotalesLayout = new javax.swing.GroupLayout(pnlTotales);
-        pnlTotales.setLayout(pnlTotalesLayout);
-        pnlTotalesLayout.setHorizontalGroup(
-            pnlTotalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSeparator1)
-            .addGroup(pnlTotalesLayout.createSequentialGroup()
-                .addGap(101, 101, 101)
-                .addComponent(btnContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(103, Short.MAX_VALUE))
-            .addGroup(pnlTotalesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlTotalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlTotalesLayout.createSequentialGroup()
-                        .addComponent(lblTituloSubtotal)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblSubtotal))
-                    .addGroup(pnlTotalesLayout.createSequentialGroup()
-                        .addComponent(lblTituloTax)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblTax)))
-                .addGap(29, 29, 29))
-            .addGroup(pnlTotalesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblTituloTotal)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblTotal)
-                .addGap(28, 28, 28))
-        );
-        pnlTotalesLayout.setVerticalGroup(
-            pnlTotalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTotalesLayout.createSequentialGroup()
-                .addGroup(pnlTotalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblTituloSubtotal)
-                    .addComponent(lblSubtotal))
-                .addGap(18, 18, 18)
-                .addGroup(pnlTotalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblTituloTax)
-                    .addComponent(lblTax))
-                .addGap(16, 16, 16)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(4, 4, 4)
-                .addGroup(pnlTotalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblTituloTotal)
-                    .addComponent(lblTotal))
-                .addGap(18, 18, 18)
-                .addComponent(btnContinuar)
-                .addContainerGap(14, Short.MAX_VALUE))
-        );
-
-        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\cinca\\Documents\\carro 1.png")); // NOI18N
-
-        btnEliminarCarrito.setBackground(new java.awt.Color(153, 153, 153));
-        btnEliminarCarrito.setForeground(new java.awt.Color(204, 0, 0));
-        btnEliminarCarrito.setText("Eliminar carrito");
-        btnEliminarCarrito.setBorder(null);
-        btnEliminarCarrito.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarCarritoActionPerformed(evt);
-            }
-        });
+        jLabel1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setText("Resumen");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnEliminarCarrito)
-                .addGap(21, 21, 21))
-            .addComponent(pnlTotales, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnEliminarCarrito)
+                        .addGap(21, 21, 21))
+                    .addComponent(pnlTotales, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(11, 11, 11)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(5, 5, 5)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(jLabel3)
                     .addComponent(btnEliminarCarrito))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlTotales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(pnlTotales, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
