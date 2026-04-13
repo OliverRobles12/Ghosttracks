@@ -23,19 +23,7 @@ public class ControlVentaEnLinea {
     }
     public List<Producto> obtenerProductosMock() {
         List<Producto> mocks = new ArrayList<>();
-        mocks.add(new Producto(
-                1L,
-                "Abbey Road (Edición Aniversario)",
-                "https://limamusicstore.com/products/the-beatles-abbey-road-vinilo-edicion-50-aniversario?srsltid=AfmBOorTzjZiPTwnlkqSxwQrIsR1emv_PFGc7vW-UQCYXrd_dydWYzK8", 
-                TipoProducto.VINILO,
-                "The Beatles",
-                "Rock", 
-                1200.0,
-                Arrays.asList("Come Together", "Something", "Maxwell's Silver Hammer", "Oh! Darling"),
-                50,
-                "Nuevo"
-        ));
-
+        
         mocks.add(new Producto(
                 2L,
                 "Thriller",
@@ -140,6 +128,19 @@ public class ControlVentaEnLinea {
                 10,
                 "Disponible"
         ));return mocks;
+    }
+    
+    public List<Producto> obtenerProductosPorTipo(TipoProducto tipo) {
+        List<Producto> todos = obtenerProductosMock();
+        List<Producto> filtrados = new ArrayList<>();
+        
+        for (Producto producto : todos) {
+            // Si el tipo coincide, lo agregamos a la nueva lista
+            if (producto.getTipo() == tipo) {
+                filtrados.add(producto);
+            }
+        }
+        return filtrados;
     }
     
     public void mostrarPantallaInicio(JFrame pantallaActual) {
