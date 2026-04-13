@@ -21,12 +21,12 @@ public class ControlVentaEnLinea {
     public ControlVentaEnLinea() {
         
     }
-    private List<Producto> obtenerProductosMock() {
+    public List<Producto> obtenerProductosMock() {
         List<Producto> mocks = new ArrayList<>();
         mocks.add(new Producto(
                 1L,
                 "Abbey Road (Edición Aniversario)",
-                "https://upload.wikimedia.org/wikipedia/commons/a/a4/The_Beatles_Abbey_Road_album_cover.jpg", 
+                "https://limamusicstore.com/products/the-beatles-abbey-road-vinilo-edicion-50-aniversario?srsltid=AfmBOorTzjZiPTwnlkqSxwQrIsR1emv_PFGc7vW-UQCYXrd_dydWYzK8", 
                 TipoProducto.VINILO,
                 "The Beatles",
                 "Rock", 
@@ -143,7 +143,7 @@ public class ControlVentaEnLinea {
     }
     
     public void mostrarPantallaInicio(JFrame pantallaActual) {
-        PantallaInicioCliente vistaPantalla = new PantallaInicioCliente();
+        PantallaInicioCliente vistaPantalla = new PantallaInicioCliente(this);
         vistaPantalla.setLocationRelativeTo(vistaPantalla);
         vistaPantalla.setVisible(true);
         
@@ -152,9 +152,13 @@ public class ControlVentaEnLinea {
         }
     }
     
-    public void mostrarPantallaVistaProducto(JFrame pantallaActual) {
-        VistaProducto vistaProducto = new VistaProducto(this);
-        vistaProducto.setVisible(true);
+    public void mostrarPantallaVistaProducto(JFrame pantallaActual, Producto productoSeleccionado, JFrame pantallaPadre) {
+        if (pantallaPadre != null) {
+            pantallaPadre.setVisible(false); // Oculta el catálogo
+        }
+        
+        VistaProducto vista = new VistaProducto(this, productoSeleccionado, pantallaPadre);
+        vista.setVisible(true);
         
         if(pantallaActual != null) {
             pantallaActual.dispose();

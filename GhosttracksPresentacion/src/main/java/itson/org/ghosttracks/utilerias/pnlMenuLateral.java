@@ -4,6 +4,9 @@
  */
 package itson.org.ghosttracks.utilerias;
 
+import itson.rog.ghosttracks.controladores.Controlador;
+import javax.swing.JFrame;
+
 /**
  *
  * @author nafbr
@@ -55,6 +58,7 @@ public class pnlMenuLateral extends javax.swing.JPanel {
         btnInicio.setText("Inicio");
         btnInicio.setBorder(null);
         btnInicio.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnInicio.addActionListener(this::btnInicioActionPerformed);
 
         btnSeguimiento.setBackground(new java.awt.Color(230, 94, 7));
         btnSeguimiento.setFont(new java.awt.Font("Corbel", 1, 30)); // NOI18N
@@ -117,7 +121,7 @@ public class pnlMenuLateral extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCompraENLineaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompraENLineaActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_btnCompraENLineaActionPerformed
 
     private void btnSeguimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeguimientoActionPerformed
@@ -127,6 +131,12 @@ public class pnlMenuLateral extends javax.swing.JPanel {
     private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCerrarSesionActionPerformed
+
+    private void btnInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInicioActionPerformed
+        JFrame pantallaPadre = (javax.swing.JFrame) javax.swing.SwingUtilities.getWindowAncestor(this);
+        
+        Controlador.getInstancia().getControlVentaEnLinea().mostrarPantallaInicio(pantallaPadre);
+    }//GEN-LAST:event_btnInicioActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

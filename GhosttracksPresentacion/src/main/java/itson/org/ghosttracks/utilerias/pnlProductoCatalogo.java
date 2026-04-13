@@ -4,17 +4,64 @@
  */
 package itson.org.ghosttracks.utilerias;
 
+import itson.org.ghosttracks.mocks.Producto;
+import itson.rog.ghosttracks.controladores.ControlVentaEnLinea;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.JFrame;
+
 /**
  *
  * @author emyla
  */
 public class pnlProductoCatalogo extends javax.swing.JPanel {
 
+    private Producto producto;
+    private ControlVentaEnLinea control;
+    private JFrame pantallaPadre;
+    
     /**
      * Creates new form pnlProductoCatalogo
      */
-    public pnlProductoCatalogo() {
+    public pnlProductoCatalogo(Producto producto, ControlVentaEnLinea control, JFrame pantallaPadre) {
         initComponents();
+        this.producto = producto;
+        this.control = control;
+        this.pantallaPadre = pantallaPadre;
+        
+        // 1. Llenamos los labels con la info del objeto
+        lblNombreProducto.setText(producto.getNombre());
+        lblArtista.setText(producto.getArtista());
+        lblPrecio.setText("$" + producto.getPrecio());
+        
+        
+        try {
+            // 1. Convertimos el String a una URL real de Java
+            java.net.URL url = new java.net.URL(producto.getUrlImagen());
+
+            // 2. Descargamos la imagen de internet
+            java.awt.Image imagenOriginal = javax.imageio.ImageIO.read(url);
+
+            // 3. Escala la imagen. Ajusta los números (150, 150) al ancho y alto de tu pnlImgProduct
+            java.awt.Image imagenEscalada = imagenOriginal.getScaledInstance(180, 150, java.awt.Image.SCALE_SMOOTH);
+
+            // 4. Metemos la imagen en el Label y quitamos cualquier texto de fondo
+            lblImg.setIcon(new javax.swing.ImageIcon(imagenEscalada));
+            lblImg.setText(""); 
+
+        } catch (Exception e) {
+            // Si no hay internet o el link se cae, mostramos un plan B
+            System.out.println("Error cargando imagen de: " + producto.getNombre());
+            lblImg.setIcon(null);
+            lblImg.setText("Imagen no disp.");
+        }
+        
+        this.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                
+                control.mostrarPantallaVistaProducto(null, producto, pantallaPadre);
+            }
+        });
     }
 
     /**
@@ -28,6 +75,7 @@ public class pnlProductoCatalogo extends javax.swing.JPanel {
 
         pnlProducto = new itson.org.ghosttracks.utilerias.PanelRedondeado();
         pnlImgProduct = new itson.org.ghosttracks.utilerias.PanelRedondeado();
+        lblImg = new javax.swing.JLabel();
         lblNombreProducto = new javax.swing.JLabel();
         lblArtista = new javax.swing.JLabel();
         lblPrecio = new javax.swing.JLabel();
@@ -35,18 +83,27 @@ public class pnlProductoCatalogo extends javax.swing.JPanel {
         setBackground(new java.awt.Color(237, 229, 222));
 
         pnlProducto.setBackground(new java.awt.Color(217, 217, 217));
+        pnlProducto.setMaximumSize(new java.awt.Dimension(247, 351));
 
         pnlImgProduct.setBackground(new java.awt.Color(230, 230, 230));
+
+        lblImg.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout pnlImgProductLayout = new javax.swing.GroupLayout(pnlImgProduct);
         pnlImgProduct.setLayout(pnlImgProductLayout);
         pnlImgProductLayout.setHorizontalGroup(
             pnlImgProductLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(pnlImgProductLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblImg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         pnlImgProductLayout.setVerticalGroup(
             pnlImgProductLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 175, Short.MAX_VALUE)
+            .addGroup(pnlImgProductLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblImg, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         lblNombreProducto.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
@@ -100,6 +157,7 @@ public class pnlProductoCatalogo extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel lblArtista;
+    private javax.swing.JLabel lblImg;
     private javax.swing.JLabel lblNombreProducto;
     private javax.swing.JLabel lblPrecio;
     private itson.org.ghosttracks.utilerias.PanelRedondeado pnlImgProduct;

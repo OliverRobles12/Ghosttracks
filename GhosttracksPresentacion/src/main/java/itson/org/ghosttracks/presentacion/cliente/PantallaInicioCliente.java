@@ -1,9 +1,13 @@
 
 package itson.org.ghosttracks.presentacion.cliente;
 
+import itson.org.ghosttracks.mocks.Producto;
 import itson.org.ghosttracks.utilerias.pnlBarraSuperiorCorta;
 import itson.org.ghosttracks.utilerias.pnlMenuLateral;
+import itson.rog.ghosttracks.controladores.ControlVentaEnLinea;
+import java.util.List;
 import org.netbeans.lib.awtextra.AbsoluteConstraints;
+import itson.org.ghosttracks.utilerias.pnlProductoCatalogo;
 
 /**
  *
@@ -12,12 +16,14 @@ import org.netbeans.lib.awtextra.AbsoluteConstraints;
 public class PantallaInicioCliente extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PantallaInicioCliente.class.getName());
-
+    private ControlVentaEnLinea control;
+    
     /**
      * Creates new form PantallaInicioCliente
      */
-    public PantallaInicioCliente() {
+    public PantallaInicioCliente(ControlVentaEnLinea control) {
         initComponents();
+        this.control = control;
         
         this.pnlMenuLateral = new pnlMenuLateral();
         this.pnlBarraSuperior = new pnlBarraSuperiorCorta();
@@ -25,6 +31,7 @@ public class PantallaInicioCliente extends javax.swing.JFrame {
         pnlPrincipal.add(pnlMenuLateral, new AbsoluteConstraints(0, 0, 300, 800));
         pnlPrincipal.add(pnlBarraSuperior, new AbsoluteConstraints(300, 0, 1100, 110));
         
+        cargarCatalogo();
     }
 
     /**
@@ -242,17 +249,7 @@ public class PantallaInicioCliente extends javax.swing.JFrame {
         );
 
         pnlCatalogo.setBackground(new java.awt.Color(237, 229, 222));
-
-        javax.swing.GroupLayout pnlCatalogoLayout = new javax.swing.GroupLayout(pnlCatalogo);
-        pnlCatalogo.setLayout(pnlCatalogoLayout);
-        pnlCatalogoLayout.setHorizontalGroup(
-            pnlCatalogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        pnlCatalogoLayout.setVerticalGroup(
-            pnlCatalogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1095, Short.MAX_VALUE)
-        );
+        pnlCatalogo.setPreferredSize(new java.awt.Dimension(775, 1095));
 
         javax.swing.GroupLayout pnlContenidoLayout = new javax.swing.GroupLayout(pnlContenido);
         pnlContenido.setLayout(pnlContenidoLayout);
@@ -312,27 +309,24 @@ public class PantallaInicioCliente extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    private void cargarCatalogo() {
+        pnlCatalogo.removeAll(); 
 
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
+        pnlCatalogo.setLayout(new java.awt.GridLayout(0, 3, 20, 20));
+
+        List<Producto> listaProductos = control.obtenerProductosMock();
+
+        if (listaProductos != null) {
+            for (Producto p : listaProductos) {
+                pnlProductoCatalogo tarjeta = new pnlProductoCatalogo(p, control, this);
+                tarjeta.setVisible(true);
+                
+                pnlCatalogo.add(tarjeta); 
             }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new PantallaInicioCliente().setVisible(true));
+        pnlCatalogo.revalidate();
+        pnlCatalogo.repaint();
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

@@ -1,7 +1,10 @@
 package itson.org.ghosttracks.presentacion.cliente;
 
+import itson.org.ghosttracks.mocks.Producto;
 import itson.org.ghosttracks.utilerias.pnlBarraSuperior;
 import itson.rog.ghosttracks.controladores.ControlVentaEnLinea;
+import itson.rog.ghosttracks.controladores.Controlador;
+import javax.swing.JFrame;
 
 /**
  *
@@ -11,19 +14,27 @@ public class VistaProducto extends javax.swing.JFrame {
     
     private ControlVentaEnLinea control;
     private pnlBarraSuperior barraSuperior;
+    private Producto producto;
+    private JFrame pantallaPadre;
     
     /**
      * Creates new form VistaProducto
      */
-    public VistaProducto(ControlVentaEnLinea control) {
+    public VistaProducto(ControlVentaEnLinea control, Producto producto, JFrame pantallaPadre) {
         this.control = control;
+        this.producto = producto;
+        this.pantallaPadre = pantallaPadre;
+        
         initComponents();
+        
         barraSuperior = new pnlBarraSuperior();
         pnlBase.add(barraSuperior);
         pnlBase.revalidate();
         pnlBase.repaint();
                 
         this.setLocationRelativeTo(null);
+        
+        cargarDatosProducto();
     }
 
     /**
@@ -40,7 +51,7 @@ public class VistaProducto extends javax.swing.JFrame {
         pnlBase = new itson.org.ghosttracks.utilerias.pnlBarraSuperior();
         panelRedondeado1 = new itson.org.ghosttracks.utilerias.PanelRedondeado();
         panelRedondeado4 = new itson.org.ghosttracks.utilerias.PanelRedondeado();
-        jLabel5 = new javax.swing.JLabel();
+        lblImgProducto = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         pnlDatosProducto = new itson.org.ghosttracks.utilerias.PanelRedondeado();
@@ -78,6 +89,7 @@ public class VistaProducto extends javax.swing.JFrame {
         lblProductSug04 = new javax.swing.JLabel();
         lblArtistSug04 = new javax.swing.JLabel();
         lblPrecioSug04 = new javax.swing.JLabel();
+        botonRedondeado1 = new itson.org.ghosttracks.utilerias.BotonRedondeado();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -92,23 +104,23 @@ public class VistaProducto extends javax.swing.JFrame {
 
         panelRedondeado4.setBackground(new java.awt.Color(230, 230, 230));
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconoFavoritos.png"))); // NOI18N
+        lblImgProducto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout panelRedondeado4Layout = new javax.swing.GroupLayout(panelRedondeado4);
         panelRedondeado4.setLayout(panelRedondeado4Layout);
         panelRedondeado4Layout.setHorizontalGroup(
             panelRedondeado4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRedondeado4Layout.createSequentialGroup()
-                .addContainerGap(618, Short.MAX_VALUE)
-                .addComponent(jLabel5)
-                .addGap(16, 16, 16))
+            .addGroup(panelRedondeado4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblImgProducto, javax.swing.GroupLayout.DEFAULT_SIZE, 672, Short.MAX_VALUE)
+                .addContainerGap())
         );
         panelRedondeado4Layout.setVerticalGroup(
             panelRedondeado4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRedondeado4Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jLabel5)
-                .addContainerGap(445, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(lblImgProducto, javax.swing.GroupLayout.DEFAULT_SIZE, 498, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/desplazarDerecha.png"))); // NOI18N
@@ -571,6 +583,16 @@ public class VistaProducto extends javax.swing.JFrame {
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
+        botonRedondeado1.setIcon(new javax.swing.ImageIcon("C:\\Users\\emyla\\OneDrive\\Desktop\\Ghosttracks\\GhosttracksPresentacion\\src\\main\\resources\\iconoVolver.png")); // NOI18N
+        botonRedondeado1.setText("Volver");
+        botonRedondeado1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        botonRedondeado1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        botonRedondeado1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonRedondeado1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlFondoLayout = new javax.swing.GroupLayout(pnlFondo);
         pnlFondo.setLayout(pnlFondoLayout);
         pnlFondoLayout.setHorizontalGroup(
@@ -579,7 +601,9 @@ public class VistaProducto extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(pnlFondoLayout.createSequentialGroup()
-                        .addComponent(panelRedondeado1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(panelRedondeado1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(botonRedondeado1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(pnlDatosProducto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -598,7 +622,10 @@ public class VistaProducto extends javax.swing.JFrame {
                         .addComponent(pnlDatosProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(panelRedondeado3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(panelRedondeado1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlFondoLayout.createSequentialGroup()
+                        .addComponent(panelRedondeado1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(botonRedondeado1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(11, Short.MAX_VALUE))
         );
 
@@ -618,13 +645,51 @@ public class VistaProducto extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void botonRedondeado1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRedondeado1ActionPerformed
+        
+        Controlador.getInstancia().getControlVentaEnLinea().mostrarPantallaInicio(this);
+        
+    }//GEN-LAST:event_botonRedondeado1ActionPerformed
+
+    private void cargarDatosProducto() {
+        // 1. Llenamos los datos básicos
+        lblNombreProducto.setText(producto.getNombre());
+        lblArtista.setText(producto.getArtista());
+        lblPrecio.setText(String.format("$%.2f", producto.getPrecio()));
+        // 2. Acomodamos el setlist (usamos HTML básico para que el JLabel acepte saltos de línea)
+        if (producto.getSetList() != null && !producto.getSetList().isEmpty()) {
+            String canciones = String.join("<br>", producto.getSetList());
+            lblSetlist.setText("<html><div style='text-align:center;'>" + canciones + "</div></html>");
+        } else {
+            lblSetlist.setText("Setlist no disponible");
+        }
+
+        // 3. Magia para descargar y escalar la imagen grande
+        try {
+            java.net.URL url = new java.net.URL(producto.getUrlImagen());
+            java.awt.Image imagenOriginal = javax.imageio.ImageIO.read(url);
+            
+            // OJO: Aquí le puse 400x400 porque en esta pantalla la imagen es más grande.
+            // Ajusta estos números dependiendo de qué tan grande sea tu lblImgProducto
+            java.awt.Image imagenEscalada = imagenOriginal.getScaledInstance(450, 450, java.awt.Image.SCALE_SMOOTH);
+            
+            lblImgProducto.setIcon(new javax.swing.ImageIcon(imagenEscalada));
+            lblImgProducto.setText(""); 
+            
+        } catch (Exception e) {
+            System.out.println("Error cargando imagen principal de: " + producto.getNombre());
+            lblImgProducto.setIcon(null);
+            lblImgProducto.setText("Imagen no disp.");
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private itson.org.ghosttracks.utilerias.BotonRedondeado botonRedondeado1;
     private javax.swing.JButton btnAniadirAlCarrito;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblArtistSug01;
     private javax.swing.JLabel lblArtistSug02;
@@ -632,6 +697,7 @@ public class VistaProducto extends javax.swing.JFrame {
     private javax.swing.JLabel lblArtistSug04;
     private javax.swing.JLabel lblArtista;
     private javax.swing.JLabel lblCantidad;
+    private javax.swing.JLabel lblImgProducto;
     private javax.swing.JLabel lblNombreProducto;
     private javax.swing.JLabel lblNombreProducto1;
     private javax.swing.JLabel lblPrecio;
