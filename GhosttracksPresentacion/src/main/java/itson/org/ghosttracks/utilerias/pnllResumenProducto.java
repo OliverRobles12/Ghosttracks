@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
+
 package itson.org.ghosttracks.utilerias;
 
 /**
@@ -16,7 +13,19 @@ public class pnllResumenProducto extends javax.swing.JPanel {
     public pnllResumenProducto() {
         initComponents();
     }
-
+    
+    public void setNombre(String nombre) {
+        this.lblNombre.setText(nombre);
+    }
+    
+    public void setArtista(String artista) {
+        this.lblArtista.setText(artista);
+    }
+    
+    public void setPrecio(double precio) {
+        this.lblPrecio.setText(String.valueOf(precio));
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,9 +37,9 @@ public class pnllResumenProducto extends javax.swing.JPanel {
 
         panelRedondeado1 = new itson.org.ghosttracks.utilerias.PanelRedondeado();
         pnlImg = new javax.swing.JPanel();
-        nombre = new javax.swing.JLabel();
-        artista = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        lblNombre = new javax.swing.JLabel();
+        lblArtista = new javax.swing.JLabel();
+        lblPrecio = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(204, 204, 204));
         setForeground(new java.awt.Color(0, 0, 0));
@@ -69,16 +78,16 @@ public class pnllResumenProducto extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        nombre.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
-        nombre.setForeground(new java.awt.Color(0, 0, 0));
-        nombre.setText("Nombre");
+        lblNombre.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        lblNombre.setForeground(new java.awt.Color(0, 0, 0));
+        lblNombre.setText("Nombre");
 
-        artista.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        artista.setForeground(new java.awt.Color(51, 51, 51));
-        artista.setText("Artista");
+        lblArtista.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        lblArtista.setForeground(new java.awt.Color(51, 51, 51));
+        lblArtista.setText("Artista");
 
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("$0");
+        lblPrecio.setForeground(new java.awt.Color(0, 0, 0));
+        lblPrecio.setText("$0");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -90,12 +99,12 @@ public class pnllResumenProducto extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(artista)
+                        .addComponent(lblArtista)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(nombre)
+                        .addComponent(lblNombre)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 124, Short.MAX_VALUE)
-                        .addComponent(jLabel1)
+                        .addComponent(lblPrecio)
                         .addGap(15, 15, 15))))
         );
         layout.setVerticalGroup(
@@ -108,19 +117,19 @@ public class pnllResumenProducto extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(16, 16, 16)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(nombre)
-                            .addComponent(jLabel1))
+                            .addComponent(lblNombre)
+                            .addComponent(lblPrecio))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(artista)))
-                .addContainerGap(10, Short.MAX_VALUE))
+                        .addComponent(lblArtista)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel artista;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel nombre;
+    private javax.swing.JLabel lblArtista;
+    private javax.swing.JLabel lblNombre;
+    private javax.swing.JLabel lblPrecio;
     private itson.org.ghosttracks.utilerias.PanelRedondeado panelRedondeado1;
     private javax.swing.JPanel pnlImg;
     // End of variables declaration//GEN-END:variables
