@@ -68,6 +68,7 @@ public class pnlMenuLateral extends javax.swing.JPanel {
         btnCerrarSesion.setBackground(new java.awt.Color(230, 94, 7));
         btnCerrarSesion.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
         btnCerrarSesion.setText("Cerrar sesón");
+        btnCerrarSesion.setActionCommand("Cerrar sesión");
         btnCerrarSesion.setBorder(null);
         btnCerrarSesion.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         btnCerrarSesion.addActionListener(this::btnCerrarSesionActionPerformed);
