@@ -60,15 +60,7 @@ public class PantallaInicioCliente extends javax.swing.JFrame {
         panelRedondeado5 = new itson.org.ghosttracks.utilerias.PanelRedondeado();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        pnlProductoCatalogo1 = new itson.org.ghosttracks.utilerias.pnlProductoCatalogo();
-        pnlProductoCatalogo2 = new itson.org.ghosttracks.utilerias.pnlProductoCatalogo();
-        pnlProductoCatalogo3 = new itson.org.ghosttracks.utilerias.pnlProductoCatalogo();
-        pnlProductoCatalogo4 = new itson.org.ghosttracks.utilerias.pnlProductoCatalogo();
-        pnlProductoCatalogo5 = new itson.org.ghosttracks.utilerias.pnlProductoCatalogo();
-        pnlProductoCatalogo6 = new itson.org.ghosttracks.utilerias.pnlProductoCatalogo();
-        pnlProductoCatalogo7 = new itson.org.ghosttracks.utilerias.pnlProductoCatalogo();
-        pnlProductoCatalogo8 = new itson.org.ghosttracks.utilerias.pnlProductoCatalogo();
-        pnlProductoCatalogo9 = new itson.org.ghosttracks.utilerias.pnlProductoCatalogo();
+        pnlCatalogo = new javax.swing.JPanel();
         pnlMenuLateral1 = new itson.org.ghosttracks.utilerias.pnlMenuLateral();
         pnlBarraSuperiorCorta1 = new itson.org.ghosttracks.utilerias.pnlBarraSuperiorCorta();
 
@@ -249,6 +241,19 @@ public class PantallaInicioCliente extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        pnlCatalogo.setBackground(new java.awt.Color(237, 229, 222));
+
+        javax.swing.GroupLayout pnlCatalogoLayout = new javax.swing.GroupLayout(pnlCatalogo);
+        pnlCatalogo.setLayout(pnlCatalogoLayout);
+        pnlCatalogoLayout.setHorizontalGroup(
+            pnlCatalogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        pnlCatalogoLayout.setVerticalGroup(
+            pnlCatalogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1095, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout pnlContenidoLayout = new javax.swing.GroupLayout(pnlContenido);
         pnlContenido.setLayout(pnlContenidoLayout);
         pnlContenidoLayout.setHorizontalGroup(
@@ -257,33 +262,15 @@ public class PantallaInicioCliente extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(panelRedondeado3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(pnlContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlContenidoLayout.createSequentialGroup()
-                        .addGroup(pnlContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(pnlProductoCatalogo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(pnlProductoCatalogo4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(pnlProductoCatalogo7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(pnlContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnlContenidoLayout.createSequentialGroup()
-                                .addComponent(pnlProductoCatalogo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(pnlProductoCatalogo3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(pnlContenidoLayout.createSequentialGroup()
-                                .addComponent(pnlProductoCatalogo5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(pnlProductoCatalogo6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(pnlContenidoLayout.createSequentialGroup()
-                                .addComponent(pnlProductoCatalogo8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(pnlProductoCatalogo9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGroup(pnlContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(pnlContenidoLayout.createSequentialGroup()
                         .addComponent(panelRedondeado2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(panelRedondeado4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(panelRedondeado5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(26, Short.MAX_VALUE))
+                        .addComponent(panelRedondeado5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pnlCatalogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         pnlContenidoLayout.setVerticalGroup(
             pnlContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -295,23 +282,10 @@ public class PantallaInicioCliente extends javax.swing.JFrame {
                             .addComponent(panelRedondeado2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(panelRedondeado4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(panelRedondeado5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addGroup(pnlContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(pnlProductoCatalogo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(pnlProductoCatalogo3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(pnlProductoCatalogo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(pnlContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(pnlProductoCatalogo4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(pnlProductoCatalogo6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(pnlProductoCatalogo5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(pnlCatalogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(panelRedondeado3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(pnlContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnlProductoCatalogo7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pnlProductoCatalogo8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pnlProductoCatalogo9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jScrollPane2.setViewportView(pnlContenido);
@@ -384,18 +358,10 @@ public class PantallaInicioCliente extends javax.swing.JFrame {
     private itson.org.ghosttracks.utilerias.PanelRedondeado panelRedondeado4;
     private itson.org.ghosttracks.utilerias.PanelRedondeado panelRedondeado5;
     private itson.org.ghosttracks.utilerias.pnlBarraSuperiorCorta pnlBarraSuperiorCorta1;
+    private javax.swing.JPanel pnlCatalogo;
     private javax.swing.JPanel pnlContenido;
     private itson.org.ghosttracks.utilerias.pnlMenuLateral pnlMenuLateral1;
     private javax.swing.JPanel pnlPrincipal;
-    private itson.org.ghosttracks.utilerias.pnlProductoCatalogo pnlProductoCatalogo1;
-    private itson.org.ghosttracks.utilerias.pnlProductoCatalogo pnlProductoCatalogo2;
-    private itson.org.ghosttracks.utilerias.pnlProductoCatalogo pnlProductoCatalogo3;
-    private itson.org.ghosttracks.utilerias.pnlProductoCatalogo pnlProductoCatalogo4;
-    private itson.org.ghosttracks.utilerias.pnlProductoCatalogo pnlProductoCatalogo5;
-    private itson.org.ghosttracks.utilerias.pnlProductoCatalogo pnlProductoCatalogo6;
-    private itson.org.ghosttracks.utilerias.pnlProductoCatalogo pnlProductoCatalogo7;
-    private itson.org.ghosttracks.utilerias.pnlProductoCatalogo pnlProductoCatalogo8;
-    private itson.org.ghosttracks.utilerias.pnlProductoCatalogo pnlProductoCatalogo9;
     // End of variables declaration//GEN-END:variables
     private pnlMenuLateral pnlMenuLateral;
     private pnlBarraSuperiorCorta pnlBarraSuperior;
