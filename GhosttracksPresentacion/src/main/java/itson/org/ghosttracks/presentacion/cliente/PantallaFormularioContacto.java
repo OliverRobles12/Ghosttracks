@@ -54,9 +54,9 @@ public class PantallaFormularioContacto extends javax.swing.JFrame {
         panelRedondeado1 = new itson.org.ghosttracks.utilerias.PanelRedondeado();
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        txtEmail = new javax.swing.JTextField();
-        txtTelefono = new javax.swing.JTextField();
-        btnGuardar = new javax.swing.JButton();
+        txtEmail = new itson.org.ghosttracks.utilerias.TextFieldRedondeado();
+        txtTelefono = new itson.org.ghosttracks.utilerias.TextFieldRedondeado();
+        btnGuardar = new itson.org.ghosttracks.utilerias.BotonRedondeado();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -75,8 +75,7 @@ public class PantallaFormularioContacto extends javax.swing.JFrame {
         jSeparator1.setForeground(new java.awt.Color(153, 153, 153));
 
         txtEmail.setBackground(new java.awt.Color(255, 255, 255));
-        txtEmail.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        txtEmail.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtEmail.setText("Email");
         txtEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtEmailActionPerformed(evt);
@@ -84,22 +83,11 @@ public class PantallaFormularioContacto extends javax.swing.JFrame {
         });
 
         txtTelefono.setBackground(new java.awt.Color(255, 255, 255));
-        txtTelefono.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        txtTelefono.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        txtTelefono.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTelefonoActionPerformed(evt);
-            }
-        });
+        txtTelefono.setText("Numero de telefono (Opcional)");
 
         btnGuardar.setBackground(new java.awt.Color(204, 51, 0));
-        btnGuardar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnGuardar.setText("Guardar");
-        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarActionPerformed(evt);
-            }
-        });
+        btnGuardar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout panelRedondeado1Layout = new javax.swing.GroupLayout(panelRedondeado1);
         panelRedondeado1.setLayout(panelRedondeado1Layout);
@@ -108,20 +96,19 @@ public class PantallaFormularioContacto extends javax.swing.JFrame {
             .addComponent(jSeparator1)
             .addGroup(panelRedondeado1Layout.createSequentialGroup()
                 .addGroup(panelRedondeado1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelRedondeado1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(panelRedondeado1Layout.createSequentialGroup()
-                            .addGap(18, 18, 18)
-                            .addComponent(jLabel1))
-                        .addGroup(panelRedondeado1Layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 666, Short.MAX_VALUE))
-                        .addGroup(panelRedondeado1Layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(txtTelefono)))
+                    .addGroup(panelRedondeado1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 664, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(panelRedondeado1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelRedondeado1Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel1))
+                            .addGroup(panelRedondeado1Layout.createSequentialGroup()
+                                .addGap(17, 17, 17)
+                                .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 664, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(panelRedondeado1Layout.createSequentialGroup()
-                        .addGap(289, 289, 289)
-                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(26, Short.MAX_VALUE))
+                        .addGap(269, 269, 269)
+                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
         panelRedondeado1Layout.setVerticalGroup(
             panelRedondeado1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,13 +117,13 @@ public class PantallaFormularioContacto extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44)
+                .addGap(29, 29, 29)
                 .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(54, 54, 54)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26))
+                .addGap(41, 41, 41)
+                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27))
         );
 
         javax.swing.GroupLayout pnlContenedorLayout = new javax.swing.GroupLayout(pnlContenedor);
@@ -153,7 +140,7 @@ public class PantallaFormularioContacto extends javax.swing.JFrame {
             .addGroup(pnlContenedorLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(panelRedondeado1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(366, Short.MAX_VALUE))
+                .addContainerGap(365, Short.MAX_VALUE))
         );
 
         pnlPrincipal.add(pnlContenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 110, 750, -1));
@@ -176,17 +163,9 @@ public class PantallaFormularioContacto extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnGuardarActionPerformed
-
     private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtEmailActionPerformed
-
-    private void txtTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTelefonoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -225,13 +204,13 @@ public class PantallaFormularioContacto extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnGuardar;
+    private itson.org.ghosttracks.utilerias.BotonRedondeado btnGuardar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JSeparator jSeparator1;
     private itson.org.ghosttracks.utilerias.PanelRedondeado panelRedondeado1;
     private javax.swing.JPanel pnlContenedor;
     private javax.swing.JPanel pnlPrincipal;
-    private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtTelefono;
+    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtEmail;
+    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtTelefono;
     // End of variables declaration//GEN-END:variables
 }
