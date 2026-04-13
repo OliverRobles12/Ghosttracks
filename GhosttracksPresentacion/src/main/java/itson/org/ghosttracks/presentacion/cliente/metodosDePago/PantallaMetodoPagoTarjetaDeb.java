@@ -36,8 +36,8 @@ public class PantallaMetodoPagoTarjetaDeb extends javax.swing.JFrame {
         lblSeleccionMetodoPago = new javax.swing.JLabel();
         txtNumeroTarjeta = new itson.org.ghosttracks.utilerias.TextFieldRedondeado();
         txtNumeroSeguridad = new itson.org.ghosttracks.utilerias.TextFieldRedondeado();
-        textFieldRedondeado1 = new itson.org.ghosttracks.utilerias.TextFieldRedondeado();
-        textFieldRedondeado2 = new itson.org.ghosttracks.utilerias.TextFieldRedondeado();
+        txtFechaVencimiento = new itson.org.ghosttracks.utilerias.TextFieldRedondeado();
+        txtNombreTitular = new itson.org.ghosttracks.utilerias.TextFieldRedondeado();
         btnContinuar = new itson.org.ghosttracks.utilerias.BotonRedondeado();
         pnlResumenPedido1 = new itson.org.ghosttracks.utilerias.pnlResumenPedido();
 
@@ -61,11 +61,11 @@ public class PantallaMetodoPagoTarjetaDeb extends javax.swing.JFrame {
         txtNumeroSeguridad.setName("CVV"); // NOI18N
         txtNumeroSeguridad.addActionListener(this::txtNumeroSeguridadActionPerformed);
 
-        textFieldRedondeado1.setText("Fecha Vencimiento");
-        textFieldRedondeado1.setFont(new java.awt.Font("Corbel", 0, 14)); // NOI18N
+        txtFechaVencimiento.setText("Fecha Vencimiento");
+        txtFechaVencimiento.setFont(new java.awt.Font("Corbel", 0, 14)); // NOI18N
 
-        textFieldRedondeado2.setText("Nombre del titular");
-        textFieldRedondeado2.setFont(new java.awt.Font("Corbel", 0, 14)); // NOI18N
+        txtNombreTitular.setText("Nombre del titular");
+        txtNombreTitular.setFont(new java.awt.Font("Corbel", 0, 14)); // NOI18N
 
         btnContinuar.setBackground(new java.awt.Color(230, 94, 7));
         btnContinuar.setForeground(new java.awt.Color(255, 255, 255));
@@ -83,10 +83,10 @@ public class PantallaMetodoPagoTarjetaDeb extends javax.swing.JFrame {
                     .addComponent(lblMetodoDePago, javax.swing.GroupLayout.PREFERRED_SIZE, 539, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtNumeroTarjeta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(panelRedondeadoLayout.createSequentialGroup()
-                        .addComponent(textFieldRedondeado1, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtFechaVencimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(txtNumeroSeguridad, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE))
-                    .addComponent(textFieldRedondeado2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtNombreTitular, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(22, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRedondeadoLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -108,9 +108,9 @@ public class PantallaMetodoPagoTarjetaDeb extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addGroup(panelRedondeadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNumeroSeguridad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textFieldRedondeado1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtFechaVencimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
-                .addComponent(textFieldRedondeado2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtNombreTitular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
                 .addComponent(btnContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(34, Short.MAX_VALUE))
@@ -181,8 +181,8 @@ public class PantallaMetodoPagoTarjetaDeb extends javax.swing.JFrame {
     private itson.org.ghosttracks.utilerias.pnlMenuLateral pnlMenuLateral;
     private javax.swing.JPanel pnlPrincipal;
     private itson.org.ghosttracks.utilerias.pnlResumenPedido pnlResumenPedido1;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado textFieldRedondeado1;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado textFieldRedondeado2;
+    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtFechaVencimiento;
+    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtNombreTitular;
     private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtNumeroSeguridad;
     private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtNumeroTarjeta;
     // End of variables declaration//GEN-END:variables
