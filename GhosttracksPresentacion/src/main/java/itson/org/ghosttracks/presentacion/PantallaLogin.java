@@ -48,7 +48,7 @@ public class PantallaLogin extends javax.swing.JFrame {
         jTextField2.setPreferredSize(new java.awt.Dimension(400, 30));
 
         jLabel1.setFont(new java.awt.Font("Corbel", 1, 36)); // NOI18N
-        jLabel1.setText("!Bienvenido!");
+        jLabel1.setText("¡Bienvenido!");
 
         btnIngresar.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         btnIngresar.setText("Ingresar");
