@@ -29,7 +29,7 @@ public class PantallaVentas extends javax.swing.JFrame {
     private void initComponents() {
 
         pnlPrincipal = new javax.swing.JPanel();
-        pnlMenuLateralAdmin1 = new itson.org.ghosttracks.utilerias.pnlMenuLateralAdmin();
+        pnlMenuLateral = new itson.org.ghosttracks.utilerias.pnlMenuLateralAdmin();
         panelHeader = new itson.org.ghosttracks.utilerias.pnlBarraSuperiorCorta();
         panelFiltros = new itson.org.ghosttracks.utilerias.PanelRedondeado();
         txtCodigoVenta = new itson.org.ghosttracks.utilerias.TextFieldRedondeado();
@@ -114,7 +114,7 @@ public class PantallaVentas extends javax.swing.JFrame {
         pnlPrincipalLayout.setHorizontalGroup(
             pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlPrincipalLayout.createSequentialGroup()
-                .addComponent(pnlMenuLateralAdmin1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnlMenuLateral, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlPrincipalLayout.createSequentialGroup()
                         .addComponent(panelHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -132,7 +132,7 @@ public class PantallaVentas extends javax.swing.JFrame {
             pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlPrincipalLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(pnlMenuLateralAdmin1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(pnlMenuLateral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(pnlPrincipalLayout.createSequentialGroup()
                 .addComponent(panelHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,7 +164,7 @@ public class PantallaVentas extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private itson.org.ghosttracks.utilerias.PanelRedondeado panelFiltros;
     private itson.org.ghosttracks.utilerias.pnlBarraSuperiorCorta panelHeader;
-    private itson.org.ghosttracks.utilerias.pnlMenuLateralAdmin pnlMenuLateralAdmin1;
+    private itson.org.ghosttracks.utilerias.pnlMenuLateralAdmin pnlMenuLateral;
     private javax.swing.JPanel pnlPrincipal;
     private itson.org.ghosttracks.utilerias.pnlResumenPedido pnlResumenPedido1;
     private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtCodigoVenta;

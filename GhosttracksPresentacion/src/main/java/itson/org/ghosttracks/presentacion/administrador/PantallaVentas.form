@@ -44,7 +44,7 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <Component id="pnlMenuLateralAdmin1" min="-2" pref="300" max="-2" attributes="0"/>
+                  <Component id="pnlMenuLateral" min="-2" pref="300" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <Component id="panelHeader" max="-2" attributes="0"/>
@@ -68,7 +68,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  <Component id="pnlMenuLateralAdmin1" min="-2" max="-2" attributes="0"/>
+                  <Component id="pnlMenuLateral" min="-2" max="-2" attributes="0"/>
               </Group>
               <Group type="102" attributes="0">
                   <Component id="panelHeader" min="-2" max="-2" attributes="0"/>
@@ -86,7 +86,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="itson.org.ghosttracks.utilerias.pnlMenuLateralAdmin" name="pnlMenuLateralAdmin1">
+        <Component class="itson.org.ghosttracks.utilerias.pnlMenuLateralAdmin" name="pnlMenuLateral">
         </Component>
         <Component class="itson.org.ghosttracks.utilerias.pnlBarraSuperiorCorta" name="panelHeader">
         </Component>
