@@ -1,40 +1,21 @@
 
 package itson.org.ghosttracks.presentacion.administrador;
 
-import itson.org.ghosttracks.mocks.Producto;
-import itson.rog.ghosttracks.controladores.ControladorVentasAdmin;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.List;
-import javax.swing.JFrame;
-
 /**
  *
  * @author oliro
  */
-public class PantallaVentasAdmin extends javax.swing.JFrame {
+public class PantallaVentas extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PantallaVentasAdmin.class.getName());
-    private ControladorVentasAdmin control;
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PantallaVentas.class.getName());
     
-    private final JFrame pantallaActual = this;
     
     /**
      * Creates new form PantallaInicioAdmin
      */
-    public PantallaVentasAdmin(ControladorVentasAdmin control) {
-        this.control = control;
+    public PantallaVentas() {
         initComponents();
         
-        List<Producto> productos = control.obtenerProductosMock();
-        pnlResumenPedido1.cargarCarrito(productos);
-        
-        pnlResumenPedido1.getBtnContinuar().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                control.mostrarPantallaProcesarPedido(pantallaActual);
-            }
-        });
         
     }
 
