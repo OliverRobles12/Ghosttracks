@@ -1,7 +1,7 @@
 
 package itson.rog.ghosttracks.controladores;
 
-import itson.org.ghosttracks.mocks.Producto;
+import itson.org.ghosttracks.mocks.ProductosMockDAO;
 import itson.org.ghosttracks.presentacion.VentanaPrincipal;
 import itson.org.ghosttracks.presentacion.administrador.PantallaVentasProcesarAdmin;
 import itson.org.ghosttracks.presentacion.administrador.PantallaVentas;
@@ -44,7 +44,7 @@ public class Navegador {
         ventana.cambiarPantalla(vista);
     }
     
-    public void irVistaProducto(Producto producto) {
+    public void irVistaProducto(ProductosMockDAO producto) {
         ControlVentaEnLinea ctrl = new ControlVentaEnLinea(this);
         PanelVistaProducto vista = new PanelVistaProducto(ctrl, producto);
         ventana.cambiarPantalla(vista);

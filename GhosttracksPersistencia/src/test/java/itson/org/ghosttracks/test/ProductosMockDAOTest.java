@@ -8,11 +8,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import itson.org.ghosttracks.dtos.ProductoDTO;
+import itson.org.ghosttracks.entidades.Producto;
 import itson.org.ghosttracks.enums.EstadoProducto;
 import itson.org.ghosttracks.enums.TipoProducto;
 import itson.org.ghosttracks.exceptions.PersistenciaException;
 import itson.org.ghosttracks.mocks.ProductosMockDAO;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -25,8 +27,7 @@ public class ProductosMockDAOTest {
 
     @BeforeEach
     public void init() {
-        // Setup general: Se crea una nueva instancia del DAO antes de cada test.
-        // Esto garantiza que los 3 productos dummy originales siempre se carguen limpios.
+        // Setup general
         this.dao = new ProductosMockDAO();
     }
 
@@ -35,51 +36,41 @@ public class ProductosMockDAOTest {
 
     @Test
     public void testObtenerTodosHappyPath() {
-        // Setup
-        
         // Ejecución
         assertDoesNotThrow(() -> {
-            List<ProductoDTO> listaProductos = dao.obtenerTodos();
+            List<Producto> listaProductos = dao.obtenerTodos();
             
             // Verificación
             assertNotNull(listaProductos);
-            // Esperamos 3 productos porque el método cargarDatosDummy() mete 3 por defecto
             assertEquals(3, listaProductos.size()); 
         });
-        
-        // Tear down
     }
 
     @Test
     public void testBuscarPorIdHappyPath() {
         // Setup
-        Long idProductoBuscado = 1L; // Sabemos que el ID 1 es Abbey Road
+        Long idProductoBuscado = 1L; 
         
         // Ejecución 
         assertDoesNotThrow(() -> {
-            ProductoDTO producto = dao.buscarPorId(idProductoBuscado);
+            Producto producto = dao.buscarPorId(idProductoBuscado);
             
             // Verificación
             assertNotNull(producto);
             assertEquals(idProductoBuscado, producto.getIdProducto());
             assertEquals("Abbey Road", producto.getNombre());
         });
-        
-        // Tear down
     }
 
     @Test
     public void testBuscarPorIdNoExiste() {
         // Setup
-        Long idProductoFake = 99L; // Un ID que sabemos que no está en los dummies
+        Long idProductoFake = 99L; 
         
         // Ejecución y Verificación
-        // Se espera que lance PersistenciaException por no encontrarlo
         assertThrows(PersistenciaException.class, () -> {
             dao.buscarPorId(idProductoFake);
         });
-        
-        // Tear down
     }
 
     @Test
@@ -96,14 +87,14 @@ public class ProductosMockDAOTest {
     @Test
     public void testAgregarHappyPath() {
         // Setup
-        ProductoDTO nuevoProducto = new ProductoDTO(
-                null, // El ID debe generarse automáticamente
+        ProductoDTO nuevoProductoDTO = new ProductoDTO(
+                null, 
                 "Random Access Memories", 
                 "ram.jpg", 
                 TipoProducto.VINILO, 
                 "Daft Punk", 
                 "Electronic", 
-                new ArrayList<>(), 
+                new ArrayList<>(Arrays.asList("Give Life Back to Music", "Get Lucky")), 
                 550.00, 
                 10, 
                 EstadoProducto.DISPONIBLE
@@ -111,25 +102,22 @@ public class ProductosMockDAOTest {
         
         // Ejecución
         assertDoesNotThrow(() -> {
-            ProductoDTO productoGuardado = dao.agregar(nuevoProducto);
+            Producto productoGuardado = dao.agregar(nuevoProductoDTO);
             
             // Verificación
             assertNotNull(productoGuardado.getIdProducto());
-            // Como ya había 3 productos, el nuevo debería recibir el ID 4L
             assertEquals(4L, productoGuardado.getIdProducto()); 
-            assertEquals(nuevoProducto.getNombre(), productoGuardado.getNombre());
+            assertEquals(nuevoProductoDTO.getNombre(), productoGuardado.getNombre());
             
-            // Verificamos que realmente se añadió a la lista general
+            // Verificamos que se añadió a la lista general
             assertEquals(4, dao.obtenerTodos().size());
         });
-        
-        // Tear down
     }
 
     @Test
     public void testAgregarProductoNulo() {
         // Setup
-        ProductoDTO productoNulo = null;
+        ProductoDTO productoNulo = null; // El input ahora es DTO
         
         // Ejecución y Verificación
         assertThrows(PersistenciaException.class, () -> {
@@ -140,7 +128,8 @@ public class ProductosMockDAOTest {
     @Test
     public void testAgregarProductoNombreVacio() {
         // Setup
-        ProductoDTO productoInvalido = new ProductoDTO(
+        // Creamos un DTO inválido para probar la validación de negocio
+        ProductoDTO productoInvalidoDTO = new ProductoDTO(
                 null, 
                 "", // Nombre vacío intencionalmente
                 "img.jpg", 
@@ -155,7 +144,7 @@ public class ProductosMockDAOTest {
         
         // Ejecución y Verificación
         assertThrows(PersistenciaException.class, () -> {
-            dao.agregar(productoInvalido);
+            dao.agregar(productoInvalidoDTO);
         });
     }
 }

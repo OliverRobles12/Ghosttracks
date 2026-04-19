@@ -2,13 +2,13 @@ package itson.org.ghosttracks.mocks;
 
 import itson.org.ghosttracks.daos.IProductosDAO;
 import itson.org.ghosttracks.dtos.ProductoDTO;
+import itson.org.ghosttracks.entidades.Producto;
 import itson.org.ghosttracks.enums.EstadoProducto;
 import itson.org.ghosttracks.enums.TipoProducto;
 import itson.org.ghosttracks.exceptions.PersistenciaException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -19,7 +19,7 @@ public class ProductosMockDAO implements IProductosDAO {
 
     private static final Logger LOGGER = Logger.getLogger(ProductosMockDAO.class.getName());
     
-    private List<ProductoDTO> productosDB;
+    private List<Producto> productosDB;
     private Long contadorId = 1L;
 
     public ProductosMockDAO() {
@@ -33,7 +33,7 @@ public class ProductosMockDAO implements IProductosDAO {
     private void cargarDatosDummy() {
         
         // --- PRODUCTO 1 ---
-        ProductoDTO producto1 = new ProductoDTO(
+        Producto producto1 = new Producto(
                 1L,                       // idProducto
                 "Abbey Road",             // nombre
                 "abbey_road.jpg",         // imgProducto
@@ -49,7 +49,7 @@ public class ProductosMockDAO implements IProductosDAO {
         contadorId++;
 
         // --- PRODUCTO 2 ---  
-        ProductoDTO producto2 = new ProductoDTO(
+        Producto producto2 = new Producto(
                 2L, 
                 "Thriller", 
                 "thriller.jpg", 
@@ -65,7 +65,7 @@ public class ProductosMockDAO implements IProductosDAO {
         contadorId++;
 
         // --- PRODUCTO 3 ---
-        ProductoDTO producto3 = new ProductoDTO(
+        Producto producto3 = new Producto(
                 3L, 
                 "The Dark Side of the Moon", 
                 "dark_side.jpg", 
@@ -82,7 +82,7 @@ public class ProductosMockDAO implements IProductosDAO {
     }
     
     @Override
-    public List<ProductoDTO> obtenerTodos() throws PersistenciaException {
+    public List<Producto> obtenerTodos() throws PersistenciaException {
         try {
             return new ArrayList<>(this.productosDB);
         } catch (Exception e) {
@@ -92,13 +92,13 @@ public class ProductosMockDAO implements IProductosDAO {
     }
     
     @Override
-    public ProductoDTO buscarPorId(Long idProducto) throws PersistenciaException {
+    public Producto buscarPorId(Long idProducto) throws PersistenciaException {
         if (idProducto == null) {
             throw new PersistenciaException("El ID del producto a buscar no puede ser nulo");
         }
 
         try {
-            for (ProductoDTO producto : productosDB) {
+            for (Producto producto : productosDB) {
                 if (producto.getIdProducto().equals(idProducto)) {
                     return producto;
                 }
@@ -115,18 +115,33 @@ public class ProductosMockDAO implements IProductosDAO {
     }
 
     @Override
-    public ProductoDTO agregar(ProductoDTO producto) throws PersistenciaException {
-        if (producto == null) {
+    public Producto agregar(ProductoDTO productoDTO) throws PersistenciaException {
+        if (productoDTO == null) {
             throw new PersistenciaException("No se puede agregar un producto nulo.");
         }
-        if (producto.getNombre() == null || producto.getNombre().trim().isEmpty()) {
+        if (productoDTO.getNombre() == null || productoDTO.getNombre().trim().isEmpty()) {
             throw new PersistenciaException("El producto debe tener un nombre válido.");
         }
 
         try {
-            producto.setIdProducto(contadorId++);
-            this.productosDB.add(producto);
-            return producto;
+            Producto nuevaEntidad = new Producto(
+            contadorId++, // Le asignamos su ID
+            productoDTO.getNombre(),
+            productoDTO.getImgProducto(),
+            productoDTO.getTipoProducto(),
+            productoDTO.getArtista(),
+            productoDTO.getGenero(),
+            productoDTO.getSetlist(),
+            productoDTO.getPrecio(),
+            productoDTO.getStock(),
+            productoDTO.getEstado()
+        );
+
+        // 3. Guardamos la entidad en nuestra "Base de Datos" (la lista)
+        this.productosDB.add(nuevaEntidad);
+
+        // 4. Retornamos la entidad guardada
+        return nuevaEntidad;
             
         } catch (Exception e) {
             LOGGER.severe("Error crítico e inesperado al intentar agregar un nuevo producto" + e.getMessage());

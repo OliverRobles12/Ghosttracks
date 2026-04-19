@@ -1,16 +1,17 @@
-package itson.org.ghosttracks.dtos;
+package itson.org.ghosttracks.entidades; 
 
 import itson.org.ghosttracks.enums.EstadoProducto;
 import itson.org.ghosttracks.enums.TipoProducto;
+
 import java.util.List;
 
 /**
- *
+ * Entidad de Dominio
  * @author Emy
  */
-public class ProductoDTO {
+public class Producto {
     
-    private Long idProducto;
+    private Long idProducto; 
     private String nombre;
     private String imgProducto;
     private TipoProducto tipoProducto;
@@ -21,21 +22,22 @@ public class ProductoDTO {
     private Integer stock;
     private EstadoProducto estado;
 
-    public ProductoDTO() {
+    public Producto() {
     }
 
-    public ProductoDTO(
-            Long idProducto, 
-            String nombre, 
-            String imgProducto, 
-            TipoProducto tipoProducto, 
-            String artista, 
-            String genero, 
-            List<String> setList,
-            Double precio, 
-            Integer stock, 
-            EstadoProducto estado
-    ) {
+    public Producto(String nombre, String imgProducto, TipoProducto tipoProducto, String artista, String genero, List<String> setlist, Double precio, Integer stock, EstadoProducto estado) {
+        this.nombre = nombre;
+        this.imgProducto = imgProducto;
+        this.tipoProducto = tipoProducto;
+        this.artista = artista;
+        this.genero = genero;
+        this.setlist = setlist;
+        this.precio = precio;
+        this.stock = stock;
+        this.estado = estado;
+    }
+
+    public Producto(Long idProducto, String nombre, String imgProducto, TipoProducto tipoProducto, String artista, String genero, List<String> setlist, Double precio, Integer stock, EstadoProducto estado) {
         this.idProducto = idProducto;
         this.nombre = nombre;
         this.imgProducto = imgProducto;
@@ -47,6 +49,8 @@ public class ProductoDTO {
         this.stock = stock;
         this.estado = estado;
     }
+
+    // GETTERS Y SETTERS
 
     public Long getIdProducto() {
         return idProducto;
@@ -72,11 +76,11 @@ public class ProductoDTO {
         this.imgProducto = imgProducto;
     }
 
-    public TipoProducto getTipoProducto() {
+    public TipoProducto getTipo() {
         return tipoProducto;
     }
 
-    public void setTipoProducto(TipoProducto tipoProducto) {
+    public void setTipo(TipoProducto tipoProducto) {
         this.tipoProducto = tipoProducto;
     }
 
@@ -127,5 +131,5 @@ public class ProductoDTO {
     public void setEstado(EstadoProducto estado) {
         this.estado = estado;
     }
-  
+
 }

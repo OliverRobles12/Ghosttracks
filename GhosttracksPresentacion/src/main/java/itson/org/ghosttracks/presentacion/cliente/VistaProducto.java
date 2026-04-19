@@ -1,6 +1,6 @@
 package itson.org.ghosttracks.presentacion.cliente;
 
-import itson.org.ghosttracks.mocks.Producto;
+import itson.org.ghosttracks.mocks.ProductosMockDAO;
 import itson.org.ghosttracks.utilerias.pnlBarraSuperior;
 import itson.rog.ghosttracks.controladores.ControlVentaEnLinea;
 
@@ -12,12 +12,12 @@ public class VistaProducto extends javax.swing.JFrame {
     
     private ControlVentaEnLinea control;
     private pnlBarraSuperior barraSuperior;
-    private Producto producto;
+    private ProductosMockDAO producto;
     
     /**
      * Creates new form VistaProducto
      */
-    public VistaProducto(ControlVentaEnLinea control, Producto producto) {
+    public VistaProducto(ControlVentaEnLinea control, ProductosMockDAO producto) {
         this.control = control;
         this.producto = producto;
         
@@ -648,35 +648,35 @@ public class VistaProducto extends javax.swing.JFrame {
     }//GEN-LAST:event_botonRedondeado1ActionPerformed
 
     private void cargarDatosProducto() {
-        // 1. Llenamos los datos básicos
-        lblNombreProducto.setText(producto.getNombre());
-        lblArtista.setText(producto.getArtista());
-        lblPrecio.setText(String.format("$%.2f", producto.getPrecio()));
-        // 2. Acomodamos el setlist (usamos HTML básico para que el JLabel acepte saltos de línea)
-        if (producto.getSetList() != null && !producto.getSetList().isEmpty()) {
-            String canciones = String.join("<br>", producto.getSetList());
-            lblSetlist.setText("<html><div style='text-align:center;'>" + canciones + "</div></html>");
-        } else {
-            lblSetlist.setText("Setlist no disponible");
-        }
-
-        // 3. Magia para descargar y escalar la imagen grande
-        try {
-            java.net.URL url = new java.net.URL(producto.getUrlImagen());
-            java.awt.Image imagenOriginal = javax.imageio.ImageIO.read(url);
-            
-            // OJO: Aquí le puse 400x400 porque en esta pantalla la imagen es más grande.
-            // Ajusta estos números dependiendo de qué tan grande sea tu lblImgProducto
-            java.awt.Image imagenEscalada = imagenOriginal.getScaledInstance(450, 450, java.awt.Image.SCALE_SMOOTH);
-            
-            lblImgProducto.setIcon(new javax.swing.ImageIcon(imagenEscalada));
-            lblImgProducto.setText(""); 
-            
-        } catch (Exception e) {
-            System.out.println("Error cargando imagen principal de: " + producto.getNombre());
-            lblImgProducto.setIcon(null);
-            lblImgProducto.setText("Imagen no disp.");
-        }
+//        // 1. Llenamos los datos básicos
+//        lblNombreProducto.setText(producto.getNombre());
+//        lblArtista.setText(producto.getArtista());
+//        lblPrecio.setText(String.format("$%.2f", producto.getPrecio()));
+//        // 2. Acomodamos el setlist (usamos HTML básico para que el JLabel acepte saltos de línea)
+//        if (producto.getSetList() != null && !producto.getSetList().isEmpty()) {
+//            String canciones = String.join("<br>", producto.getSetList());
+//            lblSetlist.setText("<html><div style='text-align:center;'>" + canciones + "</div></html>");
+//        } else {
+//            lblSetlist.setText("Setlist no disponible");
+//        }
+//
+//        // 3. Magia para descargar y escalar la imagen grande
+//        try {
+//            java.net.URL url = new java.net.URL(producto.getUrlImagen());
+//            java.awt.Image imagenOriginal = javax.imageio.ImageIO.read(url);
+//            
+//            // OJO: Aquí le puse 400x400 porque en esta pantalla la imagen es más grande.
+//            // Ajusta estos números dependiendo de qué tan grande sea tu lblImgProducto
+//            java.awt.Image imagenEscalada = imagenOriginal.getScaledInstance(450, 450, java.awt.Image.SCALE_SMOOTH);
+//            
+//            lblImgProducto.setIcon(new javax.swing.ImageIcon(imagenEscalada));
+//            lblImgProducto.setText(""); 
+//            
+//        } catch (Exception e) {
+//            System.out.println("Error cargando imagen principal de: " + producto.getNombre());
+//            lblImgProducto.setIcon(null);
+//            lblImgProducto.setText("Imagen no disp.");
+//        }
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -1,8 +1,8 @@
 
 package itson.org.ghosttracks.presentacion.cliente;
 
-import itson.org.ghosttracks.mocks.Producto;
-import itson.org.ghosttracks.mocks.TipoProducto;
+import itson.org.ghosttracks.mocks.ProductosMockDAO;
+import itson.org.ghosttracks.enums.TipoProducto;
 import itson.org.ghosttracks.utilerias.pnlBarraSuperiorCorta;
 import itson.org.ghosttracks.utilerias.pnlMenuLateral;
 import itson.rog.ghosttracks.controladores.ControlVentaEnLinea;
@@ -26,30 +26,30 @@ public class PantallaInicioCliente extends javax.swing.JFrame {
         initComponents();
         this.control = control;
      
-        pnlPrincipal.add(pnlMenuLateral, new AbsoluteConstraints(0, 0, 300, 800));
-        pnlPrincipal.add(pnlBarraSuperior, new AbsoluteConstraints(300, 0, 1100, 110));
-        
-        panelRedondeado2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        panelRedondeado2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                cargarCatalogo(itson.org.ghosttracks.mocks.TipoProducto.VINILO);
-            }
-        });
-        
-        panelRedondeado4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        panelRedondeado4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                cargarCatalogo(itson.org.ghosttracks.mocks.TipoProducto.CD);
-            }
-        });
-        
-        panelRedondeado5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        panelRedondeado5.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                cargarCatalogo(itson.org.ghosttracks.mocks.TipoProducto.CASSETTE);
-            }
-        });
-        
+//        pnlPrincipal.add(pnlMenuLateral, new AbsoluteConstraints(0, 0, 300, 800));
+//        pnlPrincipal.add(pnlBarraSuperior, new AbsoluteConstraints(300, 0, 1100, 110));
+//        
+//        panelRedondeado2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+//        panelRedondeado2.addMouseListener(new java.awt.event.MouseAdapter() {
+//            public void mouseClicked(java.awt.event.MouseEvent evt) {
+//                cargarCatalogo(itson.org.ghosttracks.mocks.TipoProducto.VINILO);
+//            }
+//        });
+//        
+//        panelRedondeado4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+//        panelRedondeado4.addMouseListener(new java.awt.event.MouseAdapter() {
+//            public void mouseClicked(java.awt.event.MouseEvent evt) {
+//                cargarCatalogo(itson.org.ghosttracks.mocks.TipoProducto.CD);
+//            }
+//        });
+//        
+//        panelRedondeado5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+//        panelRedondeado5.addMouseListener(new java.awt.event.MouseAdapter() {
+//            public void mouseClicked(java.awt.event.MouseEvent evt) {
+//                cargarCatalogo(itson.org.ghosttracks.mocks.TipoProducto.CASSETTE);
+//            }
+//        });
+//        
         cargarCatalogo(null);
     }
 
@@ -326,28 +326,28 @@ public class PantallaInicioCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     
     private void cargarCatalogo(TipoProducto tipo) {
-        pnlCatalogo.removeAll(); 
-
-        pnlCatalogo.setLayout(new java.awt.GridLayout(0, 3, 20, 20));
-
-        // Pedimos todos los productos o los filtrados dependiendo de qué seleccionó el usuario
-        List<Producto> listaProductos;
-        if (tipo == null) {
-            listaProductos = control.obtenerProductosMock(); // Si es null, muestra TODOS
-        } else {
-            listaProductos = control.obtenerProductosPorTipo(tipo); // Muestra solo los del tipo
-        }
-
-        if (listaProductos != null) {
-            for (Producto p : listaProductos) {
-                pnlProductoCatalogo tarjeta = new pnlProductoCatalogo(p, control);
-                tarjeta.setVisible(true);
-                pnlCatalogo.add(tarjeta); 
-            }
-        }
-
-        pnlCatalogo.revalidate();
-        pnlCatalogo.repaint();
+//        pnlCatalogo.removeAll(); 
+//
+//        pnlCatalogo.setLayout(new java.awt.GridLayout(0, 3, 20, 20));
+//
+//        // Pedimos todos los productos o los filtrados dependiendo de qué seleccionó el usuario
+//        List<ProductosMockDAO> listaProductos;
+//        if (tipo == null) {
+//            listaProductos = control.obtenerProductosMock(); // Si es null, muestra TODOS
+//        } else {
+//            listaProductos = control.obtenerProductosPorTipo(tipo); // Muestra solo los del tipo
+//        }
+//
+//        if (listaProductos != null) {
+//            for (Producto p : listaProductos) {
+//                pnlProductoCatalogo tarjeta = new pnlProductoCatalogo(p, control);
+//                tarjeta.setVisible(true);
+//                pnlCatalogo.add(tarjeta); 
+//            }
+//        }
+//
+//        pnlCatalogo.revalidate();
+//        pnlCatalogo.repaint();
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
