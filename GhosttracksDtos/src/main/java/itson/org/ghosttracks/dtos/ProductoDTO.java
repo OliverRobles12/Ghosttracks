@@ -3,6 +3,7 @@ package itson.org.ghosttracks.dtos;
 import itson.org.ghosttracks.enums.EstadoProducto;
 import itson.org.ghosttracks.enums.TipoProducto;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -16,7 +17,7 @@ public class ProductoDTO {
     private TipoProducto tipoProducto;
     private String artista;
     private String genero;
-    private ArrayList descripcion;
+    private List<String> setlist;
     private Double precio;
     private Integer stock;
     private EstadoProducto estado;
@@ -31,7 +32,7 @@ public class ProductoDTO {
             TipoProducto tipoProducto, 
             String artista, 
             String genero, 
-            ArrayList descripcion,
+            List<String> setList,
             Double precio, 
             Integer stock, 
             EstadoProducto estado
@@ -42,7 +43,7 @@ public class ProductoDTO {
         this.tipoProducto = tipoProducto;
         this.artista = artista;
         this.genero = genero;
-        this.descripcion = descripcion;
+        this.setlist = setlist;
         this.precio = precio;
         this.stock = stock;
         this.estado = estado;
@@ -96,12 +97,12 @@ public class ProductoDTO {
         this.genero = genero;
     }
 
-    public ArrayList getDescripcion() {
-        return descripcion;
+    public List<String> getSetlist() {
+        return setlist;
     }
 
-    public void setDescripcion(ArrayList descripcion) {
-        this.descripcion = descripcion;
+    public void setSetlist(List<String> setlist) {
+        this.setlist = setlist;
     }
 
     public Double getPrecio() {
