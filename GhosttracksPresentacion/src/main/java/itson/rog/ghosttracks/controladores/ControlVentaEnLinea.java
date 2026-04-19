@@ -18,9 +18,25 @@ import javax.swing.JOptionPane;
  */
 public class ControlVentaEnLinea {
     
-    public ControlVentaEnLinea() {
-        
+    private final Navegador navegador;
+    
+    public ControlVentaEnLinea(Navegador nav) {
+        this.navegador = nav;
     }
+    
+    public void mostrarDetalleProducto(Producto productoSeleccionado) {
+        navegador.irVistaProducto(productoSeleccionado);
+    }
+    
+    public void volverACatalogo() {
+        navegador.irInicioCliente();
+    }
+    
+    public void alternarMenuLateral() {
+        navegador.alternarMenuLateral();
+    }
+    
+    
     public List<Producto> obtenerProductosMock() {
         List<Producto> mocks = new ArrayList<>();
         
@@ -154,16 +170,16 @@ public class ControlVentaEnLinea {
     }
     
     public void mostrarPantallaVistaProducto(JFrame pantallaActual, Producto productoSeleccionado, JFrame pantallaPadre) {
-        if (pantallaPadre != null) {
-            pantallaPadre.setVisible(false); // Oculta el catálogo
-        }
-        
-        VistaProducto vista = new VistaProducto(this, productoSeleccionado, pantallaPadre);
-        vista.setVisible(true);
-        
-        if(pantallaActual != null) {
-            pantallaActual.dispose();
-        }
+//        if (pantallaPadre != null) {
+//            pantallaPadre.setVisible(false); // Oculta el catálogo
+//        }
+//        
+//        VistaProducto vista = new VistaProducto(this, productoSeleccionado, pantallaPadre);
+//        vista.setVisible(true);
+//        
+//        if(pantallaActual != null) {
+//            pantallaActual.dispose();
+//        }
     }
     
     public void mostrarPantallaMetodoPagoTarjeta(JFrame pantallaActual) {

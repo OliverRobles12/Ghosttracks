@@ -419,20 +419,6 @@
             </Container>
           </SubComponents>
         </Container>
-        <Component class="itson.org.ghosttracks.utilerias.pnlMenuLateral" name="pnlMenuLateral1">
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="0" y="0" width="300" height="800"/>
-            </Constraint>
-          </Constraints>
-        </Component>
-        <Component class="itson.org.ghosttracks.utilerias.pnlBarraSuperiorCorta" name="pnlBarraSuperiorCorta1">
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="300" y="0" width="1100" height="120"/>
-            </Constraint>
-          </Constraints>
-        </Component>
       </SubComponents>
     </Container>
   </SubComponents>

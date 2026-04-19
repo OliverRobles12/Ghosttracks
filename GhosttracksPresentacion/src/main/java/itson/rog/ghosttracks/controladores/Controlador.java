@@ -22,12 +22,5 @@ public class Controlador {
         return instancia;
     }
     
-    public ControlVentaEnLinea getControlVentaEnLinea() {
-        if (controlVentaEnLinea == null)  {
-            controlVentaEnLinea = new ControlVentaEnLinea();
-        }
-        return controlVentaEnLinea;
-    }
-    
     
 }

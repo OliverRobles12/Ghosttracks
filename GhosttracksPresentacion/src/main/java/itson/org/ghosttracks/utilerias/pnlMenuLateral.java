@@ -1,10 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
+
 package itson.org.ghosttracks.utilerias;
 
 import itson.rog.ghosttracks.controladores.Controlador;
+import itson.rog.ghosttracks.controladores.Navegador;
 import javax.swing.JFrame;
 
 /**
@@ -13,10 +11,13 @@ import javax.swing.JFrame;
  */
 public class pnlMenuLateral extends javax.swing.JPanel {
 
+    private final Navegador navegador;
+    
     /**
      * Creates new form pnlMenuLateral
      */
-    public pnlMenuLateral() {
+    public pnlMenuLateral(Navegador nav) {
+        this.navegador = nav;
         initComponents();
     }
 
@@ -129,13 +130,11 @@ public class pnlMenuLateral extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSeguimientoActionPerformed
 
     private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
-        // TODO add your handling code here:
+        navegador.cerrarSesion();
     }//GEN-LAST:event_btnCerrarSesionActionPerformed
 
     private void btnInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInicioActionPerformed
-        JFrame pantallaPadre = (javax.swing.JFrame) javax.swing.SwingUtilities.getWindowAncestor(this);
         
-        Controlador.getInstancia().getControlVentaEnLinea().mostrarPantallaInicio(pantallaPadre);
     }//GEN-LAST:event_btnInicioActionPerformed
 
 

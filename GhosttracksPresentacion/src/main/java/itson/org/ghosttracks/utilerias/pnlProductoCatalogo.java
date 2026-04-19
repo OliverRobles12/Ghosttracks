@@ -18,16 +18,14 @@ public class pnlProductoCatalogo extends javax.swing.JPanel {
 
     private Producto producto;
     private ControlVentaEnLinea control;
-    private JFrame pantallaPadre;
     
     /**
      * Creates new form pnlProductoCatalogo
      */
-    public pnlProductoCatalogo(Producto producto, ControlVentaEnLinea control, JFrame pantallaPadre) {
+    public pnlProductoCatalogo(Producto producto, ControlVentaEnLinea control) {
         initComponents();
         this.producto = producto;
         this.control = control;
-        this.pantallaPadre = pantallaPadre;
         
         // 1. Llenamos los labels con la info del objeto
         lblNombreProducto.setText(producto.getNombre());
@@ -58,8 +56,8 @@ public class pnlProductoCatalogo extends javax.swing.JPanel {
         
         this.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
-                
-                control.mostrarPantallaVistaProducto(null, producto, pantallaPadre);
+                control.mostrarDetalleProducto(producto);
+                // control.mostrarPantallaVistaProducto(null, producto, pantallaPadre);
             }
         });
     }

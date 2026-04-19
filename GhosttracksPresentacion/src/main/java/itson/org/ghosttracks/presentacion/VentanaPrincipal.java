@@ -16,6 +16,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private JPanel panelContenido;
     private JPanel panelDerecho;
     private JPanel headerActual;
+    private JPanel menuActual;
     
     public VentanaPrincipal() {
         initComponents();
@@ -32,7 +33,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
     
     public void fijarMenuLateral(JPanel menu) {
-        this.add(menu, BorderLayout.WEST);
+        BorderLayout layout = (BorderLayout) this.getContentPane().getLayout();
+        java.awt.Component menuAntiguo = layout.getLayoutComponent(BorderLayout.WEST);
+        if (menuAntiguo != null) {
+            this.remove(menuAntiguo);
+        }
+        
+        this.menuActual = menu; 
+        this.add(this.menuActual, BorderLayout.WEST);
         this.revalidate();
     }
     
@@ -64,6 +72,17 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }
         this.revalidate();
         this.repaint();
+    }
+    
+    public void alternarMenuLateral() {
+        if (menuActual != null) {
+            // Si esta visible lo oculta. Si esta oculto lo muestra.
+            boolean estadoActual = menuActual.isVisible();
+            menuActual.setVisible(!estadoActual);
+            
+            this.revalidate();
+            this.repaint();
+        }
     }
     
     public void mostrarMensaje(String msj, boolean esError) {

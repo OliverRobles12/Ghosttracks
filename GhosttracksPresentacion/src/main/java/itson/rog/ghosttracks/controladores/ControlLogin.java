@@ -14,7 +14,8 @@ public class ControlLogin {
     }
     
     public void loginCliente() {
-        
+        navegador.iniciarSesionClienteExitoso();
+        navegador.irInicioCliente();
     }
     
     public void loginAdmin() {
