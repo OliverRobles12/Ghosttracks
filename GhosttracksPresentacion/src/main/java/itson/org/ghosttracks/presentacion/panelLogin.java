@@ -1,20 +1,18 @@
 
 package itson.org.ghosttracks.presentacion;
 
-import itson.rog.ghosttracks.controladores.Controlador;
+import itson.rog.ghosttracks.controladores.ControlLogin;
 
 /**
  *
  * @author oliro
  */
-public class PantallaLogin extends javax.swing.JFrame {
-    
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PantallaLogin.class.getName());
+public class panelLogin extends javax.swing.JPanel {
 
-    /**
-     * Creates new form pnlLogin
-     */
-    public PantallaLogin() {
+    private final ControlLogin control;
+    
+    public panelLogin(ControlLogin ctrl) {
+        this.control = ctrl;
         initComponents();
     }
 
@@ -35,9 +33,8 @@ public class PantallaLogin extends javax.swing.JFrame {
         btnIngresar = new javax.swing.JButton();
         btnAdmin = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         pnlPrincipal.setBackground(new java.awt.Color(237, 229, 222));
+        pnlPrincipal.setPreferredSize(new java.awt.Dimension(1400, 800));
 
         pnlForm.setBackground(new java.awt.Color(230, 94, 7));
         pnlForm.setPreferredSize(new java.awt.Dimension(600, 300));
@@ -104,7 +101,7 @@ public class PantallaLogin extends javax.swing.JFrame {
         pnlPrincipalLayout.setHorizontalGroup(
             pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlPrincipalLayout.createSequentialGroup()
-                .addContainerGap(430, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPrincipalLayout.createSequentialGroup()
                         .addComponent(pnlForm, 540, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -116,15 +113,15 @@ public class PantallaLogin extends javax.swing.JFrame {
         pnlPrincipalLayout.setVerticalGroup(
             pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPrincipalLayout.createSequentialGroup()
-                .addContainerGap(265, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(pnlForm, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(212, 212, 212))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(pnlPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -133,18 +130,16 @@ public class PantallaLogin extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(pnlPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-
-        pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
+        
+    }//GEN-LAST:event_btnIngresarActionPerformed
+
     private void btnAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminActionPerformed
-        // Controlador.getInstancia().getControlVentasAdmin().mostrarPantallaVentas(this);
+        control.loginAdmin();
     }//GEN-LAST:event_btnAdminActionPerformed
 
-    private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
-        // Controlador.getInstancia().getControlVentaEnLinea().mostrarPantallaInicio(this);
-    }//GEN-LAST:event_btnIngresarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdmin;

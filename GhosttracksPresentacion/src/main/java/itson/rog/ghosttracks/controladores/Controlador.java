@@ -29,11 +29,5 @@ public class Controlador {
         return controlVentaEnLinea;
     }
     
-    public ControladorVentasAdmin getControlVentasAdmin() {
-        if(controlVentasAdmin == null) {
-            controlVentasAdmin = new ControladorVentasAdmin();
-        }
-        return controlVentasAdmin;
-    }
     
 }

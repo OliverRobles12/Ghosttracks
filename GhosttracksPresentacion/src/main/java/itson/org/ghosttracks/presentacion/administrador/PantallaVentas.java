@@ -1,22 +1,19 @@
 
 package itson.org.ghosttracks.presentacion.administrador;
 
+import itson.rog.ghosttracks.controladores.ControladorVentasAdmin;
+
 /**
  *
  * @author oliro
  */
-public class PantallaVentas extends javax.swing.JFrame {
+public class PantallaVentas extends javax.swing.JPanel {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PantallaVentas.class.getName());
+    private final ControladorVentasAdmin control;
     
-    
-    /**
-     * Creates new form PantallaInicioAdmin
-     */
-    public PantallaVentas() {
+    public PantallaVentas(ControladorVentasAdmin ctrl) {
+        this.control = ctrl;
         initComponents();
-        
-        
     }
 
     /**
@@ -29,19 +26,19 @@ public class PantallaVentas extends javax.swing.JFrame {
     private void initComponents() {
 
         pnlPrincipal = new javax.swing.JPanel();
-        pnlMenuLateral = new itson.org.ghosttracks.utilerias.pnlMenuLateralAdmin();
-        panelHeader = new itson.org.ghosttracks.utilerias.pnlBarraSuperiorCorta();
         panelFiltros = new itson.org.ghosttracks.utilerias.PanelRedondeado();
         txtCodigoVenta = new itson.org.ghosttracks.utilerias.TextFieldRedondeado();
         txxNombreCliente = new itson.org.ghosttracks.utilerias.TextFieldRedondeado();
         botonRedondeado1 = new itson.org.ghosttracks.utilerias.BotonRedondeado();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        pnlResumenPedido1 = new itson.org.ghosttracks.utilerias.pnlResumenPedido();
+        tblPedidos = new javax.swing.JTable();
+        panelResumenpedido = new itson.org.ghosttracks.utilerias.pnlResumenPedido();
+        btnContinuar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1100, 675));
 
         pnlPrincipal.setBackground(new java.awt.Color(237, 229, 222));
+        pnlPrincipal.setPreferredSize(new java.awt.Dimension(1100, 675));
 
         panelFiltros.setBackground(new java.awt.Color(217, 217, 217));
 
@@ -68,7 +65,7 @@ public class PantallaVentas extends javax.swing.JFrame {
                 .addComponent(txxNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(botonRedondeado1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelFiltrosLayout.setVerticalGroup(
             panelFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -81,7 +78,7 @@ public class PantallaVentas extends javax.swing.JFrame {
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblPedidos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -97,55 +94,44 @@ public class PantallaVentas extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setPreferredWidth(100);
-            jTable1.getColumnModel().getColumn(0).setMaxWidth(100);
-            jTable1.getColumnModel().getColumn(2).setPreferredWidth(100);
-            jTable1.getColumnModel().getColumn(2).setMaxWidth(100);
-            jTable1.getColumnModel().getColumn(3).setPreferredWidth(150);
-            jTable1.getColumnModel().getColumn(3).setMaxWidth(150);
-            jTable1.getColumnModel().getColumn(4).setPreferredWidth(100);
-            jTable1.getColumnModel().getColumn(4).setMaxWidth(100);
-        }
+        jScrollPane1.setViewportView(tblPedidos);
+
+        btnContinuar.setText("Continuar");
+        btnContinuar.addActionListener(this::btnContinuarActionPerformed);
 
         javax.swing.GroupLayout pnlPrincipalLayout = new javax.swing.GroupLayout(pnlPrincipal);
         pnlPrincipal.setLayout(pnlPrincipalLayout);
         pnlPrincipalLayout.setHorizontalGroup(
             pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlPrincipalLayout.createSequentialGroup()
-                .addComponent(pnlMenuLateral, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlPrincipalLayout.createSequentialGroup()
-                        .addComponent(panelHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(pnlPrincipalLayout.createSequentialGroup()
                         .addGap(15, 15, 15)
                         .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(panelFiltros, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(pnlResumenPedido1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(15, 15, 15))))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 710, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(15, 15, 15))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPrincipalLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnContinuar)
+                        .addGap(18, 18, 18)))
+                .addComponent(panelResumenpedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(12, Short.MAX_VALUE))
         );
         pnlPrincipalLayout.setVerticalGroup(
             pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlPrincipalLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(pnlMenuLateral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(pnlPrincipalLayout.createSequentialGroup()
-                .addComponent(panelHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlPrincipalLayout.createSequentialGroup()
-                        .addComponent(panelFiltros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(pnlResumenPedido1, javax.swing.GroupLayout.PREFERRED_SIZE, 647, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(panelFiltros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnContinuar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(panelResumenpedido, javax.swing.GroupLayout.DEFAULT_SIZE, 675, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(pnlPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -154,19 +140,21 @@ public class PantallaVentas extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(pnlPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
+        control.procesarPedido();
+    }//GEN-LAST:event_btnContinuarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private itson.org.ghosttracks.utilerias.BotonRedondeado botonRedondeado1;
+    private javax.swing.JButton btnContinuar;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private itson.org.ghosttracks.utilerias.PanelRedondeado panelFiltros;
-    private itson.org.ghosttracks.utilerias.pnlBarraSuperiorCorta panelHeader;
-    private itson.org.ghosttracks.utilerias.pnlMenuLateralAdmin pnlMenuLateral;
+    private itson.org.ghosttracks.utilerias.pnlResumenPedido panelResumenpedido;
     private javax.swing.JPanel pnlPrincipal;
-    private itson.org.ghosttracks.utilerias.pnlResumenPedido pnlResumenPedido1;
+    private javax.swing.JTable tblPedidos;
     private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtCodigoVenta;
     private itson.org.ghosttracks.utilerias.TextFieldRedondeado txxNombreCliente;
     // End of variables declaration//GEN-END:variables

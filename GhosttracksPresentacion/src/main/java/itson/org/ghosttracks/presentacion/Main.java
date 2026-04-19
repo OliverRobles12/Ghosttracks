@@ -1,6 +1,8 @@
 
 package itson.org.ghosttracks.presentacion;
 
+import itson.rog.ghosttracks.controladores.Navegador;
+
 /**
  *
  * @author oliro
@@ -12,8 +14,10 @@ public class Main {
      */
     public static void main(String[] args) {
         
-        PantallaLogin pantalla = new PantallaLogin();
-        pantalla.setVisible(true);
+        VentanaPrincipal ventana = new VentanaPrincipal();
+        Navegador navegador = new Navegador(ventana);
+        navegador.irLogin();
+        ventana.setVisible(true);
         
     }
     

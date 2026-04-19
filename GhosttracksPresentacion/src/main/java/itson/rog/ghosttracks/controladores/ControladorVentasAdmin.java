@@ -1,26 +1,24 @@
 
 package itson.rog.ghosttracks.controladores;
 
-import itson.org.ghosttracks.presentacion.administrador.PantallaVentas;
-import javax.swing.JFrame;
-
 /**
  *
  * @author oliro
  */
 public class ControladorVentasAdmin {
     
-    public ControladorVentasAdmin() {
+    private final Navegador navegador;
+    
+    public ControladorVentasAdmin(Navegador nav) {
+        this.navegador = nav;
     }
     
-    public void mostrarPantallaVentas(JFrame pantallaActual) {
-        PantallaVentas vistaPantalla = new PantallaVentas();
-        vistaPantalla.setLocationRelativeTo(vistaPantalla);
-        vistaPantalla.setVisible(true);
-        
-        if (pantallaActual != null) {
-            pantallaActual.dispose();
-        }
+    public void procesarPedido() {
+        navegador.irProcesarPedidoAdmin();
+    }
+    
+    public void volverAVentas() {
+        navegador.irVentasAdmin();
     }
     
 }
