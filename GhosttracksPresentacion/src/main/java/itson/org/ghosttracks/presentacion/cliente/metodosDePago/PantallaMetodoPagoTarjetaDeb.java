@@ -3,15 +3,10 @@ package itson.org.ghosttracks.presentacion.cliente.metodosDePago;
 
 /**
  *
- * @author nafbr
+ * @author oliro
  */
-public class PantallaMetodoPagoTarjetaDeb extends javax.swing.JFrame {
-    
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PantallaMetodoPagoTarjetaDeb.class.getName());
+public class PantallaMetodoPagoTarjetaDeb extends javax.swing.JPanel {
 
-    /**
-     * Creates new form PantallaMetodoPagoTarjetaDeb
-     */
     public PantallaMetodoPagoTarjetaDeb() {
         initComponents();
     }
@@ -26,7 +21,6 @@ public class PantallaMetodoPagoTarjetaDeb extends javax.swing.JFrame {
     private void initComponents() {
 
         pnlPrincipal = new javax.swing.JPanel();
-        pnlBarraSuperiorCorta = new itson.org.ghosttracks.utilerias.pnlBarraSuperiorCorta();
         panelRedondeado = new itson.org.ghosttracks.utilerias.PanelRedondeado();
         lblMetodoDePago = new javax.swing.JLabel();
         lblSeleccionMetodoPago = new javax.swing.JLabel();
@@ -37,9 +31,8 @@ public class PantallaMetodoPagoTarjetaDeb extends javax.swing.JFrame {
         btnContinuar = new itson.org.ghosttracks.utilerias.BotonRedondeado();
         pnlResumenPedido1 = new itson.org.ghosttracks.utilerias.pnlResumenPedido();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         pnlPrincipal.setBackground(new java.awt.Color(237, 229, 222));
+        pnlPrincipal.setPreferredSize(new java.awt.Dimension(1100, 675));
 
         panelRedondeado.setBackground(new java.awt.Color(217, 217, 217));
 
@@ -121,40 +114,33 @@ public class PantallaMetodoPagoTarjetaDeb extends javax.swing.JFrame {
         pnlPrincipal.setLayout(pnlPrincipalLayout);
         pnlPrincipalLayout.setHorizontalGroup(
             pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPrincipalLayout.createSequentialGroup()
-                .addContainerGap(300, Short.MAX_VALUE)
-                .addComponent(pnlBarraSuperiorCorta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPrincipalLayout.createSequentialGroup()
-                .addGap(327, 327, 327)
+            .addGroup(pnlPrincipalLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
                 .addComponent(panelRedondeado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(20, 20, 20)
                 .addComponent(pnlResumenPedido1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlPrincipalLayout.setVerticalGroup(
             pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPrincipalLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(pnlBarraSuperiorCorta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(pnlPrincipalLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pnlResumenPedido1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(panelRedondeado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(226, 226, 226))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 1085, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 797, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(pnlPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtNumeroSeguridadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumeroSeguridadActionPerformed
@@ -167,7 +153,6 @@ public class PantallaMetodoPagoTarjetaDeb extends javax.swing.JFrame {
     private javax.swing.JLabel lblMetodoDePago;
     private javax.swing.JLabel lblSeleccionMetodoPago;
     private itson.org.ghosttracks.utilerias.PanelRedondeado panelRedondeado;
-    private itson.org.ghosttracks.utilerias.pnlBarraSuperiorCorta pnlBarraSuperiorCorta;
     private javax.swing.JPanel pnlPrincipal;
     private itson.org.ghosttracks.utilerias.pnlResumenPedido pnlResumenPedido1;
     private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtFechaVencimiento;

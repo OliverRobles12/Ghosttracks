@@ -1,7 +1,7 @@
 
 package itson.org.ghosttracks.presentacion;
 
-import itson.rog.ghosttracks.controladores.Navegador;
+import itson.org.ghosttracks.controladores.Navegador;
 
 /**
  *

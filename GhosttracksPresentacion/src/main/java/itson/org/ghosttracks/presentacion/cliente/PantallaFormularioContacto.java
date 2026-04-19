@@ -1,32 +1,14 @@
 
 package itson.org.ghosttracks.presentacion.cliente;
 
-import itson.org.ghosttracks.utilerias.pnlBarraSuperiorCorta;
-import itson.org.ghosttracks.utilerias.pnlResumenPedido;
-import org.netbeans.lib.awtextra.AbsoluteConstraints;
-
 /**
  *
- * @author cinca
+ * @author oliro
  */
-public class PantallaFormularioContacto extends javax.swing.JFrame {
+public class PantallaFormularioContacto extends javax.swing.JPanel {
 
-    /**
-     * Creates new form PantallaProcesoPedido
-     */
     public PantallaFormularioContacto() {
         initComponents();
-        
-        pnlBarraSuperiorCorta barra = new pnlBarraSuperiorCorta();
-        barra.jLabel5.setText("Cliente");
-        
-        pnlPrincipal.add(barra, new AbsoluteConstraints(300, 0, 1100, 110));
-        
-        pnlResumenPedido resumen = new pnlResumenPedido();
-        
-        pnlPrincipal.add(resumen, new AbsoluteConstraints(1050, 110, 350, 680));
-        pnlPrincipal.setVisible(true);
- 
     }
 
     /**
@@ -47,12 +29,8 @@ public class PantallaFormularioContacto extends javax.swing.JFrame {
         txtTelefono = new itson.org.ghosttracks.utilerias.TextFieldRedondeado();
         btnGuardar = new itson.org.ghosttracks.utilerias.BotonRedondeado();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        pnlPrincipal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
         pnlContenedor.setBackground(new java.awt.Color(237, 229, 222));
-        pnlContenedor.setPreferredSize(new java.awt.Dimension(752, 690));
+        pnlContenedor.setPreferredSize(new java.awt.Dimension(1100, 675));
 
         panelRedondeado1.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -65,11 +43,7 @@ public class PantallaFormularioContacto extends javax.swing.JFrame {
 
         txtEmail.setBackground(new java.awt.Color(255, 255, 255));
         txtEmail.setText("Email");
-        txtEmail.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtEmailActionPerformed(evt);
-            }
-        });
+        txtEmail.addActionListener(this::txtEmailActionPerformed);
 
         txtTelefono.setBackground(new java.awt.Color(255, 255, 255));
         txtTelefono.setText("Numero de telefono (Opcional)");
@@ -120,41 +94,53 @@ public class PantallaFormularioContacto extends javax.swing.JFrame {
         pnlContenedorLayout.setHorizontalGroup(
             pnlContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlContenedorLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addGap(201, 201, 201)
                 .addComponent(panelRedondeado1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(201, Short.MAX_VALUE))
         );
         pnlContenedorLayout.setVerticalGroup(
             pnlContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlContenedorLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addGap(33, 33, 33)
                 .addComponent(panelRedondeado1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(365, Short.MAX_VALUE))
+                .addContainerGap(347, Short.MAX_VALUE))
         );
 
-        pnlPrincipal.add(pnlContenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 110, 750, -1));
+        javax.swing.GroupLayout pnlPrincipalLayout = new javax.swing.GroupLayout(pnlPrincipal);
+        pnlPrincipal.setLayout(pnlPrincipalLayout);
+        pnlPrincipalLayout.setHorizontalGroup(
+            pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pnlContenedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        pnlPrincipalLayout.setVerticalGroup(
+            pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pnlContenedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1400, Short.MAX_VALUE)
+            .addGap(0, 1100, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(pnlPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createSequentialGroup()
+                    .addComponent(pnlPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
+            .addGap(0, 675, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(pnlPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createSequentialGroup()
+                    .addComponent(pnlPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtEmailActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private itson.org.ghosttracks.utilerias.BotonRedondeado btnGuardar;

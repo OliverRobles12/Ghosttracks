@@ -1,22 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
-package itson.org.ghosttracks.presentacion.cliente;
 
-import itson.rog.ghosttracks.controladores.Controlador;
+package itson.org.ghosttracks.presentacion.cliente;
 
 /**
  *
- * @author nafbr
+ * @author oliro
  */
-public class PantallaSeleccionMetodoDePago extends javax.swing.JFrame {
+public class PantallaSeleccionMetodoDePago extends javax.swing.JPanel {
 
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PantallaSeleccionMetodoDePago.class.getName());
-
-    /**
-     * Creates new form PantallaSeleccionMetodoDePago
-     */
     public PantallaSeleccionMetodoDePago() {
         initComponents();
     }
@@ -30,7 +20,6 @@ public class PantallaSeleccionMetodoDePago extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        rbtngMetodoPago = new javax.swing.ButtonGroup();
         pnlPrincipal = new javax.swing.JPanel();
         panelRedondeado = new itson.org.ghosttracks.utilerias.PanelRedondeado();
         lblMetodoDePago = new javax.swing.JLabel();
@@ -42,10 +31,8 @@ public class PantallaSeleccionMetodoDePago extends javax.swing.JFrame {
         rbtnTarjetaDebito = new javax.swing.JRadioButton();
         pnlResumenPedido1 = new itson.org.ghosttracks.utilerias.pnlResumenPedido();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Seleccionar Método de Pago");
-
         pnlPrincipal.setBackground(new java.awt.Color(237, 229, 222));
+        pnlPrincipal.setPreferredSize(new java.awt.Dimension(1100, 675));
 
         panelRedondeado.setBackground(new java.awt.Color(217, 217, 217));
 
@@ -57,12 +44,10 @@ public class PantallaSeleccionMetodoDePago extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(217, 217, 217));
 
-        rbtngMetodoPago.add(rbtnApplePay);
         rbtnApplePay.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
         rbtnApplePay.setText("Apple Pay");
         rbtnApplePay.addActionListener(this::rbtnApplePayActionPerformed);
 
-        rbtngMetodoPago.add(rbtnMercadoPago);
         rbtnMercadoPago.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
         rbtnMercadoPago.setText("Mercado Pago");
         rbtnMercadoPago.addActionListener(this::rbtnMercadoPagoActionPerformed);
@@ -74,7 +59,6 @@ public class PantallaSeleccionMetodoDePago extends javax.swing.JFrame {
         btnContinuar.setHoverColor(new java.awt.Color(255, 255, 255));
         btnContinuar.addActionListener(this::btnContinuarActionPerformed);
 
-        rbtngMetodoPago.add(rbtnTarjetaDebito);
         rbtnTarjetaDebito.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
         rbtnTarjetaDebito.setText("Tarjeta de débito");
 
@@ -143,39 +127,33 @@ public class PantallaSeleccionMetodoDePago extends javax.swing.JFrame {
         pnlPrincipal.setLayout(pnlPrincipalLayout);
         pnlPrincipalLayout.setHorizontalGroup(
             pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPrincipalLayout.createSequentialGroup()
-                .addGap(64, 64, 64)
+            .addGroup(pnlPrincipalLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
                 .addComponent(panelRedondeado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(20, 20, 20)
                 .addComponent(pnlResumenPedido1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(280, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlPrincipalLayout.setVerticalGroup(
             pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPrincipalLayout.createSequentialGroup()
-                .addGap(0, 119, Short.MAX_VALUE)
+            .addGroup(pnlPrincipalLayout.createSequentialGroup()
                 .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(panelRedondeado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pnlResumenPedido1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(pnlResumenPedido1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 1085, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE)
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void rbtnTarjetaDebitoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
 
     private void rbtnApplePayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnApplePayActionPerformed
         // TODO add your handling code here:
@@ -186,16 +164,7 @@ public class PantallaSeleccionMetodoDePago extends javax.swing.JFrame {
     }//GEN-LAST:event_rbtnMercadoPagoActionPerformed
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
-        String seleccion = "NINGUNO";
 
-        if (rbtnTarjetaDebito.isSelected()) {
-            seleccion = "TARJETA";
-        } else if (rbtnApplePay.isSelected()) {
-            seleccion = "APPLE_PAY";
-        } else if (rbtnMercadoPago.isSelected()) {
-            seleccion = "MERCADO_PAGO";
-        }
-        // Controlador.getInstancia().getControlVentaEnLinea().procesarSeleccionMetodoPago(this, seleccion);
     }//GEN-LAST:event_btnContinuarActionPerformed
 
 
@@ -210,6 +179,5 @@ public class PantallaSeleccionMetodoDePago extends javax.swing.JFrame {
     private javax.swing.JRadioButton rbtnApplePay;
     private javax.swing.JRadioButton rbtnMercadoPago;
     private javax.swing.JRadioButton rbtnTarjetaDebito;
-    private javax.swing.ButtonGroup rbtngMetodoPago;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,31 +1,14 @@
 
 package itson.org.ghosttracks.presentacion.cliente;
 
-import itson.org.ghosttracks.utilerias.pnlBarraSuperiorCorta;
-import itson.org.ghosttracks.utilerias.pnlResumenPedido;
-import org.netbeans.lib.awtextra.AbsoluteConstraints;
-
 /**
  *
- * @author cinca
+ * @author oliro
  */
-public class PantallaFormularioEntrega extends javax.swing.JFrame {
+public class PantallaFormularioEntrega extends javax.swing.JPanel {
 
-    /**
-     * Creates new form PantallaFormularioEnytrega
-     */
     public PantallaFormularioEntrega() {
         initComponents();
-        
-        pnlBarraSuperiorCorta barra = new pnlBarraSuperiorCorta();
-        barra.jLabel5.setText("Cliente");
-        
-        pnlPrincipal.add(barra, new AbsoluteConstraints(300, 0, 1100, 110));
-        
-        pnlResumenPedido resumen = new pnlResumenPedido();
-        
-        pnlPrincipal.add(resumen, new AbsoluteConstraints(1050, 110, 350, 680));
-        pnlPrincipal.setVisible(true);
     }
 
     /**
@@ -37,7 +20,6 @@ public class PantallaFormularioEntrega extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDialog1 = new javax.swing.JDialog();
         pnlPrincipal = new javax.swing.JPanel();
         pnlContenedor = new javax.swing.JPanel();
         pnlFormulario = new itson.org.ghosttracks.utilerias.PanelRedondeado();
@@ -52,34 +34,15 @@ public class PantallaFormularioEntrega extends javax.swing.JFrame {
         txtTelefono = new itson.org.ghosttracks.utilerias.TextFieldRedondeado();
         btnGuardar = new itson.org.ghosttracks.utilerias.BotonRedondeado();
 
-        javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
-        jDialog1.getContentPane().setLayout(jDialog1Layout);
-        jDialog1Layout.setHorizontalGroup(
-            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        jDialog1Layout.setVerticalGroup(
-            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setAutoRequestFocus(false);
-        setBackground(new java.awt.Color(237, 229, 222));
-        setPreferredSize(new java.awt.Dimension(1400, 800));
-
         pnlPrincipal.setBackground(new java.awt.Color(51, 51, 51));
         pnlPrincipal.setMinimumSize(new java.awt.Dimension(1400, 800));
-        pnlPrincipal.setPreferredSize(new java.awt.Dimension(1400, 800));
-        pnlPrincipal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pnlContenedor.setBackground(new java.awt.Color(237, 229, 222));
         pnlContenedor.setMinimumSize(new java.awt.Dimension(752, 690));
-        pnlContenedor.setPreferredSize(new java.awt.Dimension(752, 690));
+        pnlContenedor.setPreferredSize(new java.awt.Dimension(1100, 675));
 
         pnlFormulario.setBackground(new java.awt.Color(204, 204, 204));
         pnlFormulario.setMinimumSize(new java.awt.Dimension(698, 294));
-        pnlFormulario.setPreferredSize(new java.awt.Dimension(698, 294));
 
         jLabel1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
@@ -94,43 +57,18 @@ public class PantallaFormularioEntrega extends javax.swing.JFrame {
 
         textFieldRedondeado2.setBackground(new java.awt.Color(255, 255, 255));
         textFieldRedondeado2.setText("Apellido(s)");
-        textFieldRedondeado2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textFieldRedondeado2ActionPerformed(evt);
-            }
-        });
 
         txtCP.setBackground(new java.awt.Color(255, 255, 255));
         txtCP.setText("Codigo Postal");
-        txtCP.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCPActionPerformed(evt);
-            }
-        });
 
         txtDireccion.setBackground(new java.awt.Color(255, 255, 255));
         txtDireccion.setText("Direccion");
-        txtDireccion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDireccionActionPerformed(evt);
-            }
-        });
 
         txtCiudad.setBackground(new java.awt.Color(255, 255, 255));
         txtCiudad.setText("Ciudad");
-        txtCiudad.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCiudadActionPerformed(evt);
-            }
-        });
 
         txtEstado.setBackground(new java.awt.Color(255, 255, 255));
         txtEstado.setText("Estado");
-        txtEstado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtEstadoActionPerformed(evt);
-            }
-        });
 
         txtTelefono.setBackground(new java.awt.Color(255, 255, 255));
         txtTelefono.setText("Telefono");
@@ -138,11 +76,7 @@ public class PantallaFormularioEntrega extends javax.swing.JFrame {
         btnGuardar.setBackground(new java.awt.Color(204, 51, 0));
         btnGuardar.setText("Guardar");
         btnGuardar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarActionPerformed(evt);
-            }
-        });
+        btnGuardar.addActionListener(this::btnGuardarActionPerformed);
 
         javax.swing.GroupLayout pnlFormularioLayout = new javax.swing.GroupLayout(pnlFormulario);
         pnlFormulario.setLayout(pnlFormularioLayout);
@@ -208,63 +142,48 @@ public class PantallaFormularioEntrega extends javax.swing.JFrame {
         pnlContenedorLayout.setHorizontalGroup(
             pnlContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlContenedorLayout.createSequentialGroup()
-                .addContainerGap(36, Short.MAX_VALUE)
+                .addContainerGap(201, Short.MAX_VALUE)
                 .addComponent(pnlFormulario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26))
+                .addGap(201, 201, 201))
         );
         pnlContenedorLayout.setVerticalGroup(
             pnlContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlContenedorLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addGap(30, 30, 30)
                 .addComponent(pnlFormulario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(375, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        pnlPrincipal.add(pnlContenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 110, 760, -1));
+        javax.swing.GroupLayout pnlPrincipalLayout = new javax.swing.GroupLayout(pnlPrincipal);
+        pnlPrincipal.setLayout(pnlPrincipalLayout);
+        pnlPrincipalLayout.setHorizontalGroup(
+            pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pnlContenedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        pnlPrincipalLayout.setVerticalGroup(
+            pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pnlContenedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(pnlPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(pnlPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtDireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDireccionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDireccionActionPerformed
-
-    private void txtCPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCPActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCPActionPerformed
-
-    private void txtEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEstadoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtEstadoActionPerformed
-
-    private void txtCiudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCiudadActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCiudadActionPerformed
-
-    private void textFieldRedondeado2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldRedondeado2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textFieldRedondeado2ActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnGuardarActionPerformed
 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private itson.org.ghosttracks.utilerias.BotonRedondeado btnGuardar;
-    private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel pnlContenedor;
     private itson.org.ghosttracks.utilerias.PanelRedondeado pnlFormulario;

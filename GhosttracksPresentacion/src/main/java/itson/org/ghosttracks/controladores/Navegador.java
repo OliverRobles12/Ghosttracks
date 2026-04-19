@@ -1,12 +1,12 @@
 
-package itson.rog.ghosttracks.controladores;
+package itson.org.ghosttracks.controladores;
 
 import itson.org.ghosttracks.mocks.ProductosMockDAO;
 import itson.org.ghosttracks.presentacion.VentanaPrincipal;
 import itson.org.ghosttracks.presentacion.administrador.PantallaVentasProcesarAdmin;
 import itson.org.ghosttracks.presentacion.administrador.PantallaVentas;
-import itson.org.ghosttracks.presentacion.cliente.PanelInicioCliente;
-import itson.org.ghosttracks.presentacion.cliente.PanelVistaProducto;
+import itson.org.ghosttracks.presentacion.cliente.PantallaInicioCliente;
+import itson.org.ghosttracks.presentacion.cliente.PantallaVistaProducto;
 import itson.org.ghosttracks.presentacion.panelLogin;
 import itson.org.ghosttracks.utilerias.pnlBarraSuperiorCorta;
 import itson.org.ghosttracks.utilerias.pnlMenuLateral;
@@ -40,13 +40,13 @@ public class Navegador {
     
     public void irInicioCliente() {
         ControlVentaEnLinea ctrl = new ControlVentaEnLinea(this);
-        PanelInicioCliente vista = new PanelInicioCliente(ctrl);
+        PantallaInicioCliente vista = new PantallaInicioCliente(ctrl);
         ventana.cambiarPantalla(vista);
     }
     
     public void irVistaProducto(ProductosMockDAO producto) {
         ControlVentaEnLinea ctrl = new ControlVentaEnLinea(this);
-        PanelVistaProducto vista = new PanelVistaProducto(ctrl, producto);
+        PantallaVistaProducto vista = new PantallaVistaProducto(ctrl, producto);
         ventana.cambiarPantalla(vista);
     }
     

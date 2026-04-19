@@ -1,8 +1,8 @@
 
 package itson.org.ghosttracks.utilerias;
 
-import itson.rog.ghosttracks.controladores.Controlador;
-import itson.rog.ghosttracks.controladores.Navegador;
+import itson.org.ghosttracks.controladores.Controlador;
+import itson.org.ghosttracks.controladores.Navegador;
 import javax.swing.JFrame;
 
 /**

@@ -3,32 +3,24 @@ package itson.org.ghosttracks.presentacion.cliente;
 
 import itson.org.ghosttracks.mocks.ProductosMockDAO;
 import itson.org.ghosttracks.enums.TipoProducto;
-import itson.org.ghosttracks.utilerias.pnlBarraSuperiorCorta;
-import itson.org.ghosttracks.utilerias.pnlMenuLateral;
-import itson.rog.ghosttracks.controladores.ControlVentaEnLinea;
-import java.util.List;
-import org.netbeans.lib.awtextra.AbsoluteConstraints;
 import itson.org.ghosttracks.utilerias.pnlProductoCatalogo;
+import itson.org.ghosttracks.controladores.ControlVentaEnLinea;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.List;
 
 /**
  *
  * @author oliro
  */
-public class PantallaInicioCliente extends javax.swing.JFrame {
+public class PantallaInicioCliente extends javax.swing.JPanel {
+
+    private final ControlVentaEnLinea control;
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PantallaInicioCliente.class.getName());
-    private ControlVentaEnLinea control;
-    
-    /**
-     * Creates new form PantallaInicioCliente
-     */
-    public PantallaInicioCliente(ControlVentaEnLinea control) {
+    public PantallaInicioCliente(ControlVentaEnLinea ctrl) {
+        this.control = ctrl;
         initComponents();
-        this.control = control;
-     
-//        pnlPrincipal.add(pnlMenuLateral, new AbsoluteConstraints(0, 0, 300, 800));
-//        pnlPrincipal.add(pnlBarraSuperior, new AbsoluteConstraints(300, 0, 1100, 110));
-//        
+        
 //        panelRedondeado2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 //        panelRedondeado2.addMouseListener(new java.awt.event.MouseAdapter() {
 //            public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -50,9 +42,35 @@ public class PantallaInicioCliente extends javax.swing.JFrame {
 //            }
 //        });
 //        
-        cargarCatalogo(null);
+//        cargarCatalogo(null);
+//        
     }
 
+    private void cargarCatalogo(TipoProducto tipo) {
+//        pnlCatalogo.removeAll(); 
+//
+//        pnlCatalogo.setLayout(new java.awt.GridLayout(0, 3, 20, 20));
+//
+//        // Pedimos todos los productos o los filtrados dependiendo de qué seleccionó el usuario
+//        List<ProductosMockDAO> listaProductos;
+//        if (tipo == null) {
+//            listaProductos = control.obtenerProductosMock(); // Si es null, muestra TODOS
+//        } else {
+//            listaProductos = control.obtenerProductosPorTipo(tipo); // Muestra solo los del tipo
+//        }
+//
+//        if (listaProductos != null) {
+//            for (Producto producto : listaProductos) {
+//                 pnlProductoCatalogo tarjeta = new pnlProductoCatalogo(producto, control);
+//                 tarjeta.setVisible(true);
+//                 pnlCatalogo.add(tarjeta); 
+//            }
+//        }
+//
+//        pnlCatalogo.revalidate();
+//        pnlCatalogo.repaint();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -88,11 +106,9 @@ public class PantallaInicioCliente extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         pnlCatalogo = new javax.swing.JPanel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(237, 229, 222));
-
         pnlPrincipal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jScrollPane2.setBorder(null);
         jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         pnlContenido.setBackground(new java.awt.Color(237, 229, 222));
@@ -304,52 +320,26 @@ public class PantallaInicioCliente extends javax.swing.JFrame {
 
         jScrollPane2.setViewportView(pnlContenido);
 
-        pnlPrincipal.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 120, 1100, 680));
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(pnlPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnlPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1100, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(pnlPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
-    
-    private void cargarCatalogo(TipoProducto tipo) {
-//        pnlCatalogo.removeAll(); 
-//
-//        pnlCatalogo.setLayout(new java.awt.GridLayout(0, 3, 20, 20));
-//
-//        // Pedimos todos los productos o los filtrados dependiendo de qué seleccionó el usuario
-//        List<ProductosMockDAO> listaProductos;
-//        if (tipo == null) {
-//            listaProductos = control.obtenerProductosMock(); // Si es null, muestra TODOS
-//        } else {
-//            listaProductos = control.obtenerProductosPorTipo(tipo); // Muestra solo los del tipo
-//        }
-//
-//        if (listaProductos != null) {
-//            for (Producto p : listaProductos) {
-//                pnlProductoCatalogo tarjeta = new pnlProductoCatalogo(p, control);
-//                tarjeta.setVisible(true);
-//                pnlCatalogo.add(tarjeta); 
-//            }
-//        }
-//
-//        pnlCatalogo.revalidate();
-//        pnlCatalogo.repaint();
-    }
-    
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -377,6 +367,4 @@ public class PantallaInicioCliente extends javax.swing.JFrame {
     private javax.swing.JPanel pnlContenido;
     private javax.swing.JPanel pnlPrincipal;
     // End of variables declaration//GEN-END:variables
-    private pnlMenuLateral pnlMenuLateral;
-    private pnlBarraSuperiorCorta pnlBarraSuperior;
 }

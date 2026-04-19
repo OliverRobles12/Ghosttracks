@@ -5,7 +5,7 @@
 package itson.org.ghosttracks.utilerias;
 
 import itson.org.ghosttracks.mocks.ProductosMockDAO;
-import itson.rog.ghosttracks.controladores.ControlVentaEnLinea;
+import itson.org.ghosttracks.controladores.ControlVentaEnLinea;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JFrame;

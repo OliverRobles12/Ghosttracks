@@ -1,7 +1,7 @@
 
 package itson.org.ghosttracks.presentacion.administrador;
 
-import itson.rog.ghosttracks.controladores.ControladorVentasAdmin;
+import itson.org.ghosttracks.controladores.ControladorVentasAdmin;
 
 /**
  *

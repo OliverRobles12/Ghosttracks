@@ -1,24 +1,14 @@
 
 package itson.org.ghosttracks.presentacion.cliente;
 
-import itson.org.ghosttracks.utilerias.pnlBarraSuperiorCorta;
-import org.netbeans.lib.awtextra.AbsoluteConstraints;
-
 /**
  *
- * @author cinca
+ * @author oliro
  */
-public class PantallaCarrito extends javax.swing.JFrame {
+public class PantallaCarrito extends javax.swing.JPanel {
 
-    /**
-     * Creates new form PantallaCarrito
-     */
     public PantallaCarrito() {
         initComponents();
-        
-        pnlBarraSuperiorCorta barra = new pnlBarraSuperiorCorta();
-        barra.jLabel5.setText("Cliente");
-        pnlPrincipal.add(barra, new AbsoluteConstraints(300, 0, 1100, 110));
     }
 
     /**
@@ -44,10 +34,7 @@ public class PantallaCarrito extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         pnlListaCarrito = new javax.swing.JPanel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1400, 800));
-
-        pnlPrincipal.setPreferredSize(new java.awt.Dimension(1400, 800));
+        pnlPrincipal.setPreferredSize(new java.awt.Dimension(1100, 675));
         pnlPrincipal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pnlContenedor.setBackground(new java.awt.Color(237, 229, 222));
@@ -63,11 +50,7 @@ public class PantallaCarrito extends javax.swing.JFrame {
         botonRedondeado1.setBackground(new java.awt.Color(204, 51, 0));
         botonRedondeado1.setText("Continuar");
         botonRedondeado1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        botonRedondeado1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonRedondeado1ActionPerformed(evt);
-            }
-        });
+        botonRedondeado1.addActionListener(this::botonRedondeado1ActionPerformed);
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(102, 102, 102));
@@ -166,25 +149,18 @@ public class PantallaCarrito extends javax.swing.JFrame {
                 .addGap(20, 20, 20))
         );
 
-        pnlPrincipal.add(pnlContenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 108, -1, -1));
+        pnlPrincipal.add(pnlContenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pnlPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(pnlPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(pnlPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(pnlPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonRedondeado1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRedondeado1ActionPerformed

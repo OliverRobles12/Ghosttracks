@@ -1,5 +1,5 @@
  
-package itson.rog.ghosttracks.controladores;
+package itson.org.ghosttracks.controladores;
 
 /**
  *

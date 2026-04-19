@@ -1,7 +1,7 @@
 
 package itson.org.ghosttracks.presentacion;
 
-import itson.rog.ghosttracks.controladores.ControlLogin;
+import itson.org.ghosttracks.controladores.ControlLogin;
 
 /**
  *
