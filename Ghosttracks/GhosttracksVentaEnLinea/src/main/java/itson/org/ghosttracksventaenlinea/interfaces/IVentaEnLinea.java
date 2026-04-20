@@ -30,4 +30,6 @@ public interface IVentaEnLinea {
     PedidoDTO actualizarEstadoPedido(Long idPedido, EstadoPedidoDTO nuevoEstado) throws Exception;
     
     CarritoDTO eliminarDelCarrito(CarritoDTO carrito, Long idProducto) throws Exception;
+    
+    List<PedidoDTO> obtenerTodosLosPedidos() throws Exception;
 }

@@ -2,6 +2,8 @@
 package itson.org.ghosttracks.presentacion.administrador;
 
 import itson.org.ghosttracks.controladores.ControladorVentasAdmin;
+import itson.org.ghosttracks.dtos.PedidoDTO;
+import java.util.List;
 
 /**
  *
@@ -14,6 +16,7 @@ public class PantallaVentas extends javax.swing.JPanel {
     public PantallaVentas(ControladorVentasAdmin ctrl) {
         this.control = ctrl;
         initComponents();
+        control.llenarTablaPedidos(this);
     }
 
     /**
@@ -158,4 +161,21 @@ public class PantallaVentas extends javax.swing.JPanel {
     private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtCodigoVenta;
     private itson.org.ghosttracks.utilerias.TextFieldRedondeado txxNombreCliente;
     // End of variables declaration//GEN-END:variables
+
+    public void llenarTabla(List<PedidoDTO> pedidos) {
+        javax.swing.table.DefaultTableModel modelo = (javax.swing.table.DefaultTableModel) tblPedidos.getModel();
+        modelo.setRowCount(0);
+
+        for (PedidoDTO pedido : pedidos) {
+            Object[] fila = new Object[5]; 
+
+            fila[0] = pedido.getIdPedido(); 
+            fila[1] = pedido.getIdCliente(); 
+            fila[2] = "-";
+            fila[3] = String.format("$%.2f", pedido.getTotal());
+            fila[4] = pedido.getEstado() != null ? pedido.getEstado().name() : "Sin estado";
+
+            modelo.addRow(fila);
+        }
+    }
 }

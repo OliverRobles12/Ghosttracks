@@ -99,4 +99,33 @@ public class PedidosBO implements IPedidosBO {
             throw new NegocioException("No se pudo actualizar el estado del pedido: " + e.getMessage());
         }
     }
+
+    @Override
+    public List<PedidoDTO> obtenerTodosLosPedidos() throws NegocioException {
+        try {
+            List<Pedido> pedidosEntidad = pedidosDAO.consultarTodos();
+            List<PedidoDTO> pedidosDTO = new ArrayList<>();
+
+            for (Pedido p : pedidosEntidad) {
+                Long id = p.getIdPedido();
+                Long cliente = p.getIdCliente();
+                Double total = p.getTotal(); 
+                
+                EstadoPedidoDTO estadoDTO = null;
+                if (p.getEstado() != null) {
+                    estadoDTO = EstadoPedidoDTO.valueOf(p.getEstado().name());
+                }
+                PedidoDTO dto = new PedidoDTO(id, cliente, estadoDTO, total);
+                pedidosDTO.add(dto);
+            }
+
+            return pedidosDTO;
+            
+        } catch (PersistenciaException e) {
+            throw new NegocioException("Error al obtener la lista de pedidos: " + e.getMessage());
+        }
+    }
+    
+    
+    
 }

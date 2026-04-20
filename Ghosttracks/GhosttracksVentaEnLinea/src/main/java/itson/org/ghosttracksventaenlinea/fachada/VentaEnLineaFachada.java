@@ -67,4 +67,9 @@ public class VentaEnLineaFachada implements IVentaEnLinea{
         public PedidoDTO actualizarEstadoPedido(Long idPedido, EstadoPedidoDTO nuevoEstado) throws Exception {
         return pedidosBO.actualizarEstadoPedido(idPedido, nuevoEstado);
     }
+        
+    @Override
+    public List<PedidoDTO> obtenerTodosLosPedidos() throws Exception {
+        return pedidosBO.obtenerTodosLosPedidos();
+    }
 }

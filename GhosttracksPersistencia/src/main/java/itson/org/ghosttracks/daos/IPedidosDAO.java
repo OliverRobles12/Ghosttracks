@@ -8,6 +8,7 @@ import itson.org.ghosttracks.entidades.Pedido;
 import itson.org.ghosttracks.enums.EstadoPedido;
 import itson.org.ghosttracks.enums.EstadoPedidoDTO;
 import itson.org.ghosttracks.exceptions.PersistenciaException;
+import java.util.List;
 
 /**
  *
@@ -17,4 +18,6 @@ public interface IPedidosDAO {
     Pedido guardarPedido(Pedido pedido) throws PersistenciaException;
     
     Pedido actualizarEstado(Long idPedido, EstadoPedido nuevoEstado) throws PersistenciaException;
+    
+    List<Pedido> consultarTodos() throws PersistenciaException;
 }

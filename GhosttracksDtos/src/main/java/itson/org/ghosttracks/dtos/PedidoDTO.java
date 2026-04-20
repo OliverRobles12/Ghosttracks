@@ -34,6 +34,13 @@ public class PedidoDTO {
         this.total = this.subtotal + this.costoEnvio;
     }
 
+    public PedidoDTO(Long idPedido, Long idCliente, EstadoPedidoDTO estado, Double total) {
+        this.idPedido = idPedido;
+        this.idCliente = idCliente;
+        this.estado = estado;
+        this.total = total;
+    }
+
     public PedidoDTO(
             Long idCliente, 
             List<ItemCarritoDTO> productos, 

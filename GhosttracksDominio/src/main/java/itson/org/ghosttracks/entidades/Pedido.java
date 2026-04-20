@@ -19,6 +19,8 @@ public class Pedido {
     private LocalDateTime fechaPedido;
     private Double subtotal;
     private Double costoEnvio;
+    private Long idCliente;
+    private List<Producto> productos;
     
     private List<ProductoPedido> productosPedido; 
     // private Envio envio; 
@@ -81,6 +83,22 @@ public class Pedido {
 
     public void setProductosPedido(List<ProductoPedido> productosPedido) {
         this.productosPedido = productosPedido;
+    }
+
+    public Long getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(Long idCliente) {
+        this.idCliente = idCliente;
+    }
+
+    public List<Producto> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(List<Producto> productos) {
+        this.productos = productos;
     }
     
     
