@@ -28,27 +28,27 @@ public class ProductosMockDAO implements IProductosDAO {
     }
 
     /**
-     * Carga de datos iniciales adaptada EXACTAMENTE a tu ProductoDTO
+     * Carga de datos iniciales adaptada a ProductoDTO
      */
     private void cargarDatosDummy() {
         
-        // --- PRODUCTO 1 ---
+        //PRODUCTO 1 
         Producto producto1 = new Producto(
-                1L,                       // idProducto
-                "Abbey Road",             // nombre
-                "abbey_road.jpg",         // imgProducto
-                TipoProducto.VINILO,      // tipoProducto 
-                "The Beatles",            // artista
-                "Rock",                   // genero
+                1L,                       
+                "Abbey Road",             
+                "abbey_road.jpg",         
+                TipoProducto.VINILO,       
+                "The Beatles",            
+                "Rock",                   
                 Arrays.asList("Come Together", "Something", "Maxwell's Silver Hammer", "Oh! Darling", "Octopus's Garden", "I Want You", "Here Comes the Sun"), // setlist
-                650.00,                   // precio
-                15,                       // stock
-                EstadoProducto.DISPONIBLE // estado 
+                650.00,                  
+                15,                       
+                EstadoProducto.DISPONIBLE 
         );
         this.productosDB.add(producto1);
         contadorId++;
 
-        // --- PRODUCTO 2 ---  
+        // PRODUCTO 2
         Producto producto2 = new Producto(
                 2L, 
                 "Thriller", 
@@ -64,7 +64,7 @@ public class ProductosMockDAO implements IProductosDAO {
         this.productosDB.add(producto2);
         contadorId++;
 
-        // --- PRODUCTO 3 ---
+        //PRODUCTO 3
         Producto producto3 = new Producto(
                 3L, 
                 "The Dark Side of the Moon", 
@@ -125,7 +125,7 @@ public class ProductosMockDAO implements IProductosDAO {
 
         try {
             Producto nuevaEntidad = new Producto(
-            contadorId++, // Le asignamos su ID
+            contadorId++, 
             productoDTO.getNombre(),
             productoDTO.getImgProducto(),
             productoDTO.getTipoProducto(),
@@ -137,10 +137,7 @@ public class ProductosMockDAO implements IProductosDAO {
             productoDTO.getEstado()
         );
 
-        // 3. Guardamos la entidad en nuestra "Base de Datos" (la lista)
         this.productosDB.add(nuevaEntidad);
-
-        // 4. Retornamos la entidad guardada
         return nuevaEntidad;
             
         } catch (Exception e) {
