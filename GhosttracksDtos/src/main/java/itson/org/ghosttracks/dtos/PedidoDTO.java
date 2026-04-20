@@ -11,6 +11,7 @@ public class PedidoDTO {
     
     private Long idPedido;
     private Long idCliente;
+    private ContactoDTO contacto;
     private List<ItemCarritoDTO> productos;
     private Double subtotal;
     private Double costoEnvio;
@@ -42,23 +43,29 @@ public class PedidoDTO {
     }
 
     public PedidoDTO(
+            Long idPedido, 
             Long idCliente, 
+            ContactoDTO contacto, 
             List<ItemCarritoDTO> productos, 
             Double subtotal, 
             Double costoEnvio, 
             Double total, 
+            EstadoPedidoDTO estado, 
             DireccionEntregaDTO direccionEntrega, 
             DatosPagoDTO datosPago
     ) {
+        this.idPedido = idPedido;
         this.idCliente = idCliente;
+        this.contacto = contacto;
         this.productos = productos;
         this.subtotal = subtotal;
         this.costoEnvio = costoEnvio;
         this.total = total;
+        this.estado = estado;
         this.direccionEntrega = direccionEntrega;
         this.datosPago = datosPago;
     }
-
+    
     public Long getIdCliente() {
         return idCliente;
     }
@@ -131,5 +138,12 @@ public class PedidoDTO {
         this.estado = estado;
     }
 
-  
+    public ContactoDTO getContacto() {
+        return contacto;
+    }
+
+    public void setContacto(ContactoDTO contacto) {
+        this.contacto = contacto;
+    }
+
 }

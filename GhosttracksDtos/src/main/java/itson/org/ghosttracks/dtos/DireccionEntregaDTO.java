@@ -13,11 +13,13 @@ public class DireccionEntregaDTO {
     private String codigoPostal;
     private String ciudad;
     private String estado;
+    private String nombre;
+    private String apellido;
 
     public DireccionEntregaDTO() {
     }
 
-    public DireccionEntregaDTO(Long idDireccion, String calle, String numero, String colonia, String codigoPostal, String ciudad, String estado) {
+    public DireccionEntregaDTO(Long idDireccion, String calle, String numero, String colonia, String codigoPostal, String ciudad, String estado, String nombre, String apellido) {
         this.idDireccion = idDireccion;
         this.calle = calle;
         this.numero = numero;
@@ -25,8 +27,10 @@ public class DireccionEntregaDTO {
         this.codigoPostal = codigoPostal;
         this.ciudad = ciudad;
         this.estado = estado;
+        this.nombre = nombre;
+        this.apellido = apellido;
     }
-
+    
     public DireccionEntregaDTO(String calle, String numero, String colonia, String codigoPostal, String ciudad, String estado) {
         this.calle = calle;
         this.numero = numero;
@@ -91,6 +95,21 @@ public class DireccionEntregaDTO {
     public void setEstado(String estado) {
         this.estado = estado;
     }
-    
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
     
 }

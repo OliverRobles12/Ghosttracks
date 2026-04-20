@@ -2,6 +2,9 @@
 package itson.org.ghosttracks.presentacion.cliente;
 
 import itson.org.ghosttracks.controladores.ControlVentaEnLinea;
+import itson.org.ghosttracks.dtos.ContactoDTO;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 /**
  *
@@ -11,9 +14,13 @@ public class PantallaFormularioContacto extends javax.swing.JPanel {
 
     private final ControlVentaEnLinea control;
     
+    private final String PLACEHOLDER_EMAIL = "Email";
+    private final String PLACEHOLDER_TEL = "Numero de telefono (Opcional)";
+    
     public PantallaFormularioContacto(ControlVentaEnLinea ctrl) {
         this.control = ctrl;
         initComponents();
+        configurarPlaceholders();
     }
 
     /**
@@ -143,10 +150,75 @@ public class PantallaFormularioContacto extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        control.procesoPedidoEntrega();
+        String email = txtEmail.getText().trim();
+        String telefono = txtTelefono.getText().trim();
+        
+        if (validarFormulario(email, telefono)) {
+            enviarDatos(email, telefono);
+        }
     }//GEN-LAST:event_btnGuardarActionPerformed
+    
+    private boolean validarFormulario(String email, String telefono) {
+        // Validar Email
+        if (email.equals(PLACEHOLDER_EMAIL) || !email.matches("^[\\w.-]+@[a-zA-Z\\d.-]+\\.[a-zA-Z]{2,}$")) {
+            control.mostrarMensaje("Por favor, ingresa un correo electrónico válido.", false);
+            return false;
+        }
 
+        // Validar Teléfono 
+        boolean tieneTelefono = !telefono.equals(PLACEHOLDER_TEL) && !telefono.isEmpty();
+        if (tieneTelefono && !telefono.matches("^\\d{10}$")) {
+            control.mostrarMensaje("El teléfono debe tener 10 dígitos numéricos.", false);
+            return false;
+        }
+        return true;
+    }
+    
+    private void configurarPlaceholders() {
+        txtEmail.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (txtEmail.getText().equals(PLACEHOLDER_EMAIL)) {
+                    txtEmail.setText("");
+                }
+            }
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (txtEmail.getText().isEmpty()) {
+                    txtEmail.setText(PLACEHOLDER_EMAIL);
+                }
+            }
+        });
+        txtTelefono.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (txtTelefono.getText().equals(PLACEHOLDER_TEL)) {
+                    txtTelefono.setText("");
+                }
+            }
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (txtTelefono.getText().isEmpty()) {
+                    txtTelefono.setText(PLACEHOLDER_TEL);
+                }
+            }
+        });
+    }
+    
+    private void enviarDatos(String email, String telefono) {
+        ContactoDTO contacto = new ContactoDTO();
+        contacto.setCorreo(email);
+        
+        // Limpiamos el valor del teléfono si es el placeholder antes de enviarlo
+        boolean tieneTelefono = !telefono.equals(PLACEHOLDER_TEL) && !telefono.isEmpty();
+        contacto.setTelefono(tieneTelefono ? telefono : null);
 
+        control.agregarContactoPedido(contacto);
+        control.procesoPedidoEntrega();
+        
+        control.mostrarMensaje("Contacto guardado con éxito.", false);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private itson.org.ghosttracks.utilerias.BotonRedondeado btnGuardar;
     private javax.swing.JLabel jLabel1;

@@ -76,7 +76,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                      <Component id="pnlFormulario" min="-2" max="-2" attributes="0"/>
+                      <Component id="pnlFormulario" min="-2" pref="250" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -96,44 +96,40 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="txtTelefono" alignment="0" max="32767" attributes="0"/>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="txtCP" min="-2" pref="212" max="-2" attributes="0"/>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="txtCiudad" min="-2" pref="199" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
-                                          <Component id="txtEstado" min="-2" pref="199" max="-2" attributes="0"/>
-                                      </Group>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="0" pref="21" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabel1" min="-2" pref="73" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="txtCiudad" min="-2" pref="315" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="txtEstado" min="-2" pref="329" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace min="0" pref="21" max="32767" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="txtDireccion" alignment="0" min="-2" pref="652" max="-2" attributes="0"/>
-                                      <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="textFieldRedondeado1" min="-2" pref="315" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="textFieldRedondeado2" max="32767" attributes="0"/>
-                                          </Group>
-                                          <Component id="txtPais" alignment="0" min="-2" pref="652" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                          <Component id="txtCalle" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="txtNombres" alignment="0" min="-2" pref="315" max="-2" attributes="0"/>
                                       </Group>
-                                      <Component id="jLabel1" alignment="0" min="-2" pref="73" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="txtApellidos" min="-2" pref="331" max="-2" attributes="0"/>
+                                          <Group type="102" attributes="0">
+                                              <Component id="txtNumero" min="-2" pref="155" max="-2" attributes="0"/>
+                                              <EmptySpace max="32767" attributes="0"/>
+                                              <Component id="txtCodigoPostal" min="-2" pref="155" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
                                   </Group>
                               </Group>
                           </Group>
                           <EmptySpace pref="25" max="32767" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="272" max="-2" attributes="0"/>
-                          <Component id="btnGuardar" min="-2" pref="116" max="-2" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="32767" attributes="0"/>
+                          <Component id="btnGuardar" min="-2" pref="116" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="291" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -143,25 +139,24 @@
                           <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                           <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="txtPais" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="textFieldRedondeado2" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="textFieldRedondeado1" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="txtNombres" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtApellidos" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="txtDireccion" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="txtCalle" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtCodigoPostal" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtNumero" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="txtCP" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="txtCiudad" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="txtEstado" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="txtTelefono" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                           <Component id="btnGuardar" min="-2" pref="35" max="-2" attributes="0"/>
-                          <EmptySpace pref="9" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -178,18 +173,7 @@
                     <Property name="text" type="java.lang.String" value="Entrega"/>
                   </Properties>
                 </Component>
-                <Component class="itson.org.ghosttracks.utilerias.TextFieldRedondeado" name="txtPais">
-                  <Properties>
-                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                    </Property>
-                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="99" green="99" red="99" type="rgb"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Pais"/>
-                  </Properties>
-                </Component>
-                <Component class="itson.org.ghosttracks.utilerias.TextFieldRedondeado" name="textFieldRedondeado1">
+                <Component class="itson.org.ghosttracks.utilerias.TextFieldRedondeado" name="txtNombres">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -197,7 +181,7 @@
                     <Property name="text" type="java.lang.String" value="Nombre(s)"/>
                   </Properties>
                 </Component>
-                <Component class="itson.org.ghosttracks.utilerias.TextFieldRedondeado" name="textFieldRedondeado2">
+                <Component class="itson.org.ghosttracks.utilerias.TextFieldRedondeado" name="txtApellidos">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -205,7 +189,7 @@
                     <Property name="text" type="java.lang.String" value="Apellido(s)"/>
                   </Properties>
                 </Component>
-                <Component class="itson.org.ghosttracks.utilerias.TextFieldRedondeado" name="txtCP">
+                <Component class="itson.org.ghosttracks.utilerias.TextFieldRedondeado" name="txtCodigoPostal">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -213,12 +197,12 @@
                     <Property name="text" type="java.lang.String" value="Codigo Postal"/>
                   </Properties>
                 </Component>
-                <Component class="itson.org.ghosttracks.utilerias.TextFieldRedondeado" name="txtDireccion">
+                <Component class="itson.org.ghosttracks.utilerias.TextFieldRedondeado" name="txtCalle">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Direccion"/>
+                    <Property name="text" type="java.lang.String" value="Calle"/>
                   </Properties>
                 </Component>
                 <Component class="itson.org.ghosttracks.utilerias.TextFieldRedondeado" name="txtCiudad">
@@ -237,14 +221,6 @@
                     <Property name="text" type="java.lang.String" value="Estado"/>
                   </Properties>
                 </Component>
-                <Component class="itson.org.ghosttracks.utilerias.TextFieldRedondeado" name="txtTelefono">
-                  <Properties>
-                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Telefono"/>
-                  </Properties>
-                </Component>
                 <Component class="itson.org.ghosttracks.utilerias.BotonRedondeado" name="btnGuardar">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -258,6 +234,14 @@
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGuardarActionPerformed"/>
                   </Events>
+                </Component>
+                <Component class="itson.org.ghosttracks.utilerias.TextFieldRedondeado" name="txtNumero">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Numero"/>
+                  </Properties>
                 </Component>
               </SubComponents>
             </Container>

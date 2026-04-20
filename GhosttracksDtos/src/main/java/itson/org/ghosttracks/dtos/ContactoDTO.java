@@ -9,18 +9,16 @@ public class ContactoDTO {
     private Long idUsuario; 
     private String nombre;
     private String correo;
-    private String asunto;
-    private String mensaje;
+    private String telefono;
 
     public ContactoDTO() {
     }
 
-    public ContactoDTO(Long idUsuario, String nombre, String correo, String asunto, String mensaje) {
+    public ContactoDTO(Long idUsuario, String nombre, String correo, String telefono) {
         this.idUsuario = idUsuario;
         this.nombre = nombre;
         this.correo = correo;
-        this.asunto = asunto;
-        this.mensaje = mensaje;
+        this.telefono = telefono;
     }
 
     public Long getIdUsuario() {
@@ -47,21 +45,12 @@ public class ContactoDTO {
         this.correo = correo;
     }
 
-    public String getAsunto() {
-        return asunto;
+    public String getTelefono() {
+        return telefono;
     }
 
-    public void setAsunto(String asunto) {
-        this.asunto = asunto;
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
-
-    public String getMensaje() {
-        return mensaje;
-    }
-
-    public void setMensaje(String mensaje) {
-        this.mensaje = mensaje;
-    }
-    
     
 }

@@ -2,6 +2,10 @@
 package itson.org.ghosttracks.presentacion.cliente;
 
 import itson.org.ghosttracks.controladores.ControlVentaEnLinea;
+import itson.org.ghosttracks.dtos.DireccionEntregaDTO;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import javax.swing.JTextField;
 
 /**
  *
@@ -11,9 +15,18 @@ public class PantallaFormularioEntrega extends javax.swing.JPanel {
 
     private final ControlVentaEnLinea control;
     
+    private final String PH_NOMBRES = "Nombre(s)";
+    private final String PH_APELLIDOS = "Apellido(s)";
+    private final String PH_CALLE = "Calle";
+    private final String PH_NUMERO = "Numero";
+    private final String PH_CP = "Codigo Postal";
+    private final String PH_CIUDAD = "Ciudad";
+    private final String PH_ESTADO = "Estado";
+    
     public PantallaFormularioEntrega(ControlVentaEnLinea ctrl) {
         this.control = ctrl;
         initComponents();
+        configurarPlaceholders();
     }
 
     /**
@@ -29,15 +42,14 @@ public class PantallaFormularioEntrega extends javax.swing.JPanel {
         pnlContenedor = new javax.swing.JPanel();
         pnlFormulario = new itson.org.ghosttracks.utilerias.PanelRedondeado();
         jLabel1 = new javax.swing.JLabel();
-        txtPais = new itson.org.ghosttracks.utilerias.TextFieldRedondeado();
-        textFieldRedondeado1 = new itson.org.ghosttracks.utilerias.TextFieldRedondeado();
-        textFieldRedondeado2 = new itson.org.ghosttracks.utilerias.TextFieldRedondeado();
-        txtCP = new itson.org.ghosttracks.utilerias.TextFieldRedondeado();
-        txtDireccion = new itson.org.ghosttracks.utilerias.TextFieldRedondeado();
+        txtNombres = new itson.org.ghosttracks.utilerias.TextFieldRedondeado();
+        txtApellidos = new itson.org.ghosttracks.utilerias.TextFieldRedondeado();
+        txtCodigoPostal = new itson.org.ghosttracks.utilerias.TextFieldRedondeado();
+        txtCalle = new itson.org.ghosttracks.utilerias.TextFieldRedondeado();
         txtCiudad = new itson.org.ghosttracks.utilerias.TextFieldRedondeado();
         txtEstado = new itson.org.ghosttracks.utilerias.TextFieldRedondeado();
-        txtTelefono = new itson.org.ghosttracks.utilerias.TextFieldRedondeado();
         btnGuardar = new itson.org.ghosttracks.utilerias.BotonRedondeado();
+        txtNumero = new itson.org.ghosttracks.utilerias.TextFieldRedondeado();
 
         pnlPrincipal.setBackground(new java.awt.Color(51, 51, 51));
         pnlPrincipal.setMinimumSize(new java.awt.Dimension(1400, 800));
@@ -53,21 +65,17 @@ public class PantallaFormularioEntrega extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Entrega");
 
-        txtPais.setBackground(new java.awt.Color(255, 255, 255));
-        txtPais.setForeground(new java.awt.Color(153, 153, 153));
-        txtPais.setText("Pais");
+        txtNombres.setBackground(new java.awt.Color(255, 255, 255));
+        txtNombres.setText("Nombre(s)");
 
-        textFieldRedondeado1.setBackground(new java.awt.Color(255, 255, 255));
-        textFieldRedondeado1.setText("Nombre(s)");
+        txtApellidos.setBackground(new java.awt.Color(255, 255, 255));
+        txtApellidos.setText("Apellido(s)");
 
-        textFieldRedondeado2.setBackground(new java.awt.Color(255, 255, 255));
-        textFieldRedondeado2.setText("Apellido(s)");
+        txtCodigoPostal.setBackground(new java.awt.Color(255, 255, 255));
+        txtCodigoPostal.setText("Codigo Postal");
 
-        txtCP.setBackground(new java.awt.Color(255, 255, 255));
-        txtCP.setText("Codigo Postal");
-
-        txtDireccion.setBackground(new java.awt.Color(255, 255, 255));
-        txtDireccion.setText("Direccion");
+        txtCalle.setBackground(new java.awt.Color(255, 255, 255));
+        txtCalle.setText("Calle");
 
         txtCiudad.setBackground(new java.awt.Color(255, 255, 255));
         txtCiudad.setText("Ciudad");
@@ -75,47 +83,44 @@ public class PantallaFormularioEntrega extends javax.swing.JPanel {
         txtEstado.setBackground(new java.awt.Color(255, 255, 255));
         txtEstado.setText("Estado");
 
-        txtTelefono.setBackground(new java.awt.Color(255, 255, 255));
-        txtTelefono.setText("Telefono");
-
         btnGuardar.setBackground(new java.awt.Color(204, 51, 0));
         btnGuardar.setText("Guardar");
         btnGuardar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnGuardar.addActionListener(this::btnGuardarActionPerformed);
+
+        txtNumero.setBackground(new java.awt.Color(255, 255, 255));
+        txtNumero.setText("Numero");
 
         javax.swing.GroupLayout pnlFormularioLayout = new javax.swing.GroupLayout(pnlFormulario);
         pnlFormulario.setLayout(pnlFormularioLayout);
         pnlFormularioLayout.setHorizontalGroup(
             pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlFormularioLayout.createSequentialGroup()
-                .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(pnlFormularioLayout.createSequentialGroup()
-                        .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txtTelefono, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlFormularioLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(txtCP, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(22, 22, 22)
-                                .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(2, 2, 2))
-                    .addGroup(pnlFormularioLayout.createSequentialGroup()
-                        .addGap(0, 21, Short.MAX_VALUE)
-                        .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 652, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 21, Short.MAX_VALUE)
+                .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(pnlFormularioLayout.createSequentialGroup()
+                            .addComponent(txtCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(2, 2, 2))
+                        .addGroup(pnlFormularioLayout.createSequentialGroup()
+                            .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(txtCalle, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtNombres, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(pnlFormularioLayout.createSequentialGroup()
-                                    .addComponent(textFieldRedondeado1, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(textFieldRedondeado2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addComponent(txtPais, javax.swing.GroupLayout.PREFERRED_SIZE, 652, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtCodigoPostal, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(25, Short.MAX_VALUE))
-            .addGroup(pnlFormularioLayout.createSequentialGroup()
-                .addGap(272, 272, 272)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlFormularioLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(291, 291, 291))
         );
         pnlFormularioLayout.setVerticalGroup(
             pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -123,23 +128,21 @@ public class PantallaFormularioEntrega extends javax.swing.JPanel {
                 .addGap(14, 14, 14)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(txtPais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(textFieldRedondeado2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textFieldRedondeado1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtNombres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCalle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCodigoPostal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(40, 40, 40)
                 .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout pnlContenedorLayout = new javax.swing.GroupLayout(pnlContenedor);
@@ -155,7 +158,7 @@ public class PantallaFormularioEntrega extends javax.swing.JPanel {
             pnlContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlContenedorLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addComponent(pnlFormulario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnlFormulario, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -183,23 +186,107 @@ public class PantallaFormularioEntrega extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        // TODO add your handling code here:
+        String nombres = txtNombres.getText().trim();
+        String apellidos = txtApellidos.getText().trim();
+        String calle = txtCalle.getText().trim();
+        String numero = txtNumero.getText().trim();
+        String cp = txtCodigoPostal.getText().trim();
+        String ciudad = txtCiudad.getText().trim();
+        String estado = txtEstado.getText().trim();
+        
+        if (validarFormulario(nombres, apellidos, calle, numero, cp, ciudad, estado)) {
+            enviarDatos(nombres, apellidos, calle, numero, cp, ciudad, estado);
+        }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
+    private boolean validarFormulario(String nombres, String apellidos, String calle, String numero, String cp, String ciudad, String estado) {
+        // Validar que ningún campo esté vacío o con el placeholder por defecto
+        if (nombres.equals(PH_NOMBRES) || apellidos.equals(PH_APELLIDOS) || 
+            calle.equals(PH_CALLE) || numero.equals(PH_NUMERO) || 
+            cp.equals(PH_CP) || ciudad.equals(PH_CIUDAD) || estado.equals(PH_ESTADO)) {
+            
+            control.mostrarMensaje("Todos los campos son obligatorios. Por favor, llena la información faltante.", false);
+            return false;
+        }
 
+        // Regex: Solo letras y espacios para nombres/apellidos/ciudad/estado
+        String regexLetras = "^[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+$";
+        
+        if (!nombres.matches(regexLetras) || !apellidos.matches(regexLetras)) {
+            control.mostrarMensaje("Los nombres y apellidos solo deben contener letras.", false);
+            return false;
+        }
+
+        if (!ciudad.matches(regexLetras) || !estado.matches(regexLetras)) {
+            control.mostrarMensaje("La ciudad y el estado solo deben contener letras.", false);
+            return false;
+        }
+
+        // Regex: Código Postal de exactamente 5 dígitos
+        if (!cp.matches("^\\d{5}$")) {
+            control.mostrarMensaje("El Código Postal debe contener exactamente 5 dígitos numéricos.", false);
+            return false;
+        }
+        
+        return true;
+    }
+    
+    private void configurarPlaceholders() {
+        agregarPlaceholder(txtNombres, PH_NOMBRES);
+        agregarPlaceholder(txtApellidos, PH_APELLIDOS);
+        agregarPlaceholder(txtCalle, PH_CALLE);
+        agregarPlaceholder(txtNumero, PH_NUMERO);
+        agregarPlaceholder(txtCodigoPostal, PH_CP);
+        agregarPlaceholder(txtCiudad, PH_CIUDAD);
+        agregarPlaceholder(txtEstado, PH_ESTADO);
+    }
+    
+    private void agregarPlaceholder(JTextField campo, String placeholder) {
+        campo.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (campo.getText().equals(placeholder)) {
+                    campo.setText("");
+                }
+            }
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (campo.getText().isEmpty()) {
+                    campo.setText(placeholder);
+                }
+            }
+        });
+    }
+
+    private void enviarDatos(String nombres, String apellidos, String calle, String numero, String cp, String ciudad, String estado) {
+        DireccionEntregaDTO dto = new DireccionEntregaDTO();
+        dto.setNombre(nombres);
+        dto.setApellido(apellidos);
+        dto.setCalle(calle);
+        dto.setNumero(numero);
+        dto.setCodigoPostal(cp);
+        dto.setCiudad(ciudad);
+        dto.setEstado(estado);
+        
+        control.agregarDireccionPedido(dto);
+        control.mostrarMensaje("Dirección guardada con éxito.", false);
+        
+        control.procesarPedidoMetodoPago();
+        
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private itson.org.ghosttracks.utilerias.BotonRedondeado btnGuardar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel pnlContenedor;
     private itson.org.ghosttracks.utilerias.PanelRedondeado pnlFormulario;
     private javax.swing.JPanel pnlPrincipal;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado textFieldRedondeado1;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado textFieldRedondeado2;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtCP;
+    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtApellidos;
+    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtCalle;
     private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtCiudad;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtDireccion;
+    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtCodigoPostal;
     private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtEstado;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtPais;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtTelefono;
+    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtNombres;
+    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtNumero;
     // End of variables declaration//GEN-END:variables
 }

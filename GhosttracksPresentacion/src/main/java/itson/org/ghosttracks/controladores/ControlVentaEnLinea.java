@@ -2,7 +2,9 @@
 package itson.org.ghosttracks.controladores;
 
 import itson.org.ghosttracks.dtos.CarritoDTO;
-import itson.org.ghosttracks.dtos.ItemCarritoDTO;
+import itson.org.ghosttracks.dtos.ContactoDTO;
+import itson.org.ghosttracks.dtos.DireccionEntregaDTO;
+import itson.org.ghosttracks.dtos.PedidoDTO;
 import itson.org.ghosttracks.dtos.ProductoDTO;
 import itson.org.ghosttracks.presentacion.cliente.PantallaCarrito;
 import itson.org.ghosttracks.presentacion.cliente.PantallaInicioCliente;
@@ -20,10 +22,59 @@ public class ControlVentaEnLinea {
     private final IVentaEnLinea ventaFachada = new VentaEnLineaFachada();
     
     private CarritoDTO carrito;
+    private PedidoDTO pedidoDTO;
     
     public ControlVentaEnLinea(Navegador nav) {
         this.navegador = nav;
+        this.pedidoDTO = new PedidoDTO();
         this.carrito = new CarritoDTO();
+    }
+    
+    // Salto pantallas
+    
+    public void comenzarProcesoPedido() {
+        navegador.irFormularioContacto();
+    }
+    
+    public void procesoPedidoEntrega() {
+        navegador.irFormularioEntrega();
+    }
+    
+    public void procesarPedidoMetodoPago() {
+        navegador.irSeleccionMetodoPago();
+    }
+    
+    public void volverACatalogo() {
+        navegador.irInicioCliente();
+    }
+    
+    // Pantallas
+    
+    public void llenarTablaCarrito(PantallaCarrito vista){
+        vista.llenarTabla(carrito);
+    }
+    
+    public void llenarCatalogo(PantallaInicioCliente vista) {
+        try {
+            List<ProductoDTO> productos = ventaFachada.obtenerCatalogo();
+            vista.cargarCatalogo(productos);
+        } catch (Exception ex) {
+            navegador.mostrarMensaje("Error al llenar el catalogo de productos.", true);
+        }
+    }
+    
+    public void mostrarDetalleProducto(ProductoDTO productoSeleccionado) {
+        navegador.irVistaProducto(productoSeleccionado);
+    }
+    
+    // Pedido
+    
+    public void agregarDireccionPedido(DireccionEntregaDTO dto) {
+        pedidoDTO.setDireccionEntrega(dto);
+    }
+    
+    public void agregarContactoPedido(ContactoDTO dto) {
+        pedidoDTO.setContacto(dto);
     }
     
     public void agregarProductoCarrito(ProductoDTO producto, Integer cantidad) {
@@ -42,38 +93,7 @@ public class ControlVentaEnLinea {
         }
     }
     
-    public void llenarTablaCarrito(PantallaCarrito vista){
-        vista.llenarTabla(carrito);
-    }
-    
-    public void llenarCatalogo(PantallaInicioCliente vista) {
-        try {
-            List<ProductoDTO> productos = ventaFachada.obtenerCatalogo();
-            vista.cargarCatalogo(productos);
-        } catch (Exception ex) {
-            navegador.mostrarMensaje("Error al llenar el catalogo de productos.", true);
-        }
-    }
-    
-    public void comenzarProcesoPedido() {
-        navegador.irFormularioContacto();
-    }
-    
-    public void procesoPedidoEntrega() {
-        navegador.irFormularioEntrega();
-    }
-    
-    public void procesarPedidoMetodoPago() {
-        navegador.irSeleccionMetodoPago();
-    }
-    
-    public void mostrarDetalleProducto(ProductoDTO productoSeleccionado) {
-        navegador.irVistaProducto(productoSeleccionado);
-    }
-    
-    public void volverACatalogo() {
-        navegador.irInicioCliente();
-    }
+    // Extras
     
     public void mostrarMensaje(String mensaje, boolean esError) {
         navegador.mostrarMensaje(mensaje, esError);
