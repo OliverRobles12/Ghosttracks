@@ -1,5 +1,7 @@
 package itson.org.ghosttracks.dtos;
 
+import java.time.LocalDate;
+
 /**
  *
  * @author emyla
@@ -8,7 +10,7 @@ public class DatosPagoDTO {
     
     private String titularTarjeta;
     private String numeroTrajeta;
-    private String fechaExpiracion;
+    private LocalDate fechaExpiracion;
     private String cvv;
 
     public DatosPagoDTO() {
@@ -17,7 +19,7 @@ public class DatosPagoDTO {
     public DatosPagoDTO(
             String titularTarjeta, 
             String numeroTrajeta, 
-            String fechaExpiracion, 
+            LocalDate fechaExpiracion, 
             String cvv
     ) {
         this.titularTarjeta = titularTarjeta;
@@ -42,11 +44,11 @@ public class DatosPagoDTO {
         this.numeroTrajeta = numeroTrajeta;
     }
 
-    public String getFechaExpiracion() {
+    public LocalDate getFechaExpiracion() {
         return fechaExpiracion;
     }
 
-    public void setFechaExpiracion(String fechaExpiracion) {
+    public void setFechaExpiracion(LocalDate fechaExpiracion) {
         this.fechaExpiracion = fechaExpiracion;
     }
 
