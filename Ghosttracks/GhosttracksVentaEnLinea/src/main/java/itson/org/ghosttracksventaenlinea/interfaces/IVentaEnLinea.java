@@ -28,4 +28,6 @@ public interface IVentaEnLinea {
     PedidoDTO confirmarCompra(PedidoDTO pedido) throws Exception;
     
     PedidoDTO actualizarEstadoPedido(Long idPedido, EstadoPedidoDTO nuevoEstado) throws Exception;
+    
+    CarritoDTO eliminarDelCarrito(CarritoDTO carrito, Long idProducto) throws Exception;
 }

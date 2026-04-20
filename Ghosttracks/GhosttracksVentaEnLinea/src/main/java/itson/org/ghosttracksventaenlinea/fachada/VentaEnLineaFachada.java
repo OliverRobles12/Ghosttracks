@@ -54,6 +54,11 @@ public class VentaEnLineaFachada implements IVentaEnLinea{
     }
     
     @Override
+    public CarritoDTO eliminarDelCarrito(CarritoDTO carrito, Long idProducto) throws Exception {
+        return carritoBO.eliminarProducto(carrito, idProducto);
+    }
+    
+    @Override
     public PedidoDTO confirmarCompra(PedidoDTO pedido) throws Exception {
         return pedidosBO.generarPedido(pedido);
     }
