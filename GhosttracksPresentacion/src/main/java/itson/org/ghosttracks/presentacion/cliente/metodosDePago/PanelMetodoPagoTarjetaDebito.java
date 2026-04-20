@@ -5,9 +5,9 @@ package itson.org.ghosttracks.presentacion.cliente.metodosDePago;
  *
  * @author oliro
  */
-public class PantallaMetodoPagoTarjetaDeb extends javax.swing.JPanel {
-
-    public PantallaMetodoPagoTarjetaDeb() {
+public class PanelMetodoPagoTarjetaDebito extends javax.swing.JPanel {
+    
+    public PanelMetodoPagoTarjetaDebito() {
         initComponents();
     }
 
@@ -29,12 +29,15 @@ public class PantallaMetodoPagoTarjetaDeb extends javax.swing.JPanel {
         txtFechaVencimiento = new itson.org.ghosttracks.utilerias.TextFieldRedondeado();
         txtNombreTitular = new itson.org.ghosttracks.utilerias.TextFieldRedondeado();
         btnContinuar = new itson.org.ghosttracks.utilerias.BotonRedondeado();
-        pnlResumenPedido1 = new itson.org.ghosttracks.utilerias.pnlResumenPedido();
+        btnVolver = new javax.swing.JButton();
+
+        setOpaque(false);
 
         pnlPrincipal.setBackground(new java.awt.Color(237, 229, 222));
         pnlPrincipal.setPreferredSize(new java.awt.Dimension(1100, 675));
 
         panelRedondeado.setBackground(new java.awt.Color(217, 217, 217));
+        panelRedondeado.setPreferredSize(new java.awt.Dimension(700, 335));
 
         lblMetodoDePago.setFont(new java.awt.Font("Corbel", 1, 24)); // NOI18N
         lblMetodoDePago.setText("Tarjeta de Débito");
@@ -59,8 +62,14 @@ public class PantallaMetodoPagoTarjetaDeb extends javax.swing.JPanel {
         btnContinuar.setBackground(new java.awt.Color(230, 94, 7));
         btnContinuar.setForeground(new java.awt.Color(255, 255, 255));
         btnContinuar.setText("Continuar");
-        btnContinuar.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
+        btnContinuar.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         btnContinuar.setHoverColor(new java.awt.Color(255, 255, 255));
+
+        btnVolver.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        btnVolver.setForeground(new java.awt.Color(0, 0, 0));
+        btnVolver.setText("Volver");
+        btnVolver.setBorderPainted(false);
+        btnVolver.setContentAreaFilled(false);
 
         javax.swing.GroupLayout panelRedondeadoLayout = new javax.swing.GroupLayout(panelRedondeado);
         panelRedondeado.setLayout(panelRedondeadoLayout);
@@ -68,19 +77,19 @@ public class PantallaMetodoPagoTarjetaDeb extends javax.swing.JPanel {
             panelRedondeadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRedondeadoLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addGroup(panelRedondeadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblMetodoDePago, javax.swing.GroupLayout.PREFERRED_SIZE, 539, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNumeroTarjeta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panelRedondeadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(panelRedondeadoLayout.createSequentialGroup()
+                        .addComponent(btnVolver)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblMetodoDePago, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 539, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNumeroTarjeta, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelRedondeadoLayout.createSequentialGroup()
                         .addComponent(txtFechaVencimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(txtNumeroSeguridad, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE))
-                    .addComponent(txtNombreTitular, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(22, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRedondeadoLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(248, 248, 248))
+                    .addComponent(txtNombreTitular, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
             .addGroup(panelRedondeadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelRedondeadoLayout.createSequentialGroup()
                     .addGap(30, 30, 30)
@@ -100,46 +109,38 @@ public class PantallaMetodoPagoTarjetaDeb extends javax.swing.JPanel {
                     .addComponent(txtFechaVencimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
                 .addComponent(txtNombreTitular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addComponent(btnContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(panelRedondeadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnVolver))
+                .addContainerGap(32, Short.MAX_VALUE))
             .addGroup(panelRedondeadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelRedondeadoLayout.createSequentialGroup()
                     .addGap(32, 32, 32)
                     .addComponent(lblSeleccionMetodoPago)
-                    .addContainerGap(271, Short.MAX_VALUE)))
+                    .addContainerGap(259, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout pnlPrincipalLayout = new javax.swing.GroupLayout(pnlPrincipal);
         pnlPrincipal.setLayout(pnlPrincipalLayout);
         pnlPrincipalLayout.setHorizontalGroup(
             pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlPrincipalLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(panelRedondeado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addComponent(pnlResumenPedido1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(panelRedondeado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         pnlPrincipalLayout.setVerticalGroup(
             pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlPrincipalLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnlResumenPedido1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panelRedondeado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(panelRedondeado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 1085, Short.MAX_VALUE)
+            .addComponent(pnlPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(pnlPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -150,11 +151,11 @@ public class PantallaMetodoPagoTarjetaDeb extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private itson.org.ghosttracks.utilerias.BotonRedondeado btnContinuar;
+    private javax.swing.JButton btnVolver;
     private javax.swing.JLabel lblMetodoDePago;
     private javax.swing.JLabel lblSeleccionMetodoPago;
     private itson.org.ghosttracks.utilerias.PanelRedondeado panelRedondeado;
     private javax.swing.JPanel pnlPrincipal;
-    private itson.org.ghosttracks.utilerias.pnlResumenPedido pnlResumenPedido1;
     private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtFechaVencimiento;
     private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtNombreTitular;
     private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtNumeroSeguridad;

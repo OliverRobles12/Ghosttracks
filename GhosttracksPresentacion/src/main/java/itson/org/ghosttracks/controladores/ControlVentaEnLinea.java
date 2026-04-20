@@ -19,6 +19,14 @@ public class ControlVentaEnLinea {
         navegador.irFormularioContacto();
     }
     
+    public void procesoPedidoEntrega() {
+        navegador.irFormularioEntrega();
+    }
+    
+    public void procesarPedidoMetodoPago() {
+        navegador.irSeleccionMetodoPago();
+    }
+    
     public void mostrarDetalleProducto(ProductosMockDAO productoSeleccionado) {
         navegador.irVistaProducto(productoSeleccionado);
     }

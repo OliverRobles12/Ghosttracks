@@ -1,14 +1,38 @@
 
 package itson.org.ghosttracks.presentacion.cliente;
 
+import itson.org.ghosttracks.controladores.ControlVentaEnLinea;
+import itson.org.ghosttracks.presentacion.cliente.metodosDePago.PanelMetodoPagoTarjetaDebito;
+import itson.org.ghosttracks.presentacion.cliente.metodosDePago.PanelSeleccionMetodoPago;
+import java.awt.CardLayout;
+
 /**
  *
  * @author oliro
  */
 public class PantallaSeleccionMetodoDePago extends javax.swing.JPanel {
 
-    public PantallaSeleccionMetodoDePago() {
+    private ControlVentaEnLinea control;
+    private CardLayout cardLayout;
+    
+    public PantallaSeleccionMetodoDePago(ControlVentaEnLinea ctrl) {
+        this.control = ctrl;
         initComponents();
+        
+        cardLayout = new CardLayout();
+        panelContenido.setLayout(cardLayout);
+        
+        PanelSeleccionMetodoPago seleccion = new PanelSeleccionMetodoPago();
+        PanelMetodoPagoTarjetaDebito debito = new PanelMetodoPagoTarjetaDebito();
+        
+        panelContenido.add(seleccion, "PAGO_SELECCION");
+        panelContenido.add(debito, "PAGO_TARJETA");
+        
+        cardLayout.show(panelContenido, "PAGO_SELECCION");
+        
+        panelContenido.revalidate();
+        panelContenido.repaint();
+        
     }
 
     /**
@@ -21,106 +45,26 @@ public class PantallaSeleccionMetodoDePago extends javax.swing.JPanel {
     private void initComponents() {
 
         pnlPrincipal = new javax.swing.JPanel();
-        panelRedondeado = new itson.org.ghosttracks.utilerias.PanelRedondeado();
-        lblMetodoDePago = new javax.swing.JLabel();
-        lblSeleccionMetodoPago = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        rbtnApplePay = new javax.swing.JRadioButton();
-        rbtnMercadoPago = new javax.swing.JRadioButton();
-        btnContinuar = new itson.org.ghosttracks.utilerias.BotonRedondeado();
-        rbtnTarjetaDebito = new javax.swing.JRadioButton();
         pnlResumenPedido1 = new itson.org.ghosttracks.utilerias.pnlResumenPedido();
+        panelContenido = new javax.swing.JPanel();
+
+        setPreferredSize(new java.awt.Dimension(1100, 675));
 
         pnlPrincipal.setBackground(new java.awt.Color(237, 229, 222));
         pnlPrincipal.setPreferredSize(new java.awt.Dimension(1100, 675));
 
-        panelRedondeado.setBackground(new java.awt.Color(217, 217, 217));
+        panelContenido.setOpaque(false);
+        panelContenido.setPreferredSize(new java.awt.Dimension(700, 675));
 
-        lblMetodoDePago.setFont(new java.awt.Font("Corbel", 1, 24)); // NOI18N
-        lblMetodoDePago.setText("Seleccione un método de pago");
-
-        lblSeleccionMetodoPago.setFont(new java.awt.Font("Corbel", 1, 36)); // NOI18N
-        lblSeleccionMetodoPago.setText("Método de Pago");
-
-        jPanel1.setBackground(new java.awt.Color(217, 217, 217));
-
-        rbtnApplePay.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
-        rbtnApplePay.setText("Apple Pay");
-        rbtnApplePay.addActionListener(this::rbtnApplePayActionPerformed);
-
-        rbtnMercadoPago.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
-        rbtnMercadoPago.setText("Mercado Pago");
-        rbtnMercadoPago.addActionListener(this::rbtnMercadoPagoActionPerformed);
-
-        btnContinuar.setBackground(new java.awt.Color(230, 94, 7));
-        btnContinuar.setForeground(new java.awt.Color(255, 255, 255));
-        btnContinuar.setText("Continuar");
-        btnContinuar.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
-        btnContinuar.setHoverColor(new java.awt.Color(255, 255, 255));
-        btnContinuar.addActionListener(this::btnContinuarActionPerformed);
-
-        rbtnTarjetaDebito.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
-        rbtnTarjetaDebito.setText("Tarjeta de débito");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(238, Short.MAX_VALUE)
-                .addComponent(btnContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(215, 215, 215))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(rbtnTarjetaDebito)
-                    .addComponent(rbtnApplePay, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rbtnMercadoPago, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        javax.swing.GroupLayout panelContenidoLayout = new javax.swing.GroupLayout(panelContenido);
+        panelContenido.setLayout(panelContenidoLayout);
+        panelContenidoLayout.setHorizontalGroup(
+            panelContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 700, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(rbtnTarjetaDebito)
-                .addGap(18, 18, 18)
-                .addComponent(rbtnApplePay)
-                .addGap(18, 18, 18)
-                .addComponent(rbtnMercadoPago)
-                .addGap(18, 18, 18)
-                .addComponent(btnContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout panelRedondeadoLayout = new javax.swing.GroupLayout(panelRedondeado);
-        panelRedondeado.setLayout(panelRedondeadoLayout);
-        panelRedondeadoLayout.setHorizontalGroup(
-            panelRedondeadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRedondeadoLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(panelRedondeadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblMetodoDePago, javax.swing.GroupLayout.PREFERRED_SIZE, 539, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(29, Short.MAX_VALUE))
-            .addGroup(panelRedondeadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(panelRedondeadoLayout.createSequentialGroup()
-                    .addGap(30, 30, 30)
-                    .addComponent(lblSeleccionMetodoPago, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(351, Short.MAX_VALUE)))
-        );
-        panelRedondeadoLayout.setVerticalGroup(
-            panelRedondeadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRedondeadoLayout.createSequentialGroup()
-                .addGap(76, 76, 76)
-                .addComponent(lblMetodoDePago)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(121, Short.MAX_VALUE))
-            .addGroup(panelRedondeadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(panelRedondeadoLayout.createSequentialGroup()
-                    .addGap(32, 32, 32)
-                    .addComponent(lblSeleccionMetodoPago)
-                    .addContainerGap(389, Short.MAX_VALUE)))
+        panelContenidoLayout.setVerticalGroup(
+            panelContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout pnlPrincipalLayout = new javax.swing.GroupLayout(pnlPrincipal);
@@ -129,55 +73,37 @@ public class PantallaSeleccionMetodoDePago extends javax.swing.JPanel {
             pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlPrincipalLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addComponent(panelRedondeado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
+                .addComponent(panelContenido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pnlResumenPedido1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         pnlPrincipalLayout.setVerticalGroup(
             pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlPrincipalLayout.createSequentialGroup()
-                .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelRedondeado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pnlResumenPedido1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPrincipalLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(pnlResumenPedido1, javax.swing.GroupLayout.DEFAULT_SIZE, 675, Short.MAX_VALUE)
+                    .addComponent(panelContenido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 1085, Short.MAX_VALUE)
+            .addComponent(pnlPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE)
+            .addComponent(pnlPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void rbtnApplePayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnApplePayActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rbtnApplePayActionPerformed
-
-    private void rbtnMercadoPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnMercadoPagoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rbtnMercadoPagoActionPerformed
-
-    private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
-
-    }//GEN-LAST:event_btnContinuarActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private itson.org.ghosttracks.utilerias.BotonRedondeado btnContinuar;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel lblMetodoDePago;
-    private javax.swing.JLabel lblSeleccionMetodoPago;
-    private itson.org.ghosttracks.utilerias.PanelRedondeado panelRedondeado;
+    private javax.swing.JPanel panelContenido;
     private javax.swing.JPanel pnlPrincipal;
     private itson.org.ghosttracks.utilerias.pnlResumenPedido pnlResumenPedido1;
-    private javax.swing.JRadioButton rbtnApplePay;
-    private javax.swing.JRadioButton rbtnMercadoPago;
-    private javax.swing.JRadioButton rbtnTarjetaDebito;
     // End of variables declaration//GEN-END:variables
 }

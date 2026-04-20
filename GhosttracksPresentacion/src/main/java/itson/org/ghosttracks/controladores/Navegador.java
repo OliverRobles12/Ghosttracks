@@ -9,7 +9,9 @@ import itson.org.ghosttracks.presentacion.cliente.PantallaCarrito;
 import itson.org.ghosttracks.presentacion.cliente.PantallaFormularioContacto;
 import itson.org.ghosttracks.presentacion.cliente.PantallaFormularioEntrega;
 import itson.org.ghosttracks.presentacion.cliente.PantallaInicioCliente;
+import itson.org.ghosttracks.presentacion.cliente.PantallaSeleccionMetodoDePago;
 import itson.org.ghosttracks.presentacion.cliente.PantallaVistaProducto;
+import itson.org.ghosttracks.presentacion.cliente.metodosDePago.PanelMetodoPagoTarjetaDebito;
 import itson.org.ghosttracks.presentacion.panelLogin;
 import itson.org.ghosttracks.utilerias.PanelHeader;
 import itson.org.ghosttracks.utilerias.pnlMenuLateral;
@@ -70,6 +72,20 @@ public class Navegador {
     public void irFormularioEntrega() {
         ControlVentaEnLinea ctrl = new ControlVentaEnLinea(this);
         PantallaFormularioEntrega vista = new PantallaFormularioEntrega(ctrl);
+        ventana.cambiarPantalla(vista);
+    }
+    
+    public void irSeleccionMetodoPago() {
+        ControlVentaEnLinea ctrl = new ControlVentaEnLinea(this);
+        PantallaSeleccionMetodoDePago vista = new PantallaSeleccionMetodoDePago(ctrl);
+        ventana.cambiarPantalla(vista);
+    }
+    
+    // Paneles Metodos de pago
+    
+    public void irMetodoPagoTarjetaDebito() {
+        ControlVentaEnLinea ctrl = new ControlVentaEnLinea(this);
+        PanelMetodoPagoTarjetaDebito vista = new PanelMetodoPagoTarjetaDebito();
         ventana.cambiarPantalla(vista);
     }
     

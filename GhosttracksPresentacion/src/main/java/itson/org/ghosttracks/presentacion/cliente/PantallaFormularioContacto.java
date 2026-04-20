@@ -143,7 +143,7 @@ public class PantallaFormularioContacto extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        // TODO add your handling code here:
+        control.procesoPedidoEntrega();
     }//GEN-LAST:event_btnGuardarActionPerformed
 
 
