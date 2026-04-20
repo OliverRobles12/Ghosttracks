@@ -59,7 +59,6 @@ public class PantallaCarrito extends javax.swing.JPanel {
         pnlContenedor.setPreferredSize(new java.awt.Dimension(1100, 692));
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Tu carrito");
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carro 1.png"))); // NOI18N
@@ -75,11 +74,9 @@ public class PantallaCarrito extends javax.swing.JPanel {
         jLabel3.setText("Impuestos y costos de envio seran calculados  al final de la compra.");
 
         lbl.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lbl.setForeground(new java.awt.Color(0, 0, 0));
         lbl.setText("Subtotal");
 
         lblSubtotal.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        lblSubtotal.setForeground(new java.awt.Color(0, 0, 0));
         lblSubtotal.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSubtotal.setText("$0.0");
         lblSubtotal.setPreferredSize(new java.awt.Dimension(175, 22));
@@ -94,7 +91,7 @@ public class PantallaCarrito extends javax.swing.JPanel {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -268,10 +265,17 @@ public class PantallaCarrito extends javax.swing.JPanel {
         public Object getCellEditorValue() {
             if (isPushed) {
                 int fila = tblCarrito.getSelectedRow();
-                Object value = tblCarrito.getValueAt(fila, 1);
+                
+                if (fila >= 0) {
+                    Object value = tblCarrito.getValueAt(fila, 1); 
 
-                if (value instanceof Long) {
-                    control.eliminarProductoCarrito((Long) value);
+                    if (value instanceof Long) {
+                        Long idProducto = (Long) value;
+                        javax.swing.SwingUtilities.invokeLater(() -> {
+                            control.eliminarProductoCarrito(idProducto);
+                            control.llenarTablaCarrito(PantallaCarrito.this);
+                        });
+                    }
                 }
             }
             isPushed = false;
