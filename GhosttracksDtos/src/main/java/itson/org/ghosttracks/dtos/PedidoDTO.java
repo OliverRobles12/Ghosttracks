@@ -1,5 +1,6 @@
 package itson.org.ghosttracks.dtos;
 
+import itson.org.ghosttracks.enums.EstadoPedidoDTO;
 import java.util.List;
 
 /**
@@ -8,11 +9,13 @@ import java.util.List;
  */
 public class PedidoDTO {
     
+    private Long idPedido;
     private Long idCliente;
     private List<ItemCarritoDTO> productos;
     private Double subtotal;
     private Double costoEnvio;
     private Double total;
+    private EstadoPedidoDTO estado;
     private DireccionEntregaDTO direccionEntrega;
     private DatosPagoDTO datosPago;
 
@@ -104,7 +107,22 @@ public class PedidoDTO {
     public void setDatosPago(DatosPagoDTO datosPago) {
         this.datosPago = datosPago;
     }
-    
-    
-    
+
+    public Long getIdPedido() {
+        return idPedido;
+    }
+
+    public void setIdPedido(Long idPedido) {
+        this.idPedido = idPedido;
+    }
+
+    public EstadoPedidoDTO getEstado() {
+        return estado;
+    }
+
+    public void setEstado(EstadoPedidoDTO estado) {
+        this.estado = estado;
+    }
+
+  
 }

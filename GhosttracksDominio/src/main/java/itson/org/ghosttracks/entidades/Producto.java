@@ -5,13 +5,12 @@ import itson.org.ghosttracks.enums.TipoProducto;
 
 import java.util.List;
 
-
 /**
  * Entidad de Dominio
  * @author Emy
  */
-public class Producto {
     
+public class Producto {
     private Long idProducto; 
     
     private String nombre;

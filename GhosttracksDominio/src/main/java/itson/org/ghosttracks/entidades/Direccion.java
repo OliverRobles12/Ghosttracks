@@ -10,8 +10,22 @@ package itson.org.ghosttracks.entidades;
  */
 public class Direccion {
     private String calle;
+    private String colonia;
     private String numero;
+    private String ciudad;
     private String codigoPostal;
+
+    public Direccion() {
+
+    }
+
+    public Direccion(String calle, String colonia, String numero, String ciudad, String codigoPostal) {
+        this.calle = calle;
+        this.colonia = colonia;
+        this.numero = numero;
+        this.ciudad = ciudad;
+        this.codigoPostal = codigoPostal;
+    }
 
     public String getCalle() {
         return calle;
@@ -19,6 +33,14 @@ public class Direccion {
 
     public void setCalle(String calle) {
         this.calle = calle;
+    }
+
+    public String getColonia() {
+        return colonia;
+    }
+
+    public void setColonia(String colonia) {
+        this.colonia = colonia;
     }
 
     public String getNumero() {
@@ -29,6 +51,14 @@ public class Direccion {
         this.numero = numero;
     }
 
+    public String getCiudad() {
+        return ciudad;
+    }
+
+    public void setCiudad(String ciudad) {
+        this.ciudad = ciudad;
+    }
+
     public String getCodigoPostal() {
         return codigoPostal;
     }
@@ -36,5 +66,5 @@ public class Direccion {
     public void setCodigoPostal(String codigoPostal) {
         this.codigoPostal = codigoPostal;
     }
-    
+
 }
