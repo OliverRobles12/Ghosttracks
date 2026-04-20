@@ -6,7 +6,9 @@ package itson.org.ghosttracksventaenlinea.interfaces;
 
 import itson.org.ghosttracks.dtos.CarritoDTO;
 import itson.org.ghosttracks.dtos.ClienteDTO;
+import itson.org.ghosttracks.dtos.PedidoDTO;
 import itson.org.ghosttracks.dtos.ProductoDTO;
+import itson.org.ghosttracks.enums.EstadoPedidoDTO;
 import java.util.List;
 
 /**
@@ -23,4 +25,7 @@ public interface IVentaEnLinea {
     
     CarritoDTO agregarAlCarrito(CarritoDTO carritoActual, ProductoDTO producto, Integer cantidad) throws Exception;
     
+    PedidoDTO confirmarCompra(PedidoDTO pedido) throws Exception;
+    
+    PedidoDTO actualizarEstadoPedido(Long idPedido, EstadoPedidoDTO nuevoEstado) throws Exception;
 }
