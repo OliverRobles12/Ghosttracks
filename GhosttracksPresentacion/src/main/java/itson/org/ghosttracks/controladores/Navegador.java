@@ -11,7 +11,6 @@ import itson.org.ghosttracks.presentacion.cliente.PantallaFormularioEntrega;
 import itson.org.ghosttracks.presentacion.cliente.PantallaInicioCliente;
 import itson.org.ghosttracks.presentacion.cliente.PantallaSeleccionMetodoDePago;
 import itson.org.ghosttracks.presentacion.cliente.PantallaVistaProducto;
-import itson.org.ghosttracks.presentacion.cliente.metodosDePago.PanelMetodoPagoTarjetaDebito;
 import itson.org.ghosttracks.presentacion.panelLogin;
 import itson.org.ghosttracks.utilerias.PanelHeader;
 import itson.org.ghosttracks.utilerias.pnlMenuLateral;
@@ -74,13 +73,6 @@ public class Navegador {
     
     public void irSeleccionMetodoPago() {
         PantallaSeleccionMetodoDePago vista = new PantallaSeleccionMetodoDePago(ctrlVentaLinea);
-        ventana.cambiarPantalla(vista);
-    }
-    
-    // Paneles Metodos de pago
-    // TODO
-    public void irMetodoPagoTarjetaDebito() {
-        PanelMetodoPagoTarjetaDebito vista = new PanelMetodoPagoTarjetaDebito();
         ventana.cambiarPantalla(vista);
     }
     

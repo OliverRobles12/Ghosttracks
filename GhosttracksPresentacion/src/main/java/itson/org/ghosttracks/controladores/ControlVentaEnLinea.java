@@ -3,9 +3,11 @@ package itson.org.ghosttracks.controladores;
 
 import itson.org.ghosttracks.dtos.CarritoDTO;
 import itson.org.ghosttracks.dtos.ContactoDTO;
+import itson.org.ghosttracks.dtos.DatosPagoDTO;
 import itson.org.ghosttracks.dtos.DireccionEntregaDTO;
 import itson.org.ghosttracks.dtos.PedidoDTO;
 import itson.org.ghosttracks.dtos.ProductoDTO;
+import itson.org.ghosttracks.enums.EstadoPedidoDTO;
 import itson.org.ghosttracks.presentacion.cliente.PantallaCarrito;
 import itson.org.ghosttracks.presentacion.cliente.PantallaInicioCliente;
 import itson.org.ghosttracksventaenlinea.fachada.VentaEnLineaFachada;
@@ -75,6 +77,21 @@ public class ControlVentaEnLinea {
     
     public void agregarContactoPedido(ContactoDTO dto) {
         pedidoDTO.setContacto(dto);
+    }
+    
+    public void agregarMetodoPago(DatosPagoDTO dto) {
+        pedidoDTO.setDatosPago(dto);
+    }
+    
+    public void procesarPedido() {
+        try {
+            this.pedidoDTO = ventaFachada.confirmarCompra(pedidoDTO);
+            ventaFachada.actualizarEstadoPedido(pedidoDTO.getIdPedido(), EstadoPedidoDTO.PAGADO);
+            mostrarMensaje("Pedido registrado exitosamente.", false);
+        } catch (Exception ex) {
+            mostrarMensaje("No ha sido posible realizar el pedido.", true);
+        }
+        
     }
     
     public void agregarProductoCarrito(ProductoDTO producto, Integer cantidad) {

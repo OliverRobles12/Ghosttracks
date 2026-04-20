@@ -2,6 +2,7 @@
 package itson.org.ghosttracks.presentacion.cliente;
 
 import itson.org.ghosttracks.controladores.ControlVentaEnLinea;
+import itson.org.ghosttracks.dtos.DatosPagoDTO;
 import itson.org.ghosttracks.presentacion.cliente.metodosDePago.PanelMetodoPagoTarjetaDebito;
 import itson.org.ghosttracks.presentacion.cliente.metodosDePago.PanelSeleccionMetodoPago;
 import java.awt.CardLayout;
@@ -22,19 +23,31 @@ public class PantallaSeleccionMetodoDePago extends javax.swing.JPanel {
         cardLayout = new CardLayout();
         panelContenido.setLayout(cardLayout);
         
-        PanelSeleccionMetodoPago seleccion = new PanelSeleccionMetodoPago();
-        PanelMetodoPagoTarjetaDebito debito = new PanelMetodoPagoTarjetaDebito();
+        // Pasamos 'this' para que los paneles puedan avisar cuando cambiar
+        PanelSeleccionMetodoPago seleccion = new PanelSeleccionMetodoPago(this);
+        PanelMetodoPagoTarjetaDebito debito = new PanelMetodoPagoTarjetaDebito(this);
         
         panelContenido.add(seleccion, "PAGO_SELECCION");
         panelContenido.add(debito, "PAGO_TARJETA");
         
         cardLayout.show(panelContenido, "PAGO_SELECCION");
         
-        panelContenido.revalidate();
-        panelContenido.repaint();
-        
     }
-
+    
+    public void setDatosPago(DatosPagoDTO dto) {
+        control.agregarMetodoPago(dto);
+        control.procesarPedido();
+        control.volverACatalogo();
+    }
+    
+    public void cambiarPantalla(String nombrePantalla) {
+        cardLayout.show(panelContenido, nombrePantalla);
+    }
+    
+    public void mostrarMensaje(String mensaje, boolean esError) {
+        control.mostrarMensaje(mensaje, esError);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

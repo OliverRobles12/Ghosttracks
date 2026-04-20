@@ -1,8 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
+
 package itson.org.ghosttracks.presentacion.cliente.metodosDePago;
+
+import itson.org.ghosttracks.presentacion.cliente.PantallaSeleccionMetodoDePago;
 
 /**
  *
@@ -10,13 +9,26 @@ package itson.org.ghosttracks.presentacion.cliente.metodosDePago;
  */
 public class PanelSeleccionMetodoPago extends javax.swing.JPanel {
 
-    /**
-     * Creates new form PanelSeleccionMetodoPago
-     */
-    public PanelSeleccionMetodoPago() {
+    private PantallaSeleccionMetodoDePago principal;
+    
+    public PanelSeleccionMetodoPago(PantallaSeleccionMetodoDePago principal) {
+        this.principal = principal;
         initComponents();
+        configurarEventos();
     }
 
+    private void configurarEventos() {
+        btnContinuar19.addActionListener(e -> {
+            if (rbtnTarjetaDebito2.isSelected()) {
+                principal.cambiarPantalla("PAGO_TARJETA");
+            } else if (rbtnApplePay2.isSelected() || rbtnMercadoPago2.isSelected()) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Método no implementado aún.");
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this, "Por favor seleccione un método.");
+            }
+        });
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -26,6 +38,7 @@ public class PanelSeleccionMetodoPago extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         panelRedondeado19 = new itson.org.ghosttracks.utilerias.PanelRedondeado();
         lblMetodoDePago19 = new javax.swing.JLabel();
         lblTitulo2 = new javax.swing.JLabel();
@@ -45,14 +58,20 @@ public class PanelSeleccionMetodoPago extends javax.swing.JPanel {
         lblTitulo2.setFont(new java.awt.Font("Corbel", 1, 36)); // NOI18N
         lblTitulo2.setText("Método de Pago");
 
+        buttonGroup1.add(rbtnMercadoPago2);
         rbtnMercadoPago2.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
         rbtnMercadoPago2.setText("Mercado Pago");
+        rbtnMercadoPago2.setContentAreaFilled(false);
 
+        buttonGroup1.add(rbtnApplePay2);
         rbtnApplePay2.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
         rbtnApplePay2.setText("Apple Pay");
+        rbtnApplePay2.setContentAreaFilled(false);
 
+        buttonGroup1.add(rbtnTarjetaDebito2);
         rbtnTarjetaDebito2.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
         rbtnTarjetaDebito2.setText("Tarjeta de débito");
+        rbtnTarjetaDebito2.setContentAreaFilled(false);
 
         btnContinuar19.setBackground(new java.awt.Color(230, 94, 7));
         btnContinuar19.setForeground(new java.awt.Color(255, 255, 255));
@@ -60,7 +79,6 @@ public class PanelSeleccionMetodoPago extends javax.swing.JPanel {
         btnContinuar19.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         btnContinuar19.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnContinuar19.setHoverColor(new java.awt.Color(255, 255, 255));
-        btnContinuar19.addActionListener(this::btnContinuar19ActionPerformed);
 
         javax.swing.GroupLayout panelRedondeado19Layout = new javax.swing.GroupLayout(panelRedondeado19);
         panelRedondeado19.setLayout(panelRedondeado19Layout);
@@ -113,168 +131,15 @@ public class PanelSeleccionMetodoPago extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnContinuar19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuar19ActionPerformed
-
-    }//GEN-LAST:event_btnContinuar19ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private itson.org.ghosttracks.utilerias.BotonRedondeado btnContinuar;
-    private itson.org.ghosttracks.utilerias.BotonRedondeado btnContinuar1;
-    private itson.org.ghosttracks.utilerias.BotonRedondeado btnContinuar10;
-    private itson.org.ghosttracks.utilerias.BotonRedondeado btnContinuar11;
-    private itson.org.ghosttracks.utilerias.BotonRedondeado btnContinuar12;
-    private itson.org.ghosttracks.utilerias.BotonRedondeado btnContinuar13;
-    private itson.org.ghosttracks.utilerias.BotonRedondeado btnContinuar14;
-    private itson.org.ghosttracks.utilerias.BotonRedondeado btnContinuar15;
-    private itson.org.ghosttracks.utilerias.BotonRedondeado btnContinuar16;
-    private itson.org.ghosttracks.utilerias.BotonRedondeado btnContinuar17;
-    private itson.org.ghosttracks.utilerias.BotonRedondeado btnContinuar18;
     private itson.org.ghosttracks.utilerias.BotonRedondeado btnContinuar19;
-    private itson.org.ghosttracks.utilerias.BotonRedondeado btnContinuar2;
-    private itson.org.ghosttracks.utilerias.BotonRedondeado btnContinuar3;
-    private itson.org.ghosttracks.utilerias.BotonRedondeado btnContinuar4;
-    private itson.org.ghosttracks.utilerias.BotonRedondeado btnContinuar5;
-    private itson.org.ghosttracks.utilerias.BotonRedondeado btnContinuar6;
-    private itson.org.ghosttracks.utilerias.BotonRedondeado btnContinuar7;
-    private itson.org.ghosttracks.utilerias.BotonRedondeado btnContinuar8;
-    private itson.org.ghosttracks.utilerias.BotonRedondeado btnContinuar9;
-    private javax.swing.JLabel lblMetodoDePago;
-    private javax.swing.JLabel lblMetodoDePago1;
-    private javax.swing.JLabel lblMetodoDePago10;
-    private javax.swing.JLabel lblMetodoDePago11;
-    private javax.swing.JLabel lblMetodoDePago12;
-    private javax.swing.JLabel lblMetodoDePago13;
-    private javax.swing.JLabel lblMetodoDePago14;
-    private javax.swing.JLabel lblMetodoDePago15;
-    private javax.swing.JLabel lblMetodoDePago16;
-    private javax.swing.JLabel lblMetodoDePago17;
-    private javax.swing.JLabel lblMetodoDePago18;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel lblMetodoDePago19;
-    private javax.swing.JLabel lblMetodoDePago2;
-    private javax.swing.JLabel lblMetodoDePago3;
-    private javax.swing.JLabel lblMetodoDePago4;
-    private javax.swing.JLabel lblMetodoDePago5;
-    private javax.swing.JLabel lblMetodoDePago6;
-    private javax.swing.JLabel lblMetodoDePago7;
-    private javax.swing.JLabel lblMetodoDePago8;
-    private javax.swing.JLabel lblMetodoDePago9;
-    private javax.swing.JLabel lblSeleccionMetodoPago;
-    private javax.swing.JLabel lblSeleccionMetodoPago1;
-    private javax.swing.JLabel lblSeleccionMetodoPago10;
-    private javax.swing.JLabel lblSeleccionMetodoPago11;
-    private javax.swing.JLabel lblSeleccionMetodoPago12;
-    private javax.swing.JLabel lblSeleccionMetodoPago13;
-    private javax.swing.JLabel lblSeleccionMetodoPago14;
-    private javax.swing.JLabel lblSeleccionMetodoPago15;
-    private javax.swing.JLabel lblSeleccionMetodoPago16;
-    private javax.swing.JLabel lblSeleccionMetodoPago2;
-    private javax.swing.JLabel lblSeleccionMetodoPago3;
-    private javax.swing.JLabel lblSeleccionMetodoPago4;
-    private javax.swing.JLabel lblSeleccionMetodoPago5;
-    private javax.swing.JLabel lblSeleccionMetodoPago6;
-    private javax.swing.JLabel lblSeleccionMetodoPago7;
-    private javax.swing.JLabel lblSeleccionMetodoPago8;
-    private javax.swing.JLabel lblSeleccionMetodoPago9;
-    private javax.swing.JLabel lblTitulo;
-    private javax.swing.JLabel lblTitulo1;
     private javax.swing.JLabel lblTitulo2;
-    private itson.org.ghosttracks.utilerias.PanelRedondeado panelRedondeado;
-    private itson.org.ghosttracks.utilerias.PanelRedondeado panelRedondeado1;
-    private itson.org.ghosttracks.utilerias.PanelRedondeado panelRedondeado10;
-    private itson.org.ghosttracks.utilerias.PanelRedondeado panelRedondeado11;
-    private itson.org.ghosttracks.utilerias.PanelRedondeado panelRedondeado12;
-    private itson.org.ghosttracks.utilerias.PanelRedondeado panelRedondeado13;
-    private itson.org.ghosttracks.utilerias.PanelRedondeado panelRedondeado14;
-    private itson.org.ghosttracks.utilerias.PanelRedondeado panelRedondeado15;
-    private itson.org.ghosttracks.utilerias.PanelRedondeado panelRedondeado16;
-    private itson.org.ghosttracks.utilerias.PanelRedondeado panelRedondeado17;
-    private itson.org.ghosttracks.utilerias.PanelRedondeado panelRedondeado18;
     private itson.org.ghosttracks.utilerias.PanelRedondeado panelRedondeado19;
-    private itson.org.ghosttracks.utilerias.PanelRedondeado panelRedondeado2;
-    private itson.org.ghosttracks.utilerias.PanelRedondeado panelRedondeado3;
-    private itson.org.ghosttracks.utilerias.PanelRedondeado panelRedondeado4;
-    private itson.org.ghosttracks.utilerias.PanelRedondeado panelRedondeado5;
-    private itson.org.ghosttracks.utilerias.PanelRedondeado panelRedondeado6;
-    private itson.org.ghosttracks.utilerias.PanelRedondeado panelRedondeado7;
-    private itson.org.ghosttracks.utilerias.PanelRedondeado panelRedondeado8;
-    private itson.org.ghosttracks.utilerias.PanelRedondeado panelRedondeado9;
-    private javax.swing.JRadioButton rbtnApplePay;
-    private javax.swing.JRadioButton rbtnApplePay1;
     private javax.swing.JRadioButton rbtnApplePay2;
-    private javax.swing.JRadioButton rbtnMercadoPago;
-    private javax.swing.JRadioButton rbtnMercadoPago1;
     private javax.swing.JRadioButton rbtnMercadoPago2;
-    private javax.swing.JRadioButton rbtnTarjetaDebito;
-    private javax.swing.JRadioButton rbtnTarjetaDebito1;
     private javax.swing.JRadioButton rbtnTarjetaDebito2;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtFechaVencimiento;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtFechaVencimiento1;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtFechaVencimiento10;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtFechaVencimiento11;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtFechaVencimiento12;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtFechaVencimiento13;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtFechaVencimiento14;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtFechaVencimiento15;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtFechaVencimiento16;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtFechaVencimiento2;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtFechaVencimiento3;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtFechaVencimiento4;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtFechaVencimiento5;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtFechaVencimiento6;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtFechaVencimiento7;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtFechaVencimiento8;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtFechaVencimiento9;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtNombreTitular;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtNombreTitular1;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtNombreTitular10;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtNombreTitular11;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtNombreTitular12;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtNombreTitular13;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtNombreTitular14;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtNombreTitular15;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtNombreTitular16;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtNombreTitular2;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtNombreTitular3;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtNombreTitular4;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtNombreTitular5;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtNombreTitular6;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtNombreTitular7;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtNombreTitular8;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtNombreTitular9;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtNumeroSeguridad;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtNumeroSeguridad1;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtNumeroSeguridad10;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtNumeroSeguridad11;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtNumeroSeguridad12;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtNumeroSeguridad13;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtNumeroSeguridad14;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtNumeroSeguridad15;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtNumeroSeguridad16;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtNumeroSeguridad2;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtNumeroSeguridad3;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtNumeroSeguridad4;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtNumeroSeguridad5;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtNumeroSeguridad6;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtNumeroSeguridad7;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtNumeroSeguridad8;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtNumeroSeguridad9;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtNumeroTarjeta;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtNumeroTarjeta1;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtNumeroTarjeta10;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtNumeroTarjeta11;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtNumeroTarjeta12;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtNumeroTarjeta13;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtNumeroTarjeta14;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtNumeroTarjeta15;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtNumeroTarjeta16;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtNumeroTarjeta2;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtNumeroTarjeta3;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtNumeroTarjeta4;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtNumeroTarjeta5;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtNumeroTarjeta6;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtNumeroTarjeta7;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtNumeroTarjeta8;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtNumeroTarjeta9;
     // End of variables declaration//GEN-END:variables
 }

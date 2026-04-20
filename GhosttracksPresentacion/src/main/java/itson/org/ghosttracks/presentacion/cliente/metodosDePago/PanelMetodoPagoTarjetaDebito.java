@@ -1,16 +1,124 @@
 
 package itson.org.ghosttracks.presentacion.cliente.metodosDePago;
 
+import itson.org.ghosttracks.dtos.DatosPagoDTO;
+import itson.org.ghosttracks.presentacion.cliente.PantallaSeleccionMetodoDePago;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import javax.swing.JTextField;
+
 /**
  *
  * @author oliro
  */
 public class PanelMetodoPagoTarjetaDebito extends javax.swing.JPanel {
     
-    public PanelMetodoPagoTarjetaDebito() {
+    private PantallaSeleccionMetodoDePago principal;
+    
+    private final String PH_NUMERO = "Número de tarjeta";
+    private final String PH_CVV = "CVV";
+    private final String PH_FECHA = "Fecha Vencimiento";
+    private final String PH_TITULAR = "Nombre del titular";
+    
+    public PanelMetodoPagoTarjetaDebito(PantallaSeleccionMetodoDePago principal) {
+        this.principal = principal;
         initComponents();
+        configurarPlaceholders();
+        configurarEventos();
     }
 
+    private void agregarPlaceholder(JTextField campo, String placeholder) {
+        campo.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (campo.getText().equals(placeholder)) {
+                    campo.setText("");
+                }
+            }
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (campo.getText().isEmpty()) {
+                    campo.setText(placeholder);
+                }
+            }
+        });
+    }
+
+    private void configurarPlaceholders() {
+        agregarPlaceholder(txtNumeroTarjeta, PH_NUMERO);
+        agregarPlaceholder(txtNumeroSeguridad, PH_CVV);
+        agregarPlaceholder(txtFechaVencimiento, PH_FECHA);
+        agregarPlaceholder(txtNombreTitular, PH_TITULAR);
+    }
+    
+    private void configurarEventos() {
+        // Botón Volver
+        btnVolver.addActionListener(e -> {
+            principal.cambiarPantalla("PAGO_SELECCION");
+        });
+
+        // Botón Continuar (Procesar el pago)
+        btnContinuar.addActionListener(e -> {
+            procesarFormulario();
+        });
+    }
+    
+    private void procesarFormulario() {
+        String numero = txtNumeroTarjeta.getText().trim();
+        String fecha = txtFechaVencimiento.getText().trim();
+        String cvv = txtNumeroSeguridad.getText().trim();
+        String titular = txtNombreTitular.getText().trim();
+
+        if (validarDatos(numero, fecha, cvv, titular)) {
+            enviarDatos(numero, fecha, cvv, titular);
+        }
+    }
+    
+    private boolean validarDatos(String num, String fec, String cvv, String tit) {
+        // 1. Verificar vacíos o placeholders
+        if (num.equals(PH_NUMERO) || fec.equals(PH_FECHA) || cvv.equals(PH_CVV) || tit.equals(PH_TITULAR)) {
+            principal.mostrarMensaje("Todos los campos son obligatorios.", false);
+            return false;
+        }
+
+        // 2. Regex Número de Tarjeta (16 dígitos)
+        if (!num.matches("^\\d{16}$")) {
+            principal.mostrarMensaje("El número de tarjeta debe tener 16 dígitos numéricos.", false);
+            return false;
+        }
+
+        // 3. Regex Fecha Vencimiento (Formato MM/YY)
+        if (!fec.matches("^(0[1-9]|1[0-2])\\/\\d{2}$")) {
+            principal.mostrarMensaje("Formato de fecha inválido. Usa MM/YY (ej: 12/26).", false);
+            return false;
+        }
+
+        // 4. Regex CVV (3 dígitos)
+        if (!cvv.matches("^\\d{3}$")) {
+            principal.mostrarMensaje("El CVV debe tener 3 dígitos.", false);
+            return false;
+        }
+
+        // 5. Regex Titular (Solo letras)
+        if (!tit.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+$")) {
+            principal.mostrarMensaje("El nombre del titular solo debe contener letras.", false);
+            return false;
+        }
+
+        return true;
+    }
+    
+    private void enviarDatos(String num, String fec, String cvv, String tit) {
+        DatosPagoDTO datos = new DatosPagoDTO();
+        datos.setNumeroTrajeta(num);
+        // datos.setFechaExpiracion(fec);
+        datos.setCvv(cvv);
+        datos.setTitularTarjeta(tit);
+
+        principal.mostrarMensaje("Datos de pago validados correctamente.", false);
+        principal.setDatosPago(datos);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
