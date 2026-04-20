@@ -1,38 +1,33 @@
-package itson.org.ghosttracks.dtos;
+package itson.org.ghosttracks.entidades;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 /**
  *
  * @author emyla
  */
-public class DatosPagoDTO {
+public class DatosPago {
     
     private Long idTarjeta;
     private String titularTarjeta;
-    private String numeroTrajeta;
-    private LocalDateTime fechaExpiracion;
+    private String numeroTrjeta;
+    private LocalDate fechaExpiracion;
     private String cvv;
 
-    public DatosPagoDTO() {
+    public DatosPago() {
     }
 
-    public DatosPagoDTO(
-            String titularTarjeta, 
-            String numeroTrajeta, 
-            LocalDateTime fechaExpiracion, 
-            String cvv
-    ) {
+    public DatosPago(String titularTarjeta, String numeroTrjeta, LocalDate fechaExpiracion, String cvv) {
         this.titularTarjeta = titularTarjeta;
-        this.numeroTrajeta = numeroTrajeta;
+        this.numeroTrjeta = numeroTrjeta;
         this.fechaExpiracion = fechaExpiracion;
         this.cvv = cvv;
     }
 
-    public DatosPagoDTO(Long idTarjeta, String titularTarjeta, String numeroTrajeta, LocalDateTime fechaExpiracion, String cvv) {
+    public DatosPago(Long idTarjeta, String titularTarjeta, String numeroTrjeta, LocalDate fechaExpiracion, String cvv) {
         this.idTarjeta = idTarjeta;
         this.titularTarjeta = titularTarjeta;
-        this.numeroTrajeta = numeroTrajeta;
+        this.numeroTrjeta = numeroTrjeta;
         this.fechaExpiracion = fechaExpiracion;
         this.cvv = cvv;
     }
@@ -53,19 +48,19 @@ public class DatosPagoDTO {
         this.titularTarjeta = titularTarjeta;
     }
 
-    public String getNumeroTrajeta() {
-        return numeroTrajeta;
+    public String getNumeroTrjeta() {
+        return numeroTrjeta;
     }
 
-    public void setNumeroTrajeta(String numeroTrajeta) {
-        this.numeroTrajeta = numeroTrajeta;
+    public void setNumeroTrjeta(String numeroTrjeta) {
+        this.numeroTrjeta = numeroTrjeta;
     }
 
-    public LocalDateTime getFechaExpiracion() {
+    public LocalDate getFechaExpiracion() {
         return fechaExpiracion;
     }
 
-    public void setFechaExpiracion(LocalDateTime fechaExpiracion) {
+    public void setFechaExpiracion(LocalDate fechaExpiracion) {
         this.fechaExpiracion = fechaExpiracion;
     }
 
@@ -76,7 +71,5 @@ public class DatosPagoDTO {
     public void setCvv(String cvv) {
         this.cvv = cvv;
     }
-    
-    
     
 }

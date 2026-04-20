@@ -4,37 +4,26 @@
  */
 package itson.org.ghosttracks.entidades;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-
 /**
  *
  * @author cinca
  */
-public class Administrador {
+public class Administrador extends Usuario{
     
-    @Id
     private Long idEmpleado;
-    
-    private String nombre;
-    private String correo;
-    private String telefono;
     
     public Administrador() {
         
     }
 
-    public Administrador(String nombre, String correo, String telefono) {
-        this.nombre = nombre;
-        this.correo = correo;
-        this.telefono = telefono;
+    public Administrador(Long idEmpleado, Long idUsuario, String nombres, String apellidoPaterno, String apellidoMaterno, String correo, String contraseña) {
+        super(idUsuario, nombres, apellidoPaterno, apellidoMaterno, correo, contraseña);
+        this.idEmpleado = idEmpleado;
     }
 
-    public Administrador(Long idEmpleado, String nombre, String correo, String telefono) {
+    public Administrador(Long idEmpleado, String nombres, String apellidoPaterno, String apellidoMaterno, String correo, String contraseña) {
+        super(nombres, apellidoPaterno, apellidoMaterno, correo, contraseña);
         this.idEmpleado = idEmpleado;
-        this.nombre = nombre;
-        this.correo = correo;
-        this.telefono = telefono;
     }
 
     public Long getIdEmpleado() {
@@ -44,30 +33,5 @@ public class Administrador {
     public void setIdEmpleado(Long idEmpleado) {
         this.idEmpleado = idEmpleado;
     }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getCorreo() {
-        return correo;
-    }
-
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
-
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
-    
     
 }

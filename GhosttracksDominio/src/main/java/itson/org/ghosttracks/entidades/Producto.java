@@ -2,20 +2,16 @@ package itson.org.ghosttracks.entidades;
 
 import itson.org.ghosttracks.enums.EstadoProducto;
 import itson.org.ghosttracks.enums.TipoProducto;
-
 import java.util.List;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
  * Entidad de Dominio
  * @author Emy
  */
-@Document(collection = "productos")
+
 public class Producto {
     
-    @Id
     private Long idProducto; 
     
     private String nombre;
@@ -29,6 +25,7 @@ public class Producto {
     private EstadoProducto estado;
 
     public Producto() {
+        
     }
 
     public Producto(String nombre, String imgProducto, TipoProducto tipoProducto, String artista, String genero, List<String> setlist, Double precio, Integer stock, EstadoProducto estado) {
@@ -55,8 +52,6 @@ public class Producto {
         this.stock = stock;
         this.estado = estado;
     }
-
-    // GETTERS Y SETTERS
 
     public Long getIdProducto() {
         return idProducto;
