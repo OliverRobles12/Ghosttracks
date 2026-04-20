@@ -9,7 +9,6 @@ import java.util.List;
  * Entidad de Dominio
  * @author Emy
  */
-
 public class Producto {
     
     private Long idProducto; 
