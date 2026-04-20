@@ -166,9 +166,6 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Email"/>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtEmailActionPerformed"/>
-                  </Events>
                 </Component>
                 <Component class="itson.org.ghosttracks.utilerias.TextFieldRedondeado" name="txtTelefono">
                   <Properties>
@@ -188,6 +185,9 @@
                       <Font name="Arial" size="14" style="0"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGuardarActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>

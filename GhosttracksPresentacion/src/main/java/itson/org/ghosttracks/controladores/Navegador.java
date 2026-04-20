@@ -5,10 +5,13 @@ import itson.org.ghosttracks.mocks.ProductosMockDAO;
 import itson.org.ghosttracks.presentacion.VentanaPrincipal;
 import itson.org.ghosttracks.presentacion.administrador.PantallaVentasProcesarAdmin;
 import itson.org.ghosttracks.presentacion.administrador.PantallaVentas;
+import itson.org.ghosttracks.presentacion.cliente.PantallaCarrito;
+import itson.org.ghosttracks.presentacion.cliente.PantallaFormularioContacto;
+import itson.org.ghosttracks.presentacion.cliente.PantallaFormularioEntrega;
 import itson.org.ghosttracks.presentacion.cliente.PantallaInicioCliente;
 import itson.org.ghosttracks.presentacion.cliente.PantallaVistaProducto;
 import itson.org.ghosttracks.presentacion.panelLogin;
-import itson.org.ghosttracks.utilerias.pnlBarraSuperiorCorta;
+import itson.org.ghosttracks.utilerias.PanelHeader;
 import itson.org.ghosttracks.utilerias.pnlMenuLateral;
 import itson.org.ghosttracks.utilerias.pnlMenuLateralAdmin;
 
@@ -35,7 +38,7 @@ public class Navegador {
     
     public void iniciarSesionClienteExitoso() {
          ventana.fijarMenuLateral(new pnlMenuLateral(this));
-         ventana.fijarHeader(new pnlBarraSuperiorCorta());
+         ventana.fijarHeader(new PanelHeader(this));
     }
     
     public void irInicioCliente() {
@@ -50,11 +53,31 @@ public class Navegador {
         ventana.cambiarPantalla(vista);
     }
     
+    public void irCarrito() {
+        ControlVentaEnLinea ctrl = new ControlVentaEnLinea(this);
+        PantallaCarrito vista = new PantallaCarrito(ctrl);
+        ventana.cambiarPantalla(vista);
+    }
+    
+    // Paneles Pedido
+    
+    public void irFormularioContacto() {
+        ControlVentaEnLinea ctrl = new ControlVentaEnLinea(this);
+        PantallaFormularioContacto vista = new PantallaFormularioContacto(ctrl);
+        ventana.cambiarPantalla(vista);
+    }
+    
+    public void irFormularioEntrega() {
+        ControlVentaEnLinea ctrl = new ControlVentaEnLinea(this);
+        PantallaFormularioEntrega vista = new PantallaFormularioEntrega(ctrl);
+        ventana.cambiarPantalla(vista);
+    }
+    
     // Paneles admin
     
     public void iniciarSesionAdminExitoso() {
         ventana.fijarMenuLateral(new pnlMenuLateralAdmin(this));
-        ventana.fijarHeader(new pnlBarraSuperiorCorta());
+        ventana.fijarHeader(new PanelHeader(this));
     }
     
     public void irVentasAdmin() {
@@ -71,10 +94,6 @@ public class Navegador {
     
     public void cerrarSesion() {
         irLogin();
-    }
-    
-    public void alternarMenuLateral() {
-        ventana.alternarMenuLateral();
     }
     
 }

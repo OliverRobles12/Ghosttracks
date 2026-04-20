@@ -1,13 +1,18 @@
 
 package itson.org.ghosttracks.presentacion.cliente;
 
+import itson.org.ghosttracks.controladores.ControlVentaEnLinea;
+
 /**
  *
  * @author oliro
  */
 public class PantallaFormularioEntrega extends javax.swing.JPanel {
 
-    public PantallaFormularioEntrega() {
+    private final ControlVentaEnLinea control;
+    
+    public PantallaFormularioEntrega(ControlVentaEnLinea ctrl) {
+        this.control = ctrl;
         initComponents();
     }
 

@@ -15,16 +15,16 @@ public class ControlVentaEnLinea {
         this.navegador = nav;
     }
     
+    public void comenzarProcesoPedido() {
+        navegador.irFormularioContacto();
+    }
+    
     public void mostrarDetalleProducto(ProductosMockDAO productoSeleccionado) {
         navegador.irVistaProducto(productoSeleccionado);
     }
     
     public void volverACatalogo() {
         navegador.irInicioCliente();
-    }
-    
-    public void alternarMenuLateral() {
-        navegador.alternarMenuLateral();
     }
     
 }

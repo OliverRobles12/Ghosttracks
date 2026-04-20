@@ -1,13 +1,18 @@
 
 package itson.org.ghosttracks.presentacion.cliente;
 
+import itson.org.ghosttracks.controladores.ControlVentaEnLinea;
+
 /**
  *
  * @author oliro
  */
 public class PantallaFormularioContacto extends javax.swing.JPanel {
 
-    public PantallaFormularioContacto() {
+    private final ControlVentaEnLinea control;
+    
+    public PantallaFormularioContacto(ControlVentaEnLinea ctrl) {
+        this.control = ctrl;
         initComponents();
     }
 
@@ -43,7 +48,6 @@ public class PantallaFormularioContacto extends javax.swing.JPanel {
 
         txtEmail.setBackground(new java.awt.Color(255, 255, 255));
         txtEmail.setText("Email");
-        txtEmail.addActionListener(this::txtEmailActionPerformed);
 
         txtTelefono.setBackground(new java.awt.Color(255, 255, 255));
         txtTelefono.setText("Numero de telefono (Opcional)");
@@ -51,6 +55,7 @@ public class PantallaFormularioContacto extends javax.swing.JPanel {
         btnGuardar.setBackground(new java.awt.Color(204, 51, 0));
         btnGuardar.setText("Guardar");
         btnGuardar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnGuardar.addActionListener(this::btnGuardarActionPerformed);
 
         javax.swing.GroupLayout panelRedondeado1Layout = new javax.swing.GroupLayout(panelRedondeado1);
         panelRedondeado1.setLayout(panelRedondeado1Layout);
@@ -137,9 +142,9 @@ public class PantallaFormularioContacto extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtEmailActionPerformed
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

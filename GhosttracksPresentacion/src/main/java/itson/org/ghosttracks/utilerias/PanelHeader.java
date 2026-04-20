@@ -1,16 +1,18 @@
 
 package itson.org.ghosttracks.utilerias;
 
+import itson.org.ghosttracks.controladores.Navegador;
+
 /**
  *
  * @author oliro
  */
-public class pnlBarraSuperiorCorta extends javax.swing.JPanel {
+public class PanelHeader extends javax.swing.JPanel {
 
-    /**
-     * Creates new form pnl
-     */
-    public pnlBarraSuperiorCorta() {
+    private final Navegador navegador;
+    
+    public PanelHeader(Navegador nav) {
+        this.navegador = nav;
         initComponents();
     }
 
@@ -51,6 +53,7 @@ public class pnlBarraSuperiorCorta extends javax.swing.JPanel {
         btnCarrito.setBorderPainted(false);
         btnCarrito.setContentAreaFilled(false);
         btnCarrito.setFocusPainted(false);
+        btnCarrito.addActionListener(this::btnCarritoActionPerformed);
 
         jLabel4.setFont(new java.awt.Font("Corbel", 1, 24)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -110,7 +113,7 @@ public class pnlBarraSuperiorCorta extends javax.swing.JPanel {
                 .addComponent(panelRedondeado2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24)
                 .addComponent(btnCarrito)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addComponent(btnFavoritos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30))
         );
@@ -155,6 +158,10 @@ public class pnlBarraSuperiorCorta extends javax.swing.JPanel {
                 .addContainerGap(15, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarritoActionPerformed
+        navegador.irCarrito();
+    }//GEN-LAST:event_btnCarritoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

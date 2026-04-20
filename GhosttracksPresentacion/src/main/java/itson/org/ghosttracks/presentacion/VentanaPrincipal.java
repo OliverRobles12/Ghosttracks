@@ -74,17 +74,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         this.repaint();
     }
     
-    public void alternarMenuLateral() {
-        if (menuActual != null) {
-            // Si esta visible lo oculta. Si esta oculto lo muestra.
-            boolean estadoActual = menuActual.isVisible();
-            menuActual.setVisible(!estadoActual);
-            
-            this.revalidate();
-            this.repaint();
-        }
-    }
-    
     public void mostrarMensaje(String msj, boolean esError) {
         int tipo = esError ? JOptionPane.ERROR_MESSAGE : JOptionPane.INFORMATION_MESSAGE;
         JOptionPane.showMessageDialog(this, msj, "Sistema", tipo);

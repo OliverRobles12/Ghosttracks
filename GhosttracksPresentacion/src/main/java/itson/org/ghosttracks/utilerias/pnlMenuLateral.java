@@ -122,7 +122,7 @@ public class pnlMenuLateral extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCompraENLineaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompraENLineaActionPerformed
-        
+        navegador.irInicioCliente();
     }//GEN-LAST:event_btnCompraENLineaActionPerformed
 
     private void btnSeguimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeguimientoActionPerformed
