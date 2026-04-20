@@ -5,13 +5,19 @@ import itson.org.ghosttracks.enums.TipoProducto;
 
 import java.util.List;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 /**
  * Entidad de Dominio
  * @author Emy
  */
+@Document(collection = "productos")
 public class Producto {
     
+    @Id
     private Long idProducto; 
+    
     private String nombre;
     private String imgProducto;
     private TipoProducto tipoProducto;
