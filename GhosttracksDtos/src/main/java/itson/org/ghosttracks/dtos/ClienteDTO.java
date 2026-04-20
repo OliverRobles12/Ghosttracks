@@ -4,23 +4,23 @@ package itson.org.ghosttracks.dtos;
  *
  * @author emyla
  */
-public class ClienteDTO extends UsuarioDTO{
-    
+public class ClienteDTO extends UsuarioDTO {
+
     private String telefono;
     private DireccionClienteDTO direccion;
-    
-    public ClienteDTO(){
+
+    public ClienteDTO() {
         super();
     }
 
     public ClienteDTO(
-            String telefono, 
-            DireccionClienteDTO direccion, 
-            Long idUsuario, 
-            String nombres, 
-            String apellidoPaterno, 
-            String apellidoMaterno, 
-            String correo, 
+            String telefono,
+            DireccionClienteDTO direccion,
+            Long idUsuario,
+            String nombres,
+            String apellidoPaterno,
+            String apellidoMaterno,
+            String correo,
             String contraseña
     ) {
         super(idUsuario, nombres, apellidoPaterno, apellidoMaterno, correo, contraseña);
@@ -43,5 +43,5 @@ public class ClienteDTO extends UsuarioDTO{
     public void setDireccion(DireccionClienteDTO direccion) {
         this.direccion = direccion;
     }
-       
+
 }
