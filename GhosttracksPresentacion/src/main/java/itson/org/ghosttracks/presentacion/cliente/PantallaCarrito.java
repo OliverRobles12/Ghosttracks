@@ -2,6 +2,10 @@
 package itson.org.ghosttracks.presentacion.cliente;
 
 import itson.org.ghosttracks.controladores.ControlVentaEnLinea;
+import itson.org.ghosttracks.dtos.CarritoDTO;
+import itson.org.ghosttracks.dtos.ItemCarritoDTO;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -14,6 +18,17 @@ public class PantallaCarrito extends javax.swing.JPanel {
     public PantallaCarrito(ControlVentaEnLinea ctrl) {
         this.control = ctrl;
         initComponents();
+        control.llenarTablaCarrito(this);
+        
+        tblCarrito.setRowHeight(40);
+        tblCarrito.getTableHeader().setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 14));
+        tblCarrito.setFont(new java.awt.Font("Arial", java.awt.Font.PLAIN, 14));
+        
+        javax.swing.table.DefaultTableCellRenderer centerRenderer = new javax.swing.table.DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(javax.swing.JLabel.CENTER);
+        tblCarrito.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+        tblCarrito.getColumnModel().getColumn(3).setCellRenderer(centerRenderer);
+        
     }
 
     /**
@@ -34,7 +49,8 @@ public class PantallaCarrito extends javax.swing.JPanel {
         lbl = new javax.swing.JLabel();
         lblSubtotal = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblCarrito = new javax.swing.JTable();
+        btnEliminar = new javax.swing.JButton();
 
         pnlPrincipal.setPreferredSize(new java.awt.Dimension(1100, 675));
         pnlPrincipal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -64,49 +80,69 @@ public class PantallaCarrito extends javax.swing.JPanel {
 
         lblSubtotal.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lblSubtotal.setForeground(new java.awt.Color(0, 0, 0));
+        lblSubtotal.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSubtotal.setText("$0.0");
+        lblSubtotal.setPreferredSize(new java.awt.Dimension(175, 22));
 
-        jTable1.setBackground(new java.awt.Color(204, 204, 204));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblCarrito.setBackground(new java.awt.Color(204, 204, 204));
+        tblCarrito.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "#", "Producto", "Cantidad", "Subtotal"
+                "", "#", "Producto", "Cantidad", "Subtotal", "Eliminar"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.setPreferredSize(new java.awt.Dimension(1070, 0));
-        jScrollPane2.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setMinWidth(100);
-            jTable1.getColumnModel().getColumn(0).setPreferredWidth(100);
-            jTable1.getColumnModel().getColumn(0).setMaxWidth(100);
+        tblCarrito.setPreferredSize(new java.awt.Dimension(1070, 400));
+        tblCarrito.getTableHeader().setReorderingAllowed(false);
+        jScrollPane2.setViewportView(tblCarrito);
+        if (tblCarrito.getColumnModel().getColumnCount() > 0) {
+            tblCarrito.getColumnModel().getColumn(0).setMinWidth(0);
+            tblCarrito.getColumnModel().getColumn(0).setPreferredWidth(0);
+            tblCarrito.getColumnModel().getColumn(0).setMaxWidth(0);
+            tblCarrito.getColumnModel().getColumn(1).setMinWidth(100);
+            tblCarrito.getColumnModel().getColumn(1).setPreferredWidth(100);
+            tblCarrito.getColumnModel().getColumn(1).setMaxWidth(100);
+            tblCarrito.getColumnModel().getColumn(2).setResizable(false);
+            tblCarrito.getColumnModel().getColumn(3).setMinWidth(200);
+            tblCarrito.getColumnModel().getColumn(3).setPreferredWidth(200);
+            tblCarrito.getColumnModel().getColumn(3).setMaxWidth(200);
+            tblCarrito.getColumnModel().getColumn(4).setMinWidth(200);
+            tblCarrito.getColumnModel().getColumn(4).setPreferredWidth(200);
+            tblCarrito.getColumnModel().getColumn(4).setMaxWidth(200);
+            tblCarrito.getColumnModel().getColumn(5).setMinWidth(100);
+            tblCarrito.getColumnModel().getColumn(5).setPreferredWidth(100);
+            tblCarrito.getColumnModel().getColumn(5).setMaxWidth(100);
         }
+
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(this::btnEliminarActionPerformed);
 
         javax.swing.GroupLayout pnlContenedorLayout = new javax.swing.GroupLayout(pnlContenedor);
         pnlContenedor.setLayout(pnlContenedorLayout);
         pnlContenedorLayout.setHorizontalGroup(
             pnlContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlContenedorLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lbl)
-                .addGap(265, 265, 265)
-                .addComponent(lblSubtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29))
             .addGroup(pnlContenedorLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(pnlContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(botonRedondeado1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
-                    .addGroup(pnlContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlContenedorLayout.createSequentialGroup()
+                        .addComponent(lbl)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblSubtotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(pnlContenedorLayout.createSequentialGroup()
+                            .addComponent(btnEliminar)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(botonRedondeado1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1070, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(pnlContenedorLayout.createSequentialGroup()
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -123,16 +159,18 @@ public class PantallaCarrito extends javax.swing.JPanel {
                         .addContainerGap()
                         .addComponent(jLabel2)))
                 .addGap(15, 15, 15)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl)
-                    .addComponent(lblSubtotal))
-                .addGap(15, 15, 15)
+                    .addComponent(lblSubtotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
-                .addGap(18, 18, 18)
-                .addComponent(botonRedondeado1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botonRedondeado1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEliminar))
+                .addContainerGap(75, Short.MAX_VALUE))
         );
 
         pnlPrincipal.add(pnlContenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 680));
@@ -153,17 +191,111 @@ public class PantallaCarrito extends javax.swing.JPanel {
         control.comenzarProcesoPedido();
     }//GEN-LAST:event_botonRedondeado1ActionPerformed
 
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    public void llenarTabla(CarritoDTO carrito) {
+        List<ItemCarritoDTO> productos = carrito.getProductos();
+        DefaultTableModel modelo = (DefaultTableModel) tblCarrito.getModel();
+        modelo.setRowCount(0);
+
+        int contador = 1;
+        for (ItemCarritoDTO item : productos) {
+            Object[] fila = new Object[6];
+
+            fila[0] = contador++;                           
+            fila[1] = item.getProductoSeleccionado().getIdProducto(); 
+            fila[2] = item.getProductoSeleccionado().getNombre();     
+            fila[3] = item.getCantidad();                             
+            fila[4] = String.format("$%.2f", item.getSubtotal());   
+            fila[5] = "Eliminar";                                     
+
+            modelo.addRow(fila);
+        }
+
+        tblCarrito.getColumnModel().getColumn(1).setMinWidth(0);
+        tblCarrito.getColumnModel().getColumn(1).setPreferredWidth(0);
+        tblCarrito.getColumnModel().getColumn(1).setMaxWidth(0);
+
+        tblCarrito.getColumnModel().getColumn(5).setCellRenderer(new ButtonRenderer());
+        tblCarrito.getColumnModel().getColumn(5).setCellEditor(new ButtonEditor(new javax.swing.JCheckBox()));
+
+        lblSubtotal.setText(String.format("$%.2f", carrito.getTotal()));
+        
+    }
+    
+    class ButtonRenderer extends javax.swing.JButton implements javax.swing.table.TableCellRenderer {
+        public ButtonRenderer() { 
+            setOpaque(true);
+            // Agregamos un margen para que el botón no toque los bordes de la celda
+            setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        }
+
+        @Override
+        public java.awt.Component getTableCellRendererComponent(javax.swing.JTable table, Object value,
+                boolean isSelected, boolean hasFocus, int row, int column) {
+            setText("Eliminar");
+            setBackground(new java.awt.Color(204, 51, 0)); // Color rojizo como tu botón "Continuar"
+            setForeground(java.awt.Color.WHITE);
+            setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 12));
+            return this;
+        }
+    }
+
+    class ButtonEditor extends javax.swing.DefaultCellEditor {
+        protected javax.swing.JButton button;
+        private String label;
+        private boolean isPushed;
+
+        public ButtonEditor(javax.swing.JCheckBox checkBox) {
+            super(checkBox);
+            button = new javax.swing.JButton();
+            button.setOpaque(true);
+            button.addActionListener(e -> fireEditingStopped());
+        }
+
+        @Override
+        public java.awt.Component getTableCellEditorComponent(javax.swing.JTable table, Object value,
+                boolean isSelected, int row, int column) {
+            label = (value == null) ? "Eliminar" : value.toString();
+            button.setText(label);
+            isPushed = true;
+            return button;
+        }
+
+        @Override
+        public Object getCellEditorValue() {
+            if (isPushed) {
+                int fila = tblCarrito.getSelectedRow();
+                Object value = tblCarrito.getValueAt(fila, 1);
+
+                if (value instanceof Long) {
+                    control.eliminarProductoCarrito((Long) value);
+                }
+            }
+            isPushed = false;
+            return label;
+        }
+
+        @Override
+        public boolean stopCellEditing() {
+            isPushed = false;
+            return super.stopCellEditing();
+        }
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private itson.org.ghosttracks.utilerias.BotonRedondeado botonRedondeado1;
+    private javax.swing.JButton btnEliminar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lbl;
     private javax.swing.JLabel lblSubtotal;
     private javax.swing.JPanel pnlContenedor;
     private javax.swing.JPanel pnlPrincipal;
+    private javax.swing.JTable tblCarrito;
     // End of variables declaration//GEN-END:variables
 }

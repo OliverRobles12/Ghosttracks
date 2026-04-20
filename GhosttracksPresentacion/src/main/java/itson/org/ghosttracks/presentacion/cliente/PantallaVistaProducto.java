@@ -1,8 +1,8 @@
 
 package itson.org.ghosttracks.presentacion.cliente;
 
-import itson.org.ghosttracks.mocks.ProductosMockDAO;
 import itson.org.ghosttracks.controladores.ControlVentaEnLinea;
+import itson.org.ghosttracks.dtos.ProductoDTO;
 
 /**
  *
@@ -11,9 +11,9 @@ import itson.org.ghosttracks.controladores.ControlVentaEnLinea;
 public class PantallaVistaProducto extends javax.swing.JPanel {
 
     private ControlVentaEnLinea control;
-    private ProductosMockDAO producto;
+    private ProductoDTO producto;
     
-    public PantallaVistaProducto(ControlVentaEnLinea control, ProductosMockDAO producto) {
+    public PantallaVistaProducto(ControlVentaEnLinea control, ProductoDTO producto) {
         this.control = control;
         this.producto = producto;
         initComponents();
@@ -69,11 +69,11 @@ public class PantallaVistaProducto extends javax.swing.JPanel {
         lblSetlist = new javax.swing.JLabel();
 
         jScrollPane1.setBorder(null);
-        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         jScrollPane1.setPreferredSize(new java.awt.Dimension(1100, 675));
 
         pnlFondo.setBackground(new java.awt.Color(237, 229, 222));
-        pnlFondo.setPreferredSize(new java.awt.Dimension(1100, 675));
+        pnlFondo.setPreferredSize(new java.awt.Dimension(1100, 1150));
 
         panelRedondeado1.setBackground(new java.awt.Color(217, 217, 217));
         panelRedondeado1.setPreferredSize(new java.awt.Dimension(410, 410));
@@ -435,6 +435,7 @@ public class PantallaVistaProducto extends javax.swing.JPanel {
         btnAniadirAlCarrito.setForeground(new java.awt.Color(0, 0, 0));
         btnAniadirAlCarrito.setText("Añadir al carrito");
         btnAniadirAlCarrito.setPreferredSize(new java.awt.Dimension(200, 35));
+        btnAniadirAlCarrito.addActionListener(this::btnAniadirAlCarritoActionPerformed);
 
         javax.swing.GroupLayout panelRedondeado5Layout = new javax.swing.GroupLayout(panelRedondeado5);
         panelRedondeado5.setLayout(panelRedondeado5Layout);
@@ -495,7 +496,7 @@ public class PantallaVistaProducto extends javax.swing.JPanel {
         lblSetlist.setForeground(new java.awt.Color(102, 102, 102));
         lblSetlist.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblSetlist.setText("setlist");
-        lblSetlist.setPreferredSize(new java.awt.Dimension(252, 50));
+        lblSetlist.setPreferredSize(new java.awt.Dimension(252, 200));
 
         javax.swing.GroupLayout pnlFondoLayout = new javax.swing.GroupLayout(pnlFondo);
         pnlFondo.setLayout(pnlFondoLayout);
@@ -508,9 +509,9 @@ public class PantallaVistaProducto extends javax.swing.JPanel {
                         .addComponent(botonRedondeado1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(pnlFondoLayout.createSequentialGroup()
-                        .addGroup(pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblSetlist, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(panelRedondeado1, javax.swing.GroupLayout.DEFAULT_SIZE, 433, Short.MAX_VALUE))
+                        .addGroup(pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(panelRedondeado1, javax.swing.GroupLayout.DEFAULT_SIZE, 433, Short.MAX_VALUE)
+                            .addComponent(lblSetlist, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(15, 15, 15)))
                 .addGroup(pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(panelRedondeado3, javax.swing.GroupLayout.PREFERRED_SIZE, 622, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -524,7 +525,7 @@ public class PantallaVistaProducto extends javax.swing.JPanel {
                     .addGroup(pnlFondoLayout.createSequentialGroup()
                         .addComponent(panelRedondeado1, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblSetlist, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblSetlist, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(botonRedondeado1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlFondoLayout.createSequentialGroup()
@@ -546,9 +547,11 @@ public class PantallaVistaProducto extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 675, Short.MAX_VALUE)
+            .addGap(0, 1167, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createSequentialGroup()
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -556,36 +559,42 @@ public class PantallaVistaProducto extends javax.swing.JPanel {
         control.volverACatalogo();
     }//GEN-LAST:event_botonRedondeado1ActionPerformed
 
+    private void btnAniadirAlCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAniadirAlCarritoActionPerformed
+        // TODO
+        control.agregarProductoCarrito(producto, 1);
+        control.mostrarMensaje("Producto agregado con exito", false);
+    }//GEN-LAST:event_btnAniadirAlCarritoActionPerformed
+
     private void cargarDatosProducto() {
-//        // 1. Llenamos los datos básicos
-//        lblNombreProducto.setText(producto.getNombre());
-//        lblArtista.setText(producto.getArtista());
-//        lblPrecio.setText(String.format("$%.2f", producto.getPrecio()));
-//        // 2. Acomodamos el setlist (usamos HTML básico para que el JLabel acepte saltos de línea)
-//        if (producto.getSetList() != null && !producto.getSetList().isEmpty()) {
-//            String canciones = String.join("<br>", producto.getSetList());
-//            lblSetlist.setText("<html><div style='text-align:center;'>" + canciones + "</div></html>");
-//        } else {
-//            lblSetlist.setText("Setlist no disponible");
-//        }
-//
-//        // 3. Magia para descargar y escalar la imagen grande
-//        try {
-//            java.net.URL url = new java.net.URL(producto.getUrlImagen());
-//            java.awt.Image imagenOriginal = javax.imageio.ImageIO.read(url);
-//            
-//            // OJO: Aquí le puse 400x400 porque en esta pantalla la imagen es más grande.
-//            // Ajusta estos números dependiendo de qué tan grande sea tu lblImgProducto
-//            java.awt.Image imagenEscalada = imagenOriginal.getScaledInstance(450, 450, java.awt.Image.SCALE_SMOOTH);
-//            
-//            lblImgProducto.setIcon(new javax.swing.ImageIcon(imagenEscalada));
-//            lblImgProducto.setText(""); 
-//            
-//        } catch (Exception e) {
-//            System.out.println("Error cargando imagen principal de: " + producto.getNombre());
-//            lblImgProducto.setIcon(null);
-//            lblImgProducto.setText("Imagen no disp.");
-//        }
+        // 1. Llenamos los datos básicos
+        lblNombreProducto.setText(producto.getNombre());
+        lblArtista.setText(producto.getArtista());
+        lblPrecio.setText(String.format("$%.2f", producto.getPrecio()));
+        // 2. Acomodamos el setlist (usamos HTML básico para que el JLabel acepte saltos de línea)
+        if (producto.getSetlist() != null && !producto.getSetlist().isEmpty()) {
+            String canciones = String.join("<br>", producto.getSetlist());
+            lblSetlist.setText("<html><div style='text-align:center;'>" + canciones + "</div></html>");
+        } else {
+            lblSetlist.setText("Setlist no disponible");
+        }
+
+        // 3. Magia para descargar y escalar la imagen grande
+        try {
+            java.net.URL url = new java.net.URL(producto.getImgProducto());
+            java.awt.Image imagenOriginal = javax.imageio.ImageIO.read(url);
+            
+            // OJO: Aquí le puse 400x400 porque en esta pantalla la imagen es más grande.
+            // Ajusta estos números dependiendo de qué tan grande sea tu lblImgProducto
+            java.awt.Image imagenEscalada = imagenOriginal.getScaledInstance(450, 450, java.awt.Image.SCALE_SMOOTH);
+            
+            lblImgProducto.setIcon(new javax.swing.ImageIcon(imagenEscalada));
+            lblImgProducto.setText(""); 
+            
+        } catch (Exception e) {
+            System.out.println("Error cargando imagen principal de: " + producto.getNombre());
+            lblImgProducto.setIcon(null);
+            lblImgProducto.setText("Imagen no disp.");
+        }
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

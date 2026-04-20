@@ -5,6 +5,7 @@ import itson.org.ghosttracks.mocks.ProductosMockDAO;
 import itson.org.ghosttracks.enums.TipoProducto;
 import itson.org.ghosttracks.utilerias.pnlProductoCatalogo;
 import itson.org.ghosttracks.controladores.ControlVentaEnLinea;
+import itson.org.ghosttracks.dtos.ProductoDTO;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
@@ -20,7 +21,9 @@ public class PantallaInicioCliente extends javax.swing.JPanel {
     public PantallaInicioCliente(ControlVentaEnLinea ctrl) {
         this.control = ctrl;
         initComponents();
+        control.llenarCatalogo(this);
         
+        // TODO Filtros del catalogo
 //        panelRedondeado2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 //        panelRedondeado2.addMouseListener(new java.awt.event.MouseAdapter() {
 //            public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -43,33 +46,33 @@ public class PantallaInicioCliente extends javax.swing.JPanel {
 //        });
 //        
 //        cargarCatalogo(null);
-//        
+        
     }
 
-    private void cargarCatalogo(TipoProducto tipo) {
-//        pnlCatalogo.removeAll(); 
-//
-//        pnlCatalogo.setLayout(new java.awt.GridLayout(0, 3, 20, 20));
-//
-//        // Pedimos todos los productos o los filtrados dependiendo de qué seleccionó el usuario
+    public void cargarCatalogo(List<ProductoDTO> listaProductos) {
+        pnlCatalogo.removeAll(); 
+        pnlCatalogo.setLayout(new java.awt.GridLayout(0, 3, 20, 20));
+
+        if (listaProductos != null) {
+            for (ProductoDTO producto : listaProductos) {
+                 pnlProductoCatalogo tarjeta = new pnlProductoCatalogo(producto, control);
+                 tarjeta.setVisible(true);
+                 pnlCatalogo.add(tarjeta); 
+            }
+        }
+
+        pnlCatalogo.revalidate();
+        pnlCatalogo.repaint();
+    }
+    
+    // logica filtro
+//    // Pedimos todos los productos o los filtrados dependiendo de qué seleccionó el usuario
 //        List<ProductosMockDAO> listaProductos;
 //        if (tipo == null) {
 //            listaProductos = control.obtenerProductosMock(); // Si es null, muestra TODOS
 //        } else {
 //            listaProductos = control.obtenerProductosPorTipo(tipo); // Muestra solo los del tipo
 //        }
-//
-//        if (listaProductos != null) {
-//            for (Producto producto : listaProductos) {
-//                 pnlProductoCatalogo tarjeta = new pnlProductoCatalogo(producto, control);
-//                 tarjeta.setVisible(true);
-//                 pnlCatalogo.add(tarjeta); 
-//            }
-//        }
-//
-//        pnlCatalogo.revalidate();
-//        pnlCatalogo.repaint();
-    }
     
     /**
      * This method is called from within the constructor to initialize the form.

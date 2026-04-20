@@ -1,7 +1,7 @@
 
 package itson.org.ghosttracks.controladores;
 
-import itson.org.ghosttracks.mocks.ProductosMockDAO;
+import itson.org.ghosttracks.dtos.ProductoDTO;
 import itson.org.ghosttracks.presentacion.VentanaPrincipal;
 import itson.org.ghosttracks.presentacion.administrador.PantallaVentasProcesarAdmin;
 import itson.org.ghosttracks.presentacion.administrador.PantallaVentas;
@@ -24,8 +24,10 @@ import itson.org.ghosttracks.utilerias.pnlMenuLateralAdmin;
 public class Navegador {
 
     private final VentanaPrincipal ventana;
+    private final ControlVentaEnLinea ctrlVentaLinea;
 
     public Navegador(VentanaPrincipal ventana) {
+        this.ctrlVentaLinea = new ControlVentaEnLinea(this);
         this.ventana = ventana;
     }
     
@@ -44,47 +46,40 @@ public class Navegador {
     }
     
     public void irInicioCliente() {
-        ControlVentaEnLinea ctrl = new ControlVentaEnLinea(this);
-        PantallaInicioCliente vista = new PantallaInicioCliente(ctrl);
+        PantallaInicioCliente vista = new PantallaInicioCliente(ctrlVentaLinea);
         ventana.cambiarPantalla(vista);
     }
     
-    public void irVistaProducto(ProductosMockDAO producto) {
-        ControlVentaEnLinea ctrl = new ControlVentaEnLinea(this);
-        PantallaVistaProducto vista = new PantallaVistaProducto(ctrl, producto);
+    public void irVistaProducto(ProductoDTO producto) {
+        PantallaVistaProducto vista = new PantallaVistaProducto(ctrlVentaLinea, producto);
         ventana.cambiarPantalla(vista);
     }
     
     public void irCarrito() {
-        ControlVentaEnLinea ctrl = new ControlVentaEnLinea(this);
-        PantallaCarrito vista = new PantallaCarrito(ctrl);
+        PantallaCarrito vista = new PantallaCarrito(ctrlVentaLinea);
         ventana.cambiarPantalla(vista);
     }
     
     // Paneles Pedido
     
     public void irFormularioContacto() {
-        ControlVentaEnLinea ctrl = new ControlVentaEnLinea(this);
-        PantallaFormularioContacto vista = new PantallaFormularioContacto(ctrl);
+        PantallaFormularioContacto vista = new PantallaFormularioContacto(ctrlVentaLinea);
         ventana.cambiarPantalla(vista);
     }
     
     public void irFormularioEntrega() {
-        ControlVentaEnLinea ctrl = new ControlVentaEnLinea(this);
-        PantallaFormularioEntrega vista = new PantallaFormularioEntrega(ctrl);
+        PantallaFormularioEntrega vista = new PantallaFormularioEntrega(ctrlVentaLinea);
         ventana.cambiarPantalla(vista);
     }
     
     public void irSeleccionMetodoPago() {
-        ControlVentaEnLinea ctrl = new ControlVentaEnLinea(this);
-        PantallaSeleccionMetodoDePago vista = new PantallaSeleccionMetodoDePago(ctrl);
+        PantallaSeleccionMetodoDePago vista = new PantallaSeleccionMetodoDePago(ctrlVentaLinea);
         ventana.cambiarPantalla(vista);
     }
     
     // Paneles Metodos de pago
-    
+    // TODO
     public void irMetodoPagoTarjetaDebito() {
-        ControlVentaEnLinea ctrl = new ControlVentaEnLinea(this);
         PanelMetodoPagoTarjetaDebito vista = new PanelMetodoPagoTarjetaDebito();
         ventana.cambiarPantalla(vista);
     }
@@ -110,6 +105,10 @@ public class Navegador {
     
     public void cerrarSesion() {
         irLogin();
+    }
+    
+    public void mostrarMensaje(String mensaje, boolean esError) {
+        ventana.mostrarMensaje(mensaje, esError);
     }
     
 }
