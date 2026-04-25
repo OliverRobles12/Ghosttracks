@@ -60,6 +60,8 @@ public class PedidosMockDAO implements IPedidosDAO{
         try {
             pedido.setIdPedido(idAutoincrementable++);
             baseDatosPedidos.add(pedido);
+            
+            System.out.println(pedido);
             return pedido;
         } catch (Exception e) {
             throw new PersistenciaException("Error al guardar el pedido en BD: " + e.getMessage());
@@ -84,5 +86,13 @@ public class PedidosMockDAO implements IPedidosDAO{
         } catch (Exception e) {
             throw new PersistenciaException("Error al consultar los pedidos: " + e.getMessage());
         }
+    }
+    
+    @Override
+    public Pedido consultarPorId(Long idPedido) throws PersistenciaException {
+        return baseDatosPedidos.stream()
+                .filter(p -> p.getIdPedido().equals(idPedido))
+                .findFirst()
+                .orElseThrow(() -> new PersistenciaException("Pedido no encontrado: " + idPedido));
     }
 }

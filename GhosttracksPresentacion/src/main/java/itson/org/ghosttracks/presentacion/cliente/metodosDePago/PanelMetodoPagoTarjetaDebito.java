@@ -111,12 +111,13 @@ public class PanelMetodoPagoTarjetaDebito extends javax.swing.JPanel {
     private void enviarDatos(String num, String fec, String cvv, String tit) {
         DatosPagoDTO datos = new DatosPagoDTO();
         datos.setNumeroTrajeta(num);
-        // datos.setFechaExpiracion(fec);
+        datos.setFechaExpiracion(fec); 
         datos.setCvv(cvv);
         datos.setTitularTarjeta(tit);
 
-        principal.mostrarMensaje("Datos de pago validados correctamente.", false);
-        principal.setDatosPago(datos);
+        principal.mostrarMensaje("Procesando pago con el banco...", false);
+        
+        principal.setDatosPago(datos); 
     }
     
     /**

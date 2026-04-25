@@ -154,37 +154,7 @@ public class VentaEnLineaFachada implements IVentaEnLinea {
         }
 
         try {
-            if (pedidoDto.getTotal() == null || pedidoDto.getTotal() == 0) {
-                pedidoDto.calcularTotales(150.0); 
-            }
-
-            Pedido entidadPedido = new Pedido();
-            entidadPedido.setFechaPedido(LocalDateTime.now());
-            entidadPedido.setEstado(EstadoPedido.PAGADO);
-            entidadPedido.setSubtotal(pedidoDto.getSubtotal());
-            entidadPedido.setCostoEnvio(pedidoDto.getCostoEnvio());
-            entidadPedido.setTotal(pedidoDto.getTotal());
-
-            List<ProductoPedido> detalles = new ArrayList<>();
-            for (ItemCarritoDTO item : pedidoDto.getProductos()) {
-                ProductoPedido detalle = new ProductoPedido();
-                detalle.setCantidadProducto(item.getCantidad());
-                detalle.setPrecioVendido(item.getProductoSeleccionado().getPrecio());
-                detalle.setImporteTotal(item.getSubtotal());
-
-                Producto prodEntidad = new Producto();
-                prodEntidad.setIdProducto(item.getProductoSeleccionado().getIdProducto());
-                detalle.setProducto(prodEntidad);
-                detalle.setPedido(entidadPedido);
-                detalles.add(detalle);
-            }
-            entidadPedido.setProductosPedido(detalles);
-
-            Pedido pedidoGuardado = pedidosBO.guardarPedido(entidadPedido);
-
-            pedidoDto.setIdPedido(pedidoGuardado.getIdPedido());
-            pedidoDto.setEstado(EstadoPedidoDTO.PAGADO);
-            return pedidoDto;
+            return pedidosBO.generarPedido(pedidoDto);
 
         } catch (NegocioException e) {
             throw new VentaEnLineaException(CodigoErrorVenta.ERROR_PERSISTENCIA, "Error al registrar el pedido", e);

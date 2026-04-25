@@ -11,7 +11,7 @@ public class DatosPagoDTO {
     private Long idTarjeta;
     private String titularTarjeta;
     private String numeroTrajeta;
-    private LocalDateTime fechaExpiracion;
+    private String fechaExpiracion;
     private String cvv;
 
     public DatosPagoDTO() {
@@ -20,7 +20,7 @@ public class DatosPagoDTO {
     public DatosPagoDTO(
             String titularTarjeta, 
             String numeroTrajeta, 
-            LocalDateTime fechaExpiracion, 
+            String fechaExpiracion, 
             String cvv
     ) {
         this.titularTarjeta = titularTarjeta;
@@ -29,7 +29,7 @@ public class DatosPagoDTO {
         this.cvv = cvv;
     }
 
-    public DatosPagoDTO(Long idTarjeta, String titularTarjeta, String numeroTrajeta, LocalDateTime fechaExpiracion, String cvv) {
+    public DatosPagoDTO(Long idTarjeta, String titularTarjeta, String numeroTrajeta, String fechaExpiracion, String cvv) {
         this.idTarjeta = idTarjeta;
         this.titularTarjeta = titularTarjeta;
         this.numeroTrajeta = numeroTrajeta;
@@ -61,11 +61,11 @@ public class DatosPagoDTO {
         this.numeroTrajeta = numeroTrajeta;
     }
 
-    public LocalDateTime getFechaExpiracion() {
+    public String getFechaExpiracion() {
         return fechaExpiracion;
     }
 
-    public void setFechaExpiracion(LocalDateTime fechaExpiracion) {
+    public void setFechaExpiracion(String fechaExpiracion) {
         this.fechaExpiracion = fechaExpiracion;
     }
 

@@ -4,6 +4,7 @@
  */
 package itson.org.ghosttracks.negocio.interfaces;
 
+import itson.org.ghosttracks.dtos.PedidoDTO;
 import itson.org.ghosttracks.entidades.Pedido;
 import itson.org.ghosttracks.enums.EstadoPedido;
 import itson.org.ghosttracks.negocio.objetosNegocio.Excepciones.NegocioException;
@@ -17,4 +18,5 @@ public interface IPedidosBO {
     Pedido guardarPedido(Pedido pedido) throws NegocioException;
     Pedido actualizarEstado(Long idPedido, EstadoPedido nuevoEstado) throws NegocioException;
     List<Pedido> consultarTodos() throws NegocioException;
+    public PedidoDTO generarPedido(PedidoDTO pedidoDto) throws NegocioException;
 }

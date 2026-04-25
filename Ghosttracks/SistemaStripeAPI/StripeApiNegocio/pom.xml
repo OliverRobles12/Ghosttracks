@@ -2,19 +2,19 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>itson.org</groupId>
-    <artifactId>Ghosttracks</artifactId>
+    <artifactId>StripeApiNegocio</artifactId>
     <version>1.0</version>
-    <packaging>pom</packaging>
-    <modules>
-        <module>../GhosttracksDominio</module>
-        <module>../GhosttracksDtos</module>
-        <module>../GhosttracksNegocio</module>
-        <module>../GhosttracksPersistencia</module>
-        <module>../GhosttracksPresentacion</module>
-        <module>GhosttracksVentaEnLinea</module>
-        <module>SistemaStripeAPI</module>
-    </modules>
+    <packaging>jar</packaging>
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>StripeAPIDtos</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.release>25</maven.compiler.release>
+        <exec.mainClass>itson.org.stripeapinegocio.StripeApiNegocio</exec.mainClass>
     </properties>
 </project>

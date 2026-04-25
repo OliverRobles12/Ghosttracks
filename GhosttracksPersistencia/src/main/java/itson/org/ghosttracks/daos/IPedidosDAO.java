@@ -20,4 +20,6 @@ public interface IPedidosDAO {
     Pedido actualizarEstado(Long idPedido, EstadoPedido nuevoEstado) throws PersistenciaException;
     
     List<Pedido> consultarTodos() throws PersistenciaException;
+    
+    public Pedido consultarPorId(Long idPedido) throws PersistenciaException;
 }

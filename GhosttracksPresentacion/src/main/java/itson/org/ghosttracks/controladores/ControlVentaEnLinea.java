@@ -95,13 +95,24 @@ public class ControlVentaEnLinea {
     
     public void procesarPedido() {
         try {
-            this.pedidoDTO = ventaFachada.confirmarCompra(pedidoDTO);
-            ventaFachada.actualizarEstadoPedido(pedidoDTO.getIdPedido(), EstadoPedidoDTO.PAGADO);
-            mostrarMensaje("Pedido registrado exitosamente.", false);
+            if (this.carrito == null || this.carrito.getProductos().isEmpty()) {
+                throw new Exception("El carrito está vacío. Agrega productos antes de pagar.");
+            }
+            
+            this.pedidoDTO.setProductos(this.carrito.getProductos());
+            this.pedidoDTO.calcularTotales(150.0);
+            
+            this.pedidoDTO = ventaFachada.confirmarCompra(this.pedidoDTO);
+            
+            mostrarMensaje("¡Pago aprobado! Pedido registrado exitosamente.", false);
+            
+            this.carrito = new CarritoDTO();
+            this.pedidoDTO = new PedidoDTO();
+            volverACatalogo();
+            
         } catch (Exception ex) {
-            mostrarMensaje("No ha sido posible realizar el pedido.", true);
+            mostrarMensaje(ex.getMessage(), true);
         }
-        
     }
     
     public void agregarProductoCarrito(ProductoDTO producto, Integer cantidad) {
