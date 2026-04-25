@@ -4,7 +4,7 @@
  */
 package itson.org.ghosttracks.negocio.interfaces;
 
-import itson.org.ghosttracks.dtos.ClienteDTO;
+import itson.org.ghosttracks.entidades.Cliente;
 import itson.org.ghosttracks.negocio.objetosNegocio.Excepciones.NegocioException;
 
 /**
@@ -12,5 +12,5 @@ import itson.org.ghosttracks.negocio.objetosNegocio.Excepciones.NegocioException
  * @author nafbr
  */
 public interface IClientesBO {
-    ClienteDTO obtenerClientePorId(Long idCliente) throws NegocioException;
+    Cliente obtenerClientePorId(Long idCliente) throws NegocioException;
 }

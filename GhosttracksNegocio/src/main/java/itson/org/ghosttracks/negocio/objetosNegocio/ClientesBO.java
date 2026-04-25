@@ -5,8 +5,6 @@
 package itson.org.ghosttracks.negocio.objetosNegocio;
 
 import itson.org.ghosttracks.daos.IClientesDAO;
-import itson.org.ghosttracks.dtos.ClienteDTO;
-import itson.org.ghosttracks.dtos.DireccionClienteDTO;
 import itson.org.ghosttracks.entidades.Cliente;
 import itson.org.ghosttracks.exceptions.PersistenciaException;
 import itson.org.ghosttracks.mocks.ClientesMockDAO;
@@ -25,32 +23,11 @@ public class ClientesBO implements IClientesBO{
     }
 
     @Override
-    public ClienteDTO obtenerClientePorId(Long idCliente) throws NegocioException {
+    public Cliente obtenerClientePorId(Long idCliente) throws NegocioException {
         try {
-            Cliente entidad = clientesDAO.buscarPorId(idCliente);
-            ClienteDTO dto = new ClienteDTO();
-            
-            dto.setIdUsuario(entidad.getIdUsuario());
-            dto.setNombres(entidad.getNombres());
-            dto.setApellidoPaterno(entidad.getApellidoPaterno());
-            dto.setApellidoMaterno(entidad.getApellidoMaterno());
-            dto.setCorreo(entidad.getCorreo());
-            dto.setContraseña(entidad.getContraseña());
-            dto.setTelefono(entidad.getTelefono());
-            
-            if (entidad.getDireccion() != null) {
-                DireccionClienteDTO dirDto = new DireccionClienteDTO();
-                dirDto.setCalle(entidad.getDireccion().getCalle());
-                dirDto.setNumero(entidad.getDireccion().getNumero());
-                dirDto.setCodigoPostal(entidad.getDireccion().getCodigoPostal());
-                
-                dto.setDireccion(dirDto);
-            }
-
-            return dto;
-
+            return clientesDAO.buscarPorId(idCliente);
         } catch (PersistenciaException e) {
-            throw new NegocioException("Error al obtener cliente: " + e.getMessage());
+            throw new NegocioException("Error al obtener cliente en BD", e);
         }
     }
 }

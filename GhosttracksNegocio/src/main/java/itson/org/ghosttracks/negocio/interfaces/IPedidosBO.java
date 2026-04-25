@@ -4,8 +4,8 @@
  */
 package itson.org.ghosttracks.negocio.interfaces;
 
-import itson.org.ghosttracks.dtos.PedidoDTO;
-import itson.org.ghosttracks.enums.EstadoPedidoDTO;
+import itson.org.ghosttracks.entidades.Pedido;
+import itson.org.ghosttracks.enums.EstadoPedido;
 import itson.org.ghosttracks.negocio.objetosNegocio.Excepciones.NegocioException;
 import java.util.List;
 
@@ -14,7 +14,7 @@ import java.util.List;
  * @author nafbr
  */
 public interface IPedidosBO {
-    PedidoDTO generarPedido(PedidoDTO pedidoDto) throws NegocioException;
-    PedidoDTO actualizarEstadoPedido(Long idPedido, EstadoPedidoDTO nuevoEstado) throws NegocioException;
-    List<PedidoDTO> obtenerTodosLosPedidos() throws NegocioException;
+    Pedido guardarPedido(Pedido pedido) throws NegocioException;
+    Pedido actualizarEstado(Long idPedido, EstadoPedido nuevoEstado) throws NegocioException;
+    List<Pedido> consultarTodos() throws NegocioException;
 }
