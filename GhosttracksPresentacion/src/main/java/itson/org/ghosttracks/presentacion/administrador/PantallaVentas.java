@@ -4,6 +4,7 @@ package itson.org.ghosttracks.presentacion.administrador;
 import itson.org.ghosttracks.controladores.ControladorVentasAdmin;
 import itson.org.ghosttracks.dtos.PedidoDTO;
 import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -163,7 +164,7 @@ public class PantallaVentas extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     public void llenarTabla(List<PedidoDTO> pedidos) {
-        javax.swing.table.DefaultTableModel modelo = (javax.swing.table.DefaultTableModel) tblPedidos.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) tblPedidos.getModel();
         modelo.setRowCount(0);
 
         for (PedidoDTO pedido : pedidos) {

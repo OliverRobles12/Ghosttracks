@@ -18,12 +18,17 @@ import java.util.logging.Logger;
  * @author nafbr
  */
 public class PedidosMockDAO implements IPedidosDAO{
-    private List<Pedido> baseDatosPedidos = new ArrayList<>();
-    private Long idAutoincrementable = 1L;
+    
+    private static List<Pedido> baseDatosPedidos = new ArrayList<>();
+    private static Long idAutoincrementable = 1L;
     private static final Logger LOGGER = Logger.getLogger(PedidosMockDAO.class.getName());
-
+    private static boolean datosPrecargados = false;
+    
     public PedidosMockDAO() {
-        precargarPedidos();
+        if (!datosPrecargados) {
+            precargarPedidos();
+            datosPrecargados = true;
+        }
     }
 
     
