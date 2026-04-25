@@ -3,6 +3,7 @@ package itson.org.ghosttracks.presentacion.cliente;
 
 import itson.org.ghosttracks.controladores.ControlVentaEnLinea;
 import itson.org.ghosttracks.dtos.ContactoDTO;
+import java.awt.Color;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
@@ -21,6 +22,7 @@ public class PantallaFormularioContacto extends javax.swing.JPanel {
         this.control = ctrl;
         initComponents();
         configurarPlaceholders();
+        control.llenarResumenPedido(pnlResumen);
     }
 
     /**
@@ -40,26 +42,25 @@ public class PantallaFormularioContacto extends javax.swing.JPanel {
         txtEmail = new itson.org.ghosttracks.utilerias.TextFieldRedondeado();
         txtTelefono = new itson.org.ghosttracks.utilerias.TextFieldRedondeado();
         btnGuardar = new itson.org.ghosttracks.utilerias.BotonRedondeado();
+        pnlResumen = new itson.org.ghosttracks.utilerias.pnlResumenPedido();
 
         pnlContenedor.setBackground(new java.awt.Color(237, 229, 222));
         pnlContenedor.setPreferredSize(new java.awt.Dimension(1100, 675));
 
-        panelRedondeado1.setBackground(new java.awt.Color(204, 204, 204));
+        panelRedondeado1.setBackground(new java.awt.Color(217, 217, 217));
 
         jLabel1.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Contacto");
 
         jSeparator1.setBackground(new java.awt.Color(153, 153, 153));
         jSeparator1.setForeground(new java.awt.Color(153, 153, 153));
 
-        txtEmail.setBackground(new java.awt.Color(255, 255, 255));
         txtEmail.setText("Email");
 
-        txtTelefono.setBackground(new java.awt.Color(255, 255, 255));
         txtTelefono.setText("Numero de telefono (Opcional)");
 
-        btnGuardar.setBackground(new java.awt.Color(204, 51, 0));
+        btnGuardar.setBackground(new java.awt.Color(191, 64, 43));
+        btnGuardar.setForeground(new java.awt.Color(255, 255, 255));
         btnGuardar.setText("Guardar");
         btnGuardar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnGuardar.addActionListener(this::btnGuardarActionPerformed);
@@ -106,16 +107,21 @@ public class PantallaFormularioContacto extends javax.swing.JPanel {
         pnlContenedorLayout.setHorizontalGroup(
             pnlContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlContenedorLayout.createSequentialGroup()
-                .addGap(201, 201, 201)
+                .addGap(16, 16, 16)
                 .addComponent(panelRedondeado1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(201, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addComponent(pnlResumen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         pnlContenedorLayout.setVerticalGroup(
             pnlContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlContenedorLayout.createSequentialGroup()
-                .addGap(33, 33, 33)
+                .addContainerGap()
                 .addComponent(panelRedondeado1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(347, Short.MAX_VALUE))
+                .addContainerGap(412, Short.MAX_VALUE))
+            .addGroup(pnlContenedorLayout.createSequentialGroup()
+                .addComponent(pnlResumen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout pnlPrincipalLayout = new javax.swing.GroupLayout(pnlPrincipal);
@@ -126,7 +132,9 @@ public class PantallaFormularioContacto extends javax.swing.JPanel {
         );
         pnlPrincipalLayout.setVerticalGroup(
             pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlContenedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(pnlPrincipalLayout.createSequentialGroup()
+                .addComponent(pnlContenedor, javax.swing.GroupLayout.PREFERRED_SIZE, 713, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -141,7 +149,7 @@ public class PantallaFormularioContacto extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 675, Short.MAX_VALUE)
+            .addGap(0, 713, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addComponent(pnlPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -175,17 +183,21 @@ public class PantallaFormularioContacto extends javax.swing.JPanel {
     }
     
     private void configurarPlaceholders() {
+        txtEmail.setForeground(Color.GRAY);
+        txtTelefono.setForeground(Color.GRAY);
         txtEmail.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
                 if (txtEmail.getText().equals(PLACEHOLDER_EMAIL)) {
                     txtEmail.setText("");
+                    txtEmail.setForeground(Color.BLACK);
                 }
             }
             @Override
             public void focusLost(FocusEvent e) {
                 if (txtEmail.getText().isEmpty()) {
                     txtEmail.setText(PLACEHOLDER_EMAIL);
+                    txtEmail.setForeground(Color.GRAY);
                 }
             }
         });
@@ -194,12 +206,14 @@ public class PantallaFormularioContacto extends javax.swing.JPanel {
             public void focusGained(FocusEvent e) {
                 if (txtTelefono.getText().equals(PLACEHOLDER_TEL)) {
                     txtTelefono.setText("");
+                    txtTelefono.setForeground(Color.BLACK);
                 }
             }
             @Override
             public void focusLost(FocusEvent e) {
                 if (txtTelefono.getText().isEmpty()) {
                     txtTelefono.setText(PLACEHOLDER_TEL);
+                    txtTelefono.setForeground(Color.GRAY);
                 }
             }
         });
@@ -226,6 +240,7 @@ public class PantallaFormularioContacto extends javax.swing.JPanel {
     private itson.org.ghosttracks.utilerias.PanelRedondeado panelRedondeado1;
     private javax.swing.JPanel pnlContenedor;
     private javax.swing.JPanel pnlPrincipal;
+    private itson.org.ghosttracks.utilerias.pnlResumenPedido pnlResumen;
     private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtEmail;
     private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtTelefono;
     // End of variables declaration//GEN-END:variables

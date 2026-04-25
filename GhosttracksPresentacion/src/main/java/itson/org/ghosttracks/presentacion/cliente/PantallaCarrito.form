@@ -106,7 +106,7 @@
                           <Component id="botonRedondeado1" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
                           <Component id="btnEliminar" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="75" max="32767" attributes="0"/>
+                      <EmptySpace pref="73" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -115,7 +115,7 @@
             <Component class="javax.swing.JLabel" name="jLabel1">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="36" style="1"/>
+                  <Font name="Corbel" size="36" style="1"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Tu carrito"/>
               </Properties>

@@ -10,6 +10,7 @@ import itson.org.ghosttracks.dtos.ProductoDTO;
 import itson.org.ghosttracks.enums.EstadoPedidoDTO;
 import itson.org.ghosttracks.presentacion.cliente.PantallaCarrito;
 import itson.org.ghosttracks.presentacion.cliente.PantallaInicioCliente;
+import itson.org.ghosttracks.utilerias.pnlResumenPedido;
 import itson.org.ghosttracksventaenlinea.fachada.VentaEnLineaFachada;
 import itson.org.ghosttracksventaenlinea.interfaces.IVentaEnLinea;
 import java.util.List;
@@ -69,6 +70,15 @@ public class ControlVentaEnLinea {
         navegador.irVistaProducto(productoSeleccionado);
     }
     
+    public void llenarResumenPedido(pnlResumenPedido vistaResumen) {
+        try {
+            vistaResumen.cargarResumen(this.carrito);
+        } catch (Exception ex) {
+            navegador.mostrarMensaje("Error al cargar el resumen del pedido.", true);
+        }
+    }
+    
+    
     // Pedido
     
     public void agregarDireccionPedido(DireccionEntregaDTO dto) {
@@ -109,6 +119,8 @@ public class ControlVentaEnLinea {
             navegador.mostrarMensaje("Error al eliminar el producto del carrito.", true);
         }
     }
+    
+    
     
     // Extras
     

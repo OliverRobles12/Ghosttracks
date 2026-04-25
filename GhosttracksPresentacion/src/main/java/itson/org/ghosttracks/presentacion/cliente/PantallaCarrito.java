@@ -58,7 +58,7 @@ public class PantallaCarrito extends javax.swing.JPanel {
         pnlContenedor.setBackground(new java.awt.Color(237, 229, 222));
         pnlContenedor.setPreferredSize(new java.awt.Dimension(1100, 692));
 
-        jLabel1.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Corbel", 1, 36)); // NOI18N
         jLabel1.setText("Tu carrito");
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carro 1.png"))); // NOI18N
@@ -167,7 +167,7 @@ public class PantallaCarrito extends javax.swing.JPanel {
                 .addGroup(pnlContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonRedondeado1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEliminar))
-                .addContainerGap(75, Short.MAX_VALUE))
+                .addContainerGap(73, Short.MAX_VALUE))
         );
 
         pnlPrincipal.add(pnlContenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 680));

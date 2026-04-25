@@ -19,7 +19,7 @@ public class PantallaSeleccionMetodoDePago extends javax.swing.JPanel {
     public PantallaSeleccionMetodoDePago(ControlVentaEnLinea ctrl) {
         this.control = ctrl;
         initComponents();
-        
+        control.llenarResumenPedido(pnlResumen);
         cardLayout = new CardLayout();
         panelContenido.setLayout(cardLayout);
         
@@ -58,7 +58,7 @@ public class PantallaSeleccionMetodoDePago extends javax.swing.JPanel {
     private void initComponents() {
 
         pnlPrincipal = new javax.swing.JPanel();
-        pnlResumenPedido1 = new itson.org.ghosttracks.utilerias.pnlResumenPedido();
+        pnlResumen = new itson.org.ghosttracks.utilerias.pnlResumenPedido();
         panelContenido = new javax.swing.JPanel();
 
         setPreferredSize(new java.awt.Dimension(1100, 675));
@@ -87,16 +87,16 @@ public class PantallaSeleccionMetodoDePago extends javax.swing.JPanel {
             .addGroup(pnlPrincipalLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(panelContenido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pnlResumenPedido1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addComponent(pnlResumen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         pnlPrincipalLayout.setVerticalGroup(
             pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPrincipalLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(pnlResumenPedido1, javax.swing.GroupLayout.DEFAULT_SIZE, 675, Short.MAX_VALUE)
+                    .addComponent(pnlResumen, javax.swing.GroupLayout.DEFAULT_SIZE, 675, Short.MAX_VALUE)
                     .addComponent(panelContenido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -109,7 +109,7 @@ public class PantallaSeleccionMetodoDePago extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 681, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -117,6 +117,6 @@ public class PantallaSeleccionMetodoDePago extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel panelContenido;
     private javax.swing.JPanel pnlPrincipal;
-    private itson.org.ghosttracks.utilerias.pnlResumenPedido pnlResumenPedido1;
+    private itson.org.ghosttracks.utilerias.pnlResumenPedido pnlResumen;
     // End of variables declaration//GEN-END:variables
 }

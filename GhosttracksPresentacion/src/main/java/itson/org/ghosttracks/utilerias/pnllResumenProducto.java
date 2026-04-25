@@ -4,17 +4,44 @@
  */
 package itson.org.ghosttracks.utilerias;
 
+import itson.org.ghosttracks.dtos.ProductoDTO;
+import java.awt.Image;
+import java.net.URL;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+
 /**
  *
- * @author cinca
+ * @author Nahomi Figueroa
  */
 public class pnllResumenProducto extends javax.swing.JPanel {
 
     /**
      * Creates new form pnllResumenProducto
      */
-    public pnllResumenProducto() {
+    public pnllResumenProducto(ProductoDTO producto, int cantidad) {
         initComponents();
+        
+        lblNombre.setText(producto.getNombre());
+        lblArtista.setText(producto.getArtista());
+        lblCantidad.setText("x" + cantidad);
+        
+        double subtotalProducto = producto.getPrecio() * cantidad;
+        lblTotal.setText("$" + String.format("%.2f", subtotalProducto));
+        
+        try {
+            URL url = new URL(producto.getImgProducto());
+            Image imagenOriginal = javax.imageio.ImageIO.read(url);
+            Image imagenEscalada = imagenOriginal.getScaledInstance(100, 94, Image.SCALE_SMOOTH);
+            JLabel lblImagenDinamica = new javax.swing.JLabel(new ImageIcon(imagenEscalada));
+            lblImagenDinamica.setBounds(0, 0, 100, 94);
+            pnlImg.removeAll();
+            pnlImg.add(lblImagenDinamica);
+            pnlImg.revalidate();
+            pnlImg.repaint();
+        } catch (Exception e) {
+            System.out.println("Error cargando imagen: " + producto.getNombre());
+        }
     }
 
     /**
@@ -26,20 +53,20 @@ public class pnllResumenProducto extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelRedondeado1 = new itson.org.ghosttracks.utilerias.PanelRedondeado();
+        pnlrImagen = new itson.org.ghosttracks.utilerias.PanelRedondeado();
         pnlImg = new javax.swing.JPanel();
-        nombre = new javax.swing.JLabel();
-        artista = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        lblNombre = new javax.swing.JLabel();
+        lblArtista = new javax.swing.JLabel();
+        lblTotal = new javax.swing.JLabel();
+        lblCantidad = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(204, 204, 204));
-        setForeground(new java.awt.Color(0, 0, 0));
+        setBackground(new java.awt.Color(217, 217, 217));
         setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
         setPreferredSize(new java.awt.Dimension(330, 118));
 
-        panelRedondeado1.setBackground(new java.awt.Color(153, 153, 153));
+        pnlrImagen.setBackground(new java.awt.Color(208, 208, 208));
 
-        pnlImg.setBackground(new java.awt.Color(153, 153, 153));
+        pnlImg.setBackground(new java.awt.Color(208, 208, 208));
 
         javax.swing.GroupLayout pnlImgLayout = new javax.swing.GroupLayout(pnlImg);
         pnlImg.setLayout(pnlImgLayout);
@@ -52,33 +79,34 @@ public class pnllResumenProducto extends javax.swing.JPanel {
             .addGap(0, 94, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout panelRedondeado1Layout = new javax.swing.GroupLayout(panelRedondeado1);
-        panelRedondeado1.setLayout(panelRedondeado1Layout);
-        panelRedondeado1Layout.setHorizontalGroup(
-            panelRedondeado1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRedondeado1Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnlrImagenLayout = new javax.swing.GroupLayout(pnlrImagen);
+        pnlrImagen.setLayout(pnlrImagenLayout);
+        pnlrImagenLayout.setHorizontalGroup(
+            pnlrImagenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlrImagenLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pnlImg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        panelRedondeado1Layout.setVerticalGroup(
-            panelRedondeado1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRedondeado1Layout.createSequentialGroup()
+        pnlrImagenLayout.setVerticalGroup(
+            pnlrImagenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlrImagenLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(pnlImg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        nombre.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
-        nombre.setForeground(new java.awt.Color(0, 0, 0));
-        nombre.setText("Nombre");
+        lblNombre.setFont(new java.awt.Font("Corbel", 1, 15)); // NOI18N
+        lblNombre.setText("Nombre");
 
-        artista.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        artista.setForeground(new java.awt.Color(51, 51, 51));
-        artista.setText("Artista");
+        lblArtista.setFont(new java.awt.Font("Corbel", 0, 12)); // NOI18N
+        lblArtista.setForeground(new java.awt.Color(51, 51, 51));
+        lblArtista.setText("Artista");
 
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("$0");
+        lblTotal.setText("$0");
+
+        lblCantidad.setFont(new java.awt.Font("Corbel", 0, 12)); // NOI18N
+        lblCantidad.setText("x0");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -86,42 +114,47 @@ public class pnllResumenProducto extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(panelRedondeado1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlrImagen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblTotal)
+                        .addGap(23, 23, 23))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(artista)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(nombre)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 124, Short.MAX_VALUE)
-                        .addComponent(jLabel1)
-                        .addGap(15, 15, 15))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblArtista)
+                            .addComponent(lblNombre))
+                        .addContainerGap(151, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(panelRedondeado1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(nombre)
-                            .addComponent(jLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(artista)))
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblTotal)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(pnlrImagen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(16, 16, 16)
+                            .addComponent(lblNombre)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(lblArtista)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(lblCantidad))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel artista;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel nombre;
-    private itson.org.ghosttracks.utilerias.PanelRedondeado panelRedondeado1;
+    private javax.swing.JLabel lblArtista;
+    private javax.swing.JLabel lblCantidad;
+    private javax.swing.JLabel lblNombre;
+    private javax.swing.JLabel lblTotal;
     private javax.swing.JPanel pnlImg;
+    private itson.org.ghosttracks.utilerias.PanelRedondeado pnlrImagen;
     // End of variables declaration//GEN-END:variables
 }

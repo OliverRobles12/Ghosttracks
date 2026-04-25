@@ -3,6 +3,7 @@ package itson.org.ghosttracks.presentacion.cliente;
 
 import itson.org.ghosttracks.controladores.ControlVentaEnLinea;
 import itson.org.ghosttracks.dtos.DireccionEntregaDTO;
+import java.awt.Color;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import javax.swing.JTextField;
@@ -27,6 +28,7 @@ public class PantallaFormularioEntrega extends javax.swing.JPanel {
         this.control = ctrl;
         initComponents();
         configurarPlaceholders();
+        control.llenarResumenPedido(pnlResumen);
     }
 
     /**
@@ -50,6 +52,7 @@ public class PantallaFormularioEntrega extends javax.swing.JPanel {
         txtEstado = new itson.org.ghosttracks.utilerias.TextFieldRedondeado();
         btnGuardar = new itson.org.ghosttracks.utilerias.BotonRedondeado();
         txtNumero = new itson.org.ghosttracks.utilerias.TextFieldRedondeado();
+        pnlResumen = new itson.org.ghosttracks.utilerias.pnlResumenPedido();
 
         pnlPrincipal.setBackground(new java.awt.Color(51, 51, 51));
         pnlPrincipal.setMinimumSize(new java.awt.Dimension(1400, 800));
@@ -58,37 +61,30 @@ public class PantallaFormularioEntrega extends javax.swing.JPanel {
         pnlContenedor.setMinimumSize(new java.awt.Dimension(752, 690));
         pnlContenedor.setPreferredSize(new java.awt.Dimension(1100, 675));
 
-        pnlFormulario.setBackground(new java.awt.Color(204, 204, 204));
+        pnlFormulario.setBackground(new java.awt.Color(217, 217, 217));
         pnlFormulario.setMinimumSize(new java.awt.Dimension(698, 294));
 
         jLabel1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Entrega");
 
-        txtNombres.setBackground(new java.awt.Color(255, 255, 255));
         txtNombres.setText("Nombre(s)");
 
-        txtApellidos.setBackground(new java.awt.Color(255, 255, 255));
         txtApellidos.setText("Apellido(s)");
 
-        txtCodigoPostal.setBackground(new java.awt.Color(255, 255, 255));
         txtCodigoPostal.setText("Codigo Postal");
 
-        txtCalle.setBackground(new java.awt.Color(255, 255, 255));
         txtCalle.setText("Calle");
 
-        txtCiudad.setBackground(new java.awt.Color(255, 255, 255));
         txtCiudad.setText("Ciudad");
 
-        txtEstado.setBackground(new java.awt.Color(255, 255, 255));
         txtEstado.setText("Estado");
 
-        btnGuardar.setBackground(new java.awt.Color(204, 51, 0));
+        btnGuardar.setBackground(new java.awt.Color(191, 64, 43));
+        btnGuardar.setForeground(new java.awt.Color(255, 255, 255));
         btnGuardar.setText("Guardar");
         btnGuardar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnGuardar.addActionListener(this::btnGuardarActionPerformed);
 
-        txtNumero.setBackground(new java.awt.Color(255, 255, 255));
         txtNumero.setText("Numero");
 
         javax.swing.GroupLayout pnlFormularioLayout = new javax.swing.GroupLayout(pnlFormulario);
@@ -149,17 +145,22 @@ public class PantallaFormularioEntrega extends javax.swing.JPanel {
         pnlContenedor.setLayout(pnlContenedorLayout);
         pnlContenedorLayout.setHorizontalGroup(
             pnlContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlContenedorLayout.createSequentialGroup()
-                .addContainerGap(201, Short.MAX_VALUE)
+            .addGroup(pnlContenedorLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
                 .addComponent(pnlFormulario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(201, 201, 201))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addComponent(pnlResumen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14))
         );
         pnlContenedorLayout.setVerticalGroup(
             pnlContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlContenedorLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addContainerGap()
                 .addComponent(pnlFormulario, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(pnlContenedorLayout.createSequentialGroup()
+                .addComponent(pnlResumen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout pnlPrincipalLayout = new javax.swing.GroupLayout(pnlPrincipal);
@@ -242,17 +243,20 @@ public class PantallaFormularioEntrega extends javax.swing.JPanel {
     }
     
     private void agregarPlaceholder(JTextField campo, String placeholder) {
+        campo.setForeground(java.awt.Color.GRAY);
         campo.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
                 if (campo.getText().equals(placeholder)) {
                     campo.setText("");
+                    campo.setForeground(Color.BLACK);
                 }
             }
             @Override
             public void focusLost(FocusEvent e) {
                 if (campo.getText().isEmpty()) {
                     campo.setText(placeholder);
+                    campo.setForeground(java.awt.Color.GRAY);
                 }
             }
         });
@@ -281,6 +285,7 @@ public class PantallaFormularioEntrega extends javax.swing.JPanel {
     private javax.swing.JPanel pnlContenedor;
     private itson.org.ghosttracks.utilerias.PanelRedondeado pnlFormulario;
     private javax.swing.JPanel pnlPrincipal;
+    private itson.org.ghosttracks.utilerias.pnlResumenPedido pnlResumen;
     private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtApellidos;
     private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtCalle;
     private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtCiudad;

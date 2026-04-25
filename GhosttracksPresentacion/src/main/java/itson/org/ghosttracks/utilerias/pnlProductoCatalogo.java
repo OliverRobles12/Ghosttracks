@@ -1,7 +1,6 @@
 
 package itson.org.ghosttracks.utilerias;
 
-import itson.org.ghosttracks.mocks.ProductosMockDAO;
 import itson.org.ghosttracks.controladores.ControlVentaEnLinea;
 import itson.org.ghosttracks.dtos.ProductoDTO;
 import java.awt.event.MouseAdapter;
@@ -24,28 +23,19 @@ public class pnlProductoCatalogo extends javax.swing.JPanel {
         this.producto = producto;
         this.control = control;
         
-        // 1. Llenamos los labels con la info del objeto
         lblNombreProducto.setText(producto.getNombre());
         lblArtista.setText(producto.getArtista());
         lblPrecio.setText("$" + producto.getPrecio());
         
         
         try {
-            // 1. Convertimos el String a una URL real de Java
             java.net.URL url = new java.net.URL(producto.getImgProducto());
-
-            // 2. Descargamos la imagen de internet
             java.awt.Image imagenOriginal = javax.imageio.ImageIO.read(url);
-
-            // 3. Escala la imagen. Ajusta los números (150, 150) al ancho y alto de tu pnlImgProduct
             java.awt.Image imagenEscalada = imagenOriginal.getScaledInstance(180, 150, java.awt.Image.SCALE_SMOOTH);
-
-            // 4. Metemos la imagen en el Label y quitamos cualquier texto de fondo
             lblImg.setIcon(new javax.swing.ImageIcon(imagenEscalada));
             lblImg.setText(""); 
 
         } catch (Exception e) {
-            // Si no hay internet o el link se cae, mostramos un plan B
             System.out.println("Error cargando imagen de: " + producto.getNombre());
             lblImg.setIcon(null);
             lblImg.setText("Imagen no disp.");

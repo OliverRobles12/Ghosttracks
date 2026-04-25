@@ -47,9 +47,9 @@
               <Group type="102" attributes="0">
                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                   <Component id="panelContenido" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="pnlResumenPedido1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="25" max="32767" attributes="0"/>
+                  <EmptySpace pref="31" max="32767" attributes="0"/>
+                  <Component id="pnlResumen" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -58,7 +58,7 @@
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="pnlResumenPedido1" pref="675" max="32767" attributes="0"/>
+                      <Component id="pnlResumen" pref="675" max="32767" attributes="0"/>
                       <Component id="panelContenido" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -67,7 +67,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="itson.org.ghosttracks.utilerias.pnlResumenPedido" name="pnlResumenPedido1">
+        <Component class="itson.org.ghosttracks.utilerias.pnlResumenPedido" name="pnlResumen">
         </Component>
         <Container class="javax.swing.JPanel" name="panelContenido">
           <Properties>

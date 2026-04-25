@@ -4,20 +4,49 @@
  */
 package itson.org.ghosttracks.utilerias;
 
+import itson.org.ghosttracks.dtos.CarritoDTO;
+import itson.org.ghosttracks.dtos.ItemCarritoDTO;
+import itson.org.ghosttracks.dtos.ProductoDTO;
 import javax.swing.BoxLayout;
+import javax.swing.JPanel;
 
 /**
  *
- * @author cinca
+ * @author Nahomi FIgueroa
  */
 public class pnlResumenPedido extends javax.swing.JPanel {
 
+    private JPanel pnlLista;
     /**
      * Creates new form pnlResumenPedido
      */
     public pnlResumenPedido() {
         initComponents();
+        pnlLista = new JPanel();
+        pnlLista.setLayout(new BoxLayout(pnlLista, BoxLayout.Y_AXIS));
+        pnlLista.setBackground(new java.awt.Color(217, 217, 217)); 
+        jspProductosCarrito.setViewportView(pnlLista);
+        jspProductosCarrito.setBorder(null); 
+    }
+    
+    public void cargarResumen(CarritoDTO carrito) {
+        pnlLista.removeAll();
+        carrito.calcularTotalGeneral();
+        if (carrito.getProductos() != null) {
+            for (ItemCarritoDTO item : carrito.getProductos()) {
+                ProductoDTO prod = item.getProductoSeleccionado();
+                Integer cant = item.getCantidad() != null ? item.getCantidad() : 0;
+                pnllResumenProducto tarjeta = new pnllResumenProducto(prod, cant);
+                pnlLista.add(tarjeta);
+            }
+        }
 
+        lblSubtotalDisplay2.setText(String.format("$%.2f", carrito.getSubtotal()));
+        lblTaxDisplay.setText(String.format("$%.2f", carrito.getImpuestos()));
+        lblTotalDisplay.setText(String.format("$%.2f", carrito.getTotal()));
+        
+        pnlLista.revalidate();
+        pnlLista.repaint();
     }
 
     /**
@@ -29,223 +58,123 @@ public class pnlResumenPedido extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        pnlTotales = new javax.swing.JPanel();
-        lblTituloSubtotal = new javax.swing.JLabel();
-        lblTituloTax = new javax.swing.JLabel();
-        lblTituloTotal = new javax.swing.JLabel();
+        pnlPrincipalResumen = new itson.org.ghosttracks.utilerias.PanelRedondeado();
+        lblImgCarrito = new javax.swing.JLabel();
+        lblResumen = new javax.swing.JLabel();
+        pnlDisplayItems = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
-        lblSubtotal = new javax.swing.JLabel();
-        lblTax = new javax.swing.JLabel();
+        jspProductosCarrito = new javax.swing.JScrollPane();
+        lblTaxDisplay = new javax.swing.JLabel();
         lblTotal = new javax.swing.JLabel();
-        btnContinuar = new itson.org.ghosttracks.utilerias.BotonRedondeado();
-        btnEliminarCarrito = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        pnlContenedprProd = new javax.swing.JPanel();
+        lblSubtotal1 = new javax.swing.JLabel();
+        lblTax = new javax.swing.JLabel();
+        lblTotalDisplay = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
+        lblSubtotalDisplay2 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(237, 229, 222));
         setPreferredSize(new java.awt.Dimension(348, 680));
 
-        pnlTotales.setBackground(new java.awt.Color(153, 153, 153));
-        pnlTotales.setForeground(new java.awt.Color(153, 153, 153));
-        pnlTotales.setMinimumSize(new java.awt.Dimension(336, 173));
+        pnlPrincipalResumen.setBackground(new java.awt.Color(217, 217, 217));
+        pnlPrincipalResumen.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblTituloSubtotal.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        lblTituloSubtotal.setForeground(new java.awt.Color(51, 51, 51));
-        lblTituloSubtotal.setText("Subtotal:");
+        lblImgCarrito.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        lblImgCarrito.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconoCarrito.png"))); // NOI18N
+        pnlPrincipalResumen.add(lblImgCarrito, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 50, 50));
 
-        lblTituloTax.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        lblTituloTax.setForeground(new java.awt.Color(51, 51, 51));
-        lblTituloTax.setText("Tax (16%):");
+        lblResumen.setFont(new java.awt.Font("Corbel", 1, 30)); // NOI18N
+        lblResumen.setText("Resumen");
+        pnlPrincipalResumen.add(lblResumen, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, -1, -1));
 
-        lblTituloTotal.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        lblTituloTotal.setForeground(new java.awt.Color(0, 0, 0));
-        lblTituloTotal.setText("Total:");
+        pnlDisplayItems.setBackground(new java.awt.Color(217, 217, 217));
 
-        lblSubtotal.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblSubtotal.setForeground(new java.awt.Color(51, 51, 51));
-        lblSubtotal.setText("$0");
+        jSeparator1.setBackground(new java.awt.Color(153, 153, 153));
+        jSeparator1.setForeground(new java.awt.Color(153, 153, 153));
 
-        lblTax.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblTax.setForeground(new java.awt.Color(51, 51, 51));
-        lblTax.setText("$0");
+        jspProductosCarrito.setBackground(new java.awt.Color(217, 217, 217));
 
-        lblTotal.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblTotal.setForeground(new java.awt.Color(0, 0, 0));
-        lblTotal.setText("$0");
-
-        btnContinuar.setBackground(new java.awt.Color(204, 51, 0));
-        btnContinuar.setText("Continuar");
-        btnContinuar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-
-        javax.swing.GroupLayout pnlTotalesLayout = new javax.swing.GroupLayout(pnlTotales);
-        pnlTotales.setLayout(pnlTotalesLayout);
-        pnlTotalesLayout.setHorizontalGroup(
-            pnlTotalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGroup(pnlTotalesLayout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addGroup(pnlTotalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlTotalesLayout.createSequentialGroup()
-                        .addComponent(lblTituloSubtotal)
-                        .addGap(215, 215, 215)
-                        .addComponent(lblSubtotal))
-                    .addGroup(pnlTotalesLayout.createSequentialGroup()
-                        .addComponent(lblTituloTax)
-                        .addGap(195, 195, 195)
-                        .addComponent(lblTax))
-                    .addGroup(pnlTotalesLayout.createSequentialGroup()
-                        .addComponent(lblTituloTotal)
-                        .addGap(241, 241, 241)
-                        .addComponent(lblTotal))))
-            .addGroup(pnlTotalesLayout.createSequentialGroup()
-                .addGap(91, 91, 91)
-                .addComponent(btnContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+        javax.swing.GroupLayout pnlDisplayItemsLayout = new javax.swing.GroupLayout(pnlDisplayItems);
+        pnlDisplayItems.setLayout(pnlDisplayItemsLayout);
+        pnlDisplayItemsLayout.setHorizontalGroup(
+            pnlDisplayItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlDisplayItemsLayout.createSequentialGroup()
+                .addComponent(jspProductosCarrito, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 8, Short.MAX_VALUE))
+            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
-        pnlTotalesLayout.setVerticalGroup(
-            pnlTotalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlTotalesLayout.createSequentialGroup()
-                .addGroup(pnlTotalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblTituloSubtotal)
-                    .addGroup(pnlTotalesLayout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(lblSubtotal)))
-                .addGap(18, 18, 18)
-                .addGroup(pnlTotalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblTituloTax)
-                    .addGroup(pnlTotalesLayout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(lblTax)))
-                .addGap(16, 16, 16)
+        pnlDisplayItemsLayout.setVerticalGroup(
+            pnlDisplayItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlDisplayItemsLayout.createSequentialGroup()
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(4, 4, 4)
-                .addGroup(pnlTotalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblTituloTotal)
-                    .addGroup(pnlTotalesLayout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(lblTotal)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
-                .addComponent(btnContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jspProductosCarrito, javax.swing.GroupLayout.DEFAULT_SIZE, 408, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        btnEliminarCarrito.setBackground(new java.awt.Color(181, 181, 181));
-        btnEliminarCarrito.setForeground(new java.awt.Color(204, 0, 0));
-        btnEliminarCarrito.setText("Eliminar carrito");
-        btnEliminarCarrito.setBorder(null);
-        btnEliminarCarrito.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarCarritoActionPerformed(evt);
-            }
-        });
+        pnlPrincipalResumen.add(pnlDisplayItems, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 350, 430));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\cinca\\Documents\\carro 1.png")); // NOI18N
+        lblTaxDisplay.setFont(new java.awt.Font("Corbel", 0, 18)); // NOI18N
+        lblTaxDisplay.setForeground(new java.awt.Color(102, 102, 102));
+        lblTaxDisplay.setText("$0");
+        pnlPrincipalResumen.add(lblTaxDisplay, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 550, -1, -1));
 
-        jPanel1.setBackground(new java.awt.Color(181, 181, 181));
+        lblTotal.setFont(new java.awt.Font("Corbel", 0, 18)); // NOI18N
+        lblTotal.setText("Total");
+        pnlPrincipalResumen.add(lblTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 600, -1, -1));
 
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("Resumen");
+        lblSubtotal1.setFont(new java.awt.Font("Corbel", 0, 18)); // NOI18N
+        lblSubtotal1.setForeground(new java.awt.Color(102, 102, 102));
+        lblSubtotal1.setText("Subtotal:");
+        pnlPrincipalResumen.add(lblSubtotal1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 510, -1, -1));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addComponent(jLabel1)
-                .addContainerGap(213, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addContainerGap(570, Short.MAX_VALUE))
-        );
+        lblTax.setFont(new java.awt.Font("Corbel", 0, 18)); // NOI18N
+        lblTax.setForeground(new java.awt.Color(102, 102, 102));
+        lblTax.setText("Tax(16%)");
+        pnlPrincipalResumen.add(lblTax, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 550, -1, -1));
 
-        pnlContenedprProd.setBackground(new java.awt.Color(204, 204, 204));
+        lblTotalDisplay.setFont(new java.awt.Font("Corbel", 0, 18)); // NOI18N
+        lblTotalDisplay.setText("$0");
+        pnlPrincipalResumen.add(lblTotalDisplay, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 600, -1, -1));
 
-        javax.swing.GroupLayout pnlContenedprProdLayout = new javax.swing.GroupLayout(pnlContenedprProd);
-        pnlContenedprProd.setLayout(pnlContenedprProdLayout);
-        pnlContenedprProdLayout.setHorizontalGroup(
-            pnlContenedprProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 362, Short.MAX_VALUE)
-        );
-        pnlContenedprProdLayout.setVerticalGroup(
-            pnlContenedprProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 424, Short.MAX_VALUE)
-        );
+        jSeparator2.setBackground(new java.awt.Color(153, 153, 153));
+        jSeparator2.setForeground(new java.awt.Color(153, 153, 153));
+        pnlPrincipalResumen.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 580, 340, 10));
 
-        jScrollPane1.setViewportView(pnlContenedprProd);
+        lblSubtotalDisplay2.setFont(new java.awt.Font("Corbel", 0, 18)); // NOI18N
+        lblSubtotalDisplay2.setText("$0");
+        pnlPrincipalResumen.add(lblSubtotalDisplay2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 510, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnEliminarCarrito, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(9, 9, 9))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(pnlTotales, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addContainerGap()))
+                .addComponent(pnlPrincipalResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 5, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnEliminarCarrito, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlTotales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(44, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(21, 21, 21)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(61, Short.MAX_VALUE)))
+                .addContainerGap()
+                .addComponent(pnlPrincipalResumen, javax.swing.GroupLayout.DEFAULT_SIZE, 649, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnEliminarCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarCarritoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEliminarCarritoActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private itson.org.ghosttracks.utilerias.BotonRedondeado btnContinuar;
-    private javax.swing.JButton btnEliminarCarrito;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JLabel lblSubtotal;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JScrollPane jspProductosCarrito;
+    private javax.swing.JLabel lblImgCarrito;
+    private javax.swing.JLabel lblResumen;
+    private javax.swing.JLabel lblSubtotal1;
+    private javax.swing.JLabel lblSubtotalDisplay2;
     private javax.swing.JLabel lblTax;
-    private javax.swing.JLabel lblTituloSubtotal;
-    private javax.swing.JLabel lblTituloTax;
-    private javax.swing.JLabel lblTituloTotal;
+    private javax.swing.JLabel lblTaxDisplay;
     private javax.swing.JLabel lblTotal;
-    private javax.swing.JPanel pnlContenedprProd;
-    private javax.swing.JPanel pnlTotales;
+    private javax.swing.JLabel lblTotalDisplay;
+    private javax.swing.JPanel pnlDisplayItems;
+    private itson.org.ghosttracks.utilerias.PanelRedondeado pnlPrincipalResumen;
     // End of variables declaration//GEN-END:variables
 }
