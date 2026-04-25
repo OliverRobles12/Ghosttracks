@@ -19,11 +19,14 @@ import itson.org.ghosttracks.negocio.objetosNegocio.Excepciones.NegocioException
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class PedidosBO implements IPedidosBO {
 
     private final IPedidosDAO pedidosDAO;
     private final IProveedorPago proveedorPago;
+    private static final Logger LOGGER = Logger.getLogger(PedidosBO.class.getName());
 
     public PedidosBO() {
         this.pedidosDAO = new PedidosMockDAO();
@@ -79,6 +82,7 @@ public class PedidosBO implements IPedidosBO {
             pagoCliente.getFechaExpiracion() 
         );
         if (!pagoExitoso) {
+            LOGGER.log(Level.WARNING, "El cobro fue rechazado por el proveedor de pagos.");
             throw new NegocioException("El banco rechazó la transacción. Verifique sus fondos o datos.");
         }
         
@@ -111,10 +115,12 @@ public class PedidosBO implements IPedidosBO {
             pedidoDto.setIdPedido(pedidoGuardado.getIdPedido());
             pedidoDto.setEstado(EstadoPedidoDTO.PAGADO); 
             
+            LOGGER.log(Level.INFO, "Pedido guardado correctamente con ID: {0}", pedidoGuardado.getIdPedido());
             return pedidoDto;
             
         } catch (PersistenciaException e) {
+            LOGGER.log(Level.SEVERE, "ERROR CRÍTICO: Cobro realizado pero falló la persistencia del pedido.", e);
             throw new NegocioException("Cobro exitoso pero ocurrió un error al registrar el pedido en la BD.", e);
         }
-    }
+    }    
 }

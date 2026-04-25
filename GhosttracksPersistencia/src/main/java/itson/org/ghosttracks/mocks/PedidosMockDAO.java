@@ -10,6 +10,8 @@ import itson.org.ghosttracks.enums.EstadoPedido;
 import itson.org.ghosttracks.exceptions.PersistenciaException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -18,6 +20,7 @@ import java.util.List;
 public class PedidosMockDAO implements IPedidosDAO{
     private List<Pedido> baseDatosPedidos = new ArrayList<>();
     private Long idAutoincrementable = 1L;
+    private static final Logger LOGGER = Logger.getLogger(PedidosMockDAO.class.getName());
 
     public PedidosMockDAO() {
         precargarPedidos();
@@ -61,9 +64,10 @@ public class PedidosMockDAO implements IPedidosDAO{
             pedido.setIdPedido(idAutoincrementable++);
             baseDatosPedidos.add(pedido);
             
-            System.out.println(pedido);
+            LOGGER.log(Level.INFO, "ENTIDAD PERSISTIDA: Pedido guardado exitosamente con ID {0}", pedido.getIdPedido());
             return pedido;
         } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, "Error al intentar persistir el pedido en la lista interna", e);
             throw new PersistenciaException("Error al guardar el pedido en BD: " + e.getMessage());
         }
     }
@@ -73,9 +77,11 @@ public class PedidosMockDAO implements IPedidosDAO{
         for (Pedido pedido : baseDatosPedidos) {
             if (pedido.getIdPedido().equals(idPedido)) {
                 pedido.setEstado(nuevoEstado);
+                LOGGER.log(Level.INFO, "Estado actualizado correctamente para el pedido {0}", idPedido);
                 return pedido; 
             }
         }
+        LOGGER.log(Level.WARNING, "No se pudo actualizar: Pedido ID {0} no encontrado.", idPedido);
         throw new PersistenciaException("No se encontró ningún pedido con el ID: " + idPedido);
     }
     
@@ -84,6 +90,7 @@ public class PedidosMockDAO implements IPedidosDAO{
         try {
             return new ArrayList<>(baseDatosPedidos);
         } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, "Error al recuperar la lista de pedidos", e);
             throw new PersistenciaException("Error al consultar los pedidos: " + e.getMessage());
         }
     }
@@ -93,6 +100,9 @@ public class PedidosMockDAO implements IPedidosDAO{
         return baseDatosPedidos.stream()
                 .filter(p -> p.getIdPedido().equals(idPedido))
                 .findFirst()
-                .orElseThrow(() -> new PersistenciaException("Pedido no encontrado: " + idPedido));
+                .orElseThrow(() -> {
+                    LOGGER.log(Level.WARNING, "Consulta fallida: Pedido {0} no existe.", idPedido);
+                    return new PersistenciaException("Pedido no encontrado: " + idPedido);
+                });
     }
 }

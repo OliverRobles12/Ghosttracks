@@ -13,6 +13,8 @@ import itson.org.stripeapi.enums.EstadoPago;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Adaptador que conecta nuestro sistema Ghosttracks con la API externa de Stripe.
@@ -21,6 +23,7 @@ import java.time.format.DateTimeParseException;
 public class StripeAdapter implements IProveedorPago {
 
     private final IStripeAPI stripeAPI;
+    private static final Logger LOGGER = Logger.getLogger(StripeAdapter.class.getName());
 
     public StripeAdapter() {
         // Instanciamos nuestra API Simulada
@@ -41,15 +44,25 @@ public class StripeAdapter implements IProveedorPago {
             YearMonth yearMonth = YearMonth.parse(fechaExpiracion, formatter);
             solicitud.setFechaExpiracion(yearMonth.atEndOfMonth());
         } catch (DateTimeParseException e) {
+            LOGGER.log(Level.SEVERE, "Error al parsear la fecha de expiración: {0}", fechaExpiracion);
             return false; 
         }
         
-        RespuestaPagoDTO respuesta = stripeAPI.procesarPago(solicitud);
+        try {
+            RespuestaPagoDTO respuesta = stripeAPI.procesarPago(solicitud);
 
-        if (respuesta.getEstado() == EstadoPago.APROBADO) {
-            return true;
-        } else {
+            if (respuesta.getEstado() == EstadoPago.APROBADO) {
+                LOGGER.log(Level.INFO, "Pago aprobado exitosamente. ID Transacción: {0}", respuesta.getIdTransaccion());
+                return true;
+            } else {
+                LOGGER.log(Level.WARNING, "Pago rechazado por Stripe. Motivo: {0}", respuesta.getMensaje());
+                return false;
+            }
+            
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, "Ocurrió un error inesperado en la comunicación con Stripe", e);
             return false;
         }
     }
 }
+
