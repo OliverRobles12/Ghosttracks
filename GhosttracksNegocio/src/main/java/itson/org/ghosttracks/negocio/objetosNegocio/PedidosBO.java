@@ -74,17 +74,13 @@ public class PedidosBO implements IPedidosBO {
 
         DatosPagoDTO pagoCliente = pedidoDto.getDatosPago(); 
         
-        boolean pagoExitoso = proveedorPago.cobrar(
+        proveedorPago.cobrar(
             pedidoDto.getTotal(), 
             pagoCliente.getTitularTarjeta(), 
             pagoCliente.getNumeroTrajeta(), 
             pagoCliente.getCvv(), 
             pagoCliente.getFechaExpiracion() 
         );
-        if (!pagoExitoso) {
-            LOGGER.log(Level.WARNING, "El cobro fue rechazado por el proveedor de pagos.");
-            throw new NegocioException("El banco rechazó la transacción. Verifique sus fondos o datos.");
-        }
         
         try {
             Pedido entidadPedido = new Pedido();

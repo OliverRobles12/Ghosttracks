@@ -157,7 +157,7 @@ public class VentaEnLineaFachada implements IVentaEnLinea {
             return pedidosBO.generarPedido(pedidoDto);
 
         } catch (NegocioException e) {
-            throw new VentaEnLineaException(CodigoErrorVenta.ERROR_PERSISTENCIA, "Error al registrar el pedido", e);
+            throw new VentaEnLineaException(CodigoErrorVenta.ERROR_PERSISTENCIA, e.getMessage(), e);
         }
     }
 

@@ -4,6 +4,8 @@
  */
 package itson.org.ghosttracks.negocio.interfaces;
 
+import itson.org.ghosttracks.negocio.objetosNegocio.Excepciones.NegocioException;
+
 /**
  *
  * @author emyla
@@ -18,5 +20,5 @@ public interface IProveedorPago {
      * @param fechaExpiracion Fecha en formato texto 
      * @return true si el banco aprobó el pago, false si lo rechazó
      */
-    boolean cobrar(Double monto, String titular, String numeroTarjeta, String cvv, String fechaExpiracion);
+    public boolean cobrar(Double monto, String titular, String numeroTarjeta, String cvv, String fechaExpiracion) throws NegocioException;
 }

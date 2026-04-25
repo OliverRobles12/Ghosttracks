@@ -5,6 +5,7 @@
 package itson.org.ghosttracks.negocio.adaptador;
 
 import itson.org.ghosttracks.negocio.interfaces.IProveedorPago;
+import itson.org.ghosttracks.negocio.objetosNegocio.Excepciones.NegocioException;
 import itson.org.stripe.negocio.interfaces.IStripeAPI;
 import itson.org.stripe.negocio.objetosNegocio.StripeSimuladoBO;
 import itson.org.stripeapi.dtos.RespuestaPagoDTO;
@@ -31,7 +32,7 @@ public class StripeAdapter implements IProveedorPago {
     }
 
     @Override
-    public boolean cobrar(Double monto, String titular, String numeroTarjeta, String cvv, String fechaExpiracion) {
+    public boolean cobrar(Double monto, String titular, String numeroTarjeta, String cvv, String fechaExpiracion) throws NegocioException {
         
         SolicitudPagoDTO solicitud = new SolicitudPagoDTO();
         solicitud.setMonto(monto);
@@ -49,6 +50,7 @@ public class StripeAdapter implements IProveedorPago {
         }
         
         try {
+            
             RespuestaPagoDTO respuesta = stripeAPI.procesarPago(solicitud);
 
             if (respuesta.getEstado() == EstadoPago.APROBADO) {
@@ -56,12 +58,15 @@ public class StripeAdapter implements IProveedorPago {
                 return true;
             } else {
                 LOGGER.log(Level.WARNING, "Pago rechazado por Stripe. Motivo: {0}", respuesta.getMensaje());
-                return false;
+                throw new NegocioException(respuesta.getMensaje()); 
             }
             
+        }catch (NegocioException e) {
+            throw e;
+                
         } catch (Exception e) {
             LOGGER.log(Level.SEVERE, "Ocurrió un error inesperado en la comunicación con Stripe", e);
-            return false;
+            throw new NegocioException("Error de conexión con el banco.");
         }
     }
 }
