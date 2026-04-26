@@ -19,4 +19,5 @@ public interface IPedidosBO {
     Pedido actualizarEstado(Long idPedido, EstadoPedido nuevoEstado) throws NegocioException;
     List<Pedido> consultarTodos() throws NegocioException;
     public PedidoDTO generarPedido(PedidoDTO pedidoDto) throws NegocioException;
+    Pedido obtenerPedidoPorId(Long idPedido) throws NegocioException;
 }

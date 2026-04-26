@@ -219,4 +219,9 @@ public class VentaEnLineaFachada implements IVentaEnLinea {
         dto.setEstado(p.getEstado());
         return dto;
     }
+
+    @Override
+    public PedidoDTO obtenerPedidoPorID(Long idPedido) throws VentaEnLineaException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

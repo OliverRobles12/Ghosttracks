@@ -119,4 +119,17 @@ public class PedidosBO implements IPedidosBO {
             throw new NegocioException("Cobro exitoso pero ocurrió un error al registrar el pedido en la BD.", e);
         }
     }    
+
+    @Override
+    public Pedido obtenerPedidoPorId(Long idPedido) throws NegocioException {
+        if (idPedido == null ){
+            throw new NegocioException("El id del pedido no es valido.");
+        }
+        try{
+            return pedidosDAO.consultarPorId(idPedido);
+        } catch(PersistenciaException e){
+            LOGGER.log(Level.WARNING, "ERROR: No se logró consultar el pedido por el ID.", e);
+            throw new NegocioException("No se logró consultar el pedido por el ID", e);
+        }
+    }
 }
