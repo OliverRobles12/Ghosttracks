@@ -3,6 +3,9 @@ package itson.org.ghosttracks.presentacion.cliente;
 
 import itson.org.ghosttracks.controladores.ControlVentaEnLinea;
 import itson.org.ghosttracks.dtos.ProductoDTO;
+import itson.org.ghosttracks.utilerias.pnlProductoSugerencia;
+import java.util.Collections;
+import java.util.List;
 
 /**
  *
@@ -18,6 +21,7 @@ public class PantallaVistaProducto extends javax.swing.JPanel {
         this.producto = producto;
         initComponents();
         cargarDatosProducto();
+        cargarSugerenciasAlAzar();
     }
 
     /**
@@ -34,28 +38,9 @@ public class PantallaVistaProducto extends javax.swing.JPanel {
         panelRedondeado1 = new itson.org.ghosttracks.utilerias.PanelRedondeado();
         panelRedondeado4 = new itson.org.ghosttracks.utilerias.PanelRedondeado();
         lblImgProducto = new javax.swing.JLabel();
-        panelRedondeado3 = new itson.org.ghosttracks.utilerias.PanelRedondeado();
-        lblNombreProducto1 = new javax.swing.JLabel();
-        pnlSugerencia01 = new itson.org.ghosttracks.utilerias.PanelRedondeado();
-        pnlImgSug01 = new itson.org.ghosttracks.utilerias.PanelRedondeado();
-        lblProductSug01 = new javax.swing.JLabel();
-        lblArtistSug01 = new javax.swing.JLabel();
-        lblPrecioSug01 = new javax.swing.JLabel();
-        pnlSugerencia02 = new itson.org.ghosttracks.utilerias.PanelRedondeado();
-        pnlImgSug02 = new itson.org.ghosttracks.utilerias.PanelRedondeado();
-        lblProductSug02 = new javax.swing.JLabel();
-        lblArtistSug02 = new javax.swing.JLabel();
-        lblPrecioSug02 = new javax.swing.JLabel();
-        pnlSugerencia03 = new itson.org.ghosttracks.utilerias.PanelRedondeado();
-        pnlImgSug03 = new itson.org.ghosttracks.utilerias.PanelRedondeado();
-        lblProductSug03 = new javax.swing.JLabel();
-        lblArtistSug03 = new javax.swing.JLabel();
-        lblPrecioSug03 = new javax.swing.JLabel();
-        pnlSugerencia04 = new itson.org.ghosttracks.utilerias.PanelRedondeado();
-        pnlImgSug04 = new itson.org.ghosttracks.utilerias.PanelRedondeado();
-        lblProductSug04 = new javax.swing.JLabel();
-        lblArtistSug04 = new javax.swing.JLabel();
-        lblPrecioSug04 = new javax.swing.JLabel();
+        pnlSugerenciasFondo = new itson.org.ghosttracks.utilerias.PanelRedondeado();
+        pnlSugerencias = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         botonRedondeado1 = new itson.org.ghosttracks.utilerias.BotonRedondeado();
         panelRedondeado5 = new itson.org.ghosttracks.utilerias.PanelRedondeado();
         lblNombreProducto = new javax.swing.JLabel();
@@ -65,10 +50,11 @@ public class PantallaVistaProducto extends javax.swing.JPanel {
         botonRedondeado2 = new itson.org.ghosttracks.utilerias.BotonRedondeado();
         botonRedondeado3 = new itson.org.ghosttracks.utilerias.BotonRedondeado();
         lblUnidad = new javax.swing.JLabel();
-        btnAniadirAlCarrito = new javax.swing.JButton();
+        AniadirProducto = new itson.org.ghosttracks.utilerias.BotonRedondeado();
         lblSetlist = new javax.swing.JLabel();
 
         jScrollPane1.setBorder(null);
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         jScrollPane1.setPreferredSize(new java.awt.Dimension(1100, 675));
 
@@ -92,14 +78,14 @@ public class PantallaVistaProducto extends javax.swing.JPanel {
             panelRedondeado4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRedondeado4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblImgProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addComponent(lblImgProducto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         panelRedondeado4Layout.setVerticalGroup(
             panelRedondeado4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRedondeado4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblImgProducto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblImgProducto, javax.swing.GroupLayout.DEFAULT_SIZE, 464, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -109,285 +95,45 @@ public class PantallaVistaProducto extends javax.swing.JPanel {
             panelRedondeado1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRedondeado1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(panelRedondeado4, javax.swing.GroupLayout.DEFAULT_SIZE, 421, Short.MAX_VALUE)
+                .addComponent(panelRedondeado4, javax.swing.GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE)
                 .addContainerGap())
         );
         panelRedondeado1Layout.setVerticalGroup(
             panelRedondeado1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRedondeado1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(panelRedondeado4, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panelRedondeado4, javax.swing.GroupLayout.DEFAULT_SIZE, 476, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        pnlSugerenciasFondo.setBackground(new java.awt.Color(217, 217, 217));
+        pnlSugerenciasFondo.setPreferredSize(new java.awt.Dimension(1040, 800));
+
+        pnlSugerencias.setBackground(new java.awt.Color(217, 217, 217));
+        pnlSugerencias.setMaximumSize(new java.awt.Dimension(559, 716));
+        pnlSugerencias.setMinimumSize(new java.awt.Dimension(559, 716));
+        pnlSugerencias.setPreferredSize(new java.awt.Dimension(559, 716));
+
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        jLabel1.setText("Tambien podría interesarte...");
+
+        javax.swing.GroupLayout pnlSugerenciasFondoLayout = new javax.swing.GroupLayout(pnlSugerenciasFondo);
+        pnlSugerenciasFondo.setLayout(pnlSugerenciasFondoLayout);
+        pnlSugerenciasFondoLayout.setHorizontalGroup(
+            pnlSugerenciasFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlSugerenciasFondoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(pnlSugerencias, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-
-        panelRedondeado3.setBackground(new java.awt.Color(217, 217, 217));
-        panelRedondeado3.setPreferredSize(new java.awt.Dimension(1070, 800));
-
-        lblNombreProducto1.setFont(new java.awt.Font("Corbel", 1, 36)); // NOI18N
-        lblNombreProducto1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblNombreProducto1.setText("Tambien podría gustarte...");
-        lblNombreProducto1.setToolTipText("");
-
-        pnlSugerencia01.setBackground(new java.awt.Color(230, 230, 230));
-
-        javax.swing.GroupLayout pnlImgSug01Layout = new javax.swing.GroupLayout(pnlImgSug01);
-        pnlImgSug01.setLayout(pnlImgSug01Layout);
-        pnlImgSug01Layout.setHorizontalGroup(
-            pnlImgSug01Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        pnlImgSug01Layout.setVerticalGroup(
-            pnlImgSug01Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 232, Short.MAX_VALUE)
-        );
-
-        lblProductSug01.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
-        lblProductSug01.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblProductSug01.setText("Producto Sugerido 01");
-
-        lblArtistSug01.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        lblArtistSug01.setForeground(new java.awt.Color(102, 102, 102));
-        lblArtistSug01.setText("Artista 01");
-
-        lblPrecioSug01.setFont(new java.awt.Font("Corbel", 1, 24)); // NOI18N
-        lblPrecioSug01.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblPrecioSug01.setText("$00.00");
-
-        javax.swing.GroupLayout pnlSugerencia01Layout = new javax.swing.GroupLayout(pnlSugerencia01);
-        pnlSugerencia01.setLayout(pnlSugerencia01Layout);
-        pnlSugerencia01Layout.setHorizontalGroup(
-            pnlSugerencia01Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlSugerencia01Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlSugerencia01Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnlImgSug01, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblProductSug01, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblPrecioSug01, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(pnlSugerencia01Layout.createSequentialGroup()
-                        .addComponent(lblArtistSug01, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 14, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        pnlSugerencia01Layout.setVerticalGroup(
-            pnlSugerencia01Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlSugerencia01Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pnlImgSug01, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblProductSug01, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblArtistSug01)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblPrecioSug01, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        pnlSugerencia02.setBackground(new java.awt.Color(230, 230, 230));
-
-        javax.swing.GroupLayout pnlImgSug02Layout = new javax.swing.GroupLayout(pnlImgSug02);
-        pnlImgSug02.setLayout(pnlImgSug02Layout);
-        pnlImgSug02Layout.setHorizontalGroup(
-            pnlImgSug02Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        pnlImgSug02Layout.setVerticalGroup(
-            pnlImgSug02Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 230, Short.MAX_VALUE)
-        );
-
-        lblProductSug02.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
-        lblProductSug02.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblProductSug02.setText("Producto Sugerido 02");
-
-        lblArtistSug02.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        lblArtistSug02.setForeground(new java.awt.Color(102, 102, 102));
-        lblArtistSug02.setText("Artista 02");
-
-        lblPrecioSug02.setFont(new java.awt.Font("Corbel", 1, 24)); // NOI18N
-        lblPrecioSug02.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblPrecioSug02.setText("$00.00");
-
-        javax.swing.GroupLayout pnlSugerencia02Layout = new javax.swing.GroupLayout(pnlSugerencia02);
-        pnlSugerencia02.setLayout(pnlSugerencia02Layout);
-        pnlSugerencia02Layout.setHorizontalGroup(
-            pnlSugerencia02Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlSugerencia02Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlSugerencia02Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnlImgSug02, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(pnlSugerencia02Layout.createSequentialGroup()
-                        .addComponent(lblArtistSug02, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(lblPrecioSug02, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-            .addGroup(pnlSugerencia02Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(pnlSugerencia02Layout.createSequentialGroup()
-                    .addGap(4, 4, 4)
-                    .addComponent(lblProductSug02, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGap(5, 5, 5)))
-        );
-        pnlSugerencia02Layout.setVerticalGroup(
-            pnlSugerencia02Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlSugerencia02Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pnlImgSug02, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
-                .addComponent(lblArtistSug02)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblPrecioSug02, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(7, Short.MAX_VALUE))
-            .addGroup(pnlSugerencia02Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(pnlSugerencia02Layout.createSequentialGroup()
-                    .addGap(246, 246, 246)
-                    .addComponent(lblProductSug02)
-                    .addContainerGap(73, Short.MAX_VALUE)))
-        );
-
-        pnlSugerencia03.setBackground(new java.awt.Color(230, 230, 230));
-
-        javax.swing.GroupLayout pnlImgSug03Layout = new javax.swing.GroupLayout(pnlImgSug03);
-        pnlImgSug03.setLayout(pnlImgSug03Layout);
-        pnlImgSug03Layout.setHorizontalGroup(
-            pnlImgSug03Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        pnlImgSug03Layout.setVerticalGroup(
-            pnlImgSug03Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 226, Short.MAX_VALUE)
-        );
-
-        lblProductSug03.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
-        lblProductSug03.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblProductSug03.setText("Producto Sugerido 03");
-
-        lblArtistSug03.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        lblArtistSug03.setForeground(new java.awt.Color(102, 102, 102));
-        lblArtistSug03.setText("Artista 03");
-
-        lblPrecioSug03.setFont(new java.awt.Font("Corbel", 1, 24)); // NOI18N
-        lblPrecioSug03.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblPrecioSug03.setText("$00.00");
-
-        javax.swing.GroupLayout pnlSugerencia03Layout = new javax.swing.GroupLayout(pnlSugerencia03);
-        pnlSugerencia03.setLayout(pnlSugerencia03Layout);
-        pnlSugerencia03Layout.setHorizontalGroup(
-            pnlSugerencia03Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlSugerencia03Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlSugerencia03Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnlImgSug03, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(pnlSugerencia03Layout.createSequentialGroup()
-                        .addComponent(lblArtistSug03, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 14, Short.MAX_VALUE))
-                    .addComponent(lblProductSug03, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblPrecioSug03, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        pnlSugerencia03Layout.setVerticalGroup(
-            pnlSugerencia03Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlSugerencia03Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pnlImgSug03, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        pnlSugerenciasFondoLayout.setVerticalGroup(
+            pnlSugerenciasFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlSugerenciasFondoLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblProductSug03, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
-                .addComponent(lblArtistSug03)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblPrecioSug03)
-                .addContainerGap())
-        );
-
-        pnlSugerencia04.setBackground(new java.awt.Color(230, 230, 230));
-
-        javax.swing.GroupLayout pnlImgSug04Layout = new javax.swing.GroupLayout(pnlImgSug04);
-        pnlImgSug04.setLayout(pnlImgSug04Layout);
-        pnlImgSug04Layout.setHorizontalGroup(
-            pnlImgSug04Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        pnlImgSug04Layout.setVerticalGroup(
-            pnlImgSug04Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 226, Short.MAX_VALUE)
-        );
-
-        lblProductSug04.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
-        lblProductSug04.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblProductSug04.setText("Producto Sugerido 04");
-
-        lblArtistSug04.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        lblArtistSug04.setForeground(new java.awt.Color(102, 102, 102));
-        lblArtistSug04.setText("Artista 04");
-
-        lblPrecioSug04.setFont(new java.awt.Font("Corbel", 1, 24)); // NOI18N
-        lblPrecioSug04.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblPrecioSug04.setText("$00.00");
-
-        javax.swing.GroupLayout pnlSugerencia04Layout = new javax.swing.GroupLayout(pnlSugerencia04);
-        pnlSugerencia04.setLayout(pnlSugerencia04Layout);
-        pnlSugerencia04Layout.setHorizontalGroup(
-            pnlSugerencia04Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlSugerencia04Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlSugerencia04Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnlImgSug04, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblProductSug04, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(pnlSugerencia04Layout.createSequentialGroup()
-                        .addComponent(lblArtistSug04, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(lblPrecioSug04, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        pnlSugerencia04Layout.setVerticalGroup(
-            pnlSugerencia04Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlSugerencia04Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pnlImgSug04, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblProductSug04, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblArtistSug04)
-                .addGap(18, 18, 18)
-                .addComponent(lblPrecioSug04)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout panelRedondeado3Layout = new javax.swing.GroupLayout(panelRedondeado3);
-        panelRedondeado3.setLayout(panelRedondeado3Layout);
-        panelRedondeado3Layout.setHorizontalGroup(
-            panelRedondeado3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRedondeado3Layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addGroup(panelRedondeado3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelRedondeado3Layout.createSequentialGroup()
-                        .addComponent(lblNombreProducto1, javax.swing.GroupLayout.PREFERRED_SIZE, 606, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRedondeado3Layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addGroup(panelRedondeado3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(panelRedondeado3Layout.createSequentialGroup()
-                                .addComponent(pnlSugerencia01, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(pnlSugerencia02, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(50, 50, 50))
-                            .addGroup(panelRedondeado3Layout.createSequentialGroup()
-                                .addComponent(pnlSugerencia03, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(26, 26, 26)
-                                .addComponent(pnlSugerencia04, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(42, 42, 42))))))
-        );
-        panelRedondeado3Layout.setVerticalGroup(
-            panelRedondeado3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRedondeado3Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(lblNombreProducto1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelRedondeado3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(pnlSugerencia02, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlSugerencia01, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(panelRedondeado3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(pnlSugerencia03, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlSugerencia04, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(pnlSugerencias, javax.swing.GroupLayout.PREFERRED_SIZE, 784, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
@@ -396,6 +142,7 @@ public class PantallaVistaProducto extends javax.swing.JPanel {
         botonRedondeado1.addActionListener(this::botonRedondeado1ActionPerformed);
 
         panelRedondeado5.setBackground(new java.awt.Color(217, 217, 217));
+        panelRedondeado5.setPreferredSize(new java.awt.Dimension(440, 322));
 
         lblNombreProducto.setFont(new java.awt.Font("Corbel", 1, 36)); // NOI18N
         lblNombreProducto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -408,7 +155,7 @@ public class PantallaVistaProducto extends javax.swing.JPanel {
         lblArtista.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblArtista.setText("Artista");
 
-        lblPrecio.setFont(new java.awt.Font("Corbel", 1, 30)); // NOI18N
+        lblPrecio.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
         lblPrecio.setForeground(new java.awt.Color(51, 51, 51));
         lblPrecio.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblPrecio.setText("$00.00");
@@ -430,46 +177,39 @@ public class PantallaVistaProducto extends javax.swing.JPanel {
         lblUnidad.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblUnidad.setText("pzas.");
 
-        btnAniadirAlCarrito.setBackground(new java.awt.Color(255, 122, 37));
-        btnAniadirAlCarrito.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        btnAniadirAlCarrito.setForeground(new java.awt.Color(0, 0, 0));
-        btnAniadirAlCarrito.setText("Añadir al carrito");
-        btnAniadirAlCarrito.setPreferredSize(new java.awt.Dimension(200, 35));
-        btnAniadirAlCarrito.addActionListener(this::btnAniadirAlCarritoActionPerformed);
+        AniadirProducto.setBackground(new java.awt.Color(230, 94, 7));
+        AniadirProducto.setText("Añadir al carrito");
+        AniadirProducto.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        AniadirProducto.addActionListener(this::AniadirProductoActionPerformed);
 
         javax.swing.GroupLayout panelRedondeado5Layout = new javax.swing.GroupLayout(panelRedondeado5);
         panelRedondeado5.setLayout(panelRedondeado5Layout);
         panelRedondeado5Layout.setHorizontalGroup(
             panelRedondeado5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRedondeado5Layout.createSequentialGroup()
+                .addContainerGap(91, Short.MAX_VALUE)
                 .addGroup(panelRedondeado5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelRedondeado5Layout.createSequentialGroup()
-                        .addGap(211, 211, 211)
-                        .addGroup(panelRedondeado5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnAniadirAlCarrito, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(panelRedondeado5Layout.createSequentialGroup()
-                        .addGap(192, 192, 192)
-                        .addComponent(lblArtista, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRedondeado5Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(panelRedondeado5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRedondeado5Layout.createSequentialGroup()
+                        .addComponent(lblPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(165, 165, 165))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRedondeado5Layout.createSequentialGroup()
                         .addComponent(lblNombreProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(111, 111, 111))
+                        .addGap(68, 68, 68))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRedondeado5Layout.createSequentialGroup()
-                        .addGroup(panelRedondeado5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelRedondeado5Layout.createSequentialGroup()
-                                .addComponent(botonRedondeado2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(textFieldRedondeado1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(botonRedondeado3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panelRedondeado5Layout.createSequentialGroup()
-                                .addGap(61, 61, 61)
-                                .addComponent(lblUnidad)))
-                        .addGap(225, 225, 225))))
+                        .addComponent(lblUnidad)
+                        .addGap(241, 241, 241))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRedondeado5Layout.createSequentialGroup()
+                        .addGroup(panelRedondeado5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblArtista, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AniadirProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(144, 144, 144))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRedondeado5Layout.createSequentialGroup()
+                        .addComponent(botonRedondeado2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(textFieldRedondeado1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(botonRedondeado3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(174, 174, 174))))
         );
         panelRedondeado5Layout.setVerticalGroup(
             panelRedondeado5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -487,9 +227,9 @@ public class PantallaVistaProducto extends javax.swing.JPanel {
                     .addComponent(botonRedondeado3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblUnidad)
-                .addGap(18, 18, 18)
-                .addComponent(btnAniadirAlCarrito, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(AniadirProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         lblSetlist.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
@@ -503,36 +243,38 @@ public class PantallaVistaProducto extends javax.swing.JPanel {
         pnlFondoLayout.setHorizontalGroup(
             pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlFondoLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addContainerGap()
                 .addGroup(pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlFondoLayout.createSequentialGroup()
-                        .addComponent(botonRedondeado1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(pnlFondoLayout.createSequentialGroup()
                         .addGroup(pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(panelRedondeado1, javax.swing.GroupLayout.DEFAULT_SIZE, 433, Short.MAX_VALUE)
-                            .addComponent(lblSetlist, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(15, 15, 15)))
-                .addGroup(pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(panelRedondeado3, javax.swing.GroupLayout.PREFERRED_SIZE, 622, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panelRedondeado5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(15, 15, 15))
+                            .addGroup(pnlFondoLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(lblSetlist, javax.swing.GroupLayout.PREFERRED_SIZE, 446, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(botonRedondeado1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 43, Short.MAX_VALUE))
+                    .addComponent(panelRedondeado1, javax.swing.GroupLayout.DEFAULT_SIZE, 495, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelRedondeado5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 559, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pnlSugerenciasFondo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 559, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28))
         );
         pnlFondoLayout.setVerticalGroup(
             pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlFondoLayout.createSequentialGroup()
                 .addGroup(pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlFondoLayout.createSequentialGroup()
-                        .addComponent(panelRedondeado1, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(panelRedondeado1, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblSetlist, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(botonRedondeado1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(botonRedondeado1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(pnlFondoLayout.createSequentialGroup()
                         .addComponent(panelRedondeado5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(panelRedondeado3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(12, 12, 12)
+                        .addComponent(pnlSugerenciasFondo, javax.swing.GroupLayout.DEFAULT_SIZE, 865, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         jScrollPane1.setViewportView(pnlFondo);
@@ -550,7 +292,7 @@ public class PantallaVistaProducto extends javax.swing.JPanel {
             .addGap(0, 1167, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 675, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -559,18 +301,16 @@ public class PantallaVistaProducto extends javax.swing.JPanel {
         control.volverACatalogo();
     }//GEN-LAST:event_botonRedondeado1ActionPerformed
 
-    private void btnAniadirAlCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAniadirAlCarritoActionPerformed
-        // TODO
+    private void AniadirProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AniadirProductoActionPerformed
         control.agregarProductoCarrito(producto, 1);
         control.mostrarMensaje("Producto agregado con exito", false);
-    }//GEN-LAST:event_btnAniadirAlCarritoActionPerformed
+    }//GEN-LAST:event_AniadirProductoActionPerformed
 
     private void cargarDatosProducto() {
-        // 1. Llenamos los datos básicos
         lblNombreProducto.setText(producto.getNombre());
         lblArtista.setText(producto.getArtista());
         lblPrecio.setText(String.format("$%.2f", producto.getPrecio()));
-        // 2. Acomodamos el setlist (usamos HTML básico para que el JLabel acepte saltos de línea)
+
         if (producto.getSetlist() != null && !producto.getSetlist().isEmpty()) {
             String canciones = String.join("<br>", producto.getSetlist());
             lblSetlist.setText("<html><div style='text-align:center;'>" + canciones + "</div></html>");
@@ -578,18 +318,21 @@ public class PantallaVistaProducto extends javax.swing.JPanel {
             lblSetlist.setText("Setlist no disponible");
         }
 
-        // 3. Magia para descargar y escalar la imagen grande
         try {
-            java.net.URL url = new java.net.URL(producto.getImgProducto());
-            java.awt.Image imagenOriginal = javax.imageio.ImageIO.read(url);
+            String nombreArchivo = producto.getImgProducto();
+            String ruta = "/imgVistaProducto/" + nombreArchivo;
             
-            // OJO: Aquí le puse 400x400 porque en esta pantalla la imagen es más grande.
-            // Ajusta estos números dependiendo de qué tan grande sea tu lblImgProducto
-            java.awt.Image imagenEscalada = imagenOriginal.getScaledInstance(450, 450, java.awt.Image.SCALE_SMOOTH);
-            
-            lblImgProducto.setIcon(new javax.swing.ImageIcon(imagenEscalada));
-            lblImgProducto.setText(""); 
-            
+            if (ruta != null && !ruta.isEmpty()) {
+                java.net.URL urlImagenLocal = getClass().getResource(ruta);
+                if (urlImagenLocal != null) {
+                    java.awt.Image imagenOriginal = javax.imageio.ImageIO.read(urlImagenLocal);
+                    java.awt.Image imagenEscalada = imagenOriginal.getScaledInstance(407, 407, java.awt.Image.SCALE_SMOOTH);
+                    lblImgProducto.setIcon(new javax.swing.ImageIcon(imagenEscalada));
+                    lblImgProducto.setText(""); 
+                } else {
+                    throw new Exception("No se encontró la ruta en el proyecto");
+                }
+            }
         } catch (Exception e) {
             System.out.println("Error cargando imagen principal de: " + producto.getNombre());
             lblImgProducto.setIcon(null);
@@ -597,44 +340,53 @@ public class PantallaVistaProducto extends javax.swing.JPanel {
         }
     }
     
+    private void cargarSugerenciasAlAzar() {
+        try {
+            List<ProductoDTO> todosLosProductos = control.obtenerCatalogo(); 
+
+            if (todosLosProductos != null && !todosLosProductos.isEmpty()) {
+
+                Collections.shuffle(todosLosProductos);
+
+                pnlSugerencias.removeAll(); 
+
+                int cantidadSugerencias = Math.min(4, todosLosProductos.size());
+
+                for (int i = 0; i < cantidadSugerencias; i++) {
+                    ProductoDTO productoAlAzar = todosLosProductos.get(i);
+
+                    pnlProductoSugerencia tarjeta = new pnlProductoSugerencia();
+                    tarjeta.setDatosSugerencia(productoAlAzar);
+                    pnlSugerencias.add(tarjeta);
+                }
+
+                pnlSugerencias.revalidate();
+                pnlSugerencias.repaint();
+            }
+        } catch (Exception ex) {
+            System.out.println("Error al cargar sugerencias: " + ex.getMessage());
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private itson.org.ghosttracks.utilerias.BotonRedondeado AniadirProducto;
     private itson.org.ghosttracks.utilerias.BotonRedondeado botonRedondeado1;
     private itson.org.ghosttracks.utilerias.BotonRedondeado botonRedondeado2;
     private itson.org.ghosttracks.utilerias.BotonRedondeado botonRedondeado3;
-    private javax.swing.JButton btnAniadirAlCarrito;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblArtistSug01;
-    private javax.swing.JLabel lblArtistSug02;
-    private javax.swing.JLabel lblArtistSug03;
-    private javax.swing.JLabel lblArtistSug04;
     private javax.swing.JLabel lblArtista;
     private javax.swing.JLabel lblImgProducto;
     private javax.swing.JLabel lblNombreProducto;
-    private javax.swing.JLabel lblNombreProducto1;
     private javax.swing.JLabel lblPrecio;
-    private javax.swing.JLabel lblPrecioSug01;
-    private javax.swing.JLabel lblPrecioSug02;
-    private javax.swing.JLabel lblPrecioSug03;
-    private javax.swing.JLabel lblPrecioSug04;
-    private javax.swing.JLabel lblProductSug01;
-    private javax.swing.JLabel lblProductSug02;
-    private javax.swing.JLabel lblProductSug03;
-    private javax.swing.JLabel lblProductSug04;
     private javax.swing.JLabel lblSetlist;
     private javax.swing.JLabel lblUnidad;
     private itson.org.ghosttracks.utilerias.PanelRedondeado panelRedondeado1;
-    private itson.org.ghosttracks.utilerias.PanelRedondeado panelRedondeado3;
     private itson.org.ghosttracks.utilerias.PanelRedondeado panelRedondeado4;
     private itson.org.ghosttracks.utilerias.PanelRedondeado panelRedondeado5;
     private javax.swing.JPanel pnlFondo;
-    private itson.org.ghosttracks.utilerias.PanelRedondeado pnlImgSug01;
-    private itson.org.ghosttracks.utilerias.PanelRedondeado pnlImgSug02;
-    private itson.org.ghosttracks.utilerias.PanelRedondeado pnlImgSug03;
-    private itson.org.ghosttracks.utilerias.PanelRedondeado pnlImgSug04;
-    private itson.org.ghosttracks.utilerias.PanelRedondeado pnlSugerencia01;
-    private itson.org.ghosttracks.utilerias.PanelRedondeado pnlSugerencia02;
-    private itson.org.ghosttracks.utilerias.PanelRedondeado pnlSugerencia03;
-    private itson.org.ghosttracks.utilerias.PanelRedondeado pnlSugerencia04;
+    private javax.swing.JPanel pnlSugerencias;
+    private itson.org.ghosttracks.utilerias.PanelRedondeado pnlSugerenciasFondo;
     private itson.org.ghosttracks.utilerias.TextFieldRedondeado textFieldRedondeado1;
     // End of variables declaration//GEN-END:variables
 }

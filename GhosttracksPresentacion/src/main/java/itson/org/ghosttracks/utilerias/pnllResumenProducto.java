@@ -30,17 +30,28 @@ public class pnllResumenProducto extends javax.swing.JPanel {
         lblTotal.setText("$" + String.format("%.2f", subtotalProducto));
         
         try {
-            URL url = new URL(producto.getImgProducto());
-            Image imagenOriginal = javax.imageio.ImageIO.read(url);
-            Image imagenEscalada = imagenOriginal.getScaledInstance(100, 94, Image.SCALE_SMOOTH);
-            JLabel lblImagenDinamica = new javax.swing.JLabel(new ImageIcon(imagenEscalada));
-            lblImagenDinamica.setBounds(0, 0, 100, 94);
-            pnlImg.removeAll();
-            pnlImg.add(lblImagenDinamica);
-            pnlImg.revalidate();
-            pnlImg.repaint();
+            String ruta = producto.getImgProducto();
+            
+            if (ruta != null && !ruta.isEmpty()) {
+                URL urlImagenLocal = getClass().getResource(ruta);
+                
+                if (urlImagenLocal != null) {
+                    Image imagenOriginal = javax.imageio.ImageIO.read(urlImagenLocal);
+                    Image imagenEscalada = imagenOriginal.getScaledInstance(100, 94, Image.SCALE_SMOOTH);
+                    
+                    JLabel lblImagenDinamica = new javax.swing.JLabel(new ImageIcon(imagenEscalada));
+                    lblImagenDinamica.setBounds(0, 0, 100, 94);
+                    
+                    pnlImg.removeAll();
+                    pnlImg.add(lblImagenDinamica);
+                    pnlImg.revalidate();
+                    pnlImg.repaint();
+                } else {
+                    throw new Exception("Ruta no encontrada: " + ruta);
+                }
+            }
         } catch (Exception e) {
-            System.out.println("Error cargando imagen: " + producto.getNombre());
+            System.out.println("Error cargando imagen en resumen de: " + producto.getNombre() + " - " + e.getMessage());
         }
     }
 

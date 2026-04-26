@@ -36,7 +36,7 @@ public class ProductosMockDAO implements IProductosDAO {
         Producto producto1 = new Producto(
                 1L,                       
                 "Abbey Road",             
-                "abbey_road.jpg",         
+                "AbbeyRoad.png",         
                 TipoProducto.VINILO,       
                 "The Beatles",            
                 "Rock",                   
@@ -52,7 +52,7 @@ public class ProductosMockDAO implements IProductosDAO {
         Producto producto2 = new Producto(
                 2L, 
                 "Thriller", 
-                "thriller.jpg", 
+                "Thriller.png", 
                 TipoProducto.CD,         
                 "Michael Jackson", 
                 "Pop", 
@@ -67,12 +67,14 @@ public class ProductosMockDAO implements IProductosDAO {
         //PRODUCTO 3
         Producto producto3 = new Producto(
                 3L, 
-                "The Dark Side of the Moon", 
-                "dark_side.jpg", 
+                "Breach", 
+                "JoshDun.png", 
                 TipoProducto.CASSETTE,    
-                "Pink Floyd", 
-                "Rock Progresivo", 
-                Arrays.asList("Speak to Me", "Breathe (In the Air)", "On the Run", "Time", "The Great Gig in the Sky", "Money", "Us and Them"), 
+                "Twenty One Pilots", 
+                "Rock Alternativo", 
+                Arrays.asList("City Walls", "RAWFEAR", "Drum Show", "Garbage", "The Contract", 
+                        "Downstairs", "Robot Voices", "Center Mass", "Cotton Wood", "One Way", "Days Lie Dormant", 
+                        "Tally", "Intentions"), 
                 200.00, 
                 5, 
                 EstadoProducto.DISPONIBLE

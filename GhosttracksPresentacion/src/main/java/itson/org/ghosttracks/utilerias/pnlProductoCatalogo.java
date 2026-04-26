@@ -29,22 +29,32 @@ public class pnlProductoCatalogo extends javax.swing.JPanel {
         
         
         try {
-            java.net.URL url = new java.net.URL(producto.getImgProducto());
-            java.awt.Image imagenOriginal = javax.imageio.ImageIO.read(url);
-            java.awt.Image imagenEscalada = imagenOriginal.getScaledInstance(180, 150, java.awt.Image.SCALE_SMOOTH);
-            lblImg.setIcon(new javax.swing.ImageIcon(imagenEscalada));
-            lblImg.setText(""); 
-
+            String nombreArchivo = producto.getImgProducto();
+            
+            String ruta = "/imgCatalogo/" + nombreArchivo;
+            
+            if (ruta != null && !ruta.isEmpty()) {
+                java.net.URL urlImagenLocal = getClass().getResource(ruta);
+                
+                if (urlImagenLocal != null) {
+                    java.awt.Image imagenOriginal = javax.imageio.ImageIO.read(urlImagenLocal);
+                    
+                    java.awt.Image imagenEscalada = imagenOriginal.getScaledInstance(180, 175, java.awt.Image.SCALE_SMOOTH);
+                    
+                    lblImg.setIcon(new javax.swing.ImageIcon(imagenEscalada));
+                    lblImg.setText(""); 
+                } else {
+                    throw new Exception("Ruta no encontrada: " + ruta);
+                }
+            }
         } catch (Exception e) {
-            System.out.println("Error cargando imagen de: " + producto.getNombre());
+            System.out.println("Error cargando imagen de: " + producto.getNombre() + " - " + e.getMessage());
             lblImg.setIcon(null);
             lblImg.setText("Imagen no disp.");
         }
-        
         this.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
                 control.mostrarDetalleProducto(producto);
-                // control.mostrarPantallaVistaProducto(null, producto, pantallaPadre);
             }
         });
     }
@@ -108,7 +118,7 @@ public class pnlProductoCatalogo extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(pnlProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pnlImgProduct, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblNombreProducto, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
+                    .addComponent(lblNombreProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblArtista, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
@@ -120,11 +130,11 @@ public class pnlProductoCatalogo extends javax.swing.JPanel {
                 .addComponent(pnlImgProduct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblNombreProducto)
-                .addGap(34, 34, 34)
+                .addGap(18, 18, 18)
                 .addComponent(lblArtista)
-                .addGap(35, 35, 35)
+                .addGap(34, 34, 34)
                 .addComponent(lblPrecio)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(10, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -135,7 +145,9 @@ public class pnlProductoCatalogo extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlProducto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(pnlProducto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

@@ -66,6 +66,14 @@ public class ControlVentaEnLinea {
         }
     }
     
+    /**
+     * Obtiene el catálogo completo de productos disponibles.
+     * Útil para cuando necesitamos la lista de datos puros (como en las sugerencias al azar).
+     */
+    public List<ProductoDTO> obtenerCatalogo() throws Exception {
+        return ventaFachada.obtenerCatalogo();
+    }    
+    
     public void mostrarDetalleProducto(ProductoDTO productoSeleccionado) {
         navegador.irVistaProducto(productoSeleccionado);
     }
