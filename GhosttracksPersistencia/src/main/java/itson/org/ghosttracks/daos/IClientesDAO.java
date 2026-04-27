@@ -13,4 +13,5 @@ import itson.org.ghosttracks.exceptions.PersistenciaException;
  */
 public interface IClientesDAO {
     Cliente buscarPorId(Long idCliente) throws PersistenciaException;
+    public abstract Cliente iniciarSesion(String correo, String contrasena) throws PersistenciaException; 
 }

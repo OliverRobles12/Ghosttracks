@@ -6,6 +6,7 @@ package itson.org.ghosttracksventaenlinea.interfaces;
 
 import itson.org.ghosttracks.dtos.CarritoDTO;
 import itson.org.ghosttracks.dtos.ClienteDTO;
+import itson.org.ghosttracks.dtos.PaqueteDTO;
 import itson.org.ghosttracks.dtos.PedidoDTO;
 import itson.org.ghosttracks.dtos.ProductoDTO;
 import itson.org.ghosttracks.enums.EstadoPedidoDTO;
@@ -35,4 +36,12 @@ public interface IVentaEnLinea {
     List<PedidoDTO> obtenerTodosLosPedidos() throws VentaEnLineaException;
     
     PedidoDTO obtenerPedidoPorID(Long idPedido) throws VentaEnLineaException;
+    
+    ClienteDTO iniciarSesion(String correo, String contrasena) throws VentaEnLineaException;
+    
+    /**
+     * Orquesta la creación de un paquete a partir de un pedido.
+     */
+    PaqueteDTO procesarEmpaqueDePedido(Long idPedido) throws VentaEnLineaException;
+
 }

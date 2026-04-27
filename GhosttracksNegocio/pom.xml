@@ -32,6 +32,24 @@
             <artifactId>StripeApiNegocio</artifactId>
             <version>1.0</version>
         </dependency>
+        
+        <dependency>
+            <groupId>itson.org</groupId>
+            <artifactId>SkydropxApiDtos</artifactId>
+            <version>1.0</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>itson.org</groupId>
+            <artifactId>SkydropxApiNegocio</artifactId>
+            <version>1.0</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>itson.org</groupId>
+            <artifactId>SkydropxApiPersistencia</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

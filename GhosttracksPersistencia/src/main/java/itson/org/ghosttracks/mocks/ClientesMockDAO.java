@@ -48,4 +48,14 @@ public class ClientesMockDAO implements IClientesDAO{
         }
         throw new PersistenciaException("Cliente no encontrado con el ID: " + idCliente);
     }
+    
+    @Override
+    public Cliente iniciarSesion(String correo, String contrasena) throws PersistenciaException {
+        for (Cliente cliente : clientesDB) {
+            if (cliente.getCorreo().equals(correo) && cliente.getContraseña().equals(contrasena)) {
+                return cliente;
+            }
+        }
+        throw new PersistenciaException("Correo o contraseña incorrectos.");
+    }
 }

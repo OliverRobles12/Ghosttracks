@@ -2,15 +2,18 @@
 package itson.org.ghosttracks.controladores;
 
 import itson.org.ghosttracks.dtos.CarritoDTO;
+import itson.org.ghosttracks.dtos.ClienteDTO;
 import itson.org.ghosttracks.dtos.ContactoDTO;
 import itson.org.ghosttracks.dtos.DatosPagoDTO;
 import itson.org.ghosttracks.dtos.DireccionEntregaDTO;
 import itson.org.ghosttracks.dtos.PedidoDTO;
 import itson.org.ghosttracks.dtos.ProductoDTO;
+import itson.org.ghosttracks.enums.EstadoPedidoDTO;
 import itson.org.ghosttracks.enums.TipoProducto;
 import itson.org.ghosttracks.presentacion.cliente.PantallaCarrito;
 import itson.org.ghosttracks.presentacion.cliente.PantallaInicioCliente;
 import itson.org.ghosttracks.utilerias.pnlResumenPedido;
+import itson.org.ghosttracksventaenlinea.excepciones.VentaEnLineaException;
 import itson.org.ghosttracksventaenlinea.fachada.VentaEnLineaFachada;
 import itson.org.ghosttracksventaenlinea.interfaces.IVentaEnLinea;
 import java.util.List;
@@ -131,25 +134,35 @@ public class ControlVentaEnLinea {
         pedidoDTO.setDatosPago(dto);
     }
     
-    public void procesarPedido() {
+    public void procesarPedido() throws Exception {
         try {
-            if (this.carrito == null || this.carrito.getProductos().isEmpty()) {
-                throw new Exception("El carrito está vacío. Agrega productos antes de pagar.");
+            
+            if (!SesionUsuario.getInstancia().haySesionActiva()) {
+                navegador.mostrarMensaje("Por favor, inicia sesión para terminar tu compra.", true);
+                return; 
             }
-            
+            ClienteDTO clienteLogueado = SesionUsuario.getInstancia().getCliente();
+            Long idCliente = clienteLogueado.getIdUsuario();
+//            
+//            Long idCliente = 1L; // El usuario registrado como Emy
+
+            this.pedidoDTO.setIdCliente(idCliente); 
             this.pedidoDTO.setProductos(this.carrito.getProductos());
-            this.pedidoDTO.calcularTotales(150.0);
+            this.pedidoDTO.setSubtotal(this.carrito.getSubtotal());
+            this.pedidoDTO.setTotal(this.carrito.getTotal());
+            this.pedidoDTO.setEstado(EstadoPedidoDTO.PENDIENTE); 
+
+            PedidoDTO pedidoGenerado = ventaFachada.confirmarCompra(this.pedidoDTO);
             
-            this.pedidoDTO = ventaFachada.confirmarCompra(this.pedidoDTO);
+            navegador.mostrarMensaje("¡Compra realizada con éxito! Pedido #" + pedidoGenerado.getIdPedido(), false);
             
-            mostrarMensaje("¡Pago aprobado! Pedido registrado exitosamente.", false);
-            
-            this.carrito = new CarritoDTO();
+            this.carrito = new CarritoDTO(); 
             this.pedidoDTO = new PedidoDTO();
-            volverACatalogo();
             
-        } catch (Exception ex) {
-            mostrarMensaje(ex.getMessage(), true);
+            navegador.irInicioCliente();
+            
+        } catch (VentaEnLineaException ex) {
+            navegador.mostrarMensaje("No pudimos procesar tu compra: " + ex.getMessage(), true);
         }
     }
     
@@ -168,9 +181,7 @@ public class ControlVentaEnLinea {
             navegador.mostrarMensaje("Error al eliminar el producto del carrito.", true);
         }
     }
-    
-    
-    
+        
     // Extras
     
     public void mostrarMensaje(String mensaje, boolean esError) {

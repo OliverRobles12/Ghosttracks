@@ -59,11 +59,15 @@ public class PanelMetodoPagoTarjetaDebito extends javax.swing.JPanel {
 
         // Botón Continuar (Procesar el pago)
         btnContinuar.addActionListener(e -> {
-            procesarFormulario();
+            try {
+                procesarFormulario();
+            } catch (Exception ex) {
+                System.getLogger(PanelMetodoPagoTarjetaDebito.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            }
         });
     }
     
-    private void procesarFormulario() {
+    private void procesarFormulario() throws Exception {
         String numero = txtNumeroTarjeta.getText().trim();
         String fecha = txtFechaVencimiento.getText().trim();
         String cvv = txtNumeroSeguridad.getText().trim();
@@ -108,7 +112,7 @@ public class PanelMetodoPagoTarjetaDebito extends javax.swing.JPanel {
         return true;
     }
     
-    private void enviarDatos(String num, String fec, String cvv, String tit) {
+    private void enviarDatos(String num, String fec, String cvv, String tit) throws Exception {
         DatosPagoDTO datos = new DatosPagoDTO();
         datos.setNumeroTrajeta(num);
         datos.setFechaExpiracion(fec); 

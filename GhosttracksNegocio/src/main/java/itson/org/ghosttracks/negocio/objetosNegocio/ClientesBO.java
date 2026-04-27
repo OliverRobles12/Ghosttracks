@@ -30,4 +30,13 @@ public class ClientesBO implements IClientesBO{
             throw new NegocioException("Error al obtener cliente en BD", e);
         }
     }
+    
+    @Override
+    public Cliente iniciarSesion(String correo, String contrasena) throws NegocioException {
+        try {
+            return clientesDAO.iniciarSesion(correo, contrasena);
+        } catch (PersistenciaException e) {
+            throw new NegocioException("Credenciales inválidas", e);
+        }
+    }
 }

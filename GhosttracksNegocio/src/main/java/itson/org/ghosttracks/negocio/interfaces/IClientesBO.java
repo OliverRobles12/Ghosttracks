@@ -13,4 +13,6 @@ import itson.org.ghosttracks.negocio.objetosNegocio.Excepciones.NegocioException
  */
 public interface IClientesBO {
     Cliente obtenerClientePorId(Long idCliente) throws NegocioException;
+    
+    public abstract Cliente iniciarSesion(String correo, String contrasena) throws NegocioException;
 }

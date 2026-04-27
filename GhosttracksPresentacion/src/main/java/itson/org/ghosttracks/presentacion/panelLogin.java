@@ -133,7 +133,14 @@ public class panelLogin extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
-        control.loginCliente();
+        String correo = jTextField1.getText().trim();
+        String contrasena = jTextField2.getText().trim();
+
+        if (correo.isEmpty() || contrasena.isEmpty()) {
+            control.mostrarMensaje("Por favor, llena todos los campos", true);
+            return;
+        }
+        control.loginCliente(correo, contrasena);
     }//GEN-LAST:event_btnIngresarActionPerformed
 
     private void btnAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminActionPerformed
