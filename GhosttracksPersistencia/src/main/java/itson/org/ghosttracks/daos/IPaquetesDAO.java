@@ -18,6 +18,8 @@ public interface IPaquetesDAO {
     
     public abstract Paquete buscarPorId(Long idPaquete) throws PersistenciaException;
     
+    public Paquete buscarPorGuia(String numeroGuia) throws PersistenciaException;
+    
     public abstract Paquete actualizarPaquete(Paquete paquete) throws PersistenciaException;
     
     public abstract List<Paquete> obtenerTodos() throws PersistenciaException;

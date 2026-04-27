@@ -17,21 +17,16 @@ public class PaqueteDTO {
     private LocalDateTime fechaEntregaEstimada;
     private LocalDateTime fechaEntregaFinal;
     private String ubicacionActual;
+    private PedidoDTO pedido;
+    private Double pesoKg;
+    private Double largoCm;
+    private Double anchoCm;
+    private Double altoCm;
 
     public PaqueteDTO() {
     }
 
-    public PaqueteDTO(String numeroGuia, String idEnvio, EstadoPaquete estado, LocalDateTime fechaEnvio, LocalDateTime fechaEntregaEstimada, LocalDateTime fechaEntregaFinal, String ubicacionActual) {
-        this.numeroGuia = numeroGuia;
-        this.idEnvio = idEnvio;
-        this.estado = estado;
-        this.fechaEnvio = fechaEnvio;
-        this.fechaEntregaEstimada = fechaEntregaEstimada;
-        this.fechaEntregaFinal = fechaEntregaFinal;
-        this.ubicacionActual = ubicacionActual;
-    }
-
-    public PaqueteDTO(Long idPaquete, String numeroGuia, String idEnvio, EstadoPaquete estado, LocalDateTime fechaEnvio, LocalDateTime fechaEntregaEstimada, LocalDateTime fechaEntregaFinal, String ubicacionActual) {
+    public PaqueteDTO(Long idPaquete, String numeroGuia, String idEnvio, EstadoPaquete estado, LocalDateTime fechaEnvio, LocalDateTime fechaEntregaEstimada, LocalDateTime fechaEntregaFinal, String ubicacionActual, PedidoDTO pedido, Double pesoKg, Double largoCm, Double anchoCm, Double altoCm) {
         this.idPaquete = idPaquete;
         this.numeroGuia = numeroGuia;
         this.idEnvio = idEnvio;
@@ -40,6 +35,26 @@ public class PaqueteDTO {
         this.fechaEntregaEstimada = fechaEntregaEstimada;
         this.fechaEntregaFinal = fechaEntregaFinal;
         this.ubicacionActual = ubicacionActual;
+        this.pedido = pedido;
+        this.pesoKg = pesoKg;
+        this.largoCm = largoCm;
+        this.anchoCm = anchoCm;
+        this.altoCm = altoCm;
+    }
+
+    public PaqueteDTO(String numeroGuia, String idEnvio, EstadoPaquete estado, LocalDateTime fechaEnvio, LocalDateTime fechaEntregaEstimada, LocalDateTime fechaEntregaFinal, String ubicacionActual, PedidoDTO pedido, Double pesoKg, Double largoCm, Double anchoCm, Double altoCm) {
+        this.numeroGuia = numeroGuia;
+        this.idEnvio = idEnvio;
+        this.estado = estado;
+        this.fechaEnvio = fechaEnvio;
+        this.fechaEntregaEstimada = fechaEntregaEstimada;
+        this.fechaEntregaFinal = fechaEntregaFinal;
+        this.ubicacionActual = ubicacionActual;
+        this.pedido = pedido;
+        this.pesoKg = pesoKg;
+        this.largoCm = largoCm;
+        this.anchoCm = anchoCm;
+        this.altoCm = altoCm;
     }
 
     public Long getIdPaquete() {
@@ -106,5 +121,44 @@ public class PaqueteDTO {
         this.ubicacionActual = ubicacionActual;
     }
     
+    public PedidoDTO getPedido() {
+        return pedido;
+    }
+
+    public void setPedido(PedidoDTO pedido) {
+        this.pedido = pedido;
+    }
+
+    public Double getPesoKg() {
+        return pesoKg;
+    }
+
+    public void setPesoKg(Double pesoKg) {
+        this.pesoKg = pesoKg;
+    }
+
+    public Double getLargoCm() {
+        return largoCm;
+    }
+
+    public void setLargoCm(Double largoCm) {
+        this.largoCm = largoCm;
+    }
+
+    public Double getAnchoCm() {
+        return anchoCm;
+    }
+
+    public void setAnchoCm(Double anchoCm) {
+        this.anchoCm = anchoCm;
+    }
+
+    public Double getAltoCm() {
+        return altoCm;
+    }
+
+    public void setAltoCm(Double altoCm) {
+        this.altoCm = altoCm;
+    }
     
 }

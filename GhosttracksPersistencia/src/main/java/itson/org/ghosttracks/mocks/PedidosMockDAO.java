@@ -5,9 +5,12 @@
 package itson.org.ghosttracks.mocks;
 
 import itson.org.ghosttracks.daos.IPedidosDAO;
+import itson.org.ghosttracks.entidades.Paquete;
 import itson.org.ghosttracks.entidades.Pedido;
+import itson.org.ghosttracks.enums.EstadoPaquete;
 import itson.org.ghosttracks.enums.EstadoPedido;
 import itson.org.ghosttracks.exceptions.PersistenciaException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -37,7 +40,19 @@ public class PedidosMockDAO implements IPedidosDAO{
         p1.setIdPedido(idAutoincrementable++);
         p1.setIdCliente(101L);
         p1.setTotal(1500.50);
-        p1.setEstado(EstadoPedido.PAGADO); 
+        p1.setEstado(EstadoPedido.ENVIADO);
+        
+        Paquete paquetePrueba = new Paquete();
+        paquetePrueba.setIdPaquete(1L);
+        paquetePrueba.setNumeroGuia("SKY-12345");
+        paquetePrueba.setEstado(EstadoPaquete.ENVIADO);
+        paquetePrueba.setFechaEnvio(LocalDateTime.now());
+        paquetePrueba.setPesoKg(2.0);
+        paquetePrueba.setLargoCm(40.0);
+        paquetePrueba.setAnchoCm(32.0);
+        paquetePrueba.setAltoCm(6.0);
+        
+        p1.setPaquete(paquetePrueba); // Enlazamos el paquete al pedido
         baseDatosPedidos.add(p1);
 
         Pedido p2 = new Pedido();
@@ -109,5 +124,17 @@ public class PedidosMockDAO implements IPedidosDAO{
                     LOGGER.log(Level.WARNING, "Consulta fallida: Pedido {0} no existe.", idPedido);
                     return new PersistenciaException("Pedido no encontrado: " + idPedido);
                 });
+    }
+    
+    @Override
+    public Pedido actualizarPedido(Pedido pedidoActualizado) throws PersistenciaException {
+        for (int i = 0; i < baseDatosPedidos.size(); i++) {
+            if (baseDatosPedidos.get(i).getIdPedido().equals(pedidoActualizado.getIdPedido())) {
+                baseDatosPedidos.set(i, pedidoActualizado);
+                return pedidoActualizado; 
+            }
+        }
+        LOGGER.log(Level.WARNING, "No se pudo actualizar: Pedido ID {0} no encontrado.", pedidoActualizado.getIdPedido());
+        throw new PersistenciaException("No se encontró ningún pedido con el ID: " + pedidoActualizado.getIdPedido());
     }
 }

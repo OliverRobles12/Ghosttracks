@@ -21,6 +21,18 @@ public class SkydropxAdapter implements IProveedorEnvios {
     }
 
     @Override
+    public String generarGuiaEnvio() throws NegocioException {
+        try {
+            String nuevaGuia = skydropxAPI.generarGuiaEnvio(); 
+            return nuevaGuia;
+            
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, "Error inesperado al solicitar guía a la API de Skydropx", e);
+            throw new NegocioException("No se pudo generar la guía de envío con el proveedor.");
+        }
+    }
+    
+    @Override
     public RespuestaRastreoDTO rastrearGuia(String numeroGuia) throws NegocioException {
         try {
             LOGGER.log(Level.INFO, "Consultando rastreo en Skydropx para guía: {0}", numeroGuia);

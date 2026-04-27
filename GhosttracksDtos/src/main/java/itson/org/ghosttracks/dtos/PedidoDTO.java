@@ -20,6 +20,7 @@ public class PedidoDTO {
     private EstadoPedidoDTO estado;
     private DireccionEntregaDTO direccionEntrega;
     private DatosPagoDTO datosPago;
+    private PaqueteDTO paquete;
 
     public PedidoDTO() {
     }
@@ -154,5 +155,12 @@ public class PedidoDTO {
     public void setImpuesto(Double impuesto) {
         this.impuesto = impuesto;
     }
+    
+    public PaqueteDTO getPaquete() {
+        return paquete;
+    }
 
+    public void setPaquete(PaqueteDTO paquete) {
+        this.paquete = paquete;
+    }
 }

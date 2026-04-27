@@ -23,8 +23,8 @@ public class Pedido {
     private Double total; 
     private Double costoEnvio;
     private List<ProductoPedido> productosPedido; 
-    // private Envio envio; 
-    // private Pago pago;  
+    private Paquete paquete;
+    private DatosPago pago;  
 
     public Pedido() {
     }
@@ -116,5 +116,23 @@ public class Pedido {
     public void setSucursal(Sucursal sucursal) {
         this.sucursal = sucursal;
     }
+
+    public Paquete getPaquete() {
+        return paquete;
+    }
+
+    public void setPaquete(Paquete paquete) {
+        this.paquete = paquete;
+    }
+
+    public DatosPago getPago() {
+        return pago;
+    }
+
+    public void setPago(DatosPago pago) {
+        this.pago = pago;
+    }
+    
+    
     
 }

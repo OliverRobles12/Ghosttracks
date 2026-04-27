@@ -12,7 +12,9 @@ import itson.org.skydropx.excepciones.PersistenciaException;
 import itson.org.skydropx.interfaces.IPaquetesDAO;
 import itson.org.skydropx.interfaces.ISkydropxAPI;
 import itson.org.skydropx.objetosPersistencia.Mock.PaquetesMockDAO;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -85,6 +87,33 @@ public class SkydropxSimuladoBO implements ISkydropxAPI{
         } catch (PersistenciaException ex) {
             LOGGER.log(Level.SEVERE, "Error crítico en persistencia al intentar registrar movimiento para la guía: " + numeroGuia, ex);
             throw new NegocioException("Error al actualizar el estado del paquete en la base de datos.", ex);
+        }
+    }
+    
+    /**
+     * Genera un nuevo número de guía, registra el paquete en el sistema con un estado inicial
+     * y devuelve únicamente la guía generada.
+     * @return El número de guía generado
+     * @throws NegocioException Si ocurre un error al guardar en la base de datos.
+     */
+    @Override
+    public String generarGuiaEnvio() throws NegocioException {
+        try {
+            String nuevaGuia = "SKY-" + (int)(Math.random() * 100000);
+            List<MovimientoDTO> historialInicial = new ArrayList<>();
+            historialInicial.add(new MovimientoDTO(
+                LocalDateTime.now(), 
+                "Sucursal Origen", 
+                "Guía generada electrónicamente. Paquete documentado."
+            ));
+            RespuestaRastreoDTO nuevoPaquete = new RespuestaRastreoDTO(nuevaGuia, EstadoEnvio.ENVIADO, historialInicial);
+            paquetesDAO.guardar(nuevoPaquete);
+
+            return nuevaGuia;
+
+        } catch (PersistenciaException ex) {
+            LOGGER.log(Level.SEVERE, "Error al generar y guardar la nueva guía.", ex);
+            throw new NegocioException("Ocurrió un error al intentar generar la guía de envío en Skydropx.", ex);
         }
     }
     

@@ -20,4 +20,5 @@ public interface IPedidosBO {
     List<Pedido> consultarTodos() throws NegocioException;
     public PedidoDTO generarPedido(PedidoDTO pedidoDto) throws NegocioException;
     Pedido obtenerPedidoPorId(Long idPedido) throws NegocioException;
+    public Pedido despacharPedido(Long idPedido, Double peso, Double largo, Double ancho, Double alto) throws NegocioException;
 }

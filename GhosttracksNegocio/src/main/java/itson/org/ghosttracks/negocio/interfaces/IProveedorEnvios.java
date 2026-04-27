@@ -17,5 +17,7 @@ public interface IProveedorEnvios {
      * si decides que tu sistema la acepte directamente.
      */
     public abstract Object rastrearGuia(String numeroGuia) throws NegocioException;
+    
+    public String generarGuiaEnvio() throws NegocioException;
 
 }

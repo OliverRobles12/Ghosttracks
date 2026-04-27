@@ -6,9 +6,13 @@ package itson.org.ghosttracks.mocks;
 
 import itson.org.ghosttracks.daos.IPaquetesDAO;
 import itson.org.ghosttracks.entidades.Paquete;
+import itson.org.ghosttracks.enums.EstadoPaquete;
 import itson.org.ghosttracks.exceptions.PersistenciaException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -16,36 +20,64 @@ import java.util.List;
  */
 public class PaquetesMockDAO implements IPaquetesDAO{
     
-    private List<Paquete> paquetesDB;
-    private Long generadorIds;
+    private static List<Paquete> paquetesDB = new ArrayList<>();
+    private static Long generadorIds = 1L;
+    private static final Logger LOGGER = Logger.getLogger(PaquetesMockDAO.class.getName());
+    private static boolean datosPrecargados = false;
 
     public PaquetesMockDAO() {
-        this.paquetesDB = new ArrayList<>();
-        this.generadorIds = 1L; // Simulamos el AUTO_INCREMENT de la base de datos
+        if (!datosPrecargados) {
+            precargarPaquetes();
+            datosPrecargados = true;
+        }
+    }
+
+    private void precargarPaquetes() {
+        Paquete p1 = new Paquete();
+        p1.setIdPaquete(generadorIds++);
+        p1.setNumeroGuia("SKY-12345");
+        p1.setEstado(EstadoPaquete.ENVIADO);
+        p1.setFechaEnvio(LocalDateTime.now());
+        p1.setPesoKg(2.0);
+        p1.setLargoCm(40.0);
+        p1.setAnchoCm(32.0);
+        p1.setAltoCm(6.0);
+        
+        paquetesDB.add(p1);
     }
 
     @Override
     public Paquete agregarPaquete(Paquete paquete) throws PersistenciaException {
-        // Le asignamos un ID falso y aumentamos el contador
-        paquete.setIdPaquete(generadorIds++);
-        paquetesDB.add(paquete);
-        
-        return paquete;
+        try {
+            paquete.setIdPaquete(generadorIds++);
+            paquetesDB.add(paquete);
+            LOGGER.log(Level.INFO, "Paquete guardado exitosamente con ID {0} y guía {1}", 
+                    new Object[]{paquete.getIdPaquete(), paquete.getNumeroGuia()});
+            return paquete;
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, "Error al guardar el paquete", e);
+            throw new PersistenciaException("Error al guardar el paquete: " + e.getMessage());
+        }
     }
 
     @Override
     public Paquete buscarPorId(Long idPaquete) throws PersistenciaException {
-        for (Paquete paquete : paquetesDB) {
-            if (paquete.getIdPaquete().equals(idPaquete)) {
-                return paquete;
-            }
-        }
-        throw new PersistenciaException("No se encontró ningún paquete con el ID: " + idPaquete);
+        return paquetesDB.stream()
+            .filter(p -> p.getIdPaquete().equals(idPaquete))
+            .findFirst()
+            .orElseThrow(() -> new PersistenciaException("No se encontró ningún paquete con el ID: " + idPaquete));
+    }
+
+    @Override
+    public Paquete buscarPorGuia(String numeroGuia) throws PersistenciaException {
+        return paquetesDB.stream()
+            .filter(p -> p.getNumeroGuia() != null && p.getNumeroGuia().equals(numeroGuia))
+            .findFirst()
+            .orElseThrow(() -> new PersistenciaException("No se encontró ningún paquete con la guía: " + numeroGuia));
     }
 
     @Override
     public Paquete actualizarPaquete(Paquete paqueteActualizado) throws PersistenciaException {
-        // Buscamos el paquete en la lista y lo reemplazamos
         for (int i = 0; i < paquetesDB.size(); i++) {
             if (paquetesDB.get(i).getIdPaquete().equals(paqueteActualizado.getIdPaquete())) {
                 paquetesDB.set(i, paqueteActualizado);
@@ -57,7 +89,6 @@ public class PaquetesMockDAO implements IPaquetesDAO{
 
     @Override
     public List<Paquete> obtenerTodos() throws PersistenciaException {
-        // Retornamos una copia de la lista
         return new ArrayList<>(paquetesDB);
     }
 }
