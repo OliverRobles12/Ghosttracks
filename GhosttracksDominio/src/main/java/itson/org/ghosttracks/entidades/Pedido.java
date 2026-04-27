@@ -14,14 +14,14 @@ import java.util.List;
  */
 public class Pedido {
     private Long idPedido;
+    private Long idCliente;
+    private Sucursal sucursal;
     private EstadoPedido estado;
-    private Double total;   
     private LocalDateTime fechaPedido;
     private Double subtotal;
+    private Double impuesto;
+    private Double total; 
     private Double costoEnvio;
-    private Long idCliente;
-    private List<Producto> productos;
-    
     private List<ProductoPedido> productosPedido; 
     // private Envio envio; 
     // private Pago pago;  
@@ -93,13 +93,28 @@ public class Pedido {
         this.idCliente = idCliente;
     }
 
-    public List<Producto> getProductos() {
-        return productos;
+    public List<ProductoPedido> getProductos() {
+        return productosPedido;
     }
 
-    public void setProductos(List<Producto> productos) {
-        this.productos = productos;
+    public void setProductos(List<ProductoPedido> productos) {
+        this.productosPedido = productos;
     }
-    
+
+    public Double getImpuesto() {
+        return impuesto;
+    }
+
+    public void setImpuesto(Double impuesto) {
+        this.impuesto = impuesto;
+    }
+
+    public Sucursal getSucursal() {
+        return sucursal;
+    }
+
+    public void setSucursal(Sucursal sucursal) {
+        this.sucursal = sucursal;
+    }
     
 }

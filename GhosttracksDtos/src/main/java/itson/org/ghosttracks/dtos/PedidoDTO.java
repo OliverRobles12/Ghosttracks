@@ -15,6 +15,7 @@ public class PedidoDTO {
     private List<ItemCarritoDTO> productos;
     private Double subtotal;
     private Double costoEnvio;
+    private Double impuesto;
     private Double total;
     private EstadoPedidoDTO estado;
     private DireccionEntregaDTO direccionEntrega;
@@ -144,6 +145,14 @@ public class PedidoDTO {
 
     public void setContacto(ContactoDTO contacto) {
         this.contacto = contacto;
+    }
+
+    public Double getImpuesto() {
+        return impuesto;
+    }
+
+    public void setImpuesto(Double impuesto) {
+        this.impuesto = impuesto;
     }
 
 }

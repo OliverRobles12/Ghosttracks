@@ -9,7 +9,7 @@ package itson.org.ghosttracks.entidades;
  * @author nafbr
  */
 public class ProductoPedido {
-    private int cantidadProducto;
+    private Integer cantidadProducto;
     private Double precioVendido;
     private Double importeTotal;
     

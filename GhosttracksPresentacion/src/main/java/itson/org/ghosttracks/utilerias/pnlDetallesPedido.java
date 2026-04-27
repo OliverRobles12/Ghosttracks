@@ -6,6 +6,7 @@ package itson.org.ghosttracks.utilerias;
 
 import itson.org.ghosttracks.dtos.CarritoDTO;
 import itson.org.ghosttracks.dtos.ItemCarritoDTO;
+import itson.org.ghosttracks.dtos.PedidoDTO;
 import itson.org.ghosttracks.dtos.ProductoDTO;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
@@ -29,22 +30,29 @@ public class pnlDetallesPedido extends javax.swing.JPanel {
         jspProductosPedido.setBorder(null); 
     }
     
-    public void cargarResumen(CarritoDTO carrito) {
+    public void cargarDetalles(PedidoDTO pedido) {
+        lblFolioDeVenta.setText("Folio de la venta: " + pedido.getIdPedido());
+        lblCliente.setText("Cliente: " + pedido.getIdCliente());
+        lblEstado.setText("Estado: " + (pedido.getEstado() != null ? pedido.getEstado().name() : "Sin estado"));
+        Double subtotal = pedido.getSubtotal() != null ? pedido.getSubtotal() : 0.0;
+        Double impuesto = pedido.getImpuesto() != null ? pedido.getImpuesto() : 0.0;
+        Double total = pedido.getTotal() != null ? pedido.getTotal() : 0.0;
+        lblSubtotalDisplay2.setText(String.format("$%.2f", subtotal)); 
+        lblTaxDisplay.setText(String.format("$%.2f", impuesto));
+        lblTotalDisplay.setText(String.format("$%.2f", total));
         pnlLista.removeAll();
-        carrito.calcularTotalGeneral();
-        if (carrito.getProductos() != null) {
-            for (ItemCarritoDTO item : carrito.getProductos()) {
+        int totalArticulos = 0;
+        
+        if (pedido.getProductos() != null) {
+            for (ItemCarritoDTO item : pedido.getProductos()) {
                 ProductoDTO prod = item.getProductoSeleccionado();
                 Integer cant = item.getCantidad() != null ? item.getCantidad() : 0;
+                totalArticulos += cant; 
                 pnllResumenProducto tarjeta = new pnllResumenProducto(prod, cant);
                 pnlLista.add(tarjeta);
             }
-        }
-
-        lblSubtotalDisplay2.setText(String.format("$%.2f", carrito.getSubtotal()));
-        lblTaxDisplay.setText(String.format("$%.2f", carrito.getImpuestos()));
-        lblTotalDisplay.setText(String.format("$%.2f", carrito.getTotal()));
-        
+        }    
+        lblArticulos.setText("Artículos: " + totalArticulos);
         pnlLista.revalidate();
         pnlLista.repaint();
     }

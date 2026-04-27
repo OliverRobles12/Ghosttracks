@@ -17,6 +17,7 @@ public class PantallaVentas extends javax.swing.JPanel {
     public PantallaVentas(ControladorVentasAdmin ctrl) {
         this.control = ctrl;
         initComponents();
+        configurarEventosTabla();
         control.llenarTablaPedidos(this);
     }
 
@@ -163,5 +164,18 @@ public class PantallaVentas extends javax.swing.JPanel {
 
             modelo.addRow(fila);
         }
+    }
+    
+    private void configurarEventosTabla() {
+        tblPedidos.getSelectionModel().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting() && tblPedidos.getSelectedRow() != -1) {
+                Long idPedido = (Long) tblPedidos.getValueAt(tblPedidos.getSelectedRow(), 0);
+                control.seleccionarPedido(idPedido, this);
+            }
+        });
+    }
+    
+    public void mostrarDetallesDelPedido(PedidoDTO pedido) {
+        pnlDetallesPedido1.cargarDetalles(pedido);
     }
 }
