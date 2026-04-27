@@ -76,6 +76,11 @@ public class Navegador {
         ventana.cambiarPantalla(vista);
     }
     
+//    public void irPedidoConfirmado(){
+//        PantallaPedidoConfirmado vista = new PantallaPedidoConfirmado(ctrlVentaLinea);
+//        venata.cambiarPantalla(vista);
+//    }
+    
     // Paneles admin
     
     public void iniciarSesionAdminExitoso() {
@@ -94,7 +99,7 @@ public class Navegador {
         PantallaVentasProcesarAdmin vista = new PantallaVentasProcesarAdmin(ctrl);
         ventana.cambiarPantalla(vista);
     }
-    
+        
     public void cerrarSesion() {
         irLogin();
     }

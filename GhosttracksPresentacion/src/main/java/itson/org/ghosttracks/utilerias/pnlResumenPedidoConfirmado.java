@@ -133,38 +133,35 @@ public class pnlResumenPedidoConfirmado extends javax.swing.JPanel {
             pnlResumenPedidoConfirmadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jSeparator1)
             .addGroup(pnlResumenPedidoConfirmadoLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(pnlResumenPedidoConfirmadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlResumenPedidoConfirmadoLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(lblResumenPedido))
-                    .addGroup(pnlResumenPedidoConfirmadoLayout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addGroup(pnlResumenPedidoConfirmadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(pnlResumenPedidoConfirmadoLayout.createSequentialGroup()
-                                .addComponent(lblMetodoPago)
-                                .addGap(114, 114, 114)
-                                .addComponent(lblMetodoPagoDisplay))
-                            .addComponent(lblPreparandoPedido)
-                            .addGroup(pnlResumenPedidoConfirmadoLayout.createSequentialGroup()
-                                .addComponent(lblNumPedido)
-                                .addGap(34, 34, 34)
-                                .addComponent(lblNumPedidoDisplay))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 653, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblResumenPedidoDinero)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlResumenPedidoConfirmadoLayout.createSequentialGroup()
-                                .addGroup(pnlResumenPedidoConfirmadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblSubtotal)
-                                    .addComponent(lblImpuestos)
-                                    .addComponent(lblEnvio)
-                                    .addComponent(lblTotal))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(pnlResumenPedidoConfirmadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblTotalDisplay)
-                                    .addComponent(lblEnvioDisplay)
-                                    .addComponent(lblImpuestosDisplay)
-                                    .addComponent(lblSubtotalDisplay))
-                                .addGap(16, 16, 16)))))
-                .addContainerGap(16, Short.MAX_VALUE))
+                    .addComponent(lblResumenPedido)
+                    .addGroup(pnlResumenPedidoConfirmadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(pnlResumenPedidoConfirmadoLayout.createSequentialGroup()
+                            .addComponent(lblMetodoPago)
+                            .addGap(114, 114, 114)
+                            .addComponent(lblMetodoPagoDisplay))
+                        .addComponent(lblPreparandoPedido)
+                        .addGroup(pnlResumenPedidoConfirmadoLayout.createSequentialGroup()
+                            .addComponent(lblNumPedido)
+                            .addGap(34, 34, 34)
+                            .addComponent(lblNumPedidoDisplay))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 653, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblResumenPedidoDinero)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlResumenPedidoConfirmadoLayout.createSequentialGroup()
+                            .addGroup(pnlResumenPedidoConfirmadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lblSubtotal)
+                                .addComponent(lblImpuestos)
+                                .addComponent(lblEnvio)
+                                .addComponent(lblTotal))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(pnlResumenPedidoConfirmadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lblTotalDisplay)
+                                .addComponent(lblEnvioDisplay)
+                                .addComponent(lblImpuestosDisplay)
+                                .addComponent(lblSubtotalDisplay))
+                            .addGap(16, 16, 16))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlResumenPedidoConfirmadoLayout.setVerticalGroup(
             pnlResumenPedidoConfirmadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -172,7 +169,7 @@ public class pnlResumenPedidoConfirmado extends javax.swing.JPanel {
                 .addGap(19, 19, 19)
                 .addComponent(lblResumenPedido)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlResumenPedidoConfirmadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNumPedido)
@@ -206,14 +203,14 @@ public class pnlResumenPedidoConfirmado extends javax.swing.JPanel {
                 .addGroup(pnlResumenPedidoConfirmadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTotal)
                     .addComponent(lblTotalDisplay))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
-        add(pnlResumenPedidoConfirmado, new org.netbeans.lib.awtextra.AbsoluteConstraints(17, 81, 690, -1));
+        add(pnlResumenPedidoConfirmado, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 660, 520));
 
         lblPedidoRecibido.setFont(new java.awt.Font("Corbel", 0, 36)); // NOI18N
         lblPedidoRecibido.setText("¡Pedido recibido!");
-        add(lblPedidoRecibido, new org.netbeans.lib.awtextra.AbsoluteConstraints(566, 31, -1, -1));
+        add(lblPedidoRecibido, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 20, -1, -1));
 
         pnlResumenEnvio.setBackground(new java.awt.Color(208, 208, 208));
 
@@ -258,7 +255,7 @@ public class pnlResumenPedidoConfirmado extends javax.swing.JPanel {
                         .addGap(15, 15, 15)
                         .addComponent(lblDireccionEnvio))
                     .addGroup(pnlResumenEnvioLayout.createSequentialGroup()
-                        .addGap(22, 22, 22)
+                        .addContainerGap()
                         .addGroup(pnlResumenEnvioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblNombre)
                             .addComponent(lblEnviar)
@@ -272,7 +269,7 @@ public class pnlResumenPedidoConfirmado extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(lblEstado))
                             .addComponent(lblCodigoPostal))))
-                .addContainerGap(281, Short.MAX_VALUE))
+                .addContainerGap(207, Short.MAX_VALUE))
         );
         pnlResumenEnvioLayout.setVerticalGroup(
             pnlResumenEnvioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -280,7 +277,7 @@ public class pnlResumenPedidoConfirmado extends javax.swing.JPanel {
                 .addGap(16, 16, 16)
                 .addComponent(lblDireccionEnvio)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblEnviar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -297,15 +294,15 @@ public class pnlResumenPedidoConfirmado extends javax.swing.JPanel {
                     .addComponent(lblEstado))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblCodigoPostal)
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addContainerGap(89, Short.MAX_VALUE))
         );
 
-        add(pnlResumenEnvio, new org.netbeans.lib.awtextra.AbsoluteConstraints(736, 81, -1, -1));
+        add(pnlResumenEnvio, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 70, 410, -1));
 
         btnComprarDeNuevo.setBackground(new java.awt.Color(191, 64, 43));
         btnComprarDeNuevo.setForeground(new java.awt.Color(255, 255, 255));
         btnComprarDeNuevo.setText("Volver a Comprar");
-        add(btnComprarDeNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 660, 290, 50));
+        add(btnComprarDeNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 610, 290, 50));
     }// </editor-fold>//GEN-END:initComponents
 
 

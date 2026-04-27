@@ -83,6 +83,9 @@ public class PedidosBO implements IPedidosBO {
         
         try {
             Pedido entidadPedido = new Pedido();
+            
+            entidadPedido.setIdCliente(pedidoDto.getIdCliente());
+            
             entidadPedido.setFechaPedido(LocalDateTime.now());
             entidadPedido.setEstado(EstadoPedido.PAGADO);
             entidadPedido.setSubtotal(pedidoDto.getSubtotal());
@@ -98,6 +101,10 @@ public class PedidosBO implements IPedidosBO {
                 
                 Producto prodEntidad = new Producto();
                 prodEntidad.setIdProducto(item.getProductoSeleccionado().getIdProducto());
+                
+                prodEntidad.setNombre(item.getProductoSeleccionado().getNombre());
+                prodEntidad.setPrecio(item.getProductoSeleccionado().getPrecio());
+                
                 detalle.setProducto(prodEntidad);
                 detalle.setPedido(entidadPedido);
                 
@@ -117,7 +124,7 @@ public class PedidosBO implements IPedidosBO {
             LOGGER.log(Level.SEVERE, "ERROR CRÍTICO: Cobro realizado pero falló la persistencia del pedido.", e);
             throw new NegocioException("Cobro exitoso pero ocurrió un error al registrar el pedido en la BD.", e);
         }
-    }    
+    }
 
     @Override
     public Pedido obtenerPedidoPorId(Long idPedido) throws NegocioException {
