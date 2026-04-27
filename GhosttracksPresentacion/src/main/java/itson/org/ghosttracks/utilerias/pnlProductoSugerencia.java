@@ -4,7 +4,11 @@
  */
 package itson.org.ghosttracks.utilerias;
 
+import itson.org.ghosttracks.controladores.ControlVentaEnLinea;
 import itson.org.ghosttracks.dtos.ProductoDTO;
+import static java.awt.SystemColor.control;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  *
@@ -12,11 +16,25 @@ import itson.org.ghosttracks.dtos.ProductoDTO;
  */
 public class pnlProductoSugerencia extends javax.swing.JPanel {
 
+    
+    private ProductoDTO producto;
+    private ControlVentaEnLinea control;
     /**
      * Creates new form pnlSugerencias
      */
-    public pnlProductoSugerencia() {
+    public pnlProductoSugerencia(ProductoDTO producto, ControlVentaEnLinea control) {
         initComponents();
+        this.producto = producto;
+        this.control = control;
+        
+        setDatosSugerencia(this.producto);
+
+        this.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent evt) {
+                control.mostrarDetalleProducto(producto);
+            }
+        });
     }
 
     public void setDatosSugerencia(ProductoDTO producto) {

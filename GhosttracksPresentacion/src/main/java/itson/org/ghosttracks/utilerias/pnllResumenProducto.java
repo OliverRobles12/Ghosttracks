@@ -30,28 +30,26 @@ public class pnllResumenProducto extends javax.swing.JPanel {
         lblTotal.setText("$" + String.format("%.2f", subtotalProducto));
         
         try {
-            String ruta = producto.getImgProducto();
+            String nombreArchivo = producto.getImgProducto();
+            String ruta = "/imgVistaProducto/" + nombreArchivo; 
             
-            if (ruta != null && !ruta.isEmpty()) {
+            if (nombreArchivo != null && !nombreArchivo.isEmpty()) {
                 URL urlImagenLocal = getClass().getResource(ruta);
                 
                 if (urlImagenLocal != null) {
                     Image imagenOriginal = javax.imageio.ImageIO.read(urlImagenLocal);
                     Image imagenEscalada = imagenOriginal.getScaledInstance(100, 94, Image.SCALE_SMOOTH);
                     
-                    JLabel lblImagenDinamica = new javax.swing.JLabel(new ImageIcon(imagenEscalada));
-                    lblImagenDinamica.setBounds(0, 0, 100, 94);
-                    
-                    pnlImg.removeAll();
-                    pnlImg.add(lblImagenDinamica);
-                    pnlImg.revalidate();
-                    pnlImg.repaint();
+                    lblImg.setIcon(new ImageIcon(imagenEscalada));
                 } else {
                     throw new Exception("Ruta no encontrada: " + ruta);
                 }
             }
         } catch (Exception e) {
             System.out.println("Error cargando imagen en resumen de: " + producto.getNombre() + " - " + e.getMessage());
+            lblImg.setIcon(null);
+            lblImg.setText("Sin img");
+            lblImg.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         }
     }
 
@@ -66,6 +64,7 @@ public class pnllResumenProducto extends javax.swing.JPanel {
 
         pnlrImagen = new itson.org.ghosttracks.utilerias.PanelRedondeado();
         pnlImg = new javax.swing.JPanel();
+        lblImg = new javax.swing.JLabel();
         lblNombre = new javax.swing.JLabel();
         lblArtista = new javax.swing.JLabel();
         lblTotal = new javax.swing.JLabel();
@@ -83,11 +82,13 @@ public class pnllResumenProducto extends javax.swing.JPanel {
         pnlImg.setLayout(pnlImgLayout);
         pnlImgLayout.setHorizontalGroup(
             pnlImgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addComponent(lblImg, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
         );
         pnlImgLayout.setVerticalGroup(
             pnlImgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 94, Short.MAX_VALUE)
+            .addGroup(pnlImgLayout.createSequentialGroup()
+                .addComponent(lblImg, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout pnlrImagenLayout = new javax.swing.GroupLayout(pnlrImagen);
@@ -137,7 +138,7 @@ public class pnllResumenProducto extends javax.swing.JPanel {
                             .addComponent(lblCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblArtista)
                             .addComponent(lblNombre))
-                        .addContainerGap(151, Short.MAX_VALUE))))
+                        .addContainerGap(150, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -163,6 +164,7 @@ public class pnllResumenProducto extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel lblArtista;
     private javax.swing.JLabel lblCantidad;
+    private javax.swing.JLabel lblImg;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblTotal;
     private javax.swing.JPanel pnlImg;

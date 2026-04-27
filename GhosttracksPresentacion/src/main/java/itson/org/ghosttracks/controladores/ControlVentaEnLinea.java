@@ -7,7 +7,7 @@ import itson.org.ghosttracks.dtos.DatosPagoDTO;
 import itson.org.ghosttracks.dtos.DireccionEntregaDTO;
 import itson.org.ghosttracks.dtos.PedidoDTO;
 import itson.org.ghosttracks.dtos.ProductoDTO;
-import itson.org.ghosttracks.enums.EstadoPedidoDTO;
+import itson.org.ghosttracks.enums.TipoProducto;
 import itson.org.ghosttracks.presentacion.cliente.PantallaCarrito;
 import itson.org.ghosttracks.presentacion.cliente.PantallaInicioCliente;
 import itson.org.ghosttracks.utilerias.pnlResumenPedido;
@@ -86,6 +86,36 @@ public class ControlVentaEnLinea {
         }
     }
     
+    public void filtrarCatalogoPorTipo(PantallaInicioCliente vista, TipoProducto tipo) {
+        try {
+            List<ProductoDTO> todosLosProductos = ventaFachada.obtenerCatalogo();
+            
+            List<ProductoDTO> productosFiltrados = todosLosProductos.stream()
+                    .filter(producto -> producto.getTipoProducto() == tipo) 
+                    .toList();
+            
+            vista.cargarCatalogo(productosFiltrados);
+            
+        } catch (Exception ex) {
+            navegador.mostrarMensaje("Error al filtrar el catálogo de productos.", true);
+        }
+    }
+    
+    public void filtrarCatalogoPorGenero(PantallaInicioCliente vista, String genero) {
+        try {
+            List<ProductoDTO> todosLosProductos = ventaFachada.obtenerCatalogo();
+            
+            List<ProductoDTO> productosFiltrados = todosLosProductos.stream()
+                    .filter(producto -> producto.getGenero() != null && 
+                                        producto.getGenero().equalsIgnoreCase(genero)) 
+                    .toList();
+            
+            vista.cargarCatalogo(productosFiltrados);
+            
+        } catch (Exception ex) {
+            navegador.mostrarMensaje("Error al filtrar el catálogo por género.", true);
+        }
+    }   
     
     // Pedido
     

@@ -15,6 +15,7 @@ public class PantallaVistaProducto extends javax.swing.JPanel {
 
     private ControlVentaEnLinea control;
     private ProductoDTO producto;
+    private Integer cantidadActual = 1;
     
     public PantallaVistaProducto(ControlVentaEnLinea control, ProductoDTO producto) {
         this.control = control;
@@ -22,6 +23,7 @@ public class PantallaVistaProducto extends javax.swing.JPanel {
         initComponents();
         cargarDatosProducto();
         cargarSugerenciasAlAzar();
+        configurarBotonesCantidad();
     }
 
     /**
@@ -47,11 +49,13 @@ public class PantallaVistaProducto extends javax.swing.JPanel {
         lblArtista = new javax.swing.JLabel();
         lblPrecio = new javax.swing.JLabel();
         textFieldRedondeado1 = new itson.org.ghosttracks.utilerias.TextFieldRedondeado();
-        botonRedondeado2 = new itson.org.ghosttracks.utilerias.BotonRedondeado();
-        botonRedondeado3 = new itson.org.ghosttracks.utilerias.BotonRedondeado();
+        btnMenos = new itson.org.ghosttracks.utilerias.BotonRedondeado();
+        btnMas = new itson.org.ghosttracks.utilerias.BotonRedondeado();
         lblUnidad = new javax.swing.JLabel();
         AniadirProducto = new itson.org.ghosttracks.utilerias.BotonRedondeado();
         lblSetlist = new javax.swing.JLabel();
+
+        setLayout(new java.awt.BorderLayout());
 
         jScrollPane1.setBorder(null);
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -134,7 +138,7 @@ public class PantallaVistaProducto extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pnlSugerencias, javax.swing.GroupLayout.PREFERRED_SIZE, 784, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         botonRedondeado1.setText("Volver");
@@ -166,11 +170,11 @@ public class PantallaVistaProducto extends javax.swing.JPanel {
         textFieldRedondeado1.setText("Cantidad");
         textFieldRedondeado1.setPreferredSize(new java.awt.Dimension(100, 35));
 
-        botonRedondeado2.setText("-");
-        botonRedondeado2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnMenos.setText("-");
+        btnMenos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
-        botonRedondeado3.setText("+");
-        botonRedondeado3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnMas.setText("+");
+        btnMas.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
         lblUnidad.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
         lblUnidad.setForeground(new java.awt.Color(102, 102, 102));
@@ -204,11 +208,11 @@ public class PantallaVistaProducto extends javax.swing.JPanel {
                             .addComponent(AniadirProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(144, 144, 144))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRedondeado5Layout.createSequentialGroup()
-                        .addComponent(botonRedondeado2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnMenos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(textFieldRedondeado1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(botonRedondeado3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnMas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(174, 174, 174))))
         );
         panelRedondeado5Layout.setVerticalGroup(
@@ -223,8 +227,8 @@ public class PantallaVistaProducto extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelRedondeado5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textFieldRedondeado1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(botonRedondeado2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(botonRedondeado3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnMenos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnMas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblUnidad)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -273,28 +277,13 @@ public class PantallaVistaProducto extends javax.swing.JPanel {
                     .addGroup(pnlFondoLayout.createSequentialGroup()
                         .addComponent(panelRedondeado5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(12, 12, 12)
-                        .addComponent(pnlSugerenciasFondo, javax.swing.GroupLayout.DEFAULT_SIZE, 865, Short.MAX_VALUE)))
+                        .addComponent(pnlSugerenciasFondo, javax.swing.GroupLayout.DEFAULT_SIZE, 848, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
         jScrollPane1.setViewportView(pnlFondo);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1100, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1167, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 675, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
+        add(jScrollPane1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonRedondeado1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRedondeado1ActionPerformed
@@ -302,8 +291,11 @@ public class PantallaVistaProducto extends javax.swing.JPanel {
     }//GEN-LAST:event_botonRedondeado1ActionPerformed
 
     private void AniadirProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AniadirProductoActionPerformed
-        control.agregarProductoCarrito(producto, 1);
+        control.agregarProductoCarrito(producto, cantidadActual);
         control.mostrarMensaje("Producto agregado con exito", false);
+        
+        cantidadActual = 1;
+        textFieldRedondeado1.setText(String.valueOf(cantidadActual));
     }//GEN-LAST:event_AniadirProductoActionPerformed
 
     private void cargarDatosProducto() {
@@ -346,17 +338,22 @@ public class PantallaVistaProducto extends javax.swing.JPanel {
 
             if (todosLosProductos != null && !todosLosProductos.isEmpty()) {
 
-                Collections.shuffle(todosLosProductos);
+                List<ProductoDTO> productosFiltrados = new java.util.ArrayList<>();
+                for (ProductoDTO p : todosLosProductos) {
+                    if (!p.getNombre().equals(this.producto.getNombre())) {
+                        productosFiltrados.add(p);
+                    }
+                }
+                Collections.shuffle(productosFiltrados);
 
                 pnlSugerencias.removeAll(); 
 
-                int cantidadSugerencias = Math.min(4, todosLosProductos.size());
+                int cantidadSugerencias = Math.min(4, productosFiltrados.size());
 
                 for (int i = 0; i < cantidadSugerencias; i++) {
-                    ProductoDTO productoAlAzar = todosLosProductos.get(i);
+                    ProductoDTO productoAlAzar = productosFiltrados.get(i);
 
-                    pnlProductoSugerencia tarjeta = new pnlProductoSugerencia();
-                    tarjeta.setDatosSugerencia(productoAlAzar);
+                    pnlProductoSugerencia tarjeta = new pnlProductoSugerencia(productoAlAzar, this.control);
                     pnlSugerencias.add(tarjeta);
                 }
 
@@ -368,11 +365,28 @@ public class PantallaVistaProducto extends javax.swing.JPanel {
         }
     }
     
+    private void configurarBotonesCantidad() {
+        textFieldRedondeado1.setText(String.valueOf(cantidadActual));
+        textFieldRedondeado1.setEditable(false); 
+        
+        btnMenos.addActionListener(evt -> {
+            if (cantidadActual > 1) { 
+                cantidadActual--;
+                textFieldRedondeado1.setText(String.valueOf(cantidadActual));
+            }
+        });
+        
+        btnMas.addActionListener(evt -> {
+            cantidadActual++;
+            textFieldRedondeado1.setText(String.valueOf(cantidadActual));
+        });
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private itson.org.ghosttracks.utilerias.BotonRedondeado AniadirProducto;
     private itson.org.ghosttracks.utilerias.BotonRedondeado botonRedondeado1;
-    private itson.org.ghosttracks.utilerias.BotonRedondeado botonRedondeado2;
-    private itson.org.ghosttracks.utilerias.BotonRedondeado botonRedondeado3;
+    private itson.org.ghosttracks.utilerias.BotonRedondeado btnMas;
+    private itson.org.ghosttracks.utilerias.BotonRedondeado btnMenos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblArtista;

@@ -13,27 +13,7 @@
     <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
   </AuxValues>
 
-  <Layout>
-    <DimensionLayout dim="0">
-      <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="1100" max="32767" attributes="0"/>
-          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-              <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
-          </Group>
-      </Group>
-    </DimensionLayout>
-    <DimensionLayout dim="1">
-      <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="1167" max="32767" attributes="0"/>
-          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <Component id="jScrollPane1" min="-2" pref="675" max="-2" attributes="0"/>
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-              </Group>
-          </Group>
-      </Group>
-    </DimensionLayout>
-  </Layout>
+  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
   <SubComponents>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <Properties>
@@ -46,6 +26,11 @@
           <Dimension value="[1100, 675]"/>
         </Property>
       </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+          <BorderConstraints direction="Center"/>
+        </Constraint>
+      </Constraints>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
@@ -101,7 +86,7 @@
                           <Group type="102" attributes="0">
                               <Component id="panelRedondeado5" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                              <Component id="pnlSugerenciasFondo" pref="865" max="32767" attributes="0"/>
+                              <Component id="pnlSugerenciasFondo" pref="848" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -218,7 +203,7 @@
                           <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="pnlSugerencias" min="-2" pref="784" max="-2" attributes="0"/>
-                          <EmptySpace pref="23" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -299,11 +284,11 @@
                                   <EmptySpace min="-2" pref="144" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
-                                  <Component id="botonRedondeado2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnMenos" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="textFieldRedondeado1" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="botonRedondeado3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnMas" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="174" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -322,8 +307,8 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="textFieldRedondeado1" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="botonRedondeado2" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="botonRedondeado3" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnMenos" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnMas" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="lblUnidad" min="-2" max="-2" attributes="0"/>
@@ -385,7 +370,7 @@
                     </Property>
                   </Properties>
                 </Component>
-                <Component class="itson.org.ghosttracks.utilerias.BotonRedondeado" name="botonRedondeado2">
+                <Component class="itson.org.ghosttracks.utilerias.BotonRedondeado" name="btnMenos">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="-"/>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -393,7 +378,7 @@
                     </Property>
                   </Properties>
                 </Component>
-                <Component class="itson.org.ghosttracks.utilerias.BotonRedondeado" name="botonRedondeado3">
+                <Component class="itson.org.ghosttracks.utilerias.BotonRedondeado" name="btnMas">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="+"/>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">

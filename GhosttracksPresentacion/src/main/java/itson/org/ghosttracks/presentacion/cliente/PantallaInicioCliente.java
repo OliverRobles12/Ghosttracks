@@ -6,9 +6,14 @@ import itson.org.ghosttracks.enums.TipoProducto;
 import itson.org.ghosttracks.utilerias.pnlProductoCatalogo;
 import itson.org.ghosttracks.controladores.ControlVentaEnLinea;
 import itson.org.ghosttracks.dtos.ProductoDTO;
+import java.awt.BorderLayout;
+import java.awt.Cursor;
+import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  *
@@ -21,59 +26,105 @@ public class PantallaInicioCliente extends javax.swing.JPanel {
     public PantallaInicioCliente(ControlVentaEnLinea ctrl) {
         this.control = ctrl;
         initComponents();
-        
         control.llenarCatalogo(this);
-        
-        // TODO Filtros del catalogo
-//        panelRedondeado2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-//        panelRedondeado2.addMouseListener(new java.awt.event.MouseAdapter() {
-//            public void mouseClicked(java.awt.event.MouseEvent evt) {
-//                cargarCatalogo(itson.org.ghosttracks.mocks.TipoProducto.VINILO);
-//            }
-//        });
-//        
-//        panelRedondeado4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-//        panelRedondeado4.addMouseListener(new java.awt.event.MouseAdapter() {
-//            public void mouseClicked(java.awt.event.MouseEvent evt) {
-//                cargarCatalogo(itson.org.ghosttracks.mocks.TipoProducto.CD);
-//            }
-//        });
-//        
-//        panelRedondeado5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-//        panelRedondeado5.addMouseListener(new java.awt.event.MouseAdapter() {
-//            public void mouseClicked(java.awt.event.MouseEvent evt) {
-//                cargarCatalogo(itson.org.ghosttracks.mocks.TipoProducto.CASSETTE);
-//            }
-//        });
-//        
-//        cargarCatalogo(null);
+        configurarFiltros();
+        inicializarFiltrosGeneros();
         
     }
 
+    private void configurarFiltros() {
+        pnlVinilos.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        pnlVinilos.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent evt) {
+                control.filtrarCatalogoPorTipo(PantallaInicioCliente.this, TipoProducto.VINILO);
+            }
+        });
+        
+        pnlCds.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        pnlCds.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent evt) {
+                control.filtrarCatalogoPorTipo(PantallaInicioCliente.this, TipoProducto.CD);
+            }
+        });
+        
+        pnlCassettes.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        pnlCassettes.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent evt) {
+                control.filtrarCatalogoPorTipo(PantallaInicioCliente.this, TipoProducto.CASSETTE);
+            }
+        });
+
+        lblTodos.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        lblTodos.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent evt) {
+            }
+        });
+    }
+    
     public void cargarCatalogo(List<ProductoDTO> listaProductos) {
         pnlCatalogo.removeAll(); 
-        pnlCatalogo.setLayout(new java.awt.GridLayout(0, 3, 5, 15));
-
-        if (listaProductos != null) {
+        
+        pnlCatalogo.setLayout(new java.awt.BorderLayout());
+        
+        JPanel pnlCuadricula = new JPanel();
+        pnlCuadricula.setLayout(new GridLayout(0, 3, 5, 5));
+        pnlCuadricula.setOpaque(false);
+        
+        if (listaProductos != null && !listaProductos.isEmpty()) {
             for (ProductoDTO producto : listaProductos) {
                  pnlProductoCatalogo tarjeta = new pnlProductoCatalogo(producto, control);
                  tarjeta.setVisible(true);
-                 pnlCatalogo.add(tarjeta); 
+                 pnlCuadricula.add(tarjeta); 
+            }
+            int faltantes = 3 - (listaProductos.size() % 3);
+            if (faltantes == 3) {
+            }
+            for (int i = 0; i < faltantes; i++) {
+                JPanel panelFantasma = new JPanel();
+                panelFantasma.setOpaque(false);
+                pnlCuadricula.add(panelFantasma);
             }
         }
+        
+        pnlCatalogo.add(pnlCuadricula, BorderLayout.NORTH);
 
         pnlCatalogo.revalidate();
         pnlCatalogo.repaint();
     }
     
-    // logica filtro
-//    // Pedimos todos los productos o los filtrados dependiendo de qué seleccionó el usuario
-//        List<ProductosMockDAO> listaProductos;
-//        if (tipo == null) {
-//            listaProductos = control.obtenerProductosMock(); // Si es null, muestra TODOS
-//        } else {
-//            listaProductos = control.obtenerProductosPorTipo(tipo); // Muestra solo los del tipo
-//        }
+    private void inicializarFiltrosGeneros() {
+        lblTodos.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        lblTodos.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent evt) {
+                control.llenarCatalogo(PantallaInicioCliente.this);
+            }
+        });
+
+        configurarEtiquetaFiltro(lblRock, "Rock");
+        configurarEtiquetaFiltro(lblAlternativo, "Alternativo");
+        configurarEtiquetaFiltro(lblPop, "Pop");
+        configurarEtiquetaFiltro(lblHipHop, "Hip hop");
+        configurarEtiquetaFiltro(lblKpop, "K-pop");
+        configurarEtiquetaFiltro(lblJazz, "Jazz");
+        configurarEtiquetaFiltro(lblUrbana, "Urbana");
+        configurarEtiquetaFiltro(lblRegionalMexicana, "Regional Mexicana");
+        configurarEtiquetaFiltro(lblTropical, "Tropical");
+    }
+    
+    private void configurarEtiquetaFiltro(JLabel etiqueta, String genero) {
+        etiqueta.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        etiqueta.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent evt) {
+                control.filtrarCatalogoPorGenero(PantallaInicioCliente.this, genero);
+            }
+        });
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -87,25 +138,25 @@ public class PantallaInicioCliente extends javax.swing.JPanel {
         pnlPrincipal = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         pnlContenido = new javax.swing.JPanel();
-        panelRedondeado2 = new itson.org.ghosttracks.utilerias.PanelRedondeado();
+        pnlVinilos = new itson.org.ghosttracks.utilerias.PanelRedondeado();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         panelRedondeado3 = new itson.org.ghosttracks.utilerias.PanelRedondeado();
         jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
-        panelRedondeado4 = new itson.org.ghosttracks.utilerias.PanelRedondeado();
+        lblTodos = new javax.swing.JLabel();
+        lblRock = new javax.swing.JLabel();
+        lblAlternativo = new javax.swing.JLabel();
+        lblPop = new javax.swing.JLabel();
+        lblHipHop = new javax.swing.JLabel();
+        lblKpop = new javax.swing.JLabel();
+        lblJazz = new javax.swing.JLabel();
+        lblUrbana = new javax.swing.JLabel();
+        lblRegionalMexicana = new javax.swing.JLabel();
+        lblTropical = new javax.swing.JLabel();
+        pnlCds = new itson.org.ghosttracks.utilerias.PanelRedondeado();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        panelRedondeado5 = new itson.org.ghosttracks.utilerias.PanelRedondeado();
+        pnlCassettes = new itson.org.ghosttracks.utilerias.PanelRedondeado();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         pnlCatalogo = new javax.swing.JPanel();
@@ -125,20 +176,20 @@ public class PantallaInicioCliente extends javax.swing.JPanel {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconoVinilo.png"))); // NOI18N
 
-        javax.swing.GroupLayout panelRedondeado2Layout = new javax.swing.GroupLayout(panelRedondeado2);
-        panelRedondeado2.setLayout(panelRedondeado2Layout);
-        panelRedondeado2Layout.setHorizontalGroup(
-            panelRedondeado2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRedondeado2Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnlVinilosLayout = new javax.swing.GroupLayout(pnlVinilos);
+        pnlVinilos.setLayout(pnlVinilosLayout);
+        pnlVinilosLayout.setHorizontalGroup(
+            pnlVinilosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlVinilosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelRedondeado2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(pnlVinilosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
-        panelRedondeado2Layout.setVerticalGroup(
-            panelRedondeado2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRedondeado2Layout.createSequentialGroup()
+        pnlVinilosLayout.setVerticalGroup(
+            pnlVinilosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlVinilosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -150,35 +201,35 @@ public class PantallaInicioCliente extends javax.swing.JPanel {
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Géneros");
 
-        jLabel8.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel8.setText("Todos");
+        lblTodos.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lblTodos.setText("Todos");
 
-        jLabel9.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel9.setText("Rock");
+        lblRock.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lblRock.setText("Rock");
 
-        jLabel10.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel10.setText("Alternativo");
+        lblAlternativo.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lblAlternativo.setText("Alternativo");
 
-        jLabel11.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel11.setText("Pop");
+        lblPop.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lblPop.setText("Pop");
 
-        jLabel12.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel12.setText("Hip hop");
+        lblHipHop.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lblHipHop.setText("Hip hop");
 
-        jLabel13.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel13.setText("K-pop");
+        lblKpop.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lblKpop.setText("K-pop");
 
-        jLabel14.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel14.setText("Jazz");
+        lblJazz.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lblJazz.setText("Jazz");
 
-        jLabel15.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel15.setText("Urbana");
+        lblUrbana.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lblUrbana.setText("Urbana");
 
-        jLabel16.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel16.setText("Regional Mexicana");
+        lblRegionalMexicana.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lblRegionalMexicana.setText("Regional Mexicana");
 
-        jLabel17.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel17.setText("Tropical");
+        lblTropical.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lblTropical.setText("Tropical");
 
         javax.swing.GroupLayout panelRedondeado3Layout = new javax.swing.GroupLayout(panelRedondeado3);
         panelRedondeado3.setLayout(panelRedondeado3Layout);
@@ -190,16 +241,16 @@ public class PantallaInicioCliente extends javax.swing.JPanel {
                     .addGroup(panelRedondeado3Layout.createSequentialGroup()
                         .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())
-                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
-                    .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(lblTodos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblRock, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblAlternativo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblPop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblHipHop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblKpop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblJazz, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblUrbana, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblRegionalMexicana, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
+                    .addComponent(lblTropical, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         panelRedondeado3Layout.setVerticalGroup(
             panelRedondeado3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -207,25 +258,25 @@ public class PantallaInicioCliente extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel8)
+                .addComponent(lblTodos)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel9)
+                .addComponent(lblRock)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel10)
+                .addComponent(lblAlternativo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel11)
+                .addComponent(lblPop)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel12)
+                .addComponent(lblHipHop)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel13)
+                .addComponent(lblKpop)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel14)
+                .addComponent(lblJazz)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel15)
+                .addComponent(lblUrbana)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel16)
+                .addComponent(lblRegionalMexicana)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel17)
+                .addComponent(lblTropical)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -236,20 +287,20 @@ public class PantallaInicioCliente extends javax.swing.JPanel {
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("CDs");
 
-        javax.swing.GroupLayout panelRedondeado4Layout = new javax.swing.GroupLayout(panelRedondeado4);
-        panelRedondeado4.setLayout(panelRedondeado4Layout);
-        panelRedondeado4Layout.setHorizontalGroup(
-            panelRedondeado4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRedondeado4Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnlCdsLayout = new javax.swing.GroupLayout(pnlCds);
+        pnlCds.setLayout(pnlCdsLayout);
+        pnlCdsLayout.setHorizontalGroup(
+            pnlCdsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCdsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelRedondeado4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(pnlCdsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
-        panelRedondeado4Layout.setVerticalGroup(
-            panelRedondeado4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRedondeado4Layout.createSequentialGroup()
+        pnlCdsLayout.setVerticalGroup(
+            pnlCdsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCdsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -264,20 +315,20 @@ public class PantallaInicioCliente extends javax.swing.JPanel {
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconoCassette.png"))); // NOI18N
 
-        javax.swing.GroupLayout panelRedondeado5Layout = new javax.swing.GroupLayout(panelRedondeado5);
-        panelRedondeado5.setLayout(panelRedondeado5Layout);
-        panelRedondeado5Layout.setHorizontalGroup(
-            panelRedondeado5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRedondeado5Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnlCassettesLayout = new javax.swing.GroupLayout(pnlCassettes);
+        pnlCassettes.setLayout(pnlCassettesLayout);
+        pnlCassettesLayout.setHorizontalGroup(
+            pnlCassettesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlCassettesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelRedondeado5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlCassettesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE))
                 .addContainerGap())
         );
-        panelRedondeado5Layout.setVerticalGroup(
-            panelRedondeado5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRedondeado5Layout.createSequentialGroup()
+        pnlCassettesLayout.setVerticalGroup(
+            pnlCassettesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCassettesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -298,11 +349,11 @@ public class PantallaInicioCliente extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlContenidoLayout.createSequentialGroup()
-                        .addComponent(panelRedondeado2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(pnlVinilos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(panelRedondeado4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(pnlCds, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(panelRedondeado5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(pnlCassettes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(pnlCatalogo, javax.swing.GroupLayout.DEFAULT_SIZE, 803, Short.MAX_VALUE))
                 .addContainerGap())
@@ -314,9 +365,9 @@ public class PantallaInicioCliente extends javax.swing.JPanel {
                 .addGroup(pnlContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlContenidoLayout.createSequentialGroup()
                         .addGroup(pnlContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(panelRedondeado2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(panelRedondeado4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(panelRedondeado5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(pnlVinilos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(pnlCds, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(pnlCassettes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(pnlCatalogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(panelRedondeado3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -347,29 +398,29 @@ public class PantallaInicioCliente extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane2;
-    private itson.org.ghosttracks.utilerias.PanelRedondeado panelRedondeado2;
+    private javax.swing.JLabel lblAlternativo;
+    private javax.swing.JLabel lblHipHop;
+    private javax.swing.JLabel lblJazz;
+    private javax.swing.JLabel lblKpop;
+    private javax.swing.JLabel lblPop;
+    private javax.swing.JLabel lblRegionalMexicana;
+    private javax.swing.JLabel lblRock;
+    private javax.swing.JLabel lblTodos;
+    private javax.swing.JLabel lblTropical;
+    private javax.swing.JLabel lblUrbana;
     private itson.org.ghosttracks.utilerias.PanelRedondeado panelRedondeado3;
-    private itson.org.ghosttracks.utilerias.PanelRedondeado panelRedondeado4;
-    private itson.org.ghosttracks.utilerias.PanelRedondeado panelRedondeado5;
+    private itson.org.ghosttracks.utilerias.PanelRedondeado pnlCassettes;
     private javax.swing.JPanel pnlCatalogo;
+    private itson.org.ghosttracks.utilerias.PanelRedondeado pnlCds;
     private javax.swing.JPanel pnlContenido;
     private javax.swing.JPanel pnlPrincipal;
+    private itson.org.ghosttracks.utilerias.PanelRedondeado pnlVinilos;
     // End of variables declaration//GEN-END:variables
 }

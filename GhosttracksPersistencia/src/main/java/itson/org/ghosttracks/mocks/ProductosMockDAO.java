@@ -57,7 +57,7 @@ public class ProductosMockDAO implements IProductosDAO {
                 "Michael Jackson", 
                 "Pop", 
                 Arrays.asList("Wanna Be Startin' Somethin'", "Baby Be Mine", "The Girl Is Mine", "Thriller", "Beat It", "Billie Jean", "Human Nature"),
-                350.00, 
+                752.30, 
                 20, 
                 EstadoProducto.DISPONIBLE
         );
@@ -75,13 +75,48 @@ public class ProductosMockDAO implements IProductosDAO {
                 Arrays.asList("City Walls", "RAWFEAR", "Drum Show", "Garbage", "The Contract", 
                         "Downstairs", "Robot Voices", "Center Mass", "Cotton Wood", "One Way", "Days Lie Dormant", 
                         "Tally", "Intentions"), 
-                200.00, 
+                1200.00, 
                 5, 
                 EstadoProducto.DISPONIBLE
         );
         this.productosDB.add(producto3);
         contadorId++;
+        
+        Producto producto4 = new Producto(
+                4L,                       
+                "Who Really Cares?",             
+                "TvGirl.png",         
+                TipoProducto.VINILO,       
+                "TV Girl",            
+                "Alternativo",                   
+                Arrays.asList("Taking What's Not Yours", "Song About Me", "Cigarettes Out The Window", 
+                        "Till You Tell Me to Leave", "Not Allowed", "(Do The) Act Like You Never Met Me", 
+                        "Safeword", "For You", "Loving Machine", "Heaven Is a Bedroom"), // setlist
+                1200.00,                  
+                20,                       
+                EstadoProducto.DISPONIBLE 
+        );
+        this.productosDB.add(producto4);
+        contadorId++;
+        
+        Producto producto5 = new Producto(
+                5L,                       
+                "Chromakopia",             
+                "Chromakopia.png",         
+                TipoProducto.CD,       
+                "Tyler, The Creator",            
+                "Hip Hop",                   
+                Arrays.asList("St. Chroma", "Rah Tah Tah", "Noid", "Darling, I", "Hey Jane", 
+                        "I Killed You", "Sticky", "Take Your Mask Off", "Tomorrow", 
+                        "Thought I Was Dead", "Like Him", "Balloon", "Hope You Find Your Way Home"),
+                750.00,                  
+                10,                       
+                EstadoProducto.DISPONIBLE 
+        );
+        this.productosDB.add(producto5);
+        contadorId++;
     }
+    
     
     @Override
     public List<Producto> obtenerTodos() throws PersistenciaException {

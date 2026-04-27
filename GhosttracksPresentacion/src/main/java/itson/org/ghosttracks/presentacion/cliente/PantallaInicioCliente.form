@@ -71,11 +71,11 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="panelRedondeado2" min="-2" max="-2" attributes="0"/>
+                              <Component id="pnlVinilos" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="panelRedondeado4" min="-2" max="-2" attributes="0"/>
+                              <Component id="pnlCds" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="panelRedondeado5" min="-2" max="-2" attributes="0"/>
+                              <Component id="pnlCassettes" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                           <Component id="pnlCatalogo" pref="803" max="32767" attributes="0"/>
@@ -91,9 +91,9 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="panelRedondeado2" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="panelRedondeado4" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="panelRedondeado5" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="pnlVinilos" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="pnlCds" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="pnlCassettes" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="pnlCatalogo" max="32767" attributes="0"/>
@@ -106,7 +106,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Container class="itson.org.ghosttracks.utilerias.PanelRedondeado" name="panelRedondeado2">
+            <Container class="itson.org.ghosttracks.utilerias.PanelRedondeado" name="pnlVinilos">
 
               <Layout>
                 <DimensionLayout dim="0">
@@ -165,16 +165,16 @@
                                   <Component id="jLabel7" max="32767" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
-                              <Component id="jLabel8" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jLabel9" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jLabel10" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jLabel11" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jLabel12" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jLabel13" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jLabel14" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jLabel15" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jLabel16" alignment="0" pref="251" max="32767" attributes="0"/>
-                              <Component id="jLabel17" alignment="0" max="32767" attributes="0"/>
+                              <Component id="lblTodos" alignment="0" max="32767" attributes="0"/>
+                              <Component id="lblRock" alignment="0" max="32767" attributes="0"/>
+                              <Component id="lblAlternativo" alignment="0" max="32767" attributes="0"/>
+                              <Component id="lblPop" alignment="0" max="32767" attributes="0"/>
+                              <Component id="lblHipHop" alignment="0" max="32767" attributes="0"/>
+                              <Component id="lblKpop" alignment="0" max="32767" attributes="0"/>
+                              <Component id="lblJazz" alignment="0" max="32767" attributes="0"/>
+                              <Component id="lblUrbana" alignment="0" max="32767" attributes="0"/>
+                              <Component id="lblRegionalMexicana" alignment="0" pref="251" max="32767" attributes="0"/>
+                              <Component id="lblTropical" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -185,25 +185,25 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblTodos" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblRock" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblAlternativo" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblPop" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblHipHop" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblKpop" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblJazz" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblUrbana" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblRegionalMexicana" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblTropical" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -219,7 +219,7 @@
                     <Property name="text" type="java.lang.String" value="G&#xe9;neros"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel8">
+                <Component class="javax.swing.JLabel" name="lblTodos">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Arial" size="18" style="0"/>
@@ -227,7 +227,7 @@
                     <Property name="text" type="java.lang.String" value="Todos"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel9">
+                <Component class="javax.swing.JLabel" name="lblRock">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Arial" size="18" style="0"/>
@@ -235,7 +235,7 @@
                     <Property name="text" type="java.lang.String" value="Rock"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel10">
+                <Component class="javax.swing.JLabel" name="lblAlternativo">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Arial" size="18" style="0"/>
@@ -243,7 +243,7 @@
                     <Property name="text" type="java.lang.String" value="Alternativo"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel11">
+                <Component class="javax.swing.JLabel" name="lblPop">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Arial" size="18" style="0"/>
@@ -251,7 +251,7 @@
                     <Property name="text" type="java.lang.String" value="Pop"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel12">
+                <Component class="javax.swing.JLabel" name="lblHipHop">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Arial" size="18" style="0"/>
@@ -259,7 +259,7 @@
                     <Property name="text" type="java.lang.String" value="Hip hop"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel13">
+                <Component class="javax.swing.JLabel" name="lblKpop">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Arial" size="18" style="0"/>
@@ -267,7 +267,7 @@
                     <Property name="text" type="java.lang.String" value="K-pop"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel14">
+                <Component class="javax.swing.JLabel" name="lblJazz">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Arial" size="18" style="0"/>
@@ -275,7 +275,7 @@
                     <Property name="text" type="java.lang.String" value="Jazz"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel15">
+                <Component class="javax.swing.JLabel" name="lblUrbana">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Arial" size="18" style="0"/>
@@ -283,7 +283,7 @@
                     <Property name="text" type="java.lang.String" value="Urbana"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel16">
+                <Component class="javax.swing.JLabel" name="lblRegionalMexicana">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Arial" size="18" style="0"/>
@@ -291,7 +291,7 @@
                     <Property name="text" type="java.lang.String" value="Regional Mexicana"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel17">
+                <Component class="javax.swing.JLabel" name="lblTropical">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Arial" size="18" style="0"/>
@@ -301,7 +301,7 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Container class="itson.org.ghosttracks.utilerias.PanelRedondeado" name="panelRedondeado4">
+            <Container class="itson.org.ghosttracks.utilerias.PanelRedondeado" name="pnlCds">
 
               <Layout>
                 <DimensionLayout dim="0">
@@ -348,7 +348,7 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Container class="itson.org.ghosttracks.utilerias.PanelRedondeado" name="panelRedondeado5">
+            <Container class="itson.org.ghosttracks.utilerias.PanelRedondeado" name="pnlCassettes">
 
               <Layout>
                 <DimensionLayout dim="0">
