@@ -83,7 +83,6 @@ public class pnlDetallesPedido extends javax.swing.JPanel {
         jSeparator2 = new javax.swing.JSeparator();
         lblSubtotalDisplay2 = new javax.swing.JLabel();
         lblTotal1 = new javax.swing.JLabel();
-        btnActualizarPedido = new itson.org.ghosttracks.utilerias.BotonRedondeado();
 
         setBackground(new java.awt.Color(237, 229, 222));
         setPreferredSize(new java.awt.Dimension(348, 680));
@@ -191,11 +190,6 @@ public class pnlDetallesPedido extends javax.swing.JPanel {
         lblTotal1.setText("Total");
         pnlPrincipalResumen.add(lblTotal1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 600, -1, -1));
 
-        btnActualizarPedido.setBackground(new java.awt.Color(191, 64, 43));
-        btnActualizarPedido.setForeground(new java.awt.Color(255, 255, 255));
-        btnActualizarPedido.setText("Actualizar pedido");
-        pnlPrincipalResumen.add(btnActualizarPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 633, 320, 40));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -208,14 +202,13 @@ public class pnlDetallesPedido extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnlPrincipalResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 688, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(pnlPrincipalResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 644, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(50, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private itson.org.ghosttracks.utilerias.BotonRedondeado btnActualizarPedido;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JScrollPane jspProductosPedido;

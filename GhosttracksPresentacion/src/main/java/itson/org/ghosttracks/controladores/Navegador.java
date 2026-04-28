@@ -1,8 +1,11 @@
 
 package itson.org.ghosttracks.controladores;
 
+import itson.org.ghosttracks.dtos.PedidoDTO;
 import itson.org.ghosttracks.dtos.ProductoDTO;
 import itson.org.ghosttracks.presentacion.VentanaPrincipal;
+import itson.org.ghosttracks.presentacion.administrador.PanelConfirmarEmpaquetado;
+import itson.org.ghosttracks.presentacion.administrador.PanelDatosPaquete;
 import itson.org.ghosttracks.presentacion.administrador.PantallaVentasProcesarAdmin;
 import itson.org.ghosttracks.presentacion.administrador.PantallaVentas;
 import itson.org.ghosttracks.presentacion.cliente.PantallaCarrito;
@@ -15,6 +18,7 @@ import itson.org.ghosttracks.presentacion.panelLogin;
 import itson.org.ghosttracks.utilerias.PanelHeader;
 import itson.org.ghosttracks.utilerias.pnlMenuLateral;
 import itson.org.ghosttracks.utilerias.pnlMenuLateralAdmin;
+import javax.swing.JPanel;
 
 /**
  *
@@ -94,11 +98,6 @@ public class Navegador {
         ventana.cambiarPantalla(vista);
     }
     
-    public void irProcesarPedidoAdmin() {
-        ControladorVentasAdmin ctrl = new ControladorVentasAdmin(this);
-        PantallaVentasProcesarAdmin vista = new PantallaVentasProcesarAdmin(ctrl);
-        ventana.cambiarPantalla(vista);
-    }
         
     public void cerrarSesion() {
         irLogin();
@@ -106,6 +105,22 @@ public class Navegador {
     
     public void mostrarMensaje(String mensaje, boolean esError) {
         ventana.mostrarMensaje(mensaje, esError);
+    }
+
+    public void irPantallaConfirmarEmpaque(PedidoDTO pedidoSeleccionado) {
+        ControladorVentasAdmin ctrl = new ControladorVentasAdmin(this);
+        PantallaVentasProcesarAdmin vistaBase = new PantallaVentasProcesarAdmin(ctrl, pedidoSeleccionado);
+        JPanel panelEmpaque = new PanelConfirmarEmpaquetado(ctrl, pedidoSeleccionado); 
+        vistaBase.cambiarPanelAccion(panelEmpaque);
+        ventana.cambiarPantalla(vistaBase);
+    }
+
+    public void irPantallaConfirmarEnvio(PedidoDTO pedidoSeleccionado) {
+        ControladorVentasAdmin ctrl = new ControladorVentasAdmin(this);
+        PantallaVentasProcesarAdmin vistaBase = new PantallaVentasProcesarAdmin(ctrl, pedidoSeleccionado);
+        JPanel panelEnvio = new PanelDatosPaquete(ctrl, pedidoSeleccionado);
+        vistaBase.cambiarPanelAccion(panelEnvio);
+        ventana.cambiarPantalla(vistaBase);
     }
     
 }

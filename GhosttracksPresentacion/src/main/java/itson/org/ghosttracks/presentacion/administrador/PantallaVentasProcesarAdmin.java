@@ -2,6 +2,9 @@
 package itson.org.ghosttracks.presentacion.administrador;
 
 import itson.org.ghosttracks.controladores.ControladorVentasAdmin;
+import itson.org.ghosttracks.dtos.PedidoDTO;
+import java.awt.BorderLayout;
+import javax.swing.JPanel;
 
 /**
  *
@@ -10,12 +13,22 @@ import itson.org.ghosttracks.controladores.ControladorVentasAdmin;
 public class PantallaVentasProcesarAdmin extends javax.swing.JPanel {
 
     private final ControladorVentasAdmin control;
+    private final PedidoDTO pedido;
     
-    public PantallaVentasProcesarAdmin(ControladorVentasAdmin ctrl) {
+    public PantallaVentasProcesarAdmin(ControladorVentasAdmin ctrl, PedidoDTO pedido) {
         this.control = ctrl;
+        this.pedido = pedido;
         initComponents();
+        pnlDetallesPedido.cargarDetalles(this.pedido);
+        pnlContenedorAccion.setLayout(new BorderLayout());
     }
 
+    public void cambiarPanelAccion(JPanel panelNuevo) {
+        pnlContenedorAccion.removeAll(); 
+        pnlContenedorAccion.add(panelNuevo, BorderLayout.CENTER); 
+        pnlContenedorAccion.revalidate();
+        pnlContenedorAccion.repaint();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -26,8 +39,9 @@ public class PantallaVentasProcesarAdmin extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        pnlResumenPedido1 = new itson.org.ghosttracks.utilerias.pnlResumenPedido();
         btnVolver = new javax.swing.JButton();
+        pnlDetallesPedido = new itson.org.ghosttracks.utilerias.pnlDetallesPedido();
+        pnlContenedorAccion = new javax.swing.JPanel();
 
         jPanel1.setBackground(new java.awt.Color(237, 229, 222));
         jPanel1.setPreferredSize(new java.awt.Dimension(1100, 675));
@@ -35,26 +49,47 @@ public class PantallaVentasProcesarAdmin extends javax.swing.JPanel {
         btnVolver.setText("Volver");
         btnVolver.addActionListener(this::btnVolverActionPerformed);
 
+        pnlContenedorAccion.setBackground(new java.awt.Color(237, 229, 222));
+
+        javax.swing.GroupLayout pnlContenedorAccionLayout = new javax.swing.GroupLayout(pnlContenedorAccion);
+        pnlContenedorAccion.setLayout(pnlContenedorAccionLayout);
+        pnlContenedorAccionLayout.setHorizontalGroup(
+            pnlContenedorAccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 530, Short.MAX_VALUE)
+        );
+        pnlContenedorAccionLayout.setVerticalGroup(
+            pnlContenedorAccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 627, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(pnlResumenPedido1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 625, Short.MAX_VALUE)
-                .addComponent(btnVolver)
-                .addGap(40, 40, 40))
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnVolver)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(pnlDetallesPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(pnlContenedorAccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(198, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(pnlResumenPedido1, javax.swing.GroupLayout.PREFERRED_SIZE, 675, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(pnlDetallesPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 660, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(pnlContenedorAccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(btnVolver)
-                .addGap(46, 46, 46))
+                .addGap(28, 28, 28))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -67,9 +102,7 @@ public class PantallaVentasProcesarAdmin extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 713, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -81,6 +114,7 @@ public class PantallaVentasProcesarAdmin extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnVolver;
     private javax.swing.JPanel jPanel1;
-    private itson.org.ghosttracks.utilerias.pnlResumenPedido pnlResumenPedido1;
+    private javax.swing.JPanel pnlContenedorAccion;
+    private itson.org.ghosttracks.utilerias.pnlDetallesPedido pnlDetallesPedido;
     // End of variables declaration//GEN-END:variables
 }
