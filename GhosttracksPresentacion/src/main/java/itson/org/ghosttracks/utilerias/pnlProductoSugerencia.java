@@ -32,7 +32,7 @@ public class pnlProductoSugerencia extends javax.swing.JPanel {
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent evt) {
-                control.mostrarDetalleProducto(producto);
+                control.irADetalleProducto(producto);
             }
         });
     }

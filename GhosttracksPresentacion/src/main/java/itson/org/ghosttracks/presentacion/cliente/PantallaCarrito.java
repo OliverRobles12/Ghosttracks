@@ -44,13 +44,12 @@ public class PantallaCarrito extends javax.swing.JPanel {
         pnlContenedor = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        botonRedondeado1 = new itson.org.ghosttracks.utilerias.BotonRedondeado();
+        btnContinuar = new itson.org.ghosttracks.utilerias.BotonRedondeado();
         jLabel3 = new javax.swing.JLabel();
         lbl = new javax.swing.JLabel();
         lblSubtotal = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblCarrito = new javax.swing.JTable();
-        btnEliminar = new javax.swing.JButton();
 
         pnlPrincipal.setPreferredSize(new java.awt.Dimension(1100, 675));
         pnlPrincipal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -64,10 +63,10 @@ public class PantallaCarrito extends javax.swing.JPanel {
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carro 1.png"))); // NOI18N
         jLabel2.setText("jLabel2");
 
-        botonRedondeado1.setBackground(new java.awt.Color(204, 51, 0));
-        botonRedondeado1.setText("Continuar");
-        botonRedondeado1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        botonRedondeado1.addActionListener(this::botonRedondeado1ActionPerformed);
+        btnContinuar.setBackground(new java.awt.Color(204, 51, 0));
+        btnContinuar.setText("Continuar");
+        btnContinuar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btnContinuar.addActionListener(this::btnContinuarActionPerformed);
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(102, 102, 102));
@@ -120,9 +119,6 @@ public class PantallaCarrito extends javax.swing.JPanel {
             tblCarrito.getColumnModel().getColumn(5).setMaxWidth(100);
         }
 
-        btnEliminar.setText("Eliminar");
-        btnEliminar.addActionListener(this::btnEliminarActionPerformed);
-
         javax.swing.GroupLayout pnlContenedorLayout = new javax.swing.GroupLayout(pnlContenedor);
         pnlContenedor.setLayout(pnlContenedorLayout);
         pnlContenedorLayout.setHorizontalGroup(
@@ -135,11 +131,8 @@ public class PantallaCarrito extends javax.swing.JPanel {
                         .addComponent(lbl)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lblSubtotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnlContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(pnlContenedorLayout.createSequentialGroup()
-                            .addComponent(btnEliminar)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(botonRedondeado1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(btnContinuar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1070, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(pnlContenedorLayout.createSequentialGroup()
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -164,9 +157,7 @@ public class PantallaCarrito extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnlContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botonRedondeado1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEliminar))
+                .addComponent(btnContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(73, Short.MAX_VALUE))
         );
 
@@ -184,13 +175,9 @@ public class PantallaCarrito extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void botonRedondeado1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRedondeado1ActionPerformed
-        control.comenzarProcesoPedido();
-    }//GEN-LAST:event_botonRedondeado1ActionPerformed
-
-    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        
-    }//GEN-LAST:event_btnEliminarActionPerformed
+    private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
+        control.irAFormularioContacto();
+    }//GEN-LAST:event_btnContinuarActionPerformed
 
     class ImageRenderer extends javax.swing.table.DefaultTableCellRenderer {
         @Override
@@ -327,8 +314,7 @@ public class PantallaCarrito extends javax.swing.JPanel {
 }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private itson.org.ghosttracks.utilerias.BotonRedondeado botonRedondeado1;
-    private javax.swing.JButton btnEliminar;
+    private itson.org.ghosttracks.utilerias.BotonRedondeado btnContinuar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

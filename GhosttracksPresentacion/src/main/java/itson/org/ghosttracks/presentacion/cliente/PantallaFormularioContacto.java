@@ -225,8 +225,8 @@ public class PantallaFormularioContacto extends javax.swing.JPanel {
         boolean tieneTelefono = !telefono.equals(PLACEHOLDER_TEL) && !telefono.isEmpty();
         contacto.setTelefono(tieneTelefono ? telefono : null);
 
-        control.agregarContactoPedido(contacto);
-        control.procesoPedidoEntrega();
+        control.guardarDatosContacto(contacto);
+        control.irAFormularioEntrega();
         
         control.mostrarMensaje("Contacto guardado con éxito.", false);
     }

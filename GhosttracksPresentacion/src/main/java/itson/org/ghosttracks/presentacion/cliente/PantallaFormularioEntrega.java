@@ -272,10 +272,10 @@ public class PantallaFormularioEntrega extends javax.swing.JPanel {
         dto.setCiudad(ciudad);
         dto.setEstado(estado);
         
-        control.agregarDireccionPedido(dto);
+        control.guardarDatosEntrega(dto);
         control.mostrarMensaje("Dirección guardada con éxito.", false);
         
-        control.procesarPedidoMetodoPago();
+        control.irASeleccionPago();
         
     }
     

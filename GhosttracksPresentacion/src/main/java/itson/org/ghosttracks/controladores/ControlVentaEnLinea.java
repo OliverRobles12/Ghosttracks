@@ -7,6 +7,7 @@ import itson.org.ghosttracks.dtos.ContactoDTO;
 import itson.org.ghosttracks.dtos.DatosPagoDTO;
 import itson.org.ghosttracks.dtos.DireccionEntregaDTO;
 import itson.org.ghosttracks.dtos.PedidoDTO;
+import itson.org.ghosttracks.dtos.PedidoDTOBuilder;
 import itson.org.ghosttracks.dtos.ProductoDTO;
 import itson.org.ghosttracks.enums.EstadoPedidoDTO;
 import itson.org.ghosttracks.enums.TipoProducto;
@@ -29,29 +30,35 @@ public class ControlVentaEnLinea {
     
     private CarritoDTO carrito;
     private PedidoDTO pedidoDTO;
+    private PedidoDTOBuilder pedidoBuilder;
     
     public ControlVentaEnLinea(Navegador nav) {
         this.navegador = nav;
         this.pedidoDTO = new PedidoDTO();
         this.carrito = new CarritoDTO();
+        this.pedidoBuilder = new PedidoDTOBuilder();
     }
     
     // Salto pantallas
     
-    public void comenzarProcesoPedido() {
+    public void irAInicio() {
+        navegador.irInicioCliente();
+    }
+    
+    public void irAFormularioContacto() {
         navegador.irFormularioContacto();
     }
     
-    public void procesoPedidoEntrega() {
+    public void irAFormularioEntrega() {
         navegador.irFormularioEntrega();
     }
     
-    public void procesarPedidoMetodoPago() {
+    public void irASeleccionPago() {
         navegador.irSeleccionMetodoPago();
     }
     
-    public void volverACatalogo() {
-        navegador.irInicioCliente();
+    public void irADetalleProducto(ProductoDTO productoSeleccionado) {
+        navegador.irVistaProducto(productoSeleccionado);
     }
     
     // Pantallas
@@ -73,23 +80,11 @@ public class ControlVentaEnLinea {
      * Obtiene el catálogo completo de productos disponibles.
      * Útil para cuando necesitamos la lista de datos puros (como en las sugerencias al azar).
      */
-    public List<ProductoDTO> obtenerCatalogo() throws Exception {
+    public List<ProductoDTO> obtenerCatalogoCompleto() throws Exception {
         return ventaFachada.obtenerCatalogo();
     }    
     
-    public void mostrarDetalleProducto(ProductoDTO productoSeleccionado) {
-        navegador.irVistaProducto(productoSeleccionado);
-    }
-    
-    public void llenarResumenPedido(pnlResumenPedido vistaResumen) {
-        try {
-            vistaResumen.cargarResumen(this.carrito);
-        } catch (Exception ex) {
-            navegador.mostrarMensaje("Error al cargar el resumen del pedido.", true);
-        }
-    }
-    
-    public void filtrarCatalogoPorTipo(PantallaInicioCliente vista, TipoProducto tipo) {
+    public void obtenerCatalogoPorTipo(PantallaInicioCliente vista, TipoProducto tipo) {
         try {
             List<ProductoDTO> todosLosProductos = ventaFachada.obtenerCatalogo();
             
@@ -104,7 +99,7 @@ public class ControlVentaEnLinea {
         }
     }
     
-    public void filtrarCatalogoPorGenero(PantallaInicioCliente vista, String genero) {
+    public void obtenerCatalogoPorGenero(PantallaInicioCliente vista, String genero) {
         try {
             List<ProductoDTO> todosLosProductos = ventaFachada.obtenerCatalogo();
             
@@ -120,18 +115,40 @@ public class ControlVentaEnLinea {
         }
     }   
     
-    // Pedido
+    public void llenarResumenPedido(pnlResumenPedido vistaResumen) {
+        try {
+            vistaResumen.cargarResumen(this.carrito);
+        } catch (Exception ex) {
+            navegador.mostrarMensaje("Error al cargar el resumen del pedido.", true);
+        }
+    }
     
-    public void agregarDireccionPedido(DireccionEntregaDTO dto) {
+    // Flujo de compra
+    
+    public void guardarCliente(){
+        
+        if (!SesionUsuario.getInstancia().haySesionActiva()) {
+            navegador.mostrarMensaje("Por favor, inicia sesión para terminar tu compra.", true);
+            return; 
+        }
+        ClienteDTO clienteLogueado = SesionUsuario.getInstancia().getCliente();
+        pedidoBuilder.setCliente(clienteLogueado);
+        
+    }
+    
+    public void guardarDatosEntrega(DireccionEntregaDTO dto) {
         pedidoDTO.setDireccionEntrega(dto);
+        pedidoBuilder.setDireccionEntrega(dto);
     }
     
-    public void agregarContactoPedido(ContactoDTO dto) {
+    public void guardarDatosContacto(ContactoDTO dto) {
         pedidoDTO.setContacto(dto);
+        pedidoBuilder.setContacto(dto);
     }
     
-    public void agregarMetodoPago(DatosPagoDTO dto) {
+    public void guardarMetodoPago(DatosPagoDTO dto) {
         pedidoDTO.setDatosPago(dto);
+        pedidoBuilder.setDatosPago(dto);
     }
     
     public void procesarPedido() throws Exception {
@@ -165,6 +182,22 @@ public class ControlVentaEnLinea {
             navegador.mostrarMensaje("No pudimos procesar tu compra: " + ex.getMessage(), true);
         }
     }
+    
+    public void procesaaar() {
+        
+        if (!SesionUsuario.getInstancia().haySesionActiva()) {
+            navegador.mostrarMensaje("Por favor, inicia sesión para terminar tu compra.", true);
+            // TODO llevar al usuario a una zona de loggin aislada
+            return; 
+        }
+        
+        ClienteDTO clienteLogueado = SesionUsuario.getInstancia().getCliente();
+        
+        this.pedidoBuilder.setCliente(clienteLogueado).setCarrito(carrito);
+        
+    }
+    
+    // Gestion carrito
     
     public void agregarProductoCarrito(ProductoDTO producto, Integer cantidad) {
         try {

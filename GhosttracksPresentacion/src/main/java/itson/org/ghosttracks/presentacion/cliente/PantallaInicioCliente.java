@@ -37,7 +37,7 @@ public class PantallaInicioCliente extends javax.swing.JPanel {
         pnlVinilos.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent evt) {
-                control.filtrarCatalogoPorTipo(PantallaInicioCliente.this, TipoProducto.VINILO);
+                control.obtenerCatalogoPorTipo(PantallaInicioCliente.this, TipoProducto.VINILO);
             }
         });
         
@@ -45,7 +45,7 @@ public class PantallaInicioCliente extends javax.swing.JPanel {
         pnlCds.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent evt) {
-                control.filtrarCatalogoPorTipo(PantallaInicioCliente.this, TipoProducto.CD);
+                control.obtenerCatalogoPorTipo(PantallaInicioCliente.this, TipoProducto.CD);
             }
         });
         
@@ -53,7 +53,7 @@ public class PantallaInicioCliente extends javax.swing.JPanel {
         pnlCassettes.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent evt) {
-                control.filtrarCatalogoPorTipo(PantallaInicioCliente.this, TipoProducto.CASSETTE);
+                control.obtenerCatalogoPorTipo(PantallaInicioCliente.this, TipoProducto.CASSETTE);
             }
         });
 
@@ -121,7 +121,7 @@ public class PantallaInicioCliente extends javax.swing.JPanel {
         etiqueta.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent evt) {
-                control.filtrarCatalogoPorGenero(PantallaInicioCliente.this, genero);
+                control.obtenerCatalogoPorGenero(PantallaInicioCliente.this, genero);
             }
         });
     }

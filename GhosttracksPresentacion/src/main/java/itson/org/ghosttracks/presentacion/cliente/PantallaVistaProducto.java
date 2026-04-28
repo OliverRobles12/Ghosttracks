@@ -287,7 +287,7 @@ public class PantallaVistaProducto extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonRedondeado1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRedondeado1ActionPerformed
-        control.volverACatalogo();
+        control.irAInicio();
     }//GEN-LAST:event_botonRedondeado1ActionPerformed
 
     private void AniadirProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AniadirProductoActionPerformed
@@ -334,7 +334,7 @@ public class PantallaVistaProducto extends javax.swing.JPanel {
     
     private void cargarSugerenciasAlAzar() {
         try {
-            List<ProductoDTO> todosLosProductos = control.obtenerCatalogo(); 
+            List<ProductoDTO> todosLosProductos = control.obtenerCatalogoCompleto(); 
 
             if (todosLosProductos != null && !todosLosProductos.isEmpty()) {
 

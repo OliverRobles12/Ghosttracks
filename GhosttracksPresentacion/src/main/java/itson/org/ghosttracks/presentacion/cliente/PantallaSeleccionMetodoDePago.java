@@ -35,7 +35,7 @@ public class PantallaSeleccionMetodoDePago extends javax.swing.JPanel {
     }
     
     public void setDatosPago(DatosPagoDTO dto) throws Exception {
-        control.agregarMetodoPago(dto);
+        control.guardarMetodoPago(dto);
         control.procesarPedido();
     }
     

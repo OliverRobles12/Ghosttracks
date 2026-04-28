@@ -54,7 +54,7 @@ public class pnlProductoCatalogo extends javax.swing.JPanel {
         }
         this.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
-                control.mostrarDetalleProducto(producto);
+                control.irADetalleProducto(producto);
             }
         });
     }
