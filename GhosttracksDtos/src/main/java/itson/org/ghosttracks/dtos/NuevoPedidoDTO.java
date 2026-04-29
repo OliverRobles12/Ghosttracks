@@ -9,17 +9,24 @@ import itson.org.ghosttracks.enums.EstadoPedidoDTO;
  */
 public class NuevoPedidoDTO {
 
+    // TODO CORREGIR
+    
     private ClienteDTO cliente;
     private ContactoDTO contacto;
     private DireccionEntregaDTO direccionEntrega;
+    private SucursalDTO sucursal;
     private DatosPagoDTO datosPago;
     private CarritoDTO carrito;
     private EstadoPedidoDTO estado = EstadoPedidoDTO.PENDIENTE;
+
+    public NuevoPedidoDTO() {
+    }
 
     public NuevoPedidoDTO(PedidoDTOBuilder builder) {
         this.cliente = builder.getCliente();
         this.contacto = builder.getContacto();
         this.direccionEntrega = builder.getDireccionEntrega();
+        // this.sucursal = builder.getSucursal();
         this.datosPago = builder.getDatosPago();
         this.carrito = builder.getCarrito();
     }

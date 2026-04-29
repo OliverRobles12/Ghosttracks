@@ -46,7 +46,7 @@ public class CarritoBO implements ICarritoBO{
             carrito.getProductos().add(nuevoItem);
         }
 
-        carrito.calcularTotalGeneral();
+        // carrito.calcularTotalGeneral();
 
         return carrito;
     }
@@ -61,7 +61,7 @@ public class CarritoBO implements ICarritoBO{
             item.getProductoSeleccionado().getIdProducto().equals(idProducto)
         );
 
-        carrito.calcularTotalGeneral();
+        // carrito.calcularTotalGeneral();
 
         return carrito;
     }

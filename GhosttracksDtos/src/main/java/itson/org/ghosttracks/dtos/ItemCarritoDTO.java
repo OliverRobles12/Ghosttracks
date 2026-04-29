@@ -17,12 +17,7 @@ public class ItemCarritoDTO {
     public ItemCarritoDTO(ProductoDTO productoSeleccionado, Integer cantidad) {
         this.productoSeleccionado = productoSeleccionado;
         this.cantidad = cantidad;
-    }
-    
-    public void calcularSubtotal() {
-        if (this.productoSeleccionado != null && this.productoSeleccionado.getPrecio() != null && this.cantidad != null) {
-            this.subtotal = this.productoSeleccionado.getPrecio() * this.cantidad;
-        }
+        this.subtotal = subtotal;
     }
 
     public ProductoDTO getProductoSeleccionado() {

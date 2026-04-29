@@ -1,10 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package itson.org.ghosttracks.mocks;
 
 import itson.org.ghosttracks.daos.IPedidosDAO;
+import itson.org.ghosttracks.entidades.Carrito;
+import itson.org.ghosttracks.entidades.Cliente;
 import itson.org.ghosttracks.entidades.Paquete;
 import itson.org.ghosttracks.entidades.Pedido;
 import itson.org.ghosttracks.enums.EstadoPaquete;
@@ -34,13 +33,18 @@ public class PedidosMockDAO implements IPedidosDAO{
         }
     }
 
-    
     private void precargarPedidos() {
         Pedido p1 = new Pedido();
         p1.setIdPedido(idAutoincrementable++);
-        p1.setIdCliente(101L);
-        p1.setTotal(1500.50);
         p1.setEstado(EstadoPedido.ENVIADO);
+        
+        Cliente c1 = new Cliente();
+        c1.setIdUsuario(101L); 
+        p1.setCliente(c1);
+        
+        Carrito car1 = new Carrito();
+        car1.setTotal(1500.50);
+        p1.setCarrito(car1);
         
         Paquete paquetePrueba = new Paquete();
         paquetePrueba.setIdPaquete(1L);
@@ -51,32 +55,52 @@ public class PedidosMockDAO implements IPedidosDAO{
         paquetePrueba.setLargoCm(40.0);
         paquetePrueba.setAnchoCm(32.0);
         paquetePrueba.setAltoCm(6.0);
+        p1.setPaquete(paquetePrueba); 
         
-        p1.setPaquete(paquetePrueba); // Enlazamos el paquete al pedido
         baseDatosPedidos.add(p1);
 
         Pedido p2 = new Pedido();
         p2.setIdPedido(idAutoincrementable++);
-        p2.setIdCliente(102L);
-        p2.setTotal(340.00);
         p2.setEstado(EstadoPedido.PAGADO); 
+        
+        Cliente c2 = new Cliente();
+        c2.setIdUsuario(102L);
+        p2.setCliente(c2);
+        
+        Carrito car2 = new Carrito();
+        car2.setTotal(340.00);
+        p2.setCarrito(car2);
+        
         baseDatosPedidos.add(p2);
 
         Pedido p3 = new Pedido();
         p3.setIdPedido(idAutoincrementable++);
-        p3.setIdCliente(103L);
-        p3.setTotal(899.99);
         p3.setEstado(EstadoPedido.PAGADO); 
+        
+        Cliente c3 = new Cliente();
+        c3.setIdUsuario(103L);
+        p3.setCliente(c3);
+        
+        Carrito car3 = new Carrito();
+        car3.setTotal(899.99);
+        p3.setCarrito(car3);
+        
         baseDatosPedidos.add(p3);
         
         Pedido p4 = new Pedido();
         p4.setIdPedido(idAutoincrementable++);
-        p4.setIdCliente(104L);
-        p4.setTotal(250.00);
         p4.setEstado(EstadoPedido.PAGADO); 
+        
+        Cliente c4 = new Cliente();
+        c4.setIdUsuario(104L);
+        p4.setCliente(c4);
+        
+        Carrito car4 = new Carrito();
+        car4.setTotal(250.00);
+        p4.setCarrito(car4);
+        
         baseDatosPedidos.add(p4);
     }
-    
     
     @Override
     public Pedido guardarPedido(Pedido pedido) throws PersistenciaException {
@@ -142,8 +166,16 @@ public class PedidosMockDAO implements IPedidosDAO{
     public List<Pedido> buscarPedidosFiltrados(List<Long> idsClientes, EstadoPedido estado) throws PersistenciaException {
         List<Pedido> filtrados = new ArrayList<>();
         for (Pedido p : baseDatosPedidos) { 
-            boolean coincideCliente = (idsClientes == null || idsClientes.contains(p.getIdCliente()));
+            
+            boolean coincideCliente = false;
+            if (idsClientes == null || idsClientes.isEmpty()) {
+                coincideCliente = true;
+            } else if (p.getCliente() != null) {
+                coincideCliente = idsClientes.contains(p.getCliente().getIdUsuario());
+            }
+            
             boolean coincideEstado = (estado == null || p.getEstado() == estado);
+            
             if (coincideCliente && coincideEstado) {
                 filtrados.add(p);
             }

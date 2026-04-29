@@ -1,127 +1,42 @@
+
 package itson.org.ghosttracks.dtos;
 
 import itson.org.ghosttracks.enums.EstadoPedidoDTO;
-import java.util.List;
+import java.time.LocalDateTime;
 
 /**
  *
- * @author emyla
+ * @author oliro
  */
 public class PedidoDTO {
-    
+
     private Long idPedido;
-    private Long idCliente;
+    private ClienteDTO cliente;
+    private CarritoDTO carrito;
     private ContactoDTO contacto;
-    private List<ItemCarritoDTO> productos;
-    private Double subtotal;
-    private Double costoEnvio;
-    private Double impuesto;
-    private Double total;
-    private EstadoPedidoDTO estado;
     private DireccionEntregaDTO direccionEntrega;
-    private DatosPagoDTO datosPago;
+    private SucursalDTO sucursal;
+    private EstadoPedidoDTO estado;
+    private LocalDateTime fechaPedido;
+    private Double costoEnvio;
     private PaqueteDTO paquete;
+    private PagoDTO pago;
 
     public PedidoDTO() {
     }
-    
-    public void calcularTotales(Double tarifaEnvio) {
-        this.subtotal = 0.0;
-        if (productos != null) {
-            for (ItemCarritoDTO item : productos) {
-                item.calcularSubtotal();
-                this.subtotal += item.getSubtotal();
-            }
-        }
-        this.costoEnvio = tarifaEnvio;
-        this.total = this.subtotal + this.costoEnvio;
-    }
 
-    public PedidoDTO(Long idPedido, Long idCliente, EstadoPedidoDTO estado, Double total) {
+    public PedidoDTO(Long idPedido, ClienteDTO cliente, CarritoDTO carrito, ContactoDTO contacto, DireccionEntregaDTO direccionEntrega, SucursalDTO sucursal, EstadoPedidoDTO estado, LocalDateTime fechaPedido, Double costoEnvio, PaqueteDTO paquete, PagoDTO pago) {
         this.idPedido = idPedido;
-        this.idCliente = idCliente;
-        this.estado = estado;
-        this.total = total;
-    }
-
-    public PedidoDTO(
-            Long idPedido, 
-            Long idCliente, 
-            ContactoDTO contacto, 
-            List<ItemCarritoDTO> productos, 
-            Double subtotal, 
-            Double costoEnvio, 
-            Double total, 
-            EstadoPedidoDTO estado, 
-            DireccionEntregaDTO direccionEntrega, 
-            DatosPagoDTO datosPago
-    ) {
-        this.idPedido = idPedido;
-        this.idCliente = idCliente;
+        this.cliente = cliente;
+        this.carrito = carrito;
         this.contacto = contacto;
-        this.productos = productos;
-        this.subtotal = subtotal;
-        this.costoEnvio = costoEnvio;
-        this.total = total;
+        this.direccionEntrega = direccionEntrega;
+        this.sucursal = sucursal;
         this.estado = estado;
-        this.direccionEntrega = direccionEntrega;
-        this.datosPago = datosPago;
-    }
-    
-    public Long getIdCliente() {
-        return idCliente;
-    }
-
-    public void setIdCliente(Long idCliente) {
-        this.idCliente = idCliente;
-    }
-
-    public List<ItemCarritoDTO> getProductos() {
-        return productos;
-    }
-
-    public void setProductos(List<ItemCarritoDTO> productos) {
-        this.productos = productos;
-    }
-
-    public Double getSubtotal() {
-        return subtotal;
-    }
-
-    public void setSubtotal(Double subtotal) {
-        this.subtotal = subtotal;
-    }
-
-    public Double getCostoEnvio() {
-        return costoEnvio;
-    }
-
-    public void setCostoEnvio(Double costoEnvio) {
+        this.fechaPedido = fechaPedido;
         this.costoEnvio = costoEnvio;
-    }
-
-    public Double getTotal() {
-        return total;
-    }
-
-    public void setTotal(Double total) {
-        this.total = total;
-    }
-
-    public DireccionEntregaDTO getDireccionEntrega() {
-        return direccionEntrega;
-    }
-
-    public void setDireccionEntrega(DireccionEntregaDTO direccionEntrega) {
-        this.direccionEntrega = direccionEntrega;
-    }
-
-    public DatosPagoDTO getDatosPago() {
-        return datosPago;
-    }
-
-    public void setDatosPago(DatosPagoDTO datosPago) {
-        this.datosPago = datosPago;
+        this.paquete = paquete;
+        this.pago = pago;
     }
 
     public Long getIdPedido() {
@@ -132,12 +47,20 @@ public class PedidoDTO {
         this.idPedido = idPedido;
     }
 
-    public EstadoPedidoDTO getEstado() {
-        return estado;
+    public ClienteDTO getCliente() {
+        return cliente;
     }
 
-    public void setEstado(EstadoPedidoDTO estado) {
-        this.estado = estado;
+    public void setCliente(ClienteDTO cliente) {
+        this.cliente = cliente;
+    }
+
+    public CarritoDTO getCarrito() {
+        return carrito;
+    }
+
+    public void setCarrito(CarritoDTO carrito) {
+        this.carrito = carrito;
     }
 
     public ContactoDTO getContacto() {
@@ -148,14 +71,46 @@ public class PedidoDTO {
         this.contacto = contacto;
     }
 
-    public Double getImpuesto() {
-        return impuesto;
+    public DireccionEntregaDTO getDireccionEntrega() {
+        return direccionEntrega;
     }
 
-    public void setImpuesto(Double impuesto) {
-        this.impuesto = impuesto;
+    public void setDireccionEntrega(DireccionEntregaDTO direccionEntrega) {
+        this.direccionEntrega = direccionEntrega;
     }
-    
+
+    public SucursalDTO getSucursal() {
+        return sucursal;
+    }
+
+    public void setSucursal(SucursalDTO sucursal) {
+        this.sucursal = sucursal;
+    }
+
+    public EstadoPedidoDTO getEstado() {
+        return estado;
+    }
+
+    public void setEstado(EstadoPedidoDTO estado) {
+        this.estado = estado;
+    }
+
+    public LocalDateTime getFechaPedido() {
+        return fechaPedido;
+    }
+
+    public void setFechaPedido(LocalDateTime fechaPedido) {
+        this.fechaPedido = fechaPedido;
+    }
+
+    public Double getCostoEnvio() {
+        return costoEnvio;
+    }
+
+    public void setCostoEnvio(Double costoEnvio) {
+        this.costoEnvio = costoEnvio;
+    }
+
     public PaqueteDTO getPaquete() {
         return paquete;
     }
@@ -163,4 +118,15 @@ public class PedidoDTO {
     public void setPaquete(PaqueteDTO paquete) {
         this.paquete = paquete;
     }
+
+    public PagoDTO getPago() {
+        return pago;
+    }
+
+    public void setPago(PagoDTO pago) {
+        this.pago = pago;
+    }
+    
+    
+    
 }

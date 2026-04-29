@@ -31,7 +31,7 @@ public class pnlResumenPedido extends javax.swing.JPanel {
     
     public void cargarResumen(CarritoDTO carrito) {
         pnlLista.removeAll();
-        carrito.calcularTotalGeneral();
+        // carrito.calcularTotalGeneral();
         if (carrito.getProductos() != null) {
             for (ItemCarritoDTO item : carrito.getProductos()) {
                 ProductoDTO prod = item.getProductoSeleccionado();

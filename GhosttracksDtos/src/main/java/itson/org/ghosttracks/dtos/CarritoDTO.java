@@ -9,40 +9,19 @@ import java.util.List;
  */
 public class CarritoDTO {
     
-    private Long idCliente;
     private List<ItemCarritoDTO> productos = new ArrayList<>();
+    private Double subtotal;
+    private Double impuestos;
     private Double total;
-    private Double subtotal = 0.0;
-    private Double impuestos = 0.0;
-    private static final double TASA_IMPUESTO = 0.16;
     
     public CarritoDTO() {
     }
-    
-    public void calcularTotalGeneral() {
-        this.subtotal = 0.0;
-        if (productos != null) {
-            for (ItemCarritoDTO producto : productos) {
-                producto.calcularSubtotal();
-                this.subtotal += producto.getSubtotal();
-            }
-        }
-        
-        this.impuestos = this.subtotal * TASA_IMPUESTO;
-        this.total = this.subtotal + this.impuestos;
-    }
 
-    public CarritoDTO(Long idCliente, Double total) {
-        this.idCliente = idCliente;
+    public CarritoDTO(List<ItemCarritoDTO> productos, Double subtotal, Double impuestos, Double total) {
+        this.productos = productos;
+        this.subtotal = subtotal;
+        this.impuestos = impuestos;
         this.total = total;
-    }
-
-    public Long getIdCliente() {
-        return idCliente;
-    }
-
-    public void setIdCliente(Long idCliente) {
-        this.idCliente = idCliente;
     }
 
     public List<ItemCarritoDTO> getProductos() {
@@ -52,14 +31,6 @@ public class CarritoDTO {
     public void setProductos(List<ItemCarritoDTO> productos) {
         this.productos = productos;
     }
-
-    public Double getTotal() {
-        return total;
-    }
-
-    public void setTotal(Double total) {
-        this.total = total;
-    } 
 
     public Double getSubtotal() {
         return subtotal;
@@ -75,6 +46,14 @@ public class CarritoDTO {
 
     public void setImpuestos(Double impuestos) {
         this.impuestos = impuestos;
+    }
+
+    public Double getTotal() {
+        return total;
+    }
+
+    public void setTotal(Double total) {
+        this.total = total;
     }
     
 }

@@ -1,19 +1,20 @@
-package itson.org.ghosttracks.dtos;
+
+package itson.org.ghosttracks.entidades;
 
 /**
  *
- * @author emyla
+ * @author oliro
  */
-public class ContactoDTO {
-    
+public class Contacto {
+
     private String nombre;
     private String correo;
     private String telefono;
 
-    public ContactoDTO() {
+    public Contacto() {
     }
 
-    public ContactoDTO(String nombre, String correo, String telefono) {
+    public Contacto(String nombre, String correo, String telefono) {
         this.nombre = nombre;
         this.correo = correo;
         this.telefono = telefono;

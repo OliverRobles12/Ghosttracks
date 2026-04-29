@@ -1,30 +1,25 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package itson.org.ghosttracks.entidades;
 
 import itson.org.ghosttracks.enums.EstadoPedido;
 import java.time.LocalDateTime;
-import java.util.List;
 
 /**
  *
  * @author nafbr
  */
 public class Pedido {
+    
     private Long idPedido;
-    private Long idCliente;
+    private Cliente cliente;
+    private Carrito carrito;
+    private Contacto contacto; 
+    private Direccion direccionEntrega; 
     private Sucursal sucursal;
     private EstadoPedido estado;
     private LocalDateTime fechaPedido;
-    private Double subtotal;
-    private Double impuesto;
-    private Double total; 
     private Double costoEnvio;
-    private List<ProductoPedido> productosPedido; 
     private Paquete paquete;
-    private DatosPago pago;  
+    private Pago pago; 
 
     public Pedido() {
     }
@@ -37,76 +32,36 @@ public class Pedido {
         this.idPedido = idPedido;
     }
 
-    public EstadoPedido getEstado() {
-        return estado;
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public void setEstado(EstadoPedido estado) {
-        this.estado = estado;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
-    public Double getTotal() {
-        return total;
+    public Carrito getCarrito() {
+        return carrito;
     }
 
-    public void setTotal(Double total) {
-        this.total = total;
+    public void setCarrito(Carrito carrito) {
+        this.carrito = carrito;
     }
 
-    public LocalDateTime getFechaPedido() {
-        return fechaPedido;
+    public Contacto getContacto() {
+        return contacto;
     }
 
-    public void setFechaPedido(LocalDateTime fechaPedido) {
-        this.fechaPedido = fechaPedido;
+    public void setContacto(Contacto contacto) {
+        this.contacto = contacto;
     }
 
-    public Double getSubtotal() {
-        return subtotal;
+    public Direccion getDireccionEntrega() {
+        return direccionEntrega;
     }
 
-    public void setSubtotal(Double subtotal) {
-        this.subtotal = subtotal;
-    }
-
-    public Double getCostoEnvio() {
-        return costoEnvio;
-    }
-
-    public void setCostoEnvio(Double costoEnvio) {
-        this.costoEnvio = costoEnvio;
-    }
-
-    public List<ProductoPedido> getProductosPedido() {
-        return productosPedido;
-    }
-
-    public void setProductosPedido(List<ProductoPedido> productosPedido) {
-        this.productosPedido = productosPedido;
-    }
-
-    public Long getIdCliente() {
-        return idCliente;
-    }
-
-    public void setIdCliente(Long idCliente) {
-        this.idCliente = idCliente;
-    }
-
-    public List<ProductoPedido> getProductos() {
-        return productosPedido;
-    }
-
-    public void setProductos(List<ProductoPedido> productos) {
-        this.productosPedido = productos;
-    }
-
-    public Double getImpuesto() {
-        return impuesto;
-    }
-
-    public void setImpuesto(Double impuesto) {
-        this.impuesto = impuesto;
+    public void setDireccionEntrega(Direccion direccionEntrega) {
+        this.direccionEntrega = direccionEntrega;
     }
 
     public Sucursal getSucursal() {
@@ -117,6 +72,30 @@ public class Pedido {
         this.sucursal = sucursal;
     }
 
+    public EstadoPedido getEstado() {
+        return estado;
+    }
+
+    public void setEstado(EstadoPedido estado) {
+        this.estado = estado;
+    }
+
+    public LocalDateTime getFechaPedido() {
+        return fechaPedido;
+    }
+
+    public void setFechaPedido(LocalDateTime fechaPedido) {
+        this.fechaPedido = fechaPedido;
+    }
+
+    public Double getCostoEnvio() {
+        return costoEnvio;
+    }
+
+    public void setCostoEnvio(Double costoEnvio) {
+        this.costoEnvio = costoEnvio;
+    }
+
     public Paquete getPaquete() {
         return paquete;
     }
@@ -125,14 +104,12 @@ public class Pedido {
         this.paquete = paquete;
     }
 
-    public DatosPago getPago() {
+    public Pago getPago() {
         return pago;
     }
 
-    public void setPago(DatosPago pago) {
+    public void setPago(Pago pago) {
         this.pago = pago;
     }
-    
-    
     
 }

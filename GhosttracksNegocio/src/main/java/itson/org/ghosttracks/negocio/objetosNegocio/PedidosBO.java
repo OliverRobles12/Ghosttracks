@@ -1,13 +1,14 @@
 package itson.org.ghosttracks.negocio.objetosNegocio;
 
 import itson.org.ghosttracks.daos.IPedidosDAO;
+import itson.org.ghosttracks.dtos.CarritoDTO;
 import itson.org.ghosttracks.dtos.DatosPagoDTO;
-import itson.org.ghosttracks.dtos.ItemCarritoDTO;
+import itson.org.ghosttracks.dtos.NuevoPedidoDTO;
 import itson.org.ghosttracks.dtos.PedidoDTO;
+import itson.org.ghosttracks.entidades.Carrito;
+import itson.org.ghosttracks.entidades.Cliente;
 import itson.org.ghosttracks.entidades.Paquete;
 import itson.org.ghosttracks.entidades.Pedido;
-import itson.org.ghosttracks.entidades.Producto;
-import itson.org.ghosttracks.entidades.ProductoPedido;
 import itson.org.ghosttracks.enums.EstadoPaquete;
 import itson.org.ghosttracks.enums.EstadoPedido;
 import itson.org.ghosttracks.enums.EstadoPedidoDTO;
@@ -21,7 +22,6 @@ import itson.org.ghosttracks.negocio.interfaces.IProveedorEnvios;
 import itson.org.ghosttracks.negocio.interfaces.IProveedorPago;
 import itson.org.ghosttracks.negocio.objetosNegocio.Excepciones.NegocioException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -69,65 +69,47 @@ public class PedidosBO implements IPedidosBO {
     }
     
     @Override
-    public PedidoDTO generarPedido(PedidoDTO pedidoDto) throws NegocioException {
+    public PedidoDTO generarPedido(PedidoDTO nuevoPedido) throws NegocioException {
         
-        if (pedidoDto == null || pedidoDto.getProductos() == null || pedidoDto.getProductos().isEmpty()) {
+        if (nuevoPedido == null || nuevoPedido.getCarrito() == null || nuevoPedido.getCarrito().getProductos().isEmpty()) {
             throw new NegocioException("No se puede procesar un pedido vacío.");
         }
 
-        
-        if (pedidoDto.getTotal() == null || pedidoDto.getTotal() == 0) {
-            pedidoDto.calcularTotales(150.0); 
-        }
-
-        DatosPagoDTO pagoCliente = pedidoDto.getDatosPago(); 
-        
-        proveedorPago.cobrar(
-            pedidoDto.getTotal(), 
-            pagoCliente.getTitularTarjeta(), 
-            pagoCliente.getNumeroTrajeta(), 
-            pagoCliente.getCvv(), 
-            pagoCliente.getFechaExpiracion() 
-        );
+        CarritoDTO carritoDto = nuevoPedido.getCarrito();
+//        DatosPagoDTO pagoCliente = nuevoPedido.getDatosPago(); 
+//        
+//        if (pagoCliente != null) {
+//            proveedorPago.cobrar(
+//                carritoDto.getTotal(), 
+//                pagoCliente.getTitularTarjeta(), 
+//                pagoCliente.getNumeroTarjeta(), // Se corrigió el typo getNumeroTrajeta a getNumeroTarjeta asumiendo que lo arreglaste en el DTO
+//                pagoCliente.getCvv(), 
+//                pagoCliente.getFechaExpiracion() 
+//            );
+//        }
         
         try {
             Pedido entidadPedido = new Pedido();
-            
-            entidadPedido.setIdCliente(pedidoDto.getIdCliente());
-            
-            entidadPedido.setFechaPedido(LocalDateTime.now());
             entidadPedido.setEstado(EstadoPedido.PAGADO);
-            entidadPedido.setSubtotal(pedidoDto.getSubtotal());
-            entidadPedido.setCostoEnvio(pedidoDto.getCostoEnvio());
-            entidadPedido.setTotal(pedidoDto.getTotal());
             
-            List<ProductoPedido> detalles = new ArrayList<>();
-            for (ItemCarritoDTO item : pedidoDto.getProductos()) {
-                ProductoPedido detalle = new ProductoPedido();
-                detalle.setCantidadProducto(item.getCantidad());
-                detalle.setPrecioVendido(item.getProductoSeleccionado().getPrecio());
-                detalle.setImporteTotal(item.getSubtotal());
-                
-                Producto prodEntidad = new Producto();
-                prodEntidad.setIdProducto(item.getProductoSeleccionado().getIdProducto());
-                
-                prodEntidad.setNombre(item.getProductoSeleccionado().getNombre());
-                prodEntidad.setPrecio(item.getProductoSeleccionado().getPrecio());
-                
-                detalle.setProducto(prodEntidad);
-                detalle.setPedido(entidadPedido);
-                
-                detalles.add(detalle);
+            if (nuevoPedido.getCliente() != null) {
+                Cliente clienteEntidad = new Cliente();
+                clienteEntidad.setIdUsuario(nuevoPedido.getCliente().getIdUsuario());
+                entidadPedido.setCliente(clienteEntidad);
             }
-            entidadPedido.setProductosPedido(detalles); 
+            
+            Carrito carritoEntidad = new Carrito();
+            carritoEntidad.setTotal(carritoDto.getTotal());
+            entidadPedido.setCarrito(carritoEntidad);
             
             Pedido pedidoGuardado = pedidosDAO.guardarPedido(entidadPedido);
             
-            pedidoDto.setIdPedido(pedidoGuardado.getIdPedido());
-            pedidoDto.setEstado(EstadoPedidoDTO.PAGADO); 
+            PedidoDTO pedidoRespuesta = new PedidoDTO();
+            pedidoRespuesta.setIdPedido(pedidoGuardado.getIdPedido());
+            pedidoRespuesta.setEstado(EstadoPedidoDTO.PAGADO); 
             
             LOGGER.log(Level.INFO, "Pedido guardado correctamente con ID: {0}", pedidoGuardado.getIdPedido());
-            return pedidoDto;
+            return pedidoRespuesta;
             
         } catch (PersistenciaException e) {
             LOGGER.log(Level.SEVERE, "ERROR CRÍTICO: Cobro realizado pero falló la persistencia del pedido.", e);
@@ -156,7 +138,9 @@ public class PedidosBO implements IPedidosBO {
             if (pedido.getEstado() == EstadoPedido.ENVIADO) {
                 throw new NegocioException("Este pedido ya ha sido procesado y enviado anteriormente.");
             }
+            
             String numeroGuiaGenerado = proveedorEnvios.generarGuiaEnvio(); 
+            
             Paquete nuevoPaquete = new Paquete();
             nuevoPaquete.setNumeroGuia(numeroGuiaGenerado);
             nuevoPaquete.setEstado(EstadoPaquete.ENVIADO); 
@@ -166,8 +150,8 @@ public class PedidosBO implements IPedidosBO {
             nuevoPaquete.setAnchoCm(ancho);
             nuevoPaquete.setAltoCm(alto);
             nuevoPaquete.setPedido(pedido);
-            pedido.setPaquete(nuevoPaquete);
             
+            pedido.setPaquete(nuevoPaquete);
             pedido.setEstado(EstadoPedido.ENVIADO); 
 
             paquetesBO.registrarEmpaque(nuevoPaquete);

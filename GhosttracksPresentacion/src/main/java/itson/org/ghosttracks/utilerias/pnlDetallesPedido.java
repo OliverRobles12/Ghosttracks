@@ -30,30 +30,30 @@ public class pnlDetallesPedido extends javax.swing.JPanel {
     }
     
     public void cargarDetalles(PedidoDTO pedido) {
-        lblFolioDeVenta.setText("Folio de la venta: " + pedido.getIdPedido());
-        lblCliente.setText("Cliente: " + pedido.getIdCliente());
-        lblEstado.setText("Estado: " + (pedido.getEstado() != null ? pedido.getEstado().name() : "Sin estado"));
-        Double subtotal = pedido.getSubtotal() != null ? pedido.getSubtotal() : 0.0;
-        Double impuesto = pedido.getImpuesto() != null ? pedido.getImpuesto() : 0.0;
-        Double total = pedido.getTotal() != null ? pedido.getTotal() : 0.0;
-        lblSubtotalDisplay2.setText(String.format("$%.2f", subtotal)); 
-        lblTaxDisplay.setText(String.format("$%.2f", impuesto));
-        lblTotalDisplay.setText(String.format("$%.2f", total));
-        pnlLista.removeAll();
-        int totalArticulos = 0;
-        
-        if (pedido.getProductos() != null) {
-            for (ItemCarritoDTO item : pedido.getProductos()) {
-                ProductoDTO prod = item.getProductoSeleccionado();
-                Integer cant = item.getCantidad() != null ? item.getCantidad() : 0;
-                totalArticulos += cant; 
-                pnllResumenProducto tarjeta = new pnllResumenProducto(prod, cant);
-                pnlLista.add(tarjeta);
-            }
-        }    
-        lblArticulos.setText("Artículos: " + totalArticulos);
-        pnlLista.revalidate();
-        pnlLista.repaint();
+//        lblFolioDeVenta.setText("Folio de la venta: " + pedido.getIdPedido());
+//        lblCliente.setText("Cliente: " + pedido.getIdCliente());
+//        lblEstado.setText("Estado: " + (pedido.getEstado() != null ? pedido.getEstado().name() : "Sin estado"));
+//        Double subtotal = pedido.getSubtotal() != null ? pedido.getSubtotal() : 0.0;
+//        Double impuesto = pedido.getImpuesto() != null ? pedido.getImpuesto() : 0.0;
+//        Double total = pedido.getTotal() != null ? pedido.getTotal() : 0.0;
+//        lblSubtotalDisplay2.setText(String.format("$%.2f", subtotal)); 
+//        lblTaxDisplay.setText(String.format("$%.2f", impuesto));
+//        lblTotalDisplay.setText(String.format("$%.2f", total));
+//        pnlLista.removeAll();
+//        int totalArticulos = 0;
+//        
+//        if (pedido.getProductos() != null) {
+//            for (ItemCarritoDTO item : pedido.getProductos()) {
+//                ProductoDTO prod = item.getProductoSeleccionado();
+//                Integer cant = item.getCantidad() != null ? item.getCantidad() : 0;
+//                totalArticulos += cant; 
+//                pnllResumenProducto tarjeta = new pnllResumenProducto(prod, cant);
+//                pnlLista.add(tarjeta);
+//            }
+//        }    
+//        lblArticulos.setText("Artículos: " + totalArticulos);
+//        pnlLista.revalidate();
+//        pnlLista.repaint();
     }
 
     /**

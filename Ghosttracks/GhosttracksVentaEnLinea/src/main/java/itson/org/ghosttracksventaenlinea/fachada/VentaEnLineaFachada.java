@@ -54,7 +54,6 @@ public class VentaEnLineaFachada implements IVentaEnLinea {
             List<ProductoDTO> disponibles = new ArrayList<>();
 
             for (Producto p : productosEntidad) {
-
                 if (p.getStock() != null && p.getStock() > 0) {
                     ProductoDTO dto = mapearProductoADTO(p);
                     disponibles.add(dto);
@@ -136,7 +135,7 @@ public class VentaEnLineaFachada implements IVentaEnLinea {
             carrito.getProductos().add(nuevoItem);
         }
 
-        carrito.calcularTotalGeneral();
+        // carrito.calcularTotalGeneral();
         return carrito;
     }
 
@@ -145,21 +144,20 @@ public class VentaEnLineaFachada implements IVentaEnLinea {
         if (carrito == null || carrito.getProductos().isEmpty()) {
             throw new VentaEnLineaException(CodigoErrorVenta.CARRITO_VACIO, "No hay productos para eliminar.");
         }
-        carrito.getProductos().removeIf(item
-                -> item.getProductoSeleccionado().getIdProducto().equals(idProducto)
-        );
-        carrito.calcularTotalGeneral();
+        carrito.getProductos().removeIf(item -> item.getProductoSeleccionado().getIdProducto().equals(idProducto));
+        // carrito.calcularTotalGeneral();
         return carrito;
     }
 
+    
+    // TODO Cambiar al NuevoPedidoDTO
     @Override
-    public PedidoDTO confirmarCompra(PedidoDTO pedidoDto) throws VentaEnLineaException {
-        
-        if (pedidoDto == null || pedidoDto.getProductos() == null || pedidoDto.getProductos().isEmpty()) {
+    public PedidoDTO confirmarCompra(PedidoDTO nuevoPedido) throws VentaEnLineaException {
+        if (nuevoPedido == null || nuevoPedido.getCarrito() == null || nuevoPedido.getCarrito().getProductos().isEmpty()) {
             throw new VentaEnLineaException(CodigoErrorVenta.PEDIDO_INVALIDO, "No se puede procesar un pedido vacío.");
         }
         try {
-            return pedidosBO.generarPedido(pedidoDto);
+            return pedidosBO.generarPedido(nuevoPedido);
         } catch (NegocioException e) {
             throw new VentaEnLineaException(CodigoErrorVenta.ERROR_PERSISTENCIA, e.getMessage(), e);
         }
@@ -174,9 +172,7 @@ public class VentaEnLineaFachada implements IVentaEnLinea {
         try {
             EstadoPedido estadoDominio = EstadoPedido.valueOf(nuevoEstadoDTO.name());
             Pedido pedidoActualizado = pedidosBO.actualizarEstado(idPedido, estadoDominio);
-
             return mapearPedidoADTO(pedidoActualizado);
-
         } catch (NegocioException e) {
             throw new VentaEnLineaException(CodigoErrorVenta.ERROR_PERSISTENCIA, "No se pudo actualizar el estado", e);
         }
@@ -201,7 +197,6 @@ public class VentaEnLineaFachada implements IVentaEnLinea {
     public ClienteDTO iniciarSesion(String correo, String contrasena) throws VentaEnLineaException {
         try {
             Cliente entidad = clientesBO.iniciarSesion(correo, contrasena);
-            
             ClienteDTO dto = new ClienteDTO();
             dto.setIdUsuario(entidad.getIdUsuario());
             dto.setNombres(entidad.getNombres());
@@ -218,9 +213,7 @@ public class VentaEnLineaFachada implements IVentaEnLinea {
                 dirDto.setCodigoPostal(entidad.getDireccion().getCodigoPostal());
                 dto.setDireccion(dirDto);
             }
-            
             return dto;
-            
         } catch (NegocioException ex) {
             throw new VentaEnLineaException(CodigoErrorVenta.DATOS_INVALIDOS, "Credenciales incorrectas", ex);
         }
@@ -233,22 +226,14 @@ public class VentaEnLineaFachada implements IVentaEnLinea {
         }
 
         try {
-            // A. Creamos la ENTIDAD inicial (ya no el DTO)
             Paquete nuevoPaqueteEntidad = new Paquete();
-            // nuevoPaqueteEntidad.setIdPedido(idPedido); <-- Si tu entidad lo requiere
-
-            // B. El BO guarda y nos regresa una ENTIDAD
             Paquete paqueteGuardado = paquetesBO.registrarEmpaque(nuevoPaqueteEntidad);
-
-            // C. La Fachada mapea la Entidad a DTO para devolvérselo al controlador
             return mapearPaqueteADTO(paqueteGuardado);
-
         } catch (NegocioException ex) {
             throw new VentaEnLineaException(CodigoErrorVenta.ERROR_PERSISTENCIA, "Error al generar el empaque del pedido.", ex);
         }
     }
     
-    // Método utilitario privado para no repetir código jeje
     private Paquete mapearPaqueteAEntidad(PaqueteDTO dto) {
         if (dto == null) return null;
         Paquete entidad = new Paquete();
@@ -300,7 +285,6 @@ public class VentaEnLineaFachada implements IVentaEnLinea {
         try {
             Pedido entidad = pedidosBO.obtenerPedidoPorId(idPedido);
             return mapearPedidoADTO(entidad);
-
         } catch (NegocioException ex) {
             throw new VentaEnLineaException(CodigoErrorVenta.ERROR_PERSISTENCIA, "No se encontró el pedido", ex);
         }
@@ -312,29 +296,26 @@ public class VentaEnLineaFachada implements IVentaEnLinea {
         }
         PedidoDTO dto = new PedidoDTO();
         dto.setIdPedido(p.getIdPedido());
-        dto.setIdCliente(p.getIdCliente());
-        dto.setTotal(p.getTotal());
-        dto.setSubtotal(p.getSubtotal());
-        dto.setImpuesto(p.getImpuesto());
-        dto.setCostoEnvio(p.getCostoEnvio());
 
-        // Mapeo del Enum
         if (p.getEstado() != null) {
             dto.setEstado(EstadoPedidoDTO.valueOf(p.getEstado().name()));
         }
 
-        if (p.getProductosPedido() != null) {
-            List<ItemCarritoDTO> items = new ArrayList<>();
-            for (ProductoPedido pp : p.getProductosPedido()) {
-                ItemCarritoDTO itemDto = new ItemCarritoDTO();
-                itemDto.setCantidad(pp.getCantidadProducto());
-                itemDto.setSubtotal(pp.getImporteTotal());
-                if (pp.getProducto() != null) {
-                    itemDto.setProductoSeleccionado(mapearProductoADTO(pp.getProducto()));
-                }
-                items.add(itemDto);
-            }
-            dto.setProductos(items);
+        if (p.getCliente() != null) {
+            ClienteDTO clienteDto = new ClienteDTO();
+            clienteDto.setIdUsuario(p.getCliente().getIdUsuario());
+            clienteDto.setNombres(p.getCliente().getNombres());
+            dto.setCliente(clienteDto);
+        }
+
+        if (p.getCarrito() != null) {
+            CarritoDTO carritoDto = new CarritoDTO();
+            carritoDto.setTotal(p.getCarrito().getTotal());
+            dto.setCarrito(carritoDto);
+        }
+
+        if (p.getPaquete() != null) {
+            dto.setPaquete(mapearPaqueteADTO(p.getPaquete()));
         }
 
         return dto;
@@ -347,9 +328,7 @@ public class VentaEnLineaFachada implements IVentaEnLinea {
             String nombreCompleto = cliente.getNombres() + " " + 
                                     cliente.getApellidoPaterno() + " " + 
                                     cliente.getApellidoMaterno();
-                                    
             return nombreCompleto.trim();
-            
         } catch (NegocioException ex) {
             throw new VentaEnLineaException(CodigoErrorVenta.ERROR_PERSISTENCIA, "No fué posible consultar el nombre del cliente");
         }
