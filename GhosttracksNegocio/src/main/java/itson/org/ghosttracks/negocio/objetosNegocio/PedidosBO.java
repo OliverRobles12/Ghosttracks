@@ -43,13 +43,13 @@ import java.util.logging.Logger;
 public class PedidosBO implements IPedidosBO {
 
     private final IPedidosDAO pedidosDAO;
-    private final IPaquetesBO paquetesBO; 
+    private final IPaquetesBO paquetesBO;
     private final IProveedorEnvios proveedorEnvios;
     private static final Logger LOGGER = Logger.getLogger(PedidosBO.class.getName());
 
     public PedidosBO() {
         this.pedidosDAO = new PedidosMockDAO();
-        this.paquetesBO = new PaquetesBO(); 
+        this.paquetesBO = new PaquetesBO();
         this.proveedorEnvios = new SkydropxAdapter();
     }
 
@@ -79,61 +79,71 @@ public class PedidosBO implements IPedidosBO {
             throw new NegocioException("Error al consultar pedidos en BD", e);
         }
     }
-    
+
     @Override
     public PedidoDTO generarPedido(NuevoPedidoDTO nuevoPedido) throws NegocioException {
-        
+
         if (nuevoPedido == null || nuevoPedido.getCarrito() == null || nuevoPedido.getCarrito().getProductos().isEmpty()) {
             throw new NegocioException("No se puede procesar un pedido vacío.");
         }
 
         CarritoDTO carritoDto = nuevoPedido.getCarrito();
-        DatosPagoDTO datosPago = nuevoPedido.getDatosPago(); 
-        
+        DatosPagoDTO datosPago = nuevoPedido.getDatosPago();
+
         if (datosPago != null) {
             IProveedorPago estrategia = ProveedorPagoFactory.obtenerEstrategia(datosPago.getMetodoPago());
-            
+
             estrategia.cobrar(
-                datosPago.getNumeroTarjeta(),
-                carritoDto.getTotal(), 
-                datosPago.getMetodoPago() 
+                    datosPago.getNumeroTarjeta(),
+                    carritoDto.getTotal(),
+                    datosPago.getMetodoPago()
             );
         }
-        
+
         try {
             Pedido entidadPedido = new Pedido();
             entidadPedido.setEstado(EstadoPedido.PAGADO);
-            entidadPedido.setFechaPedido(LocalDateTime.now()); 
-            
+            entidadPedido.setFechaPedido(LocalDateTime.now());
+
             if (datosPago != null) {
                 Pago registroPago = new Pago(
-                    datosPago.getMetodoPago(), 
-                    carritoDto.getTotal(), 
-                    LocalDateTime.now()
+                        datosPago.getMetodoPago(),
+                        carritoDto.getTotal(),
+                        LocalDateTime.now()
                 );
-                entidadPedido.setPago(registroPago); 
+                entidadPedido.setPago(registroPago);
             }
 
-            // 1. Mapeo de Cliente
+            // 1. Mapeo de Cliente (CORREGIDO)
             if (nuevoPedido.getCliente() != null) {
                 Cliente clienteEntidad = new Cliente();
+
+                // Mapeamos el ID
                 clienteEntidad.setIdUsuario(nuevoPedido.getCliente().getIdUsuario());
+
+                // ¡AQUÍ ESTÁ LA MAGIA! Pasamos los nombres para que no sean null
+                clienteEntidad.setNombres(nuevoPedido.getCliente().getNombres());
+                clienteEntidad.setApellidoPaterno(nuevoPedido.getCliente().getApellidoPaterno());
+                clienteEntidad.setApellidoMaterno(nuevoPedido.getCliente().getApellidoMaterno());
+                clienteEntidad.setCorreo(nuevoPedido.getCliente().getCorreo());
+                clienteEntidad.setTelefono(nuevoPedido.getCliente().getTelefono());
+
                 entidadPedido.setCliente(clienteEntidad);
             }
-            
+
             // 2. Mapeo Completo de Carrito e Items
             Carrito carritoEntidad = new Carrito();
             carritoEntidad.setTotal(carritoDto.getTotal());
             carritoEntidad.setSubtotal(carritoDto.getSubtotal());
             carritoEntidad.setImpuestos(carritoDto.getImpuestos());
-            
+
             List<ItemCarrito> itemsEntidad = new java.util.ArrayList<>();
             for (ItemCarritoDTO itemDTO : carritoDto.getProductos()) {
                 ItemCarrito itemEntidad = new ItemCarrito();
                 itemEntidad.setCantidad(itemDTO.getCantidad());
                 itemEntidad.setSubtotal(itemDTO.getSubtotal());
-                
-                if (itemDTO.getProductoSeleccionado()!= null) {
+
+                if (itemDTO.getProductoSeleccionado() != null) {
                     Producto productoEntidad = new Producto();
                     productoEntidad.setIdProducto(itemDTO.getProductoSeleccionado().getIdProducto());
                     productoEntidad.setPrecio(itemDTO.getProductoSeleccionado().getPrecio());
@@ -144,7 +154,7 @@ public class PedidosBO implements IPedidosBO {
             }
             carritoEntidad.setItems(itemsEntidad);
             entidadPedido.setCarrito(carritoEntidad);
-            
+
             // 3. Mapeo de Dirección de Entrega
             if (nuevoPedido.getDireccionEntrega() != null) {
                 DireccionEntregaDTO dirDTO = nuevoPedido.getDireccionEntrega();
@@ -157,13 +167,17 @@ public class PedidosBO implements IPedidosBO {
                 entidadPedido.setDireccionEntrega(dirEntidad);
             }
 
-            // 4. Mapeo de Contacto
+            // 4. Mapeo de Contacto (CORREGIDO)
             if (nuevoPedido.getContacto() != null) {
                 ContactoDTO contactoDTO = nuevoPedido.getContacto();
                 Contacto contactoEntidad = new Contacto();
-                // Nota: Ajusta estos getters/setters según lo que tengas en tu clase Contacto
+
                 contactoEntidad.setNombre(contactoDTO.getNombre());
-                contactoEntidad.setTelefono(contactoDTO.getTelefono()); 
+                contactoEntidad.setTelefono(contactoDTO.getTelefono());
+
+                // Agregamos el correo que faltaba mapear
+                contactoEntidad.setCorreo(contactoDTO.getCorreo());
+
                 entidadPedido.setContacto(contactoEntidad);
             }
 
@@ -175,37 +189,37 @@ public class PedidosBO implements IPedidosBO {
                 sucursalEntidad.setNombre(sucursalDTO.getNombre());
                 entidadPedido.setSucursal(sucursalEntidad);
             }
-            
+
             // --- Persistencia ---
             Pedido pedidoGuardado = pedidosDAO.guardarPedido(entidadPedido);
-            
+
             // --- Respuesta ---
             PedidoDTO pedidoRespuesta = new PedidoDTO();
             pedidoRespuesta.setIdPedido(pedidoGuardado.getIdPedido());
-            pedidoRespuesta.setEstado(EstadoPedidoDTO.PAGADO); 
-            
+            pedidoRespuesta.setEstado(EstadoPedidoDTO.PAGADO);
+
             LOGGER.log(Level.INFO, "Pedido y Pago registrados con éxito. ID: {0}", pedidoGuardado.getIdPedido());
             return pedidoRespuesta;
-            
+
         } catch (PersistenciaException e) {
             LOGGER.log(Level.SEVERE, "ERROR CRÍTICO: Cobro realizado pero falló la persistencia.", e);
             throw new NegocioException("El pago se realizó, pero hubo un error al guardar el pedido. Contacte a soporte.", e);
         }
     }
-    
+
     @Override
     public Pedido obtenerPedidoPorId(Long idPedido) throws NegocioException {
-        if (idPedido == null ){
+        if (idPedido == null) {
             throw new NegocioException("El id del pedido no es valido.");
         }
-        try{
+        try {
             return pedidosDAO.consultarPorId(idPedido);
-        } catch(PersistenciaException e){
+        } catch (PersistenciaException e) {
             LOGGER.log(Level.WARNING, "ERROR: No se logró consultar el pedido por el ID.", e);
             throw new NegocioException("No se logró consultar el pedido por el ID", e);
         }
     }
-    
+
     @Override
     public Pedido despacharPedido(Long idPedido, Double peso, Double largo, Double ancho, Double alto) throws NegocioException {
         try {
@@ -215,12 +229,12 @@ public class PedidosBO implements IPedidosBO {
                 throw new NegocioException("Este pedido ya ha sido procesado y enviado anteriormente.");
             }
 
-            PaqueteDTO infoGuia = proveedorEnvios.generarGuiaPaquete(pedido.getIdPedido(), peso); 
+            PaqueteDTO infoGuia = proveedorEnvios.generarGuiaPaquete(pedido.getIdPedido(), peso);
 
             Paquete nuevoPaquete = new Paquete();
-            nuevoPaquete.setNumeroGuia(infoGuia.getNumeroGuia()); 
-            nuevoPaquete.setFechaEntregaEstimada(infoGuia.getFechaEntregaEstimada()); 
-            nuevoPaquete.setEstado(EstadoPaquete.ENVIADO); 
+            nuevoPaquete.setNumeroGuia(infoGuia.getNumeroGuia());
+            nuevoPaquete.setFechaEntregaEstimada(infoGuia.getFechaEntregaEstimada());
+            nuevoPaquete.setEstado(EstadoPaquete.ENVIADO);
             nuevoPaquete.setFechaEnvio(LocalDateTime.now());
             nuevoPaquete.setPesoKg(peso);
             nuevoPaquete.setLargoCm(largo);
@@ -229,11 +243,11 @@ public class PedidosBO implements IPedidosBO {
 
             nuevoPaquete.setPedido(pedido);
             pedido.setPaquete(nuevoPaquete);
-            pedido.setEstado(EstadoPedido.ENVIADO); 
+            pedido.setEstado(EstadoPedido.ENVIADO);
 
             paquetesBO.registrarEmpaque(nuevoPaquete);
-            Pedido pedidoActualizado = pedidosDAO.actualizarPedido(pedido); 
-            
+            Pedido pedidoActualizado = pedidosDAO.actualizarPedido(pedido);
+
             return pedidoActualizado;
 
         } catch (PersistenciaException e) {
@@ -246,10 +260,10 @@ public class PedidosBO implements IPedidosBO {
 
     @Override
     public List<Pedido> buscarPedidosFiltrados(List<Long> idsClientes, EstadoPedido estado) throws NegocioException {
-        try{
+        try {
             return pedidosDAO.buscarPedidosFiltrados(idsClientes, estado);
-        }catch(PersistenciaException e){
-            throw new NegocioException("No fué posible la consulta de los pedidos especificados "+e);
+        } catch (PersistenciaException e) {
+            throw new NegocioException("No fué posible la consulta de los pedidos especificados " + e);
         }
     }
 }
