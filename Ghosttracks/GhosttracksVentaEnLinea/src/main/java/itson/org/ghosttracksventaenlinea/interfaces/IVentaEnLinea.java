@@ -6,6 +6,7 @@ package itson.org.ghosttracksventaenlinea.interfaces;
 
 import itson.org.ghosttracks.dtos.CarritoDTO;
 import itson.org.ghosttracks.dtos.ClienteDTO;
+import itson.org.ghosttracks.dtos.NuevoPedidoDTO;
 import itson.org.ghosttracks.dtos.PaqueteDTO;
 import itson.org.ghosttracks.dtos.PedidoDTO;
 import itson.org.ghosttracks.dtos.ProductoDTO;
@@ -29,7 +30,7 @@ public interface IVentaEnLinea {
     
     CarritoDTO agregarAlCarrito(CarritoDTO carritoActual, ProductoDTO producto, Integer cantidad) throws VentaEnLineaException;
     
-    PedidoDTO confirmarCompra(PedidoDTO pedido) throws Exception;
+    PedidoDTO confirmarCompra(NuevoPedidoDTO pedido) throws VentaEnLineaException;
     
     PedidoDTO actualizarEstadoPedido(Long idPedido, EstadoPedidoDTO nuevoEstado) throws VentaEnLineaException;
     

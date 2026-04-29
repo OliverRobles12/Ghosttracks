@@ -4,6 +4,7 @@ import itson.org.ghosttracks.dtos.CarritoDTO;
 import itson.org.ghosttracks.dtos.ClienteDTO;
 import itson.org.ghosttracks.dtos.DireccionClienteDTO;
 import itson.org.ghosttracks.dtos.ItemCarritoDTO;
+import itson.org.ghosttracks.dtos.NuevoPedidoDTO;
 import itson.org.ghosttracks.dtos.PaqueteDTO;
 import itson.org.ghosttracks.dtos.PedidoDTO;
 import itson.org.ghosttracks.dtos.ProductoDTO;
@@ -155,7 +156,7 @@ public class VentaEnLineaFachada implements IVentaEnLinea {
 
     // TODO Cambiar al NuevoPedidoDTO
     @Override
-    public PedidoDTO confirmarCompra(PedidoDTO nuevoPedido) throws VentaEnLineaException {
+    public PedidoDTO confirmarCompra(NuevoPedidoDTO nuevoPedido) throws VentaEnLineaException {
         if (nuevoPedido == null || nuevoPedido.getCarrito() == null || nuevoPedido.getCarrito().getProductos().isEmpty()) {
             throw new VentaEnLineaException(CodigoErrorVenta.PEDIDO_INVALIDO, "No se puede procesar un pedido vacío.");
         }
@@ -165,7 +166,7 @@ public class VentaEnLineaFachada implements IVentaEnLinea {
             throw new VentaEnLineaException(CodigoErrorVenta.ERROR_PERSISTENCIA, e.getMessage(), e);
         }
     }
-
+    
     @Override
     public PedidoDTO actualizarEstadoPedido(Long idPedido, EstadoPedidoDTO nuevoEstadoDTO) throws VentaEnLineaException {
         if (idPedido == null || idPedido <= 0 || nuevoEstadoDTO == null) {

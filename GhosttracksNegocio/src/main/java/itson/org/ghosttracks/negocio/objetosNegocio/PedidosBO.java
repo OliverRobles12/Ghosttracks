@@ -69,24 +69,24 @@ public class PedidosBO implements IPedidosBO {
     }
     
     @Override
-    public PedidoDTO generarPedido(PedidoDTO nuevoPedido) throws NegocioException {
+    public PedidoDTO generarPedido(NuevoPedidoDTO nuevoPedido) throws NegocioException {
         
         if (nuevoPedido == null || nuevoPedido.getCarrito() == null || nuevoPedido.getCarrito().getProductos().isEmpty()) {
             throw new NegocioException("No se puede procesar un pedido vacío.");
         }
 
         CarritoDTO carritoDto = nuevoPedido.getCarrito();
-//        DatosPagoDTO pagoCliente = nuevoPedido.getDatosPago(); 
-//        
-//        if (pagoCliente != null) {
-//            proveedorPago.cobrar(
-//                carritoDto.getTotal(), 
-//                pagoCliente.getTitularTarjeta(), 
-//                pagoCliente.getNumeroTarjeta(), // Se corrigió el typo getNumeroTrajeta a getNumeroTarjeta asumiendo que lo arreglaste en el DTO
-//                pagoCliente.getCvv(), 
-//                pagoCliente.getFechaExpiracion() 
-//            );
-//        }
+        DatosPagoDTO pagoCliente = nuevoPedido.getDatosPago(); 
+        
+        if (pagoCliente != null) {
+            proveedorPago.cobrar(
+                carritoDto.getTotal(), 
+                pagoCliente.getTitularTarjeta(), 
+                pagoCliente.getNumeroTarjeta(), 
+                pagoCliente.getCvv(), 
+                pagoCliente.getFechaExpiracion() 
+            );
+        }
         
         try {
             Pedido entidadPedido = new Pedido();
@@ -116,7 +116,7 @@ public class PedidosBO implements IPedidosBO {
             throw new NegocioException("Cobro exitoso pero ocurrió un error al registrar el pedido en la BD.", e);
         }
     }
-
+    
     @Override
     public Pedido obtenerPedidoPorId(Long idPedido) throws NegocioException {
         if (idPedido == null ){

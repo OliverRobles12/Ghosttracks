@@ -114,7 +114,7 @@ public class PanelMetodoPagoTarjetaDebito extends javax.swing.JPanel {
     
     private void enviarDatos(String num, String fec, String cvv, String tit) throws Exception {
         DatosPagoDTO datos = new DatosPagoDTO();
-        datos.setNumeroTrajeta(num);
+        datos.setNumeroTarjeta(num);
         datos.setFechaExpiracion(fec); 
         datos.setCvv(cvv);
         datos.setTitularTarjeta(tit);

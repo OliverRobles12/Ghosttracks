@@ -9,8 +9,6 @@ import itson.org.ghosttracks.enums.EstadoPedidoDTO;
  */
 public class NuevoPedidoDTO {
 
-    // TODO CORREGIR
-    
     private ClienteDTO cliente;
     private ContactoDTO contacto;
     private DireccionEntregaDTO direccionEntrega;
@@ -26,7 +24,7 @@ public class NuevoPedidoDTO {
         this.cliente = builder.getCliente();
         this.contacto = builder.getContacto();
         this.direccionEntrega = builder.getDireccionEntrega();
-        // this.sucursal = builder.getSucursal();
+        this.sucursal = builder.getSucursal();
         this.datosPago = builder.getDatosPago();
         this.carrito = builder.getCarrito();
     }
@@ -41,6 +39,10 @@ public class NuevoPedidoDTO {
 
     public DireccionEntregaDTO getDireccionEntrega() {
         return direccionEntrega;
+    }
+
+    public SucursalDTO getSucursal() {
+        return sucursal;
     }
 
     public DatosPagoDTO getDatosPago() {

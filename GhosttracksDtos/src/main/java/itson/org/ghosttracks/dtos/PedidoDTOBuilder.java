@@ -10,6 +10,7 @@ public class PedidoDTOBuilder {
     private ClienteDTO cliente;
     private ContactoDTO contacto;
     private DireccionEntregaDTO direccionEntrega;
+    private SucursalDTO sucursal;
     private DatosPagoDTO datosPago;
     private CarritoDTO carrito;
     
@@ -30,6 +31,11 @@ public class PedidoDTOBuilder {
     
     public PedidoDTOBuilder setDireccionEntrega(DireccionEntregaDTO direccionEntrega) {
         this.direccionEntrega = direccionEntrega;
+        return this;
+    }
+    
+    public PedidoDTOBuilder setSucursal(SucursalDTO sucursal) {
+        this.sucursal = sucursal;
         return this;
     }
     
@@ -56,6 +62,10 @@ public class PedidoDTOBuilder {
 
     public DireccionEntregaDTO getDireccionEntrega() {
         return direccionEntrega;
+    }
+
+    public SucursalDTO getSucursal() {
+        return sucursal;
     }
 
     public DatosPagoDTO getDatosPago() {

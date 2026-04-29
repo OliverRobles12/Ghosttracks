@@ -10,7 +10,7 @@ public class DatosPagoDTO {
     
     private Long idTarjeta;
     private String titularTarjeta;
-    private String numeroTrajeta;
+    private String numeroTarjeta;
     private String fechaExpiracion;
     private String cvv;
 
@@ -24,15 +24,15 @@ public class DatosPagoDTO {
             String cvv
     ) {
         this.titularTarjeta = titularTarjeta;
-        this.numeroTrajeta = numeroTrajeta;
+        this.numeroTarjeta = numeroTrajeta;
         this.fechaExpiracion = fechaExpiracion;
         this.cvv = cvv;
     }
 
-    public DatosPagoDTO(Long idTarjeta, String titularTarjeta, String numeroTrajeta, String fechaExpiracion, String cvv) {
+    public DatosPagoDTO(Long idTarjeta, String titularTarjeta, String numeroTarjeta, String fechaExpiracion, String cvv) {
         this.idTarjeta = idTarjeta;
         this.titularTarjeta = titularTarjeta;
-        this.numeroTrajeta = numeroTrajeta;
+        this.numeroTarjeta = numeroTarjeta;
         this.fechaExpiracion = fechaExpiracion;
         this.cvv = cvv;
     }
@@ -53,12 +53,12 @@ public class DatosPagoDTO {
         this.titularTarjeta = titularTarjeta;
     }
 
-    public String getNumeroTrajeta() {
-        return numeroTrajeta;
+    public String getNumeroTarjeta() {
+        return numeroTarjeta;
     }
 
-    public void setNumeroTrajeta(String numeroTrajeta) {
-        this.numeroTrajeta = numeroTrajeta;
+    public void setNumeroTarjeta(String numeroTrajeta) {
+        this.numeroTarjeta = numeroTrajeta;
     }
 
     public String getFechaExpiracion() {

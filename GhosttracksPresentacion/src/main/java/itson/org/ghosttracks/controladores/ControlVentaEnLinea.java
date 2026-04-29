@@ -10,6 +10,7 @@ import itson.org.ghosttracks.dtos.NuevoPedidoDTO;
 import itson.org.ghosttracks.dtos.PedidoDTO;
 import itson.org.ghosttracks.dtos.PedidoDTOBuilder;
 import itson.org.ghosttracks.dtos.ProductoDTO;
+import itson.org.ghosttracks.dtos.SucursalDTO;
 import itson.org.ghosttracks.enums.EstadoPedidoDTO;
 import itson.org.ghosttracks.enums.TipoProducto;
 import itson.org.ghosttracks.presentacion.cliente.PantallaCarrito;
@@ -148,35 +149,41 @@ public class ControlVentaEnLinea {
     }
     
     public void procesarPedido() throws Exception {
-//        try {
-//            
-//            if (!SesionUsuario.getInstancia().haySesionActiva()) {
-//                navegador.mostrarMensaje("Por favor, inicia sesión para terminar tu compra.", true);
-//                return; 
-//            }
-//            
-//            ClienteDTO clienteLogueado = SesionUsuario.getInstancia().getCliente();
-//            
-//            // Construimos el DTO de escritura con todos los datos recolectados
-//            NuevoPedidoDTO nuevoPedido = this.pedidoBuilder
-//                    .setCliente(clienteLogueado)
-//                    .setCarrito(this.carrito)
-//                    .build();
-//
-//            // Enviamos a la fachada (asumiendo que confirmarCompra ahora recibe NuevoPedidoDTO)
-//            PedidoDTO pedidoGenerado = ventaFachada.confirmarCompra(nuevoPedido);
-//            
-//            navegador.mostrarMensaje("¡Compra realizada con éxito! Pedido #" + pedidoGenerado.getIdPedido(), false);
-//            
-//            // Reiniciamos el estado para una nueva compra
-//            this.carrito = new CarritoDTO(); 
-//            this.pedidoBuilder = new PedidoDTOBuilder();
-//            
-//            navegador.irInicioCliente();
-//            
-//        } catch (VentaEnLineaException ex) {
-//            navegador.mostrarMensaje("No pudimos procesar tu compra: " + ex.getMessage(), true);
-//        }
+        try {
+            
+            if (!SesionUsuario.getInstancia().haySesionActiva()) {
+                navegador.mostrarMensaje("Por favor, inicia sesión para terminar tu compra.", true);
+                return; 
+            }
+            
+            ClienteDTO clienteLogueado = SesionUsuario.getInstancia().getCliente();
+            
+            // Hardcodeada
+            SucursalDTO sucursal = new SucursalDTO();
+            sucursal.setNombre("Obreyork");
+            
+            // Construimos el DTO de escritura con todos los datos recolectados
+            NuevoPedidoDTO nuevoPedido = this.pedidoBuilder
+                    .setCliente(clienteLogueado)
+                    .setSucursal(sucursal)
+                    .setCarrito(this.carrito)
+                    .build();
+
+            // Enviamos a la fachada (asumiendo que confirmarCompra ahora recibe NuevoPedidoDTO)
+            // PedidoDTO pedidoGenerado = ventaFachada.confirmarCompra(nuevoPedido);
+            PedidoDTO pedidoGenerado = ventaFachada.confirmarCompra(nuevoPedido);
+            
+            navegador.mostrarMensaje("¡Compra realizada con éxito! Pedido #" + pedidoGenerado.getIdPedido(), false);
+            
+            // Reiniciamos el estado para una nueva compra
+            this.carrito = new CarritoDTO(); 
+            this.pedidoBuilder = new PedidoDTOBuilder();
+            
+            navegador.irInicioCliente();
+            
+        } catch (VentaEnLineaException ex) {
+            navegador.mostrarMensaje("No pudimos procesar tu compra: " + ex.getMessage(), true);
+        }
     }
     
     // Gestion carrito
