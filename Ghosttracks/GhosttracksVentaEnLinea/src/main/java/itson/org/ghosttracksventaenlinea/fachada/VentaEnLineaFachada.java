@@ -123,6 +123,7 @@ public class VentaEnLineaFachada implements IVentaEnLinea {
         for (ItemCarritoDTO item : carrito.getProductos()) {
             if (item.getProductoSeleccionado().getIdProducto().equals(producto.getIdProducto())) {
                 item.setCantidad(item.getCantidad() + cantidad);
+                item.setSubtotal(item.getCantidad() * producto.getPrecio());
                 existe = true;
                 break;
             }
@@ -132,10 +133,12 @@ public class VentaEnLineaFachada implements IVentaEnLinea {
             ItemCarritoDTO nuevoItem = new ItemCarritoDTO();
             nuevoItem.setProductoSeleccionado(producto);
             nuevoItem.setCantidad(cantidad);
+            nuevoItem.setSubtotal(cantidad * producto.getPrecio());
             carrito.getProductos().add(nuevoItem);
         }
 
-        // carrito.calcularTotalGeneral();
+        recalcularTotalesCarrito(carrito);
+
         return carrito;
     }
 
@@ -145,11 +148,11 @@ public class VentaEnLineaFachada implements IVentaEnLinea {
             throw new VentaEnLineaException(CodigoErrorVenta.CARRITO_VACIO, "No hay productos para eliminar.");
         }
         carrito.getProductos().removeIf(item -> item.getProductoSeleccionado().getIdProducto().equals(idProducto));
-        // carrito.calcularTotalGeneral();
+        recalcularTotalesCarrito(carrito);
+
         return carrito;
     }
 
-    
     // TODO Cambiar al NuevoPedidoDTO
     @Override
     public PedidoDTO confirmarCompra(PedidoDTO nuevoPedido) throws VentaEnLineaException {
@@ -218,7 +221,7 @@ public class VentaEnLineaFachada implements IVentaEnLinea {
             throw new VentaEnLineaException(CodigoErrorVenta.DATOS_INVALIDOS, "Credenciales incorrectas", ex);
         }
     }
-    
+
     @Override
     public PaqueteDTO procesarEmpaqueDePedido(Long idPedido) throws VentaEnLineaException {
         if (idPedido == null || idPedido <= 0) {
@@ -233,9 +236,11 @@ public class VentaEnLineaFachada implements IVentaEnLinea {
             throw new VentaEnLineaException(CodigoErrorVenta.ERROR_PERSISTENCIA, "Error al generar el empaque del pedido.", ex);
         }
     }
-    
+
     private Paquete mapearPaqueteAEntidad(PaqueteDTO dto) {
-        if (dto == null) return null;
+        if (dto == null) {
+            return null;
+        }
         Paquete entidad = new Paquete();
         entidad.setIdPaquete(dto.getIdPaquete());
         entidad.setNumeroGuia(dto.getNumeroGuia());
@@ -249,7 +254,9 @@ public class VentaEnLineaFachada implements IVentaEnLinea {
     }
 
     private PaqueteDTO mapearPaqueteADTO(Paquete entidad) {
-        if (entidad == null) return null;
+        if (entidad == null) {
+            return null;
+        }
         PaqueteDTO dto = new PaqueteDTO();
         dto.setIdPaquete(entidad.getIdPaquete());
         dto.setNumeroGuia(entidad.getNumeroGuia());
@@ -261,7 +268,7 @@ public class VentaEnLineaFachada implements IVentaEnLinea {
         dto.setUbicacionActual(entidad.getUbicacionActual());
         return dto;
     }
-    
+
     private ProductoDTO mapearProductoADTO(Producto p) {
         ProductoDTO dto = new ProductoDTO();
         dto.setIdProducto(p.getIdProducto());
@@ -322,12 +329,12 @@ public class VentaEnLineaFachada implements IVentaEnLinea {
     }
 
     @Override
-    public String obtenerNombreCliente(Long idCliente) throws VentaEnLineaException{
+    public String obtenerNombreCliente(Long idCliente) throws VentaEnLineaException {
         try {
-           Cliente cliente = clientesBO.obtenerClientePorId(idCliente);
-            String nombreCompleto = cliente.getNombres() + " " + 
-                                    cliente.getApellidoPaterno() + " " + 
-                                    cliente.getApellidoMaterno();
+            Cliente cliente = clientesBO.obtenerClientePorId(idCliente);
+            String nombreCompleto = cliente.getNombres() + " "
+                    + cliente.getApellidoPaterno() + " "
+                    + cliente.getApellidoMaterno();
             return nombreCompleto.trim();
         } catch (NegocioException ex) {
             throw new VentaEnLineaException(CodigoErrorVenta.ERROR_PERSISTENCIA, "No fué posible consultar el nombre del cliente");
@@ -341,25 +348,40 @@ public class VentaEnLineaFachada implements IVentaEnLinea {
             if (nombreCliente != null && !nombreCliente.trim().isEmpty()) {
                 idsClientes = clientesBO.buscarIdsPorNombre(nombreCliente);
                 if (idsClientes.isEmpty()) {
-                    return new ArrayList<>(); 
+                    return new ArrayList<>();
                 }
             }
-            
+
             EstadoPedido estadoEntidad = null;
             if (estadoDTO != null) {
                 estadoEntidad = EstadoPedido.valueOf(estadoDTO.name());
             }
-            
+
             List<Pedido> pedidosFiltrados = pedidosBO.buscarPedidosFiltrados(idsClientes, estadoEntidad);
-            
+
             List<PedidoDTO> dtos = new ArrayList<>();
             for (Pedido p : pedidosFiltrados) {
-                dtos.add(mapearPedidoADTO(p)); 
+                dtos.add(mapearPedidoADTO(p));
             }
             return dtos;
 
         } catch (NegocioException ex) {
             throw new VentaEnLineaException(CodigoErrorVenta.ERROR_PERSISTENCIA, "Error al filtrar pedidos", ex);
         }
+    }
+
+    private void recalcularTotalesCarrito(CarritoDTO carrito) {
+        double subtotalGeneral = 0.0;
+
+        for (ItemCarritoDTO item : carrito.getProductos()) {
+            if (item.getSubtotal() != null) {
+                subtotalGeneral += item.getSubtotal();
+            }
+        }
+
+        carrito.setSubtotal(subtotalGeneral);
+        //Ojillo
+        carrito.setImpuestos(0.0);
+        carrito.setTotal(subtotalGeneral + carrito.getImpuestos());
     }
 }

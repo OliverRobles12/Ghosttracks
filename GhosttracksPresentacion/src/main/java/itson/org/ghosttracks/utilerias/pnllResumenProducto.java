@@ -31,7 +31,7 @@ public class pnllResumenProducto extends javax.swing.JPanel {
         
         try {
             String nombreArchivo = producto.getImgProducto();
-            String ruta = "/imgVistaProducto/" + nombreArchivo; 
+            String ruta = "/imgCatalogo/" + nombreArchivo;
             
             if (nombreArchivo != null && !nombreArchivo.isEmpty()) {
                 URL urlImagenLocal = getClass().getResource(ruta);

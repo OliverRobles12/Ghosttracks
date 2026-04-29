@@ -249,7 +249,6 @@ public class PantallaCarrito extends javax.swing.JPanel {
     class ButtonRenderer extends javax.swing.JButton implements javax.swing.table.TableCellRenderer {
         public ButtonRenderer() { 
             setOpaque(true);
-            // Agregamos un margen para que el botón no toque los bordes de la celda
             setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
         }
 
@@ -257,7 +256,7 @@ public class PantallaCarrito extends javax.swing.JPanel {
         public java.awt.Component getTableCellRendererComponent(javax.swing.JTable table, Object value,
                 boolean isSelected, boolean hasFocus, int row, int column) {
             setText("Eliminar");
-            setBackground(new java.awt.Color(204, 51, 0)); // Color rojizo como tu botón "Continuar"
+            setBackground(new java.awt.Color(204, 51, 0)); 
             setForeground(java.awt.Color.WHITE);
             setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 12));
             return this;

@@ -14,7 +14,7 @@ public class ItemCarritoDTO {
     }
 
     
-    public ItemCarritoDTO(ProductoDTO productoSeleccionado, Integer cantidad) {
+    public ItemCarritoDTO(ProductoDTO productoSeleccionado, Integer cantidad, Double subtotal) {
         this.productoSeleccionado = productoSeleccionado;
         this.cantidad = cantidad;
         this.subtotal = subtotal;
