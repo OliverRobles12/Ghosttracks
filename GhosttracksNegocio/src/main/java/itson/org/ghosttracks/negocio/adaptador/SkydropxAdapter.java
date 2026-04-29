@@ -1,10 +1,11 @@
 package itson.org.ghosttracks.negocio.adaptador;
 
+import itson.org.ghosttracks.dtos.PaqueteDTO;
+import itson.org.ghosttracks.enums.EstadoPaquete;
 import itson.org.ghosttracks.negocio.interfaces.IProveedorEnvios;
 import itson.org.ghosttracks.negocio.objetosNegocio.Excepciones.NegocioException;
-import itson.org.skydropx.interfaces.ISkydropxAPI;
-import itson.org.skydropx.objetosNegocio.mock.SkydropxSimuladoBO;
-import itson.org.skydropx.dtos.RespuestaRastreoDTO;
+import itson.org.sistemaskydropxapi.servicios.SkydropxServicio;
+import itson.org.sistemaskydropxapi.objetos.SkydropxPaquete;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -13,47 +14,34 @@ import java.util.logging.Logger;
  */
 public class SkydropxAdapter implements IProveedorEnvios {
 
-    private final ISkydropxAPI skydropxAPI;
+    private final SkydropxServicio skydropxAPI; // La API real
     private static final Logger LOGGER = Logger.getLogger(SkydropxAdapter.class.getName());
 
     public SkydropxAdapter() {
-        this.skydropxAPI = new SkydropxSimuladoBO();
+        // Instanciamos el servicio real de tu módulo SistemaSkydropxAPI
+        this.skydropxAPI = new SkydropxServicio();
     }
 
     @Override
-    public String generarGuiaEnvio() throws NegocioException {
+    public PaqueteDTO generarGuiaPaquete(Long idPedido, Double pesoKg) throws NegocioException {
         try {
-            String nuevaGuia = skydropxAPI.generarGuiaEnvio(); 
-            return nuevaGuia;
+            LOGGER.log(Level.INFO, "Solicitando guía a Skydropx para el pedido: {0}", idPedido);
+            
+            // Skydropx hace su trabajo (Crea su propio paquete interno)
+            SkydropxPaquete paqueteSkydropx = skydropxAPI.crearEnvio(idPedido, pesoKg);
+            
+            // Mapeamos la respuesta a tu concepto de PAQUETE (DTO)
+            PaqueteDTO paqueteDTO = new PaqueteDTO();
+            paqueteDTO.setNumeroGuia(paqueteSkydropx.getNumeroGuia());
+            paqueteDTO.setEstado(EstadoPaquete.ENVIADO);
+            paqueteDTO.setFechaEnvio(paqueteSkydropx.getFechaEnvio());
+            paqueteDTO.setFechaEntregaEstimada(paqueteSkydropx.getFechaEntregaEstimada());
+            
+            return paqueteDTO; 
             
         } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, "Error inesperado al solicitar guía a la API de Skydropx", e);
-            throw new NegocioException("No se pudo generar la guía de envío con el proveedor.");
-        }
-    }
-    
-    @Override
-    public RespuestaRastreoDTO rastrearGuia(String numeroGuia) throws NegocioException {
-        try {
-            LOGGER.log(Level.INFO, "Consultando rastreo en Skydropx para guía: {0}", numeroGuia);
-            
-            // Llamamos a la API externa
-            RespuestaRastreoDTO respuesta = skydropxAPI.consultarRastreo(numeroGuia);
-            
-            if (respuesta == null) {
-                throw new NegocioException("No se recibió respuesta del servidor de envíos.");
-            }
-
-            return respuesta;
-
-        } catch (itson.org.skydropx.excepciones.NegocioException e) {
-            // Traducimos la excepción de la API a una excepción de nuestro sistema
-            LOGGER.log(Level.WARNING, "Skydropx reportó un error: {0}", e.getMessage());
-            throw new NegocioException("Error del proveedor de envíos: " + e.getMessage());
-            
-        } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, "Error inesperado al conectar con Skydropx", e);
-            throw new NegocioException("No se pudo establecer conexión con el servicio de rastreo.");
+            LOGGER.severe("Error en Skydropx al generar número de guía");
+            throw new NegocioException("Error del proveedor de paquetería: " + e.getMessage());
         }
     }
 }

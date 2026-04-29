@@ -4,9 +4,13 @@ import itson.org.ghosttracks.daos.IPedidosDAO;
 import itson.org.ghosttracks.dtos.CarritoDTO;
 import itson.org.ghosttracks.dtos.DatosPagoDTO;
 import itson.org.ghosttracks.dtos.NuevoPedidoDTO;
+import itson.org.ghosttracks.dtos.PagoDTO;
+import itson.org.ghosttracks.dtos.PaqueteDTO;
 import itson.org.ghosttracks.dtos.PedidoDTO;
 import itson.org.ghosttracks.entidades.Carrito;
 import itson.org.ghosttracks.entidades.Cliente;
+import itson.org.ghosttracks.entidades.Pago;
+import itson.org.ghosttracks.entidades.PagoTarjeta;
 import itson.org.ghosttracks.entidades.Paquete;
 import itson.org.ghosttracks.entidades.Pedido;
 import itson.org.ghosttracks.enums.EstadoPaquete;
@@ -16,6 +20,7 @@ import itson.org.ghosttracks.exceptions.PersistenciaException;
 import itson.org.ghosttracks.mocks.PedidosMockDAO;
 import itson.org.ghosttracks.negocio.adaptador.SkydropxAdapter;
 import itson.org.ghosttracks.negocio.adaptador.StripeAdapter;
+import itson.org.ghosttracks.negocio.fabricas.ProveedorPagoFactory;
 import itson.org.ghosttracks.negocio.interfaces.IPaquetesBO;
 import itson.org.ghosttracks.negocio.interfaces.IPedidosBO;
 import itson.org.ghosttracks.negocio.interfaces.IProveedorEnvios;
@@ -29,14 +34,12 @@ import java.util.logging.Logger;
 public class PedidosBO implements IPedidosBO {
 
     private final IPedidosDAO pedidosDAO;
-    private final IProveedorPago proveedorPago;
     private final IPaquetesBO paquetesBO; 
     private final IProveedorEnvios proveedorEnvios;
     private static final Logger LOGGER = Logger.getLogger(PedidosBO.class.getName());
 
     public PedidosBO() {
         this.pedidosDAO = new PedidosMockDAO();
-        this.proveedorPago = new StripeAdapter();
         this.paquetesBO = new PaquetesBO(); 
         this.proveedorEnvios = new SkydropxAdapter();
     }
@@ -76,44 +79,64 @@ public class PedidosBO implements IPedidosBO {
         }
 
         CarritoDTO carritoDto = nuevoPedido.getCarrito();
-        DatosPagoDTO pagoCliente = nuevoPedido.getDatosPago(); 
+        DatosPagoDTO datosPago = nuevoPedido.getDatosPago(); 
         
-        if (pagoCliente != null) {
-            proveedorPago.cobrar(
+        // 1. Lógica de Cobro con Strategy
+        if (datosPago != null) {
+            // Obtenemos la estrategia correcta (Stripe, ApplePay o MercadoPago) mediante la Factory
+            IProveedorPago estrategia = ProveedorPagoFactory.obtenerEstrategia(datosPago.getMetodoPago());
+            
+            // Ejecutamos el cobro
+            estrategia.cobrar(
+                datosPago.getNumeroTarjeta(),
                 carritoDto.getTotal(), 
-                pagoCliente.getTitularTarjeta(), 
-                pagoCliente.getNumeroTarjeta(), 
-                pagoCliente.getCvv(), 
-                pagoCliente.getFechaExpiracion() 
+                datosPago.getMetodoPago() 
             );
         }
         
         try {
+            // 2. Creación de la Entidad Pedido
             Pedido entidadPedido = new Pedido();
             entidadPedido.setEstado(EstadoPedido.PAGADO);
+            entidadPedido.setFechaPedido(LocalDateTime.now()); // Es bueno registrar cuándo se creó
             
+            // 3. Registro del Pago (Tu nueva entidad)
+            if (datosPago != null) {
+                Pago registroPago = new Pago(
+                    datosPago.getMetodoPago(), 
+                    carritoDto.getTotal(), 
+                    LocalDateTime.now()
+                );
+                // IMPORTANTE: Asegúrate de que tu entidad Pedido tenga el método setPago(Pago pago)
+                entidadPedido.setPago(registroPago); 
+            }
+
+            // Mapeo de Cliente
             if (nuevoPedido.getCliente() != null) {
                 Cliente clienteEntidad = new Cliente();
                 clienteEntidad.setIdUsuario(nuevoPedido.getCliente().getIdUsuario());
                 entidadPedido.setCliente(clienteEntidad);
             }
             
+            // Mapeo de Carrito
             Carrito carritoEntidad = new Carrito();
             carritoEntidad.setTotal(carritoDto.getTotal());
             entidadPedido.setCarrito(carritoEntidad);
             
+            // 4. Persistencia
             Pedido pedidoGuardado = pedidosDAO.guardarPedido(entidadPedido);
             
+            // Respuesta
             PedidoDTO pedidoRespuesta = new PedidoDTO();
             pedidoRespuesta.setIdPedido(pedidoGuardado.getIdPedido());
             pedidoRespuesta.setEstado(EstadoPedidoDTO.PAGADO); 
             
-            LOGGER.log(Level.INFO, "Pedido guardado correctamente con ID: {0}", pedidoGuardado.getIdPedido());
+            LOGGER.log(Level.INFO, "Pedido y Pago registrados con éxito. ID: {0}", pedidoGuardado.getIdPedido());
             return pedidoRespuesta;
             
         } catch (PersistenciaException e) {
-            LOGGER.log(Level.SEVERE, "ERROR CRÍTICO: Cobro realizado pero falló la persistencia del pedido.", e);
-            throw new NegocioException("Cobro exitoso pero ocurrió un error al registrar el pedido en la BD.", e);
+            LOGGER.log(Level.SEVERE, "ERROR CRÍTICO: Cobro realizado pero falló la persistencia.", e);
+            throw new NegocioException("El pago se realizó, pero hubo un error al guardar el pedido. Contacte a soporte.", e);
         }
     }
     
@@ -138,33 +161,33 @@ public class PedidosBO implements IPedidosBO {
             if (pedido.getEstado() == EstadoPedido.ENVIADO) {
                 throw new NegocioException("Este pedido ya ha sido procesado y enviado anteriormente.");
             }
-            
-            String numeroGuiaGenerado = proveedorEnvios.generarGuiaEnvio(); 
-            
+
+            PaqueteDTO infoGuia = proveedorEnvios.generarGuiaPaquete(pedido.getIdPedido(), peso); 
+
             Paquete nuevoPaquete = new Paquete();
-            nuevoPaquete.setNumeroGuia(numeroGuiaGenerado);
+            nuevoPaquete.setNumeroGuia(infoGuia.getNumeroGuia()); 
+            nuevoPaquete.setFechaEntregaEstimada(infoGuia.getFechaEntregaEstimada()); 
             nuevoPaquete.setEstado(EstadoPaquete.ENVIADO); 
             nuevoPaquete.setFechaEnvio(LocalDateTime.now());
             nuevoPaquete.setPesoKg(peso);
             nuevoPaquete.setLargoCm(largo);
             nuevoPaquete.setAnchoCm(ancho);
             nuevoPaquete.setAltoCm(alto);
+
             nuevoPaquete.setPedido(pedido);
-            
             pedido.setPaquete(nuevoPaquete);
             pedido.setEstado(EstadoPedido.ENVIADO); 
 
             paquetesBO.registrarEmpaque(nuevoPaquete);
             Pedido pedidoActualizado = pedidosDAO.actualizarPedido(pedido); 
-
-            LOGGER.log(Level.INFO, "Pedido {0} despachado con éxito. Guía asignada: {1}", new Object[]{idPedido, numeroGuiaGenerado});
+            
             return pedidoActualizado;
 
         } catch (PersistenciaException e) {
-            LOGGER.log(Level.SEVERE, "Error al intentar despachar el pedido {0}", idPedido);
+            LOGGER.severe("Error al intentar despachar el pedido {0}");
             throw new NegocioException("Ocurrió un error en la base de datos al despachar el pedido.", e);
         } catch (Exception e) {
-            throw new NegocioException("Error al comunicarse con el proveedor de envíos.", e);
+            throw new NegocioException("Error al comunicarse con el proveedor de envíos: " + e.getMessage(), e);
         }
     }
 

@@ -22,33 +22,14 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>itson.org</groupId>
-            <artifactId>StripeAPIDtos</artifactId>
-            <version>1.0</version>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>SistemaSkydropxAPI</artifactId>
+            <version>${project.version}</version>
         </dependency>
-
         <dependency>
-            <groupId>itson.org</groupId>
-            <artifactId>StripeApiNegocio</artifactId>
-            <version>1.0</version>
-        </dependency>
-        
-        <dependency>
-            <groupId>itson.org</groupId>
-            <artifactId>SkydropxApiDtos</artifactId>
-            <version>1.0</version>
-        </dependency>
-        
-        <dependency>
-            <groupId>itson.org</groupId>
-            <artifactId>SkydropxApiNegocio</artifactId>
-            <version>1.0</version>
-        </dependency>
-        
-        <dependency>
-            <groupId>itson.org</groupId>
-            <artifactId>SkydropxApiPersistencia</artifactId>
-            <version>1.0</version>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>SistemaStripeAPI</artifactId>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
     <properties>

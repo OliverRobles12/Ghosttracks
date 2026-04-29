@@ -7,6 +7,7 @@ import itson.org.ghosttracks.dtos.ContactoDTO;
 import itson.org.ghosttracks.dtos.DatosPagoDTO;
 import itson.org.ghosttracks.dtos.DireccionEntregaDTO;
 import itson.org.ghosttracks.dtos.NuevoPedidoDTO;
+import itson.org.ghosttracks.dtos.PagoDTO;
 import itson.org.ghosttracks.dtos.PedidoDTO;
 import itson.org.ghosttracks.dtos.PedidoDTOBuilder;
 import itson.org.ghosttracks.dtos.ProductoDTO;

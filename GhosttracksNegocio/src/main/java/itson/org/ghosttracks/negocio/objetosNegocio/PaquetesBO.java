@@ -13,9 +13,7 @@ import itson.org.ghosttracks.negocio.adaptador.SkydropxAdapter;
 import itson.org.ghosttracks.negocio.interfaces.IPaquetesBO;
 import itson.org.ghosttracks.negocio.interfaces.IProveedorEnvios;
 import itson.org.ghosttracks.negocio.objetosNegocio.Excepciones.NegocioException;
-import itson.org.skydropx.dtos.RespuestaRastreoDTO;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -43,13 +41,26 @@ public class PaquetesBO implements IPaquetesBO{
     }
 
     @Override
-    public Paquete asignarNumeroGuia(Long idPaquete, String numeroGuia) throws NegocioException {
+    public Paquete generarAsignarGuia(Long idPaquete) throws NegocioException {
         try {
-            Paquete paquete = paquetesDAO.buscarPorId(idPaquete);
-            paquete.setNumeroGuia(numeroGuia);
-            return paquetesDAO.actualizarPaquete(paquete);
+            
+            // 1. Buscamos el paquete que queremos actualizar
+            Paquete paqueteDB = paquetesDAO.buscarPorId(idPaquete);
+            
+            Long idPedidoRef = paqueteDB.getPedido().getIdPedido();
+            Double pesoKg = paqueteDB.getPesoKg();
+
+            PaqueteDTO infoSkydropx = proveedorEnvios.generarGuiaPaquete(idPedidoRef, pesoKg);
+            
+            paqueteDB.setNumeroGuia(infoSkydropx.getNumeroGuia());
+            paqueteDB.setFechaEntregaEstimada(infoSkydropx.getFechaEntregaEstimada());
+            
+            return paquetesDAO.actualizarPaquete(paqueteDB);
+            
         } catch (PersistenciaException ex) {
-            throw new NegocioException("Error al asignar la guía de rastreo.", ex);
+            throw new NegocioException("Error de base de datos al buscar/actualizar el paquete.", ex);
+        } catch (Exception ex) {
+            throw new NegocioException("No se pudo generar la guía con el proveedor: " + ex.getMessage(), ex);
         }
     }
 
@@ -71,18 +82,4 @@ public class PaquetesBO implements IPaquetesBO{
         }
     }
     
-    @Override
-    public RespuestaRastreoDTO rastrearPaquete(Long idPaquete) throws NegocioException {
-        try {
-            Paquete paqueteLocal = paquetesDAO.buscarPorId(idPaquete);
-            
-            if (paqueteLocal.getNumeroGuia() == null) {
-                throw new NegocioException("El paquete no cuenta con número de guía.");
-            }
-            return (RespuestaRastreoDTO) proveedorEnvios.rastrearGuia(paqueteLocal.getNumeroGuia());
-
-        } catch (PersistenciaException ex) {
-            throw new NegocioException("Error al consultar la base de datos local.");
-        }
-    }
 }

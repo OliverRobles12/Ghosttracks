@@ -2,6 +2,7 @@
 package itson.org.ghosttracks.presentacion.cliente.metodosDePago;
 
 import itson.org.ghosttracks.dtos.DatosPagoDTO;
+import itson.org.ghosttracks.enums.TipoPago;
 import itson.org.ghosttracks.presentacion.cliente.PantallaSeleccionMetodoDePago;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
@@ -118,6 +119,7 @@ public class PanelMetodoPagoTarjetaDebito extends javax.swing.JPanel {
         datos.setFechaExpiracion(fec); 
         datos.setCvv(cvv);
         datos.setTitularTarjeta(tit);
+        datos.setMetodoPago(TipoPago.TARJETA);
 
         principal.mostrarMensaje("Procesando pago con el banco...", false);
         

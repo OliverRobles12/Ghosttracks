@@ -117,4 +117,76 @@ public class ControladorVentasAdmin {
             navegador.mostrarMensaje("Error al filtrar la tabla: " + ex.getMessage(), true);
         }
     }
+    
+    public void despacharPedidoConSkydropx() {
+        if (this.pedidoSeleccionado == null) {
+            navegador.mostrarMensaje("Error: No hay un pedido seleccionado para despachar.", true);
+            return;
+        }
+        
+        double[] medidas = calcularDimensionesPaquete(this.pedidoSeleccionado);
+        double pesoTotal = medidas[0];
+        double largo = medidas[1];
+        double ancho = medidas[2];
+        double alto = medidas[3];
+        
+        try {
+            PedidoDTO pedidoActualizado = ventaFachada.despacharPedidoCliente(
+                    this.pedidoSeleccionado.getIdPedido(), 
+                    pesoTotal, 
+                    largo, 
+                    ancho, 
+                    alto
+            );
+            
+            this.pedidoSeleccionado = pedidoActualizado;
+
+            String guiaGenerada = pedidoActualizado.getPaquete().getNumeroGuia();
+            navegador.mostrarMensaje("¡Éxito! Pedido despachado. Guía asignada: " + guiaGenerada, false);
+
+            navegador.irVentasAdmin();
+
+        } catch (VentaEnLineaException ex) {
+            LOGGER.severe("Falló la integración con Skydropx o la persistencia al despachar.");
+            navegador.mostrarMensaje("No fue posible generar el envío: " + ex.getMessage(), true);
+        }
+    }
+    
+    
+    // Método privado para calcular las dimensiones del paquete
+    private double[] calcularDimensionesPaquete(PedidoDTO pedido) {
+        double pesoTotal = 0.1; 
+        double largo = 15.0;  
+        double ancho = 15.0;
+        double alto = 5.0;  
+
+        boolean contieneVinilo = false;
+        int cantidadArticulos = 0;
+
+        if (pedido != null && pedido.getCarrito() != null && pedido.getCarrito().getProductos() != null) {
+            for (var item : pedido.getCarrito().getProductos()) {
+                cantidadArticulos += item.getCantidad();
+                String tipo = item.getProductoSeleccionado().getTipoProducto().toString().toUpperCase();
+
+                if (tipo.contains("VINILO") || tipo.contains("VINYL")) {
+                    contieneVinilo = true;
+                    pesoTotal += (0.5 * item.getCantidad()); 
+                } else if (tipo.contains("CD")) {
+                    pesoTotal += (0.15 * item.getCantidad()); 
+                } else {
+                    pesoTotal += (0.3 * item.getCantidad());
+                }
+            }
+        }
+
+        if (contieneVinilo) {
+            largo = 35.0; 
+            ancho = 35.0;
+        }
+        if (cantidadArticulos > 1) {
+            alto += (cantidadArticulos * 1.5);
+        }
+
+        return new double[]{pesoTotal, largo, ancho, alto};
+    }
 }

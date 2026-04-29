@@ -44,9 +44,6 @@ public interface IVentaEnLinea {
     
     List<PedidoDTO> consultarPedidosFiltrados(String nombreCliente, EstadoPedidoDTO estado) throws VentaEnLineaException;
     
-    /**
-     * Orquesta la creación de un paquete a partir de un pedido.
-     */
-    PaqueteDTO procesarEmpaqueDePedido(Long idPedido) throws VentaEnLineaException;
+    PedidoDTO despacharPedidoCliente(Long idPedido, Double peso, Double largo, Double ancho, Double alto) throws VentaEnLineaException;
 
 }

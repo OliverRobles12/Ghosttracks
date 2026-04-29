@@ -6,7 +6,6 @@ package itson.org.ghosttracks.negocio.interfaces;
 
 import itson.org.ghosttracks.entidades.Paquete;
 import itson.org.ghosttracks.negocio.objetosNegocio.Excepciones.NegocioException;
-import itson.org.skydropx.dtos.RespuestaRastreoDTO;
 import java.util.List;
 
 /**
@@ -17,12 +16,11 @@ public interface IPaquetesBO {
     
     public abstract Paquete registrarEmpaque(Paquete paquete) throws NegocioException;
     
-    public abstract Paquete asignarNumeroGuia(Long idPaquete, String numeroGuia) throws NegocioException;
-    
+    public Paquete generarAsignarGuia(Long idPaquete) throws NegocioException;
+            
     public abstract Paquete consultarPaquetePorId(Long idPaquete) throws NegocioException;
     
     public abstract List<Paquete> consultarTodos() throws NegocioException;
     
-    public abstract RespuestaRastreoDTO rastrearPaquete(Long idPaquete) throws NegocioException;
     
 }

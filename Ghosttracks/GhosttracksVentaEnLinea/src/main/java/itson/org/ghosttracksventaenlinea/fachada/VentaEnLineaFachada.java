@@ -12,7 +12,6 @@ import itson.org.ghosttracks.entidades.Cliente;
 import itson.org.ghosttracks.entidades.Paquete;
 import itson.org.ghosttracks.entidades.Pedido;
 import itson.org.ghosttracks.entidades.Producto;
-import itson.org.ghosttracks.entidades.ProductoPedido;
 import itson.org.ghosttracks.enums.EstadoPedido;
 import itson.org.ghosttracks.enums.EstadoPedidoDTO;
 import itson.org.ghosttracks.negocio.interfaces.IClientesBO;
@@ -224,17 +223,16 @@ public class VentaEnLineaFachada implements IVentaEnLinea {
     }
 
     @Override
-    public PaqueteDTO procesarEmpaqueDePedido(Long idPedido) throws VentaEnLineaException {
+    public PedidoDTO despacharPedidoCliente(Long idPedido, Double peso, Double largo, Double ancho, Double alto) throws VentaEnLineaException {
         if (idPedido == null || idPedido <= 0) {
-            throw new VentaEnLineaException(CodigoErrorVenta.DATOS_INVALIDOS, "ID de pedido inválido para empaque.");
+            throw new VentaEnLineaException(CodigoErrorVenta.DATOS_INVALIDOS, "ID de pedido inválido para despacho.");
         }
-
         try {
-            Paquete nuevoPaqueteEntidad = new Paquete();
-            Paquete paqueteGuardado = paquetesBO.registrarEmpaque(nuevoPaqueteEntidad);
-            return mapearPaqueteADTO(paqueteGuardado);
+            Pedido pedidoActualizado = pedidosBO.despacharPedido(idPedido, peso, largo, ancho, alto);
+            return mapearPedidoADTO(pedidoActualizado);
+
         } catch (NegocioException ex) {
-            throw new VentaEnLineaException(CodigoErrorVenta.ERROR_PERSISTENCIA, "Error al generar el empaque del pedido.", ex);
+            throw new VentaEnLineaException(CodigoErrorVenta.ERROR_PERSISTENCIA, "Error al generar el empaque y guía del pedido.", ex);
         }
     }
 
