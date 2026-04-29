@@ -2,12 +2,15 @@ package itson.org.ghosttracksventaenlinea.fachada;
 
 import itson.org.ghosttracks.dtos.CarritoDTO;
 import itson.org.ghosttracks.dtos.ClienteDTO;
+import itson.org.ghosttracks.dtos.ContactoDTO;
 import itson.org.ghosttracks.dtos.DireccionClienteDTO;
+import itson.org.ghosttracks.dtos.DireccionEntregaDTO;
 import itson.org.ghosttracks.dtos.ItemCarritoDTO;
 import itson.org.ghosttracks.dtos.NuevoPedidoDTO;
 import itson.org.ghosttracks.dtos.PaqueteDTO;
 import itson.org.ghosttracks.dtos.PedidoDTO;
 import itson.org.ghosttracks.dtos.ProductoDTO;
+import itson.org.ghosttracks.dtos.SucursalDTO;
 import itson.org.ghosttracks.entidades.Cliente;
 import itson.org.ghosttracks.entidades.Paquete;
 import itson.org.ghosttracks.entidades.Pedido;
@@ -311,17 +314,56 @@ public class VentaEnLineaFachada implements IVentaEnLinea {
             ClienteDTO clienteDto = new ClienteDTO();
             clienteDto.setIdUsuario(p.getCliente().getIdUsuario());
             clienteDto.setNombres(p.getCliente().getNombres());
+            clienteDto.setApellidoPaterno(p.getCliente().getApellidoPaterno());
+            clienteDto.setApellidoMaterno(p.getCliente().getApellidoMaterno());
+            clienteDto.setCorreo(p.getCliente().getCorreo());
+            clienteDto.setTelefono(p.getCliente().getTelefono());
             dto.setCliente(clienteDto);
         }
 
         if (p.getCarrito() != null) {
             CarritoDTO carritoDto = new CarritoDTO();
             carritoDto.setTotal(p.getCarrito().getTotal());
+            carritoDto.setSubtotal(p.getCarrito().getSubtotal());
+            carritoDto.setImpuestos(p.getCarrito().getImpuestos());
+
+            if (p.getCarrito().getItems()!= null) {
+                for (var itemEntidad : p.getCarrito().getItems()) {
+                    ItemCarritoDTO itemDto = new ItemCarritoDTO();
+                    itemDto.setCantidad(itemEntidad.getCantidad());
+                    itemDto.setSubtotal(itemEntidad.getSubtotal());
+                    itemDto.setProductoSeleccionado(mapearProductoADTO(itemEntidad.getProducto()));
+                    
+                    carritoDto.getProductos().add(itemDto);
+                }
+            }
             dto.setCarrito(carritoDto);
         }
 
         if (p.getPaquete() != null) {
             dto.setPaquete(mapearPaqueteADTO(p.getPaquete()));
+        }
+
+        if (p.getDireccionEntrega() != null) {
+            DireccionEntregaDTO dirDto = new DireccionEntregaDTO();
+            dirDto.setCalle(p.getDireccionEntrega().getCalle());
+            dirDto.setNumero(p.getDireccionEntrega().getNumero());
+            dirDto.setCodigoPostal(p.getDireccionEntrega().getCodigoPostal());
+            dirDto.setCiudad(p.getDireccionEntrega().getCiudad());
+            dto.setDireccionEntrega(dirDto);
+        }
+
+        if (p.getContacto() != null) {
+            ContactoDTO contactoDto = new ContactoDTO();
+            contactoDto.setNombre(p.getContacto().getNombre());
+            contactoDto.setTelefono(p.getContacto().getTelefono());
+            dto.setContacto(contactoDto);
+        }
+
+        if (p.getSucursal() != null) {
+            SucursalDTO sucursalDto = new SucursalDTO();
+            sucursalDto.setNombre("Obreyork");
+            dto.setSucursal(sucursalDto);
         }
 
         return dto;

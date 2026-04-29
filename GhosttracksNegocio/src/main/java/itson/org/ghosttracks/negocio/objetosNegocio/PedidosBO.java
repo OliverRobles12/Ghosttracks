@@ -2,17 +2,26 @@ package itson.org.ghosttracks.negocio.objetosNegocio;
 
 import itson.org.ghosttracks.daos.IPedidosDAO;
 import itson.org.ghosttracks.dtos.CarritoDTO;
+import itson.org.ghosttracks.dtos.ContactoDTO;
 import itson.org.ghosttracks.dtos.DatosPagoDTO;
+import itson.org.ghosttracks.dtos.DireccionEntregaDTO;
+import itson.org.ghosttracks.dtos.ItemCarritoDTO;
 import itson.org.ghosttracks.dtos.NuevoPedidoDTO;
 import itson.org.ghosttracks.dtos.PagoDTO;
 import itson.org.ghosttracks.dtos.PaqueteDTO;
 import itson.org.ghosttracks.dtos.PedidoDTO;
+import itson.org.ghosttracks.dtos.SucursalDTO;
 import itson.org.ghosttracks.entidades.Carrito;
 import itson.org.ghosttracks.entidades.Cliente;
+import itson.org.ghosttracks.entidades.Contacto;
+import itson.org.ghosttracks.entidades.Direccion;
+import itson.org.ghosttracks.entidades.ItemCarrito;
 import itson.org.ghosttracks.entidades.Pago;
 import itson.org.ghosttracks.entidades.PagoTarjeta;
 import itson.org.ghosttracks.entidades.Paquete;
 import itson.org.ghosttracks.entidades.Pedido;
+import itson.org.ghosttracks.entidades.Producto;
+import itson.org.ghosttracks.entidades.Sucursal;
 import itson.org.ghosttracks.enums.EstadoPaquete;
 import itson.org.ghosttracks.enums.EstadoPedido;
 import itson.org.ghosttracks.enums.EstadoPedidoDTO;
@@ -81,12 +90,9 @@ public class PedidosBO implements IPedidosBO {
         CarritoDTO carritoDto = nuevoPedido.getCarrito();
         DatosPagoDTO datosPago = nuevoPedido.getDatosPago(); 
         
-        // 1. Lógica de Cobro con Strategy
         if (datosPago != null) {
-            // Obtenemos la estrategia correcta (Stripe, ApplePay o MercadoPago) mediante la Factory
             IProveedorPago estrategia = ProveedorPagoFactory.obtenerEstrategia(datosPago.getMetodoPago());
             
-            // Ejecutamos el cobro
             estrategia.cobrar(
                 datosPago.getNumeroTarjeta(),
                 carritoDto.getTotal(), 
@@ -95,38 +101,85 @@ public class PedidosBO implements IPedidosBO {
         }
         
         try {
-            // 2. Creación de la Entidad Pedido
             Pedido entidadPedido = new Pedido();
             entidadPedido.setEstado(EstadoPedido.PAGADO);
-            entidadPedido.setFechaPedido(LocalDateTime.now()); // Es bueno registrar cuándo se creó
+            entidadPedido.setFechaPedido(LocalDateTime.now()); 
             
-            // 3. Registro del Pago (Tu nueva entidad)
             if (datosPago != null) {
                 Pago registroPago = new Pago(
                     datosPago.getMetodoPago(), 
                     carritoDto.getTotal(), 
                     LocalDateTime.now()
                 );
-                // IMPORTANTE: Asegúrate de que tu entidad Pedido tenga el método setPago(Pago pago)
                 entidadPedido.setPago(registroPago); 
             }
 
-            // Mapeo de Cliente
+            // 1. Mapeo de Cliente
             if (nuevoPedido.getCliente() != null) {
                 Cliente clienteEntidad = new Cliente();
                 clienteEntidad.setIdUsuario(nuevoPedido.getCliente().getIdUsuario());
                 entidadPedido.setCliente(clienteEntidad);
             }
             
-            // Mapeo de Carrito
+            // 2. Mapeo Completo de Carrito e Items
             Carrito carritoEntidad = new Carrito();
             carritoEntidad.setTotal(carritoDto.getTotal());
+            carritoEntidad.setSubtotal(carritoDto.getSubtotal());
+            carritoEntidad.setImpuestos(carritoDto.getImpuestos());
+            
+            List<ItemCarrito> itemsEntidad = new java.util.ArrayList<>();
+            for (ItemCarritoDTO itemDTO : carritoDto.getProductos()) {
+                ItemCarrito itemEntidad = new ItemCarrito();
+                itemEntidad.setCantidad(itemDTO.getCantidad());
+                itemEntidad.setSubtotal(itemDTO.getSubtotal());
+                
+                if (itemDTO.getProductoSeleccionado()!= null) {
+                    Producto productoEntidad = new Producto();
+                    productoEntidad.setIdProducto(itemDTO.getProductoSeleccionado().getIdProducto());
+                    productoEntidad.setPrecio(itemDTO.getProductoSeleccionado().getPrecio());
+                    // Puedes mapear el nombre u otros datos del producto si los necesitas en la BD
+                    itemEntidad.setProducto(productoEntidad);
+                }
+                itemsEntidad.add(itemEntidad);
+            }
+            carritoEntidad.setItems(itemsEntidad);
             entidadPedido.setCarrito(carritoEntidad);
             
-            // 4. Persistencia
+            // 3. Mapeo de Dirección de Entrega
+            if (nuevoPedido.getDireccionEntrega() != null) {
+                DireccionEntregaDTO dirDTO = nuevoPedido.getDireccionEntrega();
+                Direccion dirEntidad = new Direccion();
+                dirEntidad.setCalle(dirDTO.getCalle());
+                dirEntidad.setColonia(dirDTO.getColonia());
+                dirEntidad.setNumero(dirDTO.getNumero());
+                dirEntidad.setCiudad(dirDTO.getCiudad());
+                dirEntidad.setCodigoPostal(dirDTO.getCodigoPostal());
+                entidadPedido.setDireccionEntrega(dirEntidad);
+            }
+
+            // 4. Mapeo de Contacto
+            if (nuevoPedido.getContacto() != null) {
+                ContactoDTO contactoDTO = nuevoPedido.getContacto();
+                Contacto contactoEntidad = new Contacto();
+                // Nota: Ajusta estos getters/setters según lo que tengas en tu clase Contacto
+                contactoEntidad.setNombre(contactoDTO.getNombre());
+                contactoEntidad.setTelefono(contactoDTO.getTelefono()); 
+                entidadPedido.setContacto(contactoEntidad);
+            }
+
+            // 5. Mapeo de Sucursal
+            if (nuevoPedido.getSucursal() != null) {
+                SucursalDTO sucursalDTO = nuevoPedido.getSucursal();
+                Sucursal sucursalEntidad = new Sucursal();
+                // Nota: Ajusta esto según las propiedades de tu clase Sucursal
+                sucursalEntidad.setNombre(sucursalDTO.getNombre());
+                entidadPedido.setSucursal(sucursalEntidad);
+            }
+            
+            // --- Persistencia ---
             Pedido pedidoGuardado = pedidosDAO.guardarPedido(entidadPedido);
             
-            // Respuesta
+            // --- Respuesta ---
             PedidoDTO pedidoRespuesta = new PedidoDTO();
             pedidoRespuesta.setIdPedido(pedidoGuardado.getIdPedido());
             pedidoRespuesta.setEstado(EstadoPedidoDTO.PAGADO); 
