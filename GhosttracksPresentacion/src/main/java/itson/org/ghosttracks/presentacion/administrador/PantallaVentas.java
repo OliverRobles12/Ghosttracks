@@ -2,6 +2,7 @@
 package itson.org.ghosttracks.presentacion.administrador;
 
 import itson.org.ghosttracks.controladores.ControladorVentasAdmin;
+import itson.org.ghosttracks.dtos.ItemCarritoDTO;
 import itson.org.ghosttracks.dtos.PedidoDTO;
 import java.awt.Color;
 import java.awt.event.FocusAdapter;
@@ -192,7 +193,13 @@ public class PantallaVentas extends javax.swing.JPanel {
 
             fila[0] = pedido.getIdPedido(); 
             fila[1] = pedido.getCliente().getNombres()+" "+pedido.getCliente().getApellidoPaterno();
-            fila[2] = "-";
+            int totalPiezas = 0;
+            if (pedido.getCarrito() != null && pedido.getCarrito().getProductos() != null) {
+                for (ItemCarritoDTO item : pedido.getCarrito().getProductos()) {
+                    totalPiezas += item.getCantidad();
+                }
+            }
+            fila[2] = totalPiezas;
             fila[3] = String.format("$%.2f", pedido.getCarrito().getTotal());
             fila[4] = pedido.getEstado() != null ? pedido.getEstado().name() : "Sin estado";
 

@@ -148,7 +148,7 @@ public class ControlVentaEnLinea {
     public void guardarMetodoPago(DatosPagoDTO dto) {
         pedidoBuilder.setDatosPago(dto);
     }
-    
+        
     public void procesarPedido() throws Exception {
         try {
             
@@ -170,8 +170,6 @@ public class ControlVentaEnLinea {
                     .setCarrito(this.carrito)
                     .build();
 
-            // Enviamos a la fachada (asumiendo que confirmarCompra ahora recibe NuevoPedidoDTO)
-            // PedidoDTO pedidoGenerado = ventaFachada.confirmarCompra(nuevoPedido);
             PedidoDTO pedidoGenerado = ventaFachada.confirmarCompra(nuevoPedido);
             
             navegador.mostrarMensaje("¡Compra realizada con éxito! Pedido #" + pedidoGenerado.getIdPedido(), false);
@@ -180,7 +178,7 @@ public class ControlVentaEnLinea {
             this.carrito = new CarritoDTO(); 
             this.pedidoBuilder = new PedidoDTOBuilder();
             
-            navegador.irInicioCliente();
+            navegador.irPedidoConfirmado(pedidoGenerado);
             
         } catch (VentaEnLineaException ex) {
             navegador.mostrarMensaje("No pudimos procesar tu compra: " + ex.getMessage(), true);

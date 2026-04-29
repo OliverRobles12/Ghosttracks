@@ -18,6 +18,7 @@ import itson.org.ghosttracks.presentacion.panelLogin;
 import itson.org.ghosttracks.utilerias.PanelHeader;
 import itson.org.ghosttracks.utilerias.pnlMenuLateral;
 import itson.org.ghosttracks.utilerias.pnlMenuLateralAdmin;
+import itson.org.ghosttracks.utilerias.pnlResumenPedidoConfirmado;
 import javax.swing.JPanel;
 
 /**
@@ -121,6 +122,12 @@ public class Navegador {
         JPanel panelEnvio = new PanelDatosPaquete(ctrl, pedidoSeleccionado);
         vistaBase.cambiarPanelAccion(panelEnvio);
         ventana.cambiarPantalla(vistaBase);
+    }
+
+    public void irPedidoConfirmado(PedidoDTO pedidoConfirmado) {
+        pnlResumenPedidoConfirmado vista = new pnlResumenPedidoConfirmado(ctrlVentaLinea);
+        vista.cargarDatosPedido(pedidoConfirmado);
+        ventana.cambiarPantalla(vista);
     }
     
 }

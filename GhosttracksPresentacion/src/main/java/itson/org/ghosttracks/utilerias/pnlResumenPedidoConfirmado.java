@@ -4,19 +4,88 @@
  */
 package itson.org.ghosttracks.utilerias;
 
+import itson.org.ghosttracks.controladores.ControlVentaEnLinea;
+import itson.org.ghosttracks.dtos.ItemCarritoDTO;
+import itson.org.ghosttracks.dtos.PedidoDTO;
+import itson.org.ghosttracks.dtos.ProductoDTO;
+import java.awt.Dimension;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+
 /**
  *
  * @author nafbr
  */
 public class pnlResumenPedidoConfirmado extends javax.swing.JPanel {
-
+    private final ControlVentaEnLinea control;
     /**
      * Creates new form pnlResumenPedidoConfirmado
      */
-    public pnlResumenPedidoConfirmado() {
+    public pnlResumenPedidoConfirmado(ControlVentaEnLinea control) {
         initComponents();
+        this.control = control;
     }
 
+    
+    public void cargarDatosPedido(PedidoDTO pedido) {
+        if (pedido == null) return;
+
+        lblNumPedidoDisplay.setText("#" + pedido.getIdPedido());
+        
+        if (pedido.getCarrito() != null) {
+            lblSubtotalDisplay.setText(String.format("$%.2f", pedido.getCarrito().getSubtotal()));
+            lblImpuestosDisplay.setText(String.format("$%.2f", pedido.getCarrito().getImpuestos()));
+            
+            lblEnvioDisplay.setText(String.format("$%.2f", pedido.getCostoEnvio())); 
+            lblTotalDisplay.setText(String.format("$%.2f", pedido.getCarrito().getTotal()));
+            
+            
+            pnlResumenPedido.setLayout(new javax.swing.BoxLayout(pnlResumenPedido, javax.swing.BoxLayout.X_AXIS));
+            pnlResumenPedido.removeAll(); 
+
+            pnlResumenPedido.add(Box.createRigidArea(new Dimension(10, 0)));
+            
+            if (pedido.getCarrito().getProductos() != null) {
+                for (ItemCarritoDTO item : pedido.getCarrito().getProductos()) {
+                  
+                    ProductoDTO prod = item.getProductoSeleccionado();
+                    Integer cant = item.getCantidad() != null ? item.getCantidad() : 0;
+                    pnllResumenProducto tarjeta = new pnllResumenProducto(prod, cant);
+                    pnlResumenPedido.add(tarjeta);
+                    pnlResumenPedido.add(Box.createRigidArea(new Dimension(15, 0)));
+                }
+            }
+            
+            pnlResumenPedido.revalidate();
+            pnlResumenPedido.repaint();
+        }
+
+        lblMetodoPagoDisplay.setText(pedido.getPago().getTipo().name());
+
+        
+        if (pedido.getContacto() != null) {
+            lblNombre.setText(pedido.getContacto().getNombre());
+        } else {
+            lblNombre.setText("Sin nombre");
+        }
+
+        if (pedido.getDireccionEntrega() != null) {
+            itson.org.ghosttracks.dtos.DireccionEntregaDTO dir = pedido.getDireccionEntrega();
+            lblCalle.setText(dir.getCalle() != null ? dir.getCalle() : "Calle no registrada");
+            lblNumero.setText(dir.getNumero() != null ? "#" + dir.getNumero() : "S/N");
+            lblColonia.setText(dir.getColonia() != null ? dir.getColonia() : "");
+            lblCiudad.setText(dir.getCiudad() != null ? dir.getCiudad() : "Ciudad no registrada");
+            lblEstado.setText(dir.getEstado()); 
+            lblCodigoPostal.setText(dir.getCodigoPostal() != null ? "CP: " + dir.getCodigoPostal() : "");
+        } else {
+            lblCalle.setText("Recoger en sucursal");
+            lblNumero.setText("");
+            lblColonia.setText("");
+            lblCiudad.setText("");
+            lblEstado.setText("");
+            lblCodigoPostal.setText("");
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -302,8 +371,13 @@ public class pnlResumenPedidoConfirmado extends javax.swing.JPanel {
         btnComprarDeNuevo.setBackground(new java.awt.Color(191, 64, 43));
         btnComprarDeNuevo.setForeground(new java.awt.Color(255, 255, 255));
         btnComprarDeNuevo.setText("Volver a Comprar");
+        btnComprarDeNuevo.addActionListener(this::btnComprarDeNuevoActionPerformed);
         add(btnComprarDeNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 610, 290, 50));
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnComprarDeNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarDeNuevoActionPerformed
+        control.irAInicio();
+    }//GEN-LAST:event_btnComprarDeNuevoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

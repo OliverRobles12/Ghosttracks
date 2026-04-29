@@ -114,14 +114,11 @@ public class PedidosBO implements IPedidosBO {
                 entidadPedido.setPago(registroPago);
             }
 
-            // 1. Mapeo de Cliente (CORREGIDO)
             if (nuevoPedido.getCliente() != null) {
                 Cliente clienteEntidad = new Cliente();
 
-                // Mapeamos el ID
                 clienteEntidad.setIdUsuario(nuevoPedido.getCliente().getIdUsuario());
 
-                // ¡AQUÍ ESTÁ LA MAGIA! Pasamos los nombres para que no sean null
                 clienteEntidad.setNombres(nuevoPedido.getCliente().getNombres());
                 clienteEntidad.setApellidoPaterno(nuevoPedido.getCliente().getApellidoPaterno());
                 clienteEntidad.setApellidoMaterno(nuevoPedido.getCliente().getApellidoMaterno());
@@ -131,7 +128,6 @@ public class PedidosBO implements IPedidosBO {
                 entidadPedido.setCliente(clienteEntidad);
             }
 
-            // 2. Mapeo Completo de Carrito e Items
             Carrito carritoEntidad = new Carrito();
             carritoEntidad.setTotal(carritoDto.getTotal());
             carritoEntidad.setSubtotal(carritoDto.getSubtotal());
@@ -147,7 +143,7 @@ public class PedidosBO implements IPedidosBO {
                     Producto productoEntidad = new Producto();
                     productoEntidad.setIdProducto(itemDTO.getProductoSeleccionado().getIdProducto());
                     productoEntidad.setPrecio(itemDTO.getProductoSeleccionado().getPrecio());
-                    // Puedes mapear el nombre u otros datos del producto si los necesitas en la BD
+                    productoEntidad.setImgProducto(itemDTO.getProductoSeleccionado().getImgProducto());
                     itemEntidad.setProducto(productoEntidad);
                 }
                 itemsEntidad.add(itemEntidad);
@@ -155,7 +151,6 @@ public class PedidosBO implements IPedidosBO {
             carritoEntidad.setItems(itemsEntidad);
             entidadPedido.setCarrito(carritoEntidad);
 
-            // 3. Mapeo de Dirección de Entrega
             if (nuevoPedido.getDireccionEntrega() != null) {
                 DireccionEntregaDTO dirDTO = nuevoPedido.getDireccionEntrega();
                 Direccion dirEntidad = new Direccion();
@@ -167,7 +162,6 @@ public class PedidosBO implements IPedidosBO {
                 entidadPedido.setDireccionEntrega(dirEntidad);
             }
 
-            // 4. Mapeo de Contacto (CORREGIDO)
             if (nuevoPedido.getContacto() != null) {
                 ContactoDTO contactoDTO = nuevoPedido.getContacto();
                 Contacto contactoEntidad = new Contacto();
@@ -175,25 +169,20 @@ public class PedidosBO implements IPedidosBO {
                 contactoEntidad.setNombre(contactoDTO.getNombre());
                 contactoEntidad.setTelefono(contactoDTO.getTelefono());
 
-                // Agregamos el correo que faltaba mapear
                 contactoEntidad.setCorreo(contactoDTO.getCorreo());
 
                 entidadPedido.setContacto(contactoEntidad);
             }
 
-            // 5. Mapeo de Sucursal
             if (nuevoPedido.getSucursal() != null) {
                 SucursalDTO sucursalDTO = nuevoPedido.getSucursal();
                 Sucursal sucursalEntidad = new Sucursal();
-                // Nota: Ajusta esto según las propiedades de tu clase Sucursal
                 sucursalEntidad.setNombre(sucursalDTO.getNombre());
                 entidadPedido.setSucursal(sucursalEntidad);
             }
 
-            // --- Persistencia ---
             Pedido pedidoGuardado = pedidosDAO.guardarPedido(entidadPedido);
 
-            // --- Respuesta ---
             PedidoDTO pedidoRespuesta = new PedidoDTO();
             pedidoRespuesta.setIdPedido(pedidoGuardado.getIdPedido());
             pedidoRespuesta.setEstado(EstadoPedidoDTO.PAGADO);
