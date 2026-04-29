@@ -137,4 +137,17 @@ public class PedidosMockDAO implements IPedidosDAO{
         LOGGER.log(Level.WARNING, "No se pudo actualizar: Pedido ID {0} no encontrado.", pedidoActualizado.getIdPedido());
         throw new PersistenciaException("No se encontró ningún pedido con el ID: " + pedidoActualizado.getIdPedido());
     }
+
+    @Override
+    public List<Pedido> buscarPedidosFiltrados(List<Long> idsClientes, EstadoPedido estado) throws PersistenciaException {
+        List<Pedido> filtrados = new ArrayList<>();
+        for (Pedido p : baseDatosPedidos) { 
+            boolean coincideCliente = (idsClientes == null || idsClientes.contains(p.getIdCliente()));
+            boolean coincideEstado = (estado == null || p.getEstado() == estado);
+            if (coincideCliente && coincideEstado) {
+                filtrados.add(p);
+            }
+        }
+        return filtrados;
+    }
 }

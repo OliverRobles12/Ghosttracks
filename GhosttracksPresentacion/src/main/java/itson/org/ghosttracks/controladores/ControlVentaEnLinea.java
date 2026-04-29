@@ -161,7 +161,7 @@ public class ControlVentaEnLinea {
             ClienteDTO clienteLogueado = SesionUsuario.getInstancia().getCliente();
             Long idCliente = clienteLogueado.getIdUsuario();
 //            
-//            Long idCliente = 1L; // El usuario registrado como Emy
+//            Long idCliente = 1L; 
 
             this.pedidoDTO.setIdCliente(idCliente); 
             this.pedidoDTO.setProductos(this.carrito.getProductos());
@@ -182,7 +182,7 @@ public class ControlVentaEnLinea {
             navegador.mostrarMensaje("No pudimos procesar tu compra: " + ex.getMessage(), true);
         }
     }
-    
+     
     public void procesaaar() {
         
         if (!SesionUsuario.getInstancia().haySesionActiva()) {

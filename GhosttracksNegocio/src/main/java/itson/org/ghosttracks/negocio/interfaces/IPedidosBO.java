@@ -15,10 +15,11 @@ import java.util.List;
  * @author nafbr
  */
 public interface IPedidosBO {
-    Pedido guardarPedido(Pedido pedido) throws NegocioException;
-    Pedido actualizarEstado(Long idPedido, EstadoPedido nuevoEstado) throws NegocioException;
-    List<Pedido> consultarTodos() throws NegocioException;
+    public Pedido guardarPedido(Pedido pedido) throws NegocioException;
+    public Pedido actualizarEstado(Long idPedido, EstadoPedido nuevoEstado) throws NegocioException;
+    public List<Pedido> consultarTodos() throws NegocioException;
     public PedidoDTO generarPedido(PedidoDTO pedidoDto) throws NegocioException;
-    Pedido obtenerPedidoPorId(Long idPedido) throws NegocioException;
+    public Pedido obtenerPedidoPorId(Long idPedido) throws NegocioException;
     public Pedido despacharPedido(Long idPedido, Double peso, Double largo, Double ancho, Double alto) throws NegocioException;
+    public List<Pedido> buscarPedidosFiltrados(List<Long> idsClientes, EstadoPedido estado) throws NegocioException;
 }

@@ -6,6 +6,7 @@ package itson.org.ghosttracks.daos;
 
 import itson.org.ghosttracks.entidades.Cliente;
 import itson.org.ghosttracks.exceptions.PersistenciaException;
+import java.util.List;
 
 /**
  *
@@ -14,4 +15,5 @@ import itson.org.ghosttracks.exceptions.PersistenciaException;
 public interface IClientesDAO {
     Cliente buscarPorId(Long idCliente) throws PersistenciaException;
     public abstract Cliente iniciarSesion(String correo, String contrasena) throws PersistenciaException; 
+    List<Long> buscarIdsPorNombre(String nombreCliente) throws PersistenciaException;
 }

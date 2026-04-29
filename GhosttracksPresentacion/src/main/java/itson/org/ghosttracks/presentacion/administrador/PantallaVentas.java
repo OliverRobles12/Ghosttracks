@@ -3,6 +3,8 @@ package itson.org.ghosttracks.presentacion.administrador;
 
 import itson.org.ghosttracks.controladores.ControladorVentasAdmin;
 import itson.org.ghosttracks.dtos.PedidoDTO;
+import java.awt.Color;
+import java.awt.event.FocusAdapter;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -13,11 +15,14 @@ import javax.swing.table.DefaultTableModel;
 public class PantallaVentas extends javax.swing.JPanel {
     
     private final ControladorVentasAdmin control;
+    private final String PLACEHOLDER_TEXT = "Nombre del cliente...";
     
     public PantallaVentas(ControladorVentasAdmin ctrl) {
         this.control = ctrl;
         initComponents();
+        configurarFiltros();
         configurarEventosTabla();
+        configurarPlaceholder();
         control.llenarTablaPedidos(this);
     }
 
@@ -32,42 +37,42 @@ public class PantallaVentas extends javax.swing.JPanel {
 
         pnlPrincipal = new javax.swing.JPanel();
         panelFiltros = new itson.org.ghosttracks.utilerias.PanelRedondeado();
-        txtCodigoVenta = new itson.org.ghosttracks.utilerias.TextFieldRedondeado();
         txxNombreCliente = new itson.org.ghosttracks.utilerias.TextFieldRedondeado();
-        botonRedondeado1 = new itson.org.ghosttracks.utilerias.BotonRedondeado();
+        btnBuscar = new itson.org.ghosttracks.utilerias.BotonRedondeado();
+        cmbxEstados = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblPedidos = new javax.swing.JTable();
         pnlDetallesPedido1 = new itson.org.ghosttracks.utilerias.pnlDetallesPedido();
         btnActualizarPedido = new itson.org.ghosttracks.utilerias.BotonRedondeado();
 
-        setPreferredSize(new java.awt.Dimension(1100, 675));
+        setPreferredSize(new java.awt.Dimension(1100, 900));
 
         pnlPrincipal.setBackground(new java.awt.Color(237, 229, 222));
         pnlPrincipal.setPreferredSize(new java.awt.Dimension(1100, 675));
 
         panelFiltros.setBackground(new java.awt.Color(217, 217, 217));
 
-        txtCodigoVenta.setText("Código venta");
-        txtCodigoVenta.setPreferredSize(new java.awt.Dimension(220, 35));
-
         txxNombreCliente.setText("NombreCliente");
         txxNombreCliente.setPreferredSize(new java.awt.Dimension(220, 35));
 
-        botonRedondeado1.setText("Buscar");
-        botonRedondeado1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        botonRedondeado1.setPreferredSize(new java.awt.Dimension(150, 35));
+        btnBuscar.setText("Buscar");
+        btnBuscar.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        btnBuscar.setPreferredSize(new java.awt.Dimension(150, 35));
+        btnBuscar.addActionListener(this::btnBuscarActionPerformed);
+
+        cmbxEstados.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout panelFiltrosLayout = new javax.swing.GroupLayout(panelFiltros);
         panelFiltros.setLayout(panelFiltrosLayout);
         panelFiltrosLayout.setHorizontalGroup(
             panelFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelFiltrosLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(txtCodigoVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25)
-                .addComponent(txxNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(botonRedondeado1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14)
+                .addComponent(txxNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(cmbxEstados, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelFiltrosLayout.setVerticalGroup(
@@ -75,9 +80,9 @@ public class PantallaVentas extends javax.swing.JPanel {
             .addGroup(panelFiltrosLayout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addGroup(panelFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCodigoVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txxNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(botonRedondeado1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbxEstados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
@@ -113,7 +118,7 @@ public class PantallaVentas extends javax.swing.JPanel {
                 .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(panelFiltros, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 710, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(pnlDetallesPedido1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnActualizarPedido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -130,24 +135,18 @@ public class PantallaVentas extends javax.swing.JPanel {
                     .addComponent(pnlDetallesPedido1, javax.swing.GroupLayout.PREFERRED_SIZE, 653, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnActualizarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pnlPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 1097, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(pnlPrincipal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pnlPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 753, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(pnlPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 704, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -155,16 +154,32 @@ public class PantallaVentas extends javax.swing.JPanel {
         control.procesarPedido();
     }//GEN-LAST:event_btnActualizarPedidoActionPerformed
 
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        String nombre = txxNombreCliente.getText().trim();
+        if (nombre.equals(PLACEHOLDER_TEXT) || nombre.equals("NombreCliente")) {
+            nombre = ""; 
+        }
+        
+        String estadoSeleccionado = (String) cmbxEstados.getSelectedItem();
+        itson.org.ghosttracks.enums.EstadoPedidoDTO estado = null;
+        
+        if (estadoSeleccionado != null && !estadoSeleccionado.equals("Todos los estados")) {
+            estado = itson.org.ghosttracks.enums.EstadoPedidoDTO.valueOf(estadoSeleccionado);
+        }
+
+        control.aplicarFiltros(nombre, estado, this);
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private itson.org.ghosttracks.utilerias.BotonRedondeado botonRedondeado1;
     private itson.org.ghosttracks.utilerias.BotonRedondeado btnActualizarPedido;
+    private itson.org.ghosttracks.utilerias.BotonRedondeado btnBuscar;
+    private javax.swing.JComboBox<String> cmbxEstados;
     private javax.swing.JScrollPane jScrollPane1;
     private itson.org.ghosttracks.utilerias.PanelRedondeado panelFiltros;
     private itson.org.ghosttracks.utilerias.pnlDetallesPedido pnlDetallesPedido1;
     private javax.swing.JPanel pnlPrincipal;
     private javax.swing.JTable tblPedidos;
-    private itson.org.ghosttracks.utilerias.TextFieldRedondeado txtCodigoVenta;
     private itson.org.ghosttracks.utilerias.TextFieldRedondeado txxNombreCliente;
     // End of variables declaration//GEN-END:variables
 
@@ -176,7 +191,7 @@ public class PantallaVentas extends javax.swing.JPanel {
             Object[] fila = new Object[5]; 
 
             fila[0] = pedido.getIdPedido(); 
-            fila[1] = pedido.getIdCliente(); 
+            fila[1] = control.obtenerNombreClienteCompleto(pedido.getIdCliente()); 
             fila[2] = "-";
             fila[3] = String.format("$%.2f", pedido.getTotal());
             fila[4] = pedido.getEstado() != null ? pedido.getEstado().name() : "Sin estado";
@@ -196,5 +211,35 @@ public class PantallaVentas extends javax.swing.JPanel {
     
     public void mostrarDetallesDelPedido(PedidoDTO pedido) {
         pnlDetallesPedido1.cargarDetalles(pedido);
+    }
+    
+    private void configurarFiltros() {
+        cmbxEstados.removeAllItems();
+        cmbxEstados.addItem("Todos los estados");
+        for (itson.org.ghosttracks.enums.EstadoPedidoDTO estado : itson.org.ghosttracks.enums.EstadoPedidoDTO.values()) {
+            cmbxEstados.addItem(estado.name());
+        }
+    }
+    
+    private void configurarPlaceholder() {
+        txxNombreCliente.setText(PLACEHOLDER_TEXT);
+        txxNombreCliente.setForeground(new Color(153, 153, 153)); 
+        txxNombreCliente.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                if (txxNombreCliente.getText().equals(PLACEHOLDER_TEXT)) {
+                    txxNombreCliente.setText("");
+                    txxNombreCliente.setForeground(new java.awt.Color(0, 0, 0)); 
+                }
+            }
+
+            @Override
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                if (txxNombreCliente.getText().trim().isEmpty()) {
+                    txxNombreCliente.setText(PLACEHOLDER_TEXT);
+                    txxNombreCliente.setForeground(new java.awt.Color(153, 153, 153)); 
+                }
+            }
+        });
     }
 }

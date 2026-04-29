@@ -10,6 +10,7 @@ import itson.org.ghosttracks.exceptions.PersistenciaException;
 import itson.org.ghosttracks.mocks.ClientesMockDAO;
 import itson.org.ghosttracks.negocio.interfaces.IClientesBO;
 import itson.org.ghosttracks.negocio.objetosNegocio.Excepciones.NegocioException;
+import java.util.List;
 
 /**
  *
@@ -37,6 +38,15 @@ public class ClientesBO implements IClientesBO{
             return clientesDAO.iniciarSesion(correo, contrasena);
         } catch (PersistenciaException e) {
             throw new NegocioException("Credenciales inválidas", e);
+        }
+    }
+    
+    @Override
+    public List<Long> buscarIdsPorNombre(String nombreCliente) throws NegocioException{
+        try{
+            return clientesDAO.buscarIdsPorNombre(nombreCliente);
+        } catch (PersistenciaException e){
+            throw new NegocioException("No fué posible consultar a los clientes "+e);
         }
     }
 }

@@ -339,4 +339,48 @@ public class VentaEnLineaFachada implements IVentaEnLinea {
 
         return dto;
     }
+
+    @Override
+    public String obtenerNombreCliente(Long idCliente) throws VentaEnLineaException{
+        try {
+           Cliente cliente = clientesBO.obtenerClientePorId(idCliente);
+            String nombreCompleto = cliente.getNombres() + " " + 
+                                    cliente.getApellidoPaterno() + " " + 
+                                    cliente.getApellidoMaterno();
+                                    
+            return nombreCompleto.trim();
+            
+        } catch (NegocioException ex) {
+            throw new VentaEnLineaException(CodigoErrorVenta.ERROR_PERSISTENCIA, "No fué posible consultar el nombre del cliente");
+        }
+    }
+
+    @Override
+    public List<PedidoDTO> consultarPedidosFiltrados(String nombreCliente, EstadoPedidoDTO estadoDTO) throws VentaEnLineaException {
+        try {
+            List<Long> idsClientes = null;
+            if (nombreCliente != null && !nombreCliente.trim().isEmpty()) {
+                idsClientes = clientesBO.buscarIdsPorNombre(nombreCliente);
+                if (idsClientes.isEmpty()) {
+                    return new ArrayList<>(); 
+                }
+            }
+            
+            EstadoPedido estadoEntidad = null;
+            if (estadoDTO != null) {
+                estadoEntidad = EstadoPedido.valueOf(estadoDTO.name());
+            }
+            
+            List<Pedido> pedidosFiltrados = pedidosBO.buscarPedidosFiltrados(idsClientes, estadoEntidad);
+            
+            List<PedidoDTO> dtos = new ArrayList<>();
+            for (Pedido p : pedidosFiltrados) {
+                dtos.add(mapearPedidoADTO(p)); 
+            }
+            return dtos;
+
+        } catch (NegocioException ex) {
+            throw new VentaEnLineaException(CodigoErrorVenta.ERROR_PERSISTENCIA, "Error al filtrar pedidos", ex);
+        }
+    }
 }

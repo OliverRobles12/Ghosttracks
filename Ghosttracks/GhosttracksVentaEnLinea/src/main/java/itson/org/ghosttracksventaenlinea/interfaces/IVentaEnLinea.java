@@ -19,6 +19,8 @@ import java.util.List;
  */
 public interface IVentaEnLinea {
 
+    String obtenerNombreCliente(Long idCliente) throws VentaEnLineaException;
+    
     List<ProductoDTO> obtenerCatalogo() throws VentaEnLineaException;
 
     ProductoDTO consultarDetalleProducto(Long id) throws VentaEnLineaException;
@@ -38,6 +40,8 @@ public interface IVentaEnLinea {
     PedidoDTO obtenerPedidoPorID(Long idPedido) throws VentaEnLineaException;
     
     ClienteDTO iniciarSesion(String correo, String contrasena) throws VentaEnLineaException;
+    
+    List<PedidoDTO> consultarPedidosFiltrados(String nombreCliente, EstadoPedidoDTO estado) throws VentaEnLineaException;
     
     /**
      * Orquesta la creación de un paquete a partir de un pedido.

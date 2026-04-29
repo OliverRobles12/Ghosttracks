@@ -58,4 +58,21 @@ public class ClientesMockDAO implements IClientesDAO{
         }
         throw new PersistenciaException("Correo o contraseña incorrectos.");
     }
+    
+    @Override
+    public List<Long> buscarIdsPorNombre(String nombreCliente) throws PersistenciaException {
+        List<Long> ids = new ArrayList<>();
+        if (nombreCliente == null || nombreCliente.trim().isEmpty()) {
+            return ids;
+        }
+        
+        String busqueda = nombreCliente.toLowerCase().trim();
+        for (Cliente c : clientesDB) {
+            String nombreCompleto = (c.getNombres() + " " + c.getApellidoPaterno() + " " + c.getApellidoMaterno()).toLowerCase();
+            if (nombreCompleto.contains(busqueda)) {
+                ids.add(c.getIdUsuario());
+            }
+        }
+        return ids;
+    }
 }

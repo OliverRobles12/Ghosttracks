@@ -4,6 +4,7 @@ package itson.org.ghosttracks.presentacion;
 import java.awt.BorderLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 /**
  *
@@ -13,7 +14,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VentanaPrincipal.class.getName());
 
-    private JPanel panelContenido;
+    private JScrollPane scrollContenido; 
     private JPanel panelDerecho;
     private JPanel headerActual;
     private JPanel menuActual;
@@ -24,12 +25,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         this.setLayout(new BorderLayout());
         
         panelDerecho = new JPanel(new BorderLayout());
-        panelContenido = new JPanel(new BorderLayout());
         
-        panelDerecho.add(panelContenido, BorderLayout.CENTER);
+        scrollContenido = new JScrollPane();
+        scrollContenido.setBorder(null); 
+        scrollContenido.getVerticalScrollBar().setUnitIncrement(16); // Hace que vaya más rápido 
+        scrollContenido.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scrollContenido.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        panelDerecho.add(scrollContenido, BorderLayout.CENTER);
         
         this.add(panelDerecho, BorderLayout.CENTER);
-        
     }
     
     public void fijarMenuLateral(JPanel menu) {
@@ -54,8 +58,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
     
     public void cambiarPantalla(JPanel nuevaPantalla) {
-        panelContenido.removeAll(); 
-        panelContenido.add(nuevaPantalla, BorderLayout.CENTER); 
+        scrollContenido.setViewportView(nuevaPantalla); 
         this.revalidate(); 
         this.repaint(); 
     }

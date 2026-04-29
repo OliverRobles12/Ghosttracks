@@ -8,6 +8,7 @@ import itson.org.ghosttracksventaenlinea.excepciones.VentaEnLineaException;
 import itson.org.ghosttracksventaenlinea.fachada.VentaEnLineaFachada;
 import itson.org.ghosttracksventaenlinea.interfaces.IVentaEnLinea;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  *
@@ -15,6 +16,9 @@ import java.util.List;
  */
 public class ControladorVentasAdmin {
 
+    private static final Logger LOGGER = Logger.getLogger(ControladorVentasAdmin.class.getName());
+
+    
     private final Navegador navegador;
     private final IVentaEnLinea ventaFachada = new VentaEnLineaFachada();
     private PedidoDTO pedidoSeleccionado;
@@ -94,5 +98,23 @@ public class ControladorVentasAdmin {
             navegador.mostrarMensaje("Error en el sistema. No fué posible actualizar el pedido: "+ex, true);
         }
         
+    }
+    
+    public String obtenerNombreClienteCompleto(Long idCliente) {
+        try {
+            return ventaFachada.obtenerNombreCliente(idCliente); 
+        } catch (VentaEnLineaException ex) {
+            LOGGER.warning("No se pudo cargar el nombre del cliente");
+            return "Cliente Desconocido";
+        }
+    }
+    
+    public void aplicarFiltros(String nombreCliente, EstadoPedidoDTO estado, PantallaVentas vista) {
+        try {
+            List<PedidoDTO> pedidosFiltrados = ventaFachada.consultarPedidosFiltrados(nombreCliente, estado);
+            vista.llenarTabla(pedidosFiltrados);
+        } catch (VentaEnLineaException ex) {
+            navegador.mostrarMensaje("Error al filtrar la tabla: " + ex.getMessage(), true);
+        }
     }
 }

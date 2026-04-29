@@ -15,13 +15,16 @@ import java.util.List;
  * @author nafbr
  */
 public interface IPedidosDAO {
-    Pedido guardarPedido(Pedido pedido) throws PersistenciaException;
+    public Pedido guardarPedido(Pedido pedido) throws PersistenciaException;
     
-    Pedido actualizarEstado(Long idPedido, EstadoPedido nuevoEstado) throws PersistenciaException;
+    public Pedido actualizarEstado(Long idPedido, EstadoPedido nuevoEstado) throws PersistenciaException;
     
-    List<Pedido> consultarTodos() throws PersistenciaException;
+    public List<Pedido> consultarTodos() throws PersistenciaException;
     
     public Pedido consultarPorId(Long idPedido) throws PersistenciaException;
     
     public Pedido actualizarPedido(Pedido pedidoActualizado) throws PersistenciaException;
+    
+    List<Pedido> buscarPedidosFiltrados(List<Long> idsClientes, EstadoPedido estado) throws PersistenciaException;
+    
 }

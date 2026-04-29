@@ -7,6 +7,7 @@ package itson.org.ghosttracks.presentacion.administrador;
 import itson.org.ghosttracks.controladores.ControladorVentasAdmin;
 import itson.org.ghosttracks.dtos.PedidoDTO;
 import static itson.org.ghosttracks.enums.EstadoPedidoDTO.EN_PREPARACION;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -25,7 +26,7 @@ public class PanelConfirmarEmpaquetado extends javax.swing.JPanel {
         this.control = ctrl;
         this.pedido = pedido;
         initComponents();
-        //lblCliente.setText(pedido.getIdCliente());
+        lblCliente.setText(control.obtenerNombreClienteCompleto(pedido.getIdCliente()));
     }
 
     /**
@@ -96,6 +97,8 @@ public class PanelConfirmarEmpaquetado extends javax.swing.JPanel {
 
     private void btnConfirmarPaqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarPaqueteActionPerformed
        control.actualizarEstadoPedido(this.pedido, EN_PREPARACION);
+        JOptionPane.showMessageDialog(this, "Estado de pedido actualizado");
+       control.volverAVentas();
     }//GEN-LAST:event_btnConfirmarPaqueteActionPerformed
 
 

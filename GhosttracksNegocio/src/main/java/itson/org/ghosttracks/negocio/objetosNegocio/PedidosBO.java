@@ -183,4 +183,13 @@ public class PedidosBO implements IPedidosBO {
             throw new NegocioException("Error al comunicarse con el proveedor de envíos.", e);
         }
     }
+
+    @Override
+    public List<Pedido> buscarPedidosFiltrados(List<Long> idsClientes, EstadoPedido estado) throws NegocioException {
+        try{
+            return pedidosDAO.buscarPedidosFiltrados(idsClientes, estado);
+        }catch(PersistenciaException e){
+            throw new NegocioException("No fué posible la consulta de los pedidos especificados "+e);
+        }
+    }
 }

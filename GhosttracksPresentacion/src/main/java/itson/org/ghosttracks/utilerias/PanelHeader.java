@@ -2,6 +2,8 @@
 package itson.org.ghosttracks.utilerias;
 
 import itson.org.ghosttracks.controladores.Navegador;
+import itson.org.ghosttracks.controladores.SesionUsuario;
+import itson.org.ghosttracks.dtos.ClienteDTO;
 
 /**
  *
@@ -14,8 +16,19 @@ public class PanelHeader extends javax.swing.JPanel {
     public PanelHeader(Navegador nav) {
         this.navegador = nav;
         initComponents();
+        cargarDatosSesion();
     }
 
+    private void cargarDatosSesion() {
+        if (SesionUsuario.getInstancia().haySesionActiva()) {
+            // Obtenemos al cliente logueado
+            ClienteDTO cliente = SesionUsuario.getInstancia().getCliente();
+            String nombreMostrado = cliente.getNombres() + " " + cliente.getApellidoPaterno();
+            lblNombre.setText(nombreMostrado);
+        } else {
+            lblNombre.setText("Invitado"); 
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -26,10 +39,8 @@ public class PanelHeader extends javax.swing.JPanel {
     private void initComponents() {
 
         panelRedondeado1 = new itson.org.ghosttracks.utilerias.PanelRedondeado();
-        btnFavoritos = new javax.swing.JButton();
         btnCarrito = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        lblNombre = new javax.swing.JLabel();
         btnUsuario = new javax.swing.JButton();
         panelRedondeado2 = new itson.org.ghosttracks.utilerias.PanelRedondeado();
         jTextField1 = new javax.swing.JTextField();
@@ -42,12 +53,6 @@ public class PanelHeader extends javax.swing.JPanel {
         panelRedondeado1.setForeground(new java.awt.Color(217, 217, 217));
         panelRedondeado1.setPreferredSize(new java.awt.Dimension(170, 95));
 
-        btnFavoritos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconoFavoritos.png"))); // NOI18N
-        btnFavoritos.setBorderPainted(false);
-        btnFavoritos.setContentAreaFilled(false);
-        btnFavoritos.setFocusPainted(false);
-        btnFavoritos.setPreferredSize(new java.awt.Dimension(50, 50));
-
         btnCarrito.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconoCarrito.png"))); // NOI18N
         btnCarrito.setBorder(null);
         btnCarrito.setBorderPainted(false);
@@ -55,12 +60,9 @@ public class PanelHeader extends javax.swing.JPanel {
         btnCarrito.setFocusPainted(false);
         btnCarrito.addActionListener(this::btnCarritoActionPerformed);
 
-        jLabel4.setFont(new java.awt.Font("Corbel", 1, 24)); // NOI18N
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel4.setText("Nombre Apellido");
-
-        jLabel5.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel5.setText("Administrador");
+        lblNombre.setFont(new java.awt.Font("Corbel", 1, 24)); // NOI18N
+        lblNombre.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblNombre.setText("Nombre Apellido");
 
         btnUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconoUsuario.png"))); // NOI18N
         btnUsuario.setBorderPainted(false);
@@ -106,16 +108,12 @@ public class PanelHeader extends javax.swing.JPanel {
                 .addGap(15, 15, 15)
                 .addComponent(btnUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
-                .addGroup(panelRedondeado1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5))
+                .addComponent(lblNombre)
                 .addGap(22, 22, 22)
                 .addComponent(panelRedondeado2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24)
                 .addComponent(btnCarrito)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                .addComponent(btnFavoritos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30))
+                .addContainerGap(107, Short.MAX_VALUE))
         );
         panelRedondeado1Layout.setVerticalGroup(
             panelRedondeado1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -123,7 +121,6 @@ public class PanelHeader extends javax.swing.JPanel {
                 .addGap(23, 23, 23)
                 .addGroup(panelRedondeado1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnCarrito, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnFavoritos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRedondeado1Layout.createSequentialGroup()
                         .addComponent(panelRedondeado2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(1, 1, 1)))
@@ -135,10 +132,8 @@ public class PanelHeader extends javax.swing.JPanel {
                         .addComponent(btnUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(10, 10, 10))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRedondeado1Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel5)
-                        .addGap(17, 17, 17))))
+                        .addComponent(lblNombre)
+                        .addGap(45, 45, 45))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -166,12 +161,10 @@ public class PanelHeader extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCarrito;
-    private javax.swing.JButton btnFavoritos;
     private javax.swing.JButton btnUsuario;
-    private javax.swing.JLabel jLabel4;
-    public javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel lblNombre;
     private itson.org.ghosttracks.utilerias.PanelRedondeado panelRedondeado1;
     private itson.org.ghosttracks.utilerias.PanelRedondeado panelRedondeado2;
     // End of variables declaration//GEN-END:variables
