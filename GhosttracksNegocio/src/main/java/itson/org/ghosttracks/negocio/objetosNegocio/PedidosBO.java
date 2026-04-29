@@ -142,6 +142,7 @@ public class PedidosBO implements IPedidosBO {
                     productoEntidad.setIdProducto(itemDTO.getProductoSeleccionado().getIdProducto());
                     productoEntidad.setPrecio(itemDTO.getProductoSeleccionado().getPrecio());
                     productoEntidad.setImgProducto(itemDTO.getProductoSeleccionado().getImgProducto());
+                    productoEntidad.setTipo(itemDTO.getProductoSeleccionado().getTipoProducto());
                     itemEntidad.setProducto(productoEntidad);
                 }
                 itemsEntidad.add(itemEntidad);

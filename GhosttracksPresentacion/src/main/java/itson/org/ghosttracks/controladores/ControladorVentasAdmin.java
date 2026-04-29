@@ -1,5 +1,6 @@
 package itson.org.ghosttracks.controladores;
 
+import itson.org.ghosttracks.dtos.ItemCarritoDTO;
 import itson.org.ghosttracks.enums.EstadoPedidoDTO;
 import itson.org.ghosttracks.dtos.PedidoDTO;
 import itson.org.ghosttracks.dtos.PaqueteDTO;
@@ -160,9 +161,12 @@ public class ControladorVentasAdmin {
         int cantidadArticulos = 0;
 
         if (pedido != null && pedido.getCarrito() != null && pedido.getCarrito().getProductos() != null) {
-            for (var item : pedido.getCarrito().getProductos()) {
+            for (ItemCarritoDTO item : pedido.getCarrito().getProductos()) {
                 cantidadArticulos += item.getCantidad();
-                String tipo = item.getProductoSeleccionado().getTipoProducto().toString().toUpperCase();
+                String tipo = "";
+                if (item.getProductoSeleccionado().getTipoProducto() != null) {
+                    tipo = item.getProductoSeleccionado().getTipoProducto().toString().toUpperCase();
+                }
 
                 if (tipo.contains("VINILO") || tipo.contains("VINYL")) {
                     contieneVinilo = true;
