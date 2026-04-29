@@ -118,13 +118,9 @@ public class ControladorVentasAdmin {
         }
     }
     
-    public void despacharPedidoConSkydropx() {
-        if (this.pedidoSeleccionado == null) {
-            navegador.mostrarMensaje("Error: No hay un pedido seleccionado para despachar.", true);
-            return;
-        }
-        
-        double[] medidas = calcularDimensionesPaquete(this.pedidoSeleccionado);
+    public void despacharPedidoConSkydropx(PedidoDTO pedido) {
+                
+        double[] medidas = calcularDimensionesPaquete(pedido);
         double pesoTotal = medidas[0];
         double largo = medidas[1];
         double ancho = medidas[2];
@@ -132,7 +128,7 @@ public class ControladorVentasAdmin {
         
         try {
             PedidoDTO pedidoActualizado = ventaFachada.despacharPedidoCliente(
-                    this.pedidoSeleccionado.getIdPedido(), 
+                    pedido.getIdPedido(), 
                     pesoTotal, 
                     largo, 
                     ancho, 

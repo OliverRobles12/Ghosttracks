@@ -179,9 +179,9 @@ public class PanelMetodoPagoTarjetaDebito extends javax.swing.JPanel {
         btnContinuar.setText("Continuar");
         btnContinuar.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         btnContinuar.setHoverColor(new java.awt.Color(255, 255, 255));
+        btnContinuar.addActionListener(this::btnContinuarActionPerformed);
 
         btnVolver.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        btnVolver.setForeground(new java.awt.Color(0, 0, 0));
         btnVolver.setText("Volver");
         btnVolver.setBorderPainted(false);
         btnVolver.setContentAreaFilled(false);
@@ -262,6 +262,10 @@ public class PanelMetodoPagoTarjetaDebito extends javax.swing.JPanel {
     private void txtNumeroSeguridadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumeroSeguridadActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNumeroSeguridadActionPerformed
+
+    private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnContinuarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

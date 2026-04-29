@@ -92,7 +92,8 @@ public class PanelDatosPaquete extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConfirmarEnvioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarEnvioActionPerformed
-        // TODO add your handling code here:
+        control.despacharPedidoConSkydropx(this.pedido);
+        control.volverAVentas();
     }//GEN-LAST:event_btnConfirmarEnvioActionPerformed
 
 

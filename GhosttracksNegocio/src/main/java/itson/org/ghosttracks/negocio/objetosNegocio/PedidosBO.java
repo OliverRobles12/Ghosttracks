@@ -7,7 +7,6 @@ import itson.org.ghosttracks.dtos.DatosPagoDTO;
 import itson.org.ghosttracks.dtos.DireccionEntregaDTO;
 import itson.org.ghosttracks.dtos.ItemCarritoDTO;
 import itson.org.ghosttracks.dtos.NuevoPedidoDTO;
-import itson.org.ghosttracks.dtos.PagoDTO;
 import itson.org.ghosttracks.dtos.PaqueteDTO;
 import itson.org.ghosttracks.dtos.PedidoDTO;
 import itson.org.ghosttracks.dtos.SucursalDTO;
@@ -17,7 +16,6 @@ import itson.org.ghosttracks.entidades.Contacto;
 import itson.org.ghosttracks.entidades.Direccion;
 import itson.org.ghosttracks.entidades.ItemCarrito;
 import itson.org.ghosttracks.entidades.Pago;
-import itson.org.ghosttracks.entidades.PagoTarjeta;
 import itson.org.ghosttracks.entidades.Paquete;
 import itson.org.ghosttracks.entidades.Pedido;
 import itson.org.ghosttracks.entidades.Producto;
@@ -25,10 +23,10 @@ import itson.org.ghosttracks.entidades.Sucursal;
 import itson.org.ghosttracks.enums.EstadoPaquete;
 import itson.org.ghosttracks.enums.EstadoPedido;
 import itson.org.ghosttracks.enums.EstadoPedidoDTO;
+import itson.org.ghosttracks.enums.TipoPago;
 import itson.org.ghosttracks.exceptions.PersistenciaException;
 import itson.org.ghosttracks.mocks.PedidosMockDAO;
 import itson.org.ghosttracks.negocio.adaptador.SkydropxAdapter;
-import itson.org.ghosttracks.negocio.adaptador.StripeAdapter;
 import itson.org.ghosttracks.negocio.fabricas.ProveedorPagoFactory;
 import itson.org.ghosttracks.negocio.interfaces.IPaquetesBO;
 import itson.org.ghosttracks.negocio.interfaces.IPedidosBO;
@@ -107,7 +105,7 @@ public class PedidosBO implements IPedidosBO {
 
             if (datosPago != null) {
                 Pago registroPago = new Pago(
-                        datosPago.getMetodoPago(),
+                        TipoPago.TARJETA,
                         carritoDto.getTotal(),
                         LocalDateTime.now()
                 );

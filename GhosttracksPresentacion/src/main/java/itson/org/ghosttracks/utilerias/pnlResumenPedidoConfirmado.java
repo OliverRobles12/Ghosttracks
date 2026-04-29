@@ -60,8 +60,6 @@ public class pnlResumenPedidoConfirmado extends javax.swing.JPanel {
             pnlResumenPedido.repaint();
         }
 
-        lblMetodoPagoDisplay.setText(pedido.getPago().getTipo().name());
-
         
         if (pedido.getContacto() != null) {
             lblNombre.setText(pedido.getContacto().getNombre());
