@@ -380,8 +380,10 @@ public class VentaEnLineaFachada implements IVentaEnLinea {
         }
 
         carrito.setSubtotal(subtotalGeneral);
-        //Ojillo
-        carrito.setImpuestos(0.0);
-        carrito.setTotal(subtotalGeneral + carrito.getImpuestos());
+
+        double impuestos = subtotalGeneral * 0.16;
+        carrito.setImpuestos(impuestos);
+
+        carrito.setTotal(subtotalGeneral + impuestos);
     }
 }
