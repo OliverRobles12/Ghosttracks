@@ -23,7 +23,7 @@ public class PanelDatosPaquete extends javax.swing.JPanel {
         this.control = ctrl;
         this.pedido = pedido;
         initComponents();
-        // lblCliente.setText(control.obtenerNombreClienteCompleto(pedido.getIdCliente()));
+        lblCliente.setText(pedido.getCliente().getNombres());
     }
 
     /**

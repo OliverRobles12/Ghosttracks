@@ -26,7 +26,7 @@ public class PanelConfirmarEmpaquetado extends javax.swing.JPanel {
         this.control = ctrl;
         this.pedido = pedido;
         initComponents();
-        // lblCliente.setText(control.obtenerNombreClienteCompleto(pedido.getIdCliente()));
+        lblCliente.setText(pedido.getCliente().getNombres());
     }
 
     /**

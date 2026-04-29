@@ -191,9 +191,9 @@ public class PantallaVentas extends javax.swing.JPanel {
             Object[] fila = new Object[5]; 
 
             fila[0] = pedido.getIdPedido(); 
-            // fila[1] = control.obtenerNombreClienteCompleto(pedido.getIdCliente()); 
+            fila[1] = pedido.getCliente().getNombres()+" "+pedido.getCliente().getApellidoPaterno();
             fila[2] = "-";
-            // fila[3] = String.format("$%.2f", pedido.getTotal());
+            fila[3] = String.format("$%.2f", pedido.getCarrito().getTotal());
             fila[4] = pedido.getEstado() != null ? pedido.getEstado().name() : "Sin estado";
 
             modelo.addRow(fila);
