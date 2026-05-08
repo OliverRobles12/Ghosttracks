@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 public class Pedido {
     
     private Long idPedido;
+    private String folio;
     private Cliente cliente;
     private Carrito carrito;
     private Contacto contacto; 
@@ -30,6 +31,14 @@ public class Pedido {
 
     public void setIdPedido(Long idPedido) {
         this.idPedido = idPedido;
+    }
+
+    public String getFolio() {
+        return folio;
+    }
+
+    public void setFolio(String folio) {
+        this.folio = folio;
     }
 
     public Cliente getCliente() {

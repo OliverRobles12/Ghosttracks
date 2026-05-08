@@ -106,6 +106,7 @@ public class PedidosMockDAO implements IPedidosDAO{
     public Pedido guardarPedido(Pedido pedido) throws PersistenciaException {
         try {
             pedido.setIdPedido(idAutoincrementable++);
+            pedido.setFolio("VE" + idAutoincrementable);
             baseDatosPedidos.add(pedido);
             
             LOGGER.log(Level.INFO, "ENTIDAD PERSISTIDA: Pedido guardado exitosamente con ID {0}", pedido.getIdPedido());

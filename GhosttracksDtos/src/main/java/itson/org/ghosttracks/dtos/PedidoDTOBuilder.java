@@ -1,6 +1,8 @@
 
 package itson.org.ghosttracks.dtos;
 
+import itson.org.ghosttracks.enums.EstadoPedidoDTO;
+
 /**
  *
  * @author oliro
@@ -13,6 +15,25 @@ public class PedidoDTOBuilder {
     private SucursalDTO sucursal;
     private DatosPagoDTO datosPago;
     private CarritoDTO carrito;
+    private EstadoPedidoDTO estado;
+    
+    public NuevoPedidoDTO build() {
+        
+        // TODO validaciones
+        
+        return new NuevoPedidoDTO(cliente, contacto, direccionEntrega, sucursal, datosPago, carrito, estado);
+            
+    }
+    
+    public void reset() {
+        this.cliente = null;
+        this.contacto = null;
+        this.direccionEntrega = null;
+        this.sucursal = null;
+        this.datosPago = null;
+        this.carrito = null;
+        this.estado = null;
+    }
     
     public PedidoDTOBuilder setCliente(ClienteDTO cliente){
         this.cliente = cliente;
@@ -44,12 +65,9 @@ public class PedidoDTOBuilder {
         return this;
     }
     
-    public NuevoPedidoDTO build() {
-        
-        // TODO validaciones
-        
-        return new NuevoPedidoDTO(this);
-            
+    public PedidoDTOBuilder setEstado(EstadoPedidoDTO estado) {
+        this.estado = estado;
+        return this;
     }
 
     public ClienteDTO getCliente() {
@@ -74,6 +92,10 @@ public class PedidoDTOBuilder {
 
     public CarritoDTO getCarrito() {
         return carrito;
+    }
+
+    public EstadoPedidoDTO getEstado() {
+        return estado;
     }
     
 }

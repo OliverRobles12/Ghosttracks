@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 public class PedidoDTO {
 
     private Long idPedido;
+    private String folio;
     private ClienteDTO cliente;
     private CarritoDTO carrito;
     private ContactoDTO contacto;
@@ -25,26 +26,20 @@ public class PedidoDTO {
     public PedidoDTO() {
     }
 
-    public PedidoDTO(Long idPedido, ClienteDTO cliente, CarritoDTO carrito, ContactoDTO contacto, DireccionEntregaDTO direccionEntrega, SucursalDTO sucursal, EstadoPedidoDTO estado, LocalDateTime fechaPedido, Double costoEnvio, PaqueteDTO paquete, PagoDTO pago) {
-        this.idPedido = idPedido;
-        this.cliente = cliente;
-        this.carrito = carrito;
-        this.contacto = contacto;
-        this.direccionEntrega = direccionEntrega;
-        this.sucursal = sucursal;
-        this.estado = estado;
-        this.fechaPedido = fechaPedido;
-        this.costoEnvio = costoEnvio;
-        this.paquete = paquete;
-        this.pago = pago;
-    }
-
     public Long getIdPedido() {
         return idPedido;
     }
 
     public void setIdPedido(Long idPedido) {
         this.idPedido = idPedido;
+    }
+
+    public String getFolio() {
+        return folio;
+    }
+
+    public void setFolio(String folio) {
+        this.folio = folio;
     }
 
     public ClienteDTO getCliente() {

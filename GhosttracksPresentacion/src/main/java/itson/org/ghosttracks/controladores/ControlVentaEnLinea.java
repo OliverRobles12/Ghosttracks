@@ -7,15 +7,11 @@ import itson.org.ghosttracks.dtos.ContactoDTO;
 import itson.org.ghosttracks.dtos.DatosPagoDTO;
 import itson.org.ghosttracks.dtos.DireccionEntregaDTO;
 import itson.org.ghosttracks.dtos.NuevoPedidoDTO;
-import itson.org.ghosttracks.dtos.PagoDTO;
 import itson.org.ghosttracks.dtos.PedidoDTO;
 import itson.org.ghosttracks.dtos.PedidoDTOBuilder;
 import itson.org.ghosttracks.dtos.ProductoDTO;
 import itson.org.ghosttracks.dtos.SucursalDTO;
-import itson.org.ghosttracks.entidades.DatosPago;
 import itson.org.ghosttracks.enums.EstadoPedidoDTO;
-import itson.org.ghosttracks.enums.TipoPago;
-import static itson.org.ghosttracks.enums.TipoPago.TARJETA;
 import itson.org.ghosttracks.enums.TipoProducto;
 import itson.org.ghosttracks.presentacion.cliente.PantallaCarrito;
 import itson.org.ghosttracks.presentacion.cliente.PantallaInicioCliente;
@@ -23,6 +19,7 @@ import itson.org.ghosttracks.utilerias.pnlResumenPedido;
 import itson.org.ghosttracksventaenlinea.excepciones.VentaEnLineaException;
 import itson.org.ghosttracksventaenlinea.fachada.VentaEnLineaFachada;
 import itson.org.ghosttracksventaenlinea.interfaces.IVentaEnLinea;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -84,8 +81,14 @@ public class ControlVentaEnLinea {
      * Obtiene el catálogo completo de productos disponibles.
      * Útil para cuando necesitamos la lista de datos puros (como en las sugerencias al azar).
      */
-    public List<ProductoDTO> obtenerCatalogoCompleto() throws Exception {
-        return ventaFachada.obtenerCatalogo();
+    public List<ProductoDTO> obtenerCatalogoCompleto() {
+        List<ProductoDTO> productos = new LinkedList<>();
+        try {
+            productos = ventaFachada.obtenerCatalogo();
+        } catch (VentaEnLineaException ex) {
+            navegador.mostrarMensaje("No ha sido posible cargar el catalogo.", true);
+        }
+        return productos;
     }   
     
     public void obtenerCatalogoPorTipo(PantallaInicioCliente vista, TipoProducto tipo) {
@@ -152,7 +155,7 @@ public class ControlVentaEnLinea {
         pedidoBuilder.setDatosPago(dto);
     }
         
-    public void procesarPedido() throws Exception {
+    public void procesarPedido() {
         try {
             
             if (!SesionUsuario.getInstancia().haySesionActiva()) {
@@ -164,22 +167,23 @@ public class ControlVentaEnLinea {
             
             // Hardcodeada
             SucursalDTO sucursal = new SucursalDTO();
-            sucursal.setNombre("Obreyork");
+            sucursal.setNombre("Obreyork 1");
             
             // Construimos el DTO de escritura con todos los datos recolectados
             NuevoPedidoDTO nuevoPedido = this.pedidoBuilder
                     .setCliente(clienteLogueado)
                     .setSucursal(sucursal)
                     .setCarrito(this.carrito)
+                    .setEstado(EstadoPedidoDTO.PENDIENTE)
                     .build();
-
+            
             PedidoDTO pedidoGenerado = ventaFachada.confirmarCompra(nuevoPedido);
             
             navegador.mostrarMensaje("¡Compra realizada con éxito! Pedido #" + pedidoGenerado.getIdPedido(), false);
             
-            // Reiniciamos el estado para una nueva compra
+            // Reseteamos el carrito y el builder
             this.carrito = new CarritoDTO(); 
-            this.pedidoBuilder = new PedidoDTOBuilder();
+            this.pedidoBuilder.reset();
             
             navegador.irPedidoConfirmado(pedidoGenerado);
             

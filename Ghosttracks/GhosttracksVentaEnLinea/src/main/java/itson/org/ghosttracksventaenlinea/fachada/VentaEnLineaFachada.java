@@ -155,8 +155,8 @@ public class VentaEnLineaFachada implements IVentaEnLinea {
 
         return carrito;
     }
-
-    // TODO Cambiar al NuevoPedidoDTO
+    
+    // TODO Hacer todas las validaciones correspondientes
     @Override
     public PedidoDTO confirmarCompra(NuevoPedidoDTO nuevoPedido) throws VentaEnLineaException {
         if (nuevoPedido == null || nuevoPedido.getCarrito() == null || nuevoPedido.getCarrito().getProductos().isEmpty()) {

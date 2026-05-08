@@ -15,20 +15,21 @@ public class NuevoPedidoDTO {
     private SucursalDTO sucursal;
     private DatosPagoDTO datosPago;
     private CarritoDTO carrito;
-    private EstadoPedidoDTO estado = EstadoPedidoDTO.PENDIENTE;
+    private EstadoPedidoDTO estado;
 
     public NuevoPedidoDTO() {
     }
 
-    public NuevoPedidoDTO(PedidoDTOBuilder builder) {
-        this.cliente = builder.getCliente();
-        this.contacto = builder.getContacto();
-        this.direccionEntrega = builder.getDireccionEntrega();
-        this.sucursal = builder.getSucursal();
-        this.datosPago = builder.getDatosPago();
-        this.carrito = builder.getCarrito();
+    public NuevoPedidoDTO(ClienteDTO cliente, ContactoDTO contacto, DireccionEntregaDTO direccionEntrega, SucursalDTO sucursal, DatosPagoDTO datosPago, CarritoDTO carrito, EstadoPedidoDTO estado) {
+        this.cliente = cliente;
+        this.contacto = contacto;
+        this.direccionEntrega = direccionEntrega;
+        this.sucursal = sucursal;
+        this.datosPago = datosPago;
+        this.carrito = carrito;
+        this.estado = estado;
     }
-
+    
     public ClienteDTO getCliente() {
         return cliente;
     }
