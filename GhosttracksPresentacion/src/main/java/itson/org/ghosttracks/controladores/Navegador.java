@@ -26,108 +26,98 @@ import javax.swing.JPanel;
  * @author oliro
  */
 public class Navegador {
-
     private final VentanaPrincipal ventana;
     private final ControlVentaEnLinea ctrlVentaLinea;
-
+    private ControladorVentasAdmin ctrlVentasAdmin;
+ 
     public Navegador(VentanaPrincipal ventana) {
         this.ctrlVentaLinea = new ControlVentaEnLinea(this);
         this.ventana = ventana;
     }
     
+    //Cosas de las sesión
     public void irLogin() {
         ventana.limpiarMenuYHeader();
         ControlLogin ctrl = new ControlLogin(this);
         panelLogin vista = new panelLogin(ctrl);
         ventana.cambiarPantalla(vista);
     }
-    
-    // Paneles cliente
-    
-    public void iniciarSesionClienteExitoso() {
-         ventana.fijarMenuLateral(new pnlMenuLateral(this));
-         ventana.fijarHeader(new PanelHeader(this));
+ 
+    public void cerrarSesion() {
+        ctrlVentasAdmin = null;
+        irLogin();
     }
     
+    //Paneles del cliente
+     public void iniciarSesionClienteExitoso() {
+        ventana.fijarMenuLateral(new pnlMenuLateral(this));
+        ventana.fijarHeader(new PanelHeader(this));
+    }
+ 
     public void irInicioCliente() {
         PantallaInicioCliente vista = new PantallaInicioCliente(ctrlVentaLinea);
         ventana.cambiarPantalla(vista);
     }
-    
+ 
     public void irVistaProducto(ProductoDTO producto) {
         PantallaVistaProducto vista = new PantallaVistaProducto(ctrlVentaLinea, producto);
         ventana.cambiarPantalla(vista);
     }
-    
+ 
     public void irCarrito() {
         PantallaCarrito vista = new PantallaCarrito(ctrlVentaLinea);
         ventana.cambiarPantalla(vista);
     }
-    
-    // Paneles Pedido
-    
+ 
     public void irFormularioContacto() {
         PantallaFormularioContacto vista = new PantallaFormularioContacto(ctrlVentaLinea);
         ventana.cambiarPantalla(vista);
     }
-    
+ 
     public void irFormularioEntrega() {
         PantallaFormularioEntrega vista = new PantallaFormularioEntrega(ctrlVentaLinea);
         ventana.cambiarPantalla(vista);
     }
-    
+ 
     public void irSeleccionMetodoPago() {
         PantallaSeleccionMetodoDePago vista = new PantallaSeleccionMetodoDePago(ctrlVentaLinea);
         ventana.cambiarPantalla(vista);
     }
-    
-//    public void irPedidoConfirmado(){
-//        PantallaPedidoConfirmado vista = new PantallaPedidoConfirmado(ctrlVentaLinea);
-//        venata.cambiarPantalla(vista);
-//    }
-    
-    // Paneles admin
-    
-    public void iniciarSesionAdminExitoso() {
-        ventana.fijarMenuLateral(new pnlMenuLateralAdmin(this));
-        ventana.fijarHeader(new PanelHeader(this));
-    }
-    
-    public void irVentasAdmin() {
-        ControladorVentasAdmin ctrl = new ControladorVentasAdmin(this);
-        PantallaVentas vista = new PantallaVentas(ctrl);
-        ventana.cambiarPantalla(vista);
-    }
-    
-        
-    public void cerrarSesion() {
-        irLogin();
-    }
-    
-    public void mostrarMensaje(String mensaje, boolean esError) {
-        ventana.mostrarMensaje(mensaje, esError);
-    }
-
-    public void irPantallaConfirmarEmpaque(PedidoDTO pedidoSeleccionado) {
-        ControladorVentasAdmin ctrl = new ControladorVentasAdmin(this);
-        PantallaVentasProcesarAdmin vistaBase = new PantallaVentasProcesarAdmin(ctrl, pedidoSeleccionado);
-        JPanel panelEmpaque = new PanelConfirmarEmpaquetado(ctrl, pedidoSeleccionado); 
-        vistaBase.cambiarPanelAccion(panelEmpaque);
-        ventana.cambiarPantalla(vistaBase);
-    }
-
-    public void irPantallaConfirmarEnvio(PedidoDTO pedidoSeleccionado) {
-        ControladorVentasAdmin ctrl = new ControladorVentasAdmin(this);
-        PantallaVentasProcesarAdmin vistaBase = new PantallaVentasProcesarAdmin(ctrl, pedidoSeleccionado);
-        JPanel panelEnvio = new PanelDatosPaquete(ctrl, pedidoSeleccionado);
-        vistaBase.cambiarPanelAccion(panelEnvio);
-        ventana.cambiarPantalla(vistaBase);
-    }
-
+ 
     public void irPedidoConfirmado(PedidoDTO pedidoConfirmado) {
         pnlResumenPedidoConfirmado vista = new pnlResumenPedidoConfirmado(ctrlVentaLinea);
         vista.cargarDatosPedido(pedidoConfirmado);
         ventana.cambiarPantalla(vista);
     }
     
+    //Paneles de admin
+     public void iniciarSesionAdminExitoso() {
+        ctrlVentasAdmin = new ControladorVentasAdmin(this);
+        ventana.fijarMenuLateral(new pnlMenuLateralAdmin(this));
+        ventana.fijarHeader(new PanelHeader(this));
+    }
+ 
+    public void irVentasAdmin() {
+        PantallaVentas vista = new PantallaVentas(ctrlVentasAdmin);
+        ventana.cambiarPantalla(vista);
+    }
+ 
+    public void irPantallaConfirmarEmpaque(PedidoDTO pedidoSeleccionado) {
+        PantallaVentasProcesarAdmin vistaBase = new PantallaVentasProcesarAdmin(ctrlVentasAdmin, pedidoSeleccionado);
+        JPanel panelEmpaque = new PanelConfirmarEmpaquetado(ctrlVentasAdmin, pedidoSeleccionado);
+        vistaBase.cambiarPanelAccion(panelEmpaque);
+        ventana.cambiarPantalla(vistaBase);
+    }
+ 
+    public void irPantallaConfirmarEnvio(PedidoDTO pedidoSeleccionado) {
+        PantallaVentasProcesarAdmin vistaBase = new PantallaVentasProcesarAdmin(ctrlVentasAdmin, pedidoSeleccionado);
+        JPanel panelEnvio = new PanelDatosPaquete(ctrlVentasAdmin, pedidoSeleccionado);
+        vistaBase.cambiarPanelAccion(panelEnvio);
+        ventana.cambiarPantalla(vistaBase);
+    }
+    
+    //Utilidades
+    public void mostrarMensaje(String mensaje, boolean esError) {
+        ventana.mostrarMensaje(mensaje, esError);
+    }
 }
